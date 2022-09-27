@@ -1,0 +1,36 @@
+body {
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
+
+figure {
+    border: thin #c0c0c0 solid;
+    display: flex;
+    flex-flow: column;
+    padding: 5px;
+    margin: auto;
+}
+
+figcaption {
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+}
+
+#headerP {
+    font-style: oblique;
+    font-family: fantasy;
+    font-size:xx-large;
+    color: aqua;
+    margin-left: 15px;
+}
+
+#smallHeader {
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: medium;
+    margin-left: 15px;
+}
+
+
