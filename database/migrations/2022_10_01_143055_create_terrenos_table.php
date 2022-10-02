@@ -14,13 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('terrenos', function (Blueprint $table) {
-            $table->increments('id_terreno');
+            $table->BigIncrements('id_terreno');
+            $table->unsignedTinyInteger('id_tipo');
             $table->float('area_terreno');
             $table->string('tamano',25);
-            $table->integer('id_tipo')->unsigned();
-            $table->foreign('id_tipo')->references('id_tipo')->on('tipos')->onDelete('cascade');
-            $table->integer('id_localizacion')->unsigned();
-            $table->foreign('id_localizacion')->references('id_localizacion')->on('localizaciones')->onDelete('cascade');
+            $table->foreign('id_tipo')->references('id_tipo')->on('tipos')->onDelete('restrict');
+            $table->unsignedSmallInteger('id_localizacion');
+            $table->boolean('disponibilidad');
+            $table->boolean('destacado');
+            $table->unsignedBigInteger('id_agente');
+            $table->foreign('id_agente')->references('id_agente')->on('agentes')->onDelete('restrict');
+            $table->foreign('id_localizacion')->references('id_localizacion')->on('localizaciones')->onDelete('restrict');
             $table->timestamps();
         });
     }

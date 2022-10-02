@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('casas', function (Blueprint $table) {
-            $table->string('foto',12)->nullable();
+        Schema::create('usuarios', function (Blueprint $table) {
+            $table->BigIncrements('id_usuario');
+            $table->string('nombre',20);
+            $table->string('apellidos',20);
+            $table->string('email',50);
+            $table->string('password',100);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('casas', function (Blueprint $table) {
-            $table->dropColumn('foto');
-        });
+        Schema::dropIfExists('usuarios');
     }
 };

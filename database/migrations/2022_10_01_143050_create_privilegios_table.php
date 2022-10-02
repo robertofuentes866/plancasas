@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('terrenos', function (Blueprint $table) {
-            $table->string('foto',12)->nullable();
+        Schema::create('privilegios', function (Blueprint $table) {
+            $table->tinyIncrements('id_privilegio');
+            $table->string('nombre',12);
+            $table->boolean('select');
+            $table->boolean('insert');
+            $table->boolean('update');
+            $table->boolean('delete');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('terrenos', function (Blueprint $table) {
-            $table->dropColumn('foto');
-        });
+        Schema::dropIfExists('privilegios');
     }
 };

@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('recursos', function (Blueprint $table) {
-            $table->tinyIncrements('id_recurso');
-            $table->string('recurso',25);
+        Schema::create('fotos_casas', function (Blueprint $table) {
+            $table->UnsignedBigInteger('id_casa');
+            $table->string('foto_normal',150);
+            $table->string('foto_thumb',150);
+            $table->string('leyenda',30);
+            $table->boolean('es_principal');
+            $table->foreign('id_casa')->references('id_casa')->on('casas')->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recursos');
+        Schema::dropIfExists('fotos_casas');
     }
 };

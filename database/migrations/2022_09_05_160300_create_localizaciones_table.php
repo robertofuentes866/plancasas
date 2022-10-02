@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('localizaciones', function (Blueprint $table) {
-            $table->increments('id_localizacion');
-            $table->string('residencial',35);
-            $table->string('direccion',100);
-            $table->integer('id_ciudad')->unsigned();
-            $table->foreign('id_ciudad')->references('id_ciudad')->on('ciudades')->onDelete('cascade');
+            $table->smallIncrements('id_localizacion');
+            $table->string('residencial',35)->nullable(false);
+            $table->string('direccion',100)->nullable(false);
+            $table->unsignedTinyInteger('id_ciudad');
+            $table->foreign('id_ciudad')->references('id_ciudad')->on('ciudades')->onDelete('restrict');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('duraciones', function (Blueprint $table) {
-            $table->increments('id_duracion');
+            $table->tinyIncrements('id_duracion');
             $table->string('duracion',12);
             $table->timestamps();
         });

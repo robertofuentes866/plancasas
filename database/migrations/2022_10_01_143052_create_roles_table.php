@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('bodegas', function (Blueprint $table) {
-            $table->string('foto',12)->nullable();
+        Schema::create('roles', function (Blueprint $table) {
+            $table->tinyIncrements('id_rol');
+            $table->string('descripcion',25);
+            $table->unsignedTinyInteger('id_privilegio');
+            $table->foreign('id_privilegio')->references('id_privilegio')->on('privilegios')->onDelete('restrict');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('bodegas', function (Blueprint $table) {
-            $table->dropColumn('foto');
-        });
+        Schema::dropIfExists('roles');
     }
 };
