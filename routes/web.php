@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\casaController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::get('/menu.iniciarSesion','App\Http\Controllers\menuController@iniciarSes
 Route::get('/menu.cerrarSesion','App\Http\Controllers\menuController@cerrarSesion')->name('menu.cerrarSesion');
 
 Route::view('/lixo',"lixo.lixo");
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

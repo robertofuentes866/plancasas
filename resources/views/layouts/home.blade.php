@@ -24,24 +24,29 @@
         <ul class="nav nav-pills">
             <li class="nav-item">
                 @if (Route::has('menu.inicio'))
-                    <a class="nav-link active" href="{{Route('menu.inicio')}}">INICIO</a>
+                    <a class = "@yield('nav_link_inicio')" href="{{Route('menu.inicio')}}">INICIO</a>
                 @endif
             </li>
+           @guest
              <li class="nav-item">
                 @if (Route::has('menu.crearUsuario'))
-                    <a class="nav-link" href="{{Route('menu.crearUsuario')}}">CREAR USUARIO</a>
+                    <a class = "@yield('nav_link_registrar')" href="{{Route('register')}}">REGISTRARSE</a>
                 @endif
             </li>
             <li class="nav-item">
                 @if (Route::has('menu.iniciarSesion'))
-                    <a class="nav-link" href="{{Route('menu.iniciarSesion')}}">INICIAR SESION</a>
+                    <a class = "@yield('nav_link_entrar')" href="{{Route('login')}}">ENTRAR</a>
                 @endif
             </li>
+            @else
              <li class="nav-item">
-                @if (Route::has('menu.cerrarSesion'))
-                    <a class="nav-link" href="{{Route('menu.cerrarSesion')}}">CERRAR SESION</a>
-                @endif
+             <form id="logout" action="{{ route('logout') }}" method="POST">
+                    <a role="button" class="nav-link active"
+                    onclick="document.getElementById('logout').submit();">Salir</a>
+                    @csrf
+             </form>
              </li>
+             @endguest
         </ul>
     </div>
         

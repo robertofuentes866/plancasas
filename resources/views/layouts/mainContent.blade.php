@@ -1,5 +1,8 @@
 @extends('layouts/home')
 @section('mainTitle',$viewData['titulo'])
+@section('nav_link_inicio',$viewData['nav_link_inicio'])
+@section('nav_link_registrar',$viewData['nav_link_registrar'])
+@section('nav_link_entrar',$viewData['nav_link_entrar'])
 @section('cuerpo')
 
 <div class="col-lg-4 bg-primary">
