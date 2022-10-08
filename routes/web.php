@@ -3,6 +3,7 @@
 use App\Http\Controllers\casaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\Sanctum;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +17,9 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
-Route::get('/menu.crearUsuario','App\Http\Controllers\menuController@crearUsuario')->name('menu.crearUsuario');
-Route::get('/menu.iniciarSesion','App\Http\Controllers\menuController@iniciarSesion')->name('menu.iniciarSesion');
-Route::get('/menu.cerrarSesion','App\Http\Controllers\menuController@cerrarSesion')->name('menu.cerrarSesion');
 
-Route::view('/lixo',"lixo.lixo");
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/lixo',function(){ echo "hola";})->middleware(['auth','edad']);
+
+Route::get('/no-autorizado',function(){ echo "Usuario no autorizado";});

@@ -1,8 +1,7 @@
 @extends('layouts.home')
-@section('mainTitle',$viewData['titulo'])
-@section('nav_link_inicio',$viewData['nav_link_inicio'])
-@section('nav_link_registrar',$viewData['nav_link_registrar'])
-@section('nav_link_entrar',$viewData['nav_link_entrar'])
+@section('nav_link_inicio','nav-link');
+@section('nav_link_registrar','nav-link active');
+@section('nav_link_entrar','nav-link');
 @section('cuerpo')
 <div class="container">
     <div class="row justify-content-center">

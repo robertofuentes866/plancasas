@@ -1,5 +1,7 @@
 @extends('layouts.home')
-
+@section('nav_link_inicio','nav-link');
+@section('nav_link_registrar','nav-link ');
+@section('nav_link_entrar','nav-link active');
 @section('cuerpo')
 <div class="container">
     <div class="row justify-content-center">

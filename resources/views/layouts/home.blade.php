@@ -23,25 +23,19 @@
         <div class="col-lg-12 nav-justified">
         <ul class="nav nav-pills">
             <li class="nav-item">
-                @if (Route::has('menu.inicio'))
                     <a class = "@yield('nav_link_inicio')" href="{{Route('menu.inicio')}}">INICIO</a>
-                @endif
             </li>
            @guest
              <li class="nav-item">
-                @if (Route::has('menu.crearUsuario'))
                     <a class = "@yield('nav_link_registrar')" href="{{Route('register')}}">REGISTRARSE</a>
-                @endif
             </li>
             <li class="nav-item">
-                @if (Route::has('menu.iniciarSesion'))
                     <a class = "@yield('nav_link_entrar')" href="{{Route('login')}}">ENTRAR</a>
-                @endif
             </li>
             @else
              <li class="nav-item">
              <form id="logout" action="{{ route('logout') }}" method="POST">
-                    <a role="button" class="nav-link active"
+                    <a role="button" class="nav-link"
                     onclick="document.getElementById('logout').submit();">Salir</a>
                     @csrf
              </form>
