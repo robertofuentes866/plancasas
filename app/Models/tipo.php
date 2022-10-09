@@ -12,6 +12,7 @@ class tipo extends Model
     protected $table = 'tipos';
     protected $fillable = ['tipo'];
     protected $hidden = ['id_tipo'];
+    protected $primaryKey = "id_tipo";
 
 
     public function obtenerTipos(){
@@ -20,6 +21,14 @@ class tipo extends Model
 
     public function obtenerTiposPorId($id){
         return Tipo::find($id);
+    }
+
+    public function getId() {
+        return $this->attributes['id_tipo'];
+    }
+
+    public function getTipo(){
+        return $this->attributes['tipo'];
     }
     
 }
