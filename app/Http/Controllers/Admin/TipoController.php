@@ -68,7 +68,10 @@ class TipoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $viewData = [];
+        $viewData['title'] = "Editar Tipo de propiedad";
+        $viewData['tipos'] = tipo::findOrFail($id);
+       return view('admin.tipoFormEdit')->with('viewData',$viewData);
     }
 
     /**
@@ -80,7 +83,15 @@ class TipoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $viewData = [];
+        $viewData['title'] = "Editar Tipo de propiedad";
+        
+        $tipo = tipo::findOrFail($id);
+        $tipo->setTipo($request->tipo);
+        $tipo->save();
+        $viewData['tipos'] = tipo::all();
+        return view('admin.tipoForm')->with('viewData',$viewData);
     }
 
     /**

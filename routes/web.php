@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\casaController;
+use App\Http\Controllers\Admin\tipoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\Sanctum;
@@ -20,14 +20,12 @@ Route::get('/','App\Http\Controllers\menuController@inicio')->name('menu.inicio'
 
 Route::get('/admin.tipoForm.index','App\Http\Controllers\Admin\tipoController@index')->name('admin.tipoForm.index')->middleware('auth');
 
-Route::post('/admin.tipoForm.store','App\Http\Controllers\Admin\tipoController@store')->name('admin.tipoForm.store');
+Route::post('/admin.tipoForm.store','App\Http\Controllers\Admin\tipoController@store')->name('admin.tipoForm.store')->middleware('auth');
 
-Route::get('/admin.tipoForm.edit','App\Http\Controllers\Admin\tipoController@edit')->name('admin.tipoForm.edit');
+Route::get('/{id}/admin.tipoForm.edit','App\Http\Controllers\Admin\tipoController@edit')->name('admin.tipoForm.edit')->middleware('auth');
 
-Route::delete('/{id}/admin.tipoForm.delete','App\Http\Controllers\Admin\tipoController@destroy')->name('admin.tipoForm.delete');
+Route::put('/{id}/admin.tipoForm.update',[tipoController::class,'update'])->name('admin.tipoForm.update')->middleware('auth');
+
+Route::delete('/{id}/admin.tipoForm.delete','App\Http\Controllers\Admin\tipoController@destroy')->name('admin.tipoForm.delete')->middleware('auth');
 
 Auth::routes();
-
-Route::get('/lixo',function(){ echo "hola";})->middleware(['auth','edad']);
-
-Route::get('/no-autorizado',function(){ echo "Usuario no autorizado";});

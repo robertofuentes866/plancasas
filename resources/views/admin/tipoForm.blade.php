@@ -50,7 +50,7 @@ Ver Tipo de propiedades
 <td>{{ $tipo->getId() }}</td>
 <td>{{ $tipo->getTipo() }}</td>
 <td> 
-    <a class="btn btn-primary" href="{{route('admin.tipoForm.edit', $tipo->getId())}}">
+    <a class="btn btn-primary" href="{{route('admin.tipoForm.edit',['id'=>$tipo->getId()])}}">
     <i class="bi-pencil"></i>
     </a>
 </td>

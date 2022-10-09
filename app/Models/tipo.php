@@ -30,5 +30,9 @@ class tipo extends Model
     public function getTipo(){
         return $this->attributes['tipo'];
     }
+
+    public function setTipo($tipo) {
+        $this->attributes['tipo'] = $tipo;
+    }
     
 }
