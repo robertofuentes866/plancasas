@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\tipoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\Sanctum;
+use App\Http\Controllers\Admin\AdminFormsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,20 @@ use Laravel\Sanctum\Sanctum;
 |
 */
 
+// llama pagina de inicio de plancasas. Cualquier usuario puede tener acceso.
 Route::get('/','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
 
-Route::get('/admin.tipoForm.index','App\Http\Controllers\Admin\tipoController@index')->name('admin.tipoForm.index')->middleware('auth');
+// prepara datos del menu de formularios.
+Route::get('/AdminForms','App\Http\Controllers\Admin\AdminFormsController@index')->middleware('auth');
+
+// llama al formulario de entrada de datos seleccionado. Solo para administradores.
+Route::get('/admin.controlForms','App\Http\Controllers\Admin\AdminFormsController@showForm')->name('admin.controlForms');
+
+// llama menu de formularios de entrada de datos a seleccionar. Solo para administradores.
+Route::view('admin.adminFormsContents','admin.adminFormsContents')->name('admin.adminFormsContents');
+
+// Relacionados al formulario TIPO DE PROPIEDADES.
+Route::get('/admin.tipoForm.index','App\Http\Controllers\Admin\tipoController@index')->name('admin.tipoForm.index');
 
 Route::post('/admin.tipoForm.store','App\Http\Controllers\Admin\tipoController@store')->name('admin.tipoForm.store')->middleware('auth');
 

@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class AdminFormsController extends Controller
+{
+    public function index() { // el formulario de la tabla se desea seleccionar.
+        $viewData = [];
+        $viewData['title'] = "Panel de Administracion - Plancasas";
+        $viewData['tablas'] = ["admin.tipoForm.index"=>"Tabla Tipos de propiedades",
+                              "ofrecimientosForms"=>"Tabla Ofrecimientos",
+                            "recursosForms"=>"Tabla Recursos"];
+        return view('admin.AdminFormsContents')->with("viewData",$viewData);
+    }
+
+    public function showForm(Request $request) {
+        return redirect()->route($request->table);
+    }
+}
