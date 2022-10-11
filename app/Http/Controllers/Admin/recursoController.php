@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\tipo;
 
-class TipoController extends Controller
+use App\Models\recurso;
+
+
+class recursoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
-    { 
+    {
         $viewData = [];
-        $viewData['title'] = "Formulario - Tipos de propiedades";
-        $viewData['table'] = tipo::all();
-        return view('admin.tipoForm')->with('data',$viewData);
+        $viewData['title'] = "Formulario - Recursos";
+        $viewData['table'] = recurso::all();
+        return view('admin.recursoForm')->with('data',$viewData);
     }
 
     /**
@@ -40,14 +41,14 @@ class TipoController extends Controller
      */
     public function store(Request $request)
     {
-            $tipo = new tipo;
-            $tipo->tipo = $request->tipo;
-            $tipo->save();
+        $recurso = new recurso;
+        $recurso->recurso = $request->recurso;
+        $recurso->save();
 
-            $viewData = [];
-            $viewData['title'] = "Tipos de Propiedades";
-            $viewData['table'] = tipo::all();
-            return view('admin.tipoForm')->with('data',$viewData);
+        $viewData = [];
+        $viewData['title'] = "Recursos";
+        $viewData['table'] = recurso::all();
+        return view('admin.recursoForm')->with('data',$viewData);
     }
 
     /**
@@ -70,9 +71,9 @@ class TipoController extends Controller
     public function edit($id)
     {
         $viewData = [];
-        $viewData['title'] = "Editar Tipo de propiedad";
-        $viewData['tipos'] = tipo::findOrFail($id);
-       return view('admin.tipoFormEdit')->with('viewData',$viewData);
+        $viewData['title'] = "Editar Recursos";
+        $viewData['recursos'] = recurso::findOrFail($id);
+       return view('admin.recursoFormEdit')->with('viewData',$viewData);
     }
 
     /**
@@ -84,14 +85,14 @@ class TipoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tipo = tipo::findOrFail($id);
-        $tipo->setTipo($request->tipo);
+        $tipo = recurso::findOrFail($id);
+        $tipo->setRecurso($request->recurso);
         $tipo->save();
 
         $viewData = [];
-        $viewData['title'] = "Editar Tipo de propiedad";
-        $viewData['table'] = tipo::all();
-        return view('admin.tipoForm')->with('data',$viewData);
+        $viewData['title'] = "Editar Recurso";
+        $viewData['table'] = recurso::all();
+        return view('admin.recursoForm')->with('data',$viewData);
     }
 
     /**
@@ -102,12 +103,11 @@ class TipoController extends Controller
      */
     public function destroy($id)
     {
-        tipo::destroy($id);
+        recurso::destroy($id);
         $viewData = [];
-        $viewData['title'] = "Tipos de Propiedades";
-        $viewData['table'] = tipo::all();
+        $viewData['title'] = "Recursos";
+        $viewData['table'] = recurso::all();
 
-        return view('admin.tipoForm')->with('data',$viewData);
-        
+        return view('admin.recursoForm')->with('data',$viewData);
     }
 }

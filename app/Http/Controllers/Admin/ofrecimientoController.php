@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\tipo;
 
-class TipoController extends Controller
+use App\Models\ofrecimiento;
+
+class ofrecimientoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
-    { 
+    {
         $viewData = [];
-        $viewData['title'] = "Formulario - Tipos de propiedades";
-        $viewData['table'] = tipo::all();
-        return view('admin.tipoForm')->with('data',$viewData);
+        $viewData['title'] = "Formulario - Ofrecimientos";
+        $viewData['table'] = ofrecimiento::all();
+        return view('admin.ofrecimientoForm')->with('data',$viewData);
     }
 
     /**
@@ -40,14 +40,14 @@ class TipoController extends Controller
      */
     public function store(Request $request)
     {
-            $tipo = new tipo;
-            $tipo->tipo = $request->tipo;
-            $tipo->save();
+        $ofrecimiento = new ofrecimiento();
+        $ofrecimiento->ofrecimiento = $request->ofrecimiento;
+        $ofrecimiento->save();
 
-            $viewData = [];
-            $viewData['title'] = "Tipos de Propiedades";
-            $viewData['table'] = tipo::all();
-            return view('admin.tipoForm')->with('data',$viewData);
+        $viewData = [];
+        $viewData['title'] = "Ofrecimientos";
+        $viewData['table'] = ofrecimiento::all();
+        return view('admin.ofrecimientoForm')->with('data',$viewData);
     }
 
     /**
@@ -70,9 +70,9 @@ class TipoController extends Controller
     public function edit($id)
     {
         $viewData = [];
-        $viewData['title'] = "Editar Tipo de propiedad";
-        $viewData['tipos'] = tipo::findOrFail($id);
-       return view('admin.tipoFormEdit')->with('viewData',$viewData);
+        $viewData['title'] = "Editar Ofrecimiento";
+        $viewData['ofrecimientos'] = ofrecimiento::findOrFail($id);
+       return view('admin.ofrecimientoFormEdit')->with('viewData',$viewData);
     }
 
     /**
@@ -84,14 +84,14 @@ class TipoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tipo = tipo::findOrFail($id);
-        $tipo->setTipo($request->tipo);
-        $tipo->save();
+        $ofrecimiento = ofrecimiento::findOrFail($id);
+        $ofrecimiento->setOfrecimiento($request->ofrecimiento);
+        $ofrecimiento->save();
 
         $viewData = [];
-        $viewData['title'] = "Editar Tipo de propiedad";
-        $viewData['table'] = tipo::all();
-        return view('admin.tipoForm')->with('data',$viewData);
+        $viewData['title'] = "Editar Ofrecimiento";
+        $viewData['table'] = ofrecimiento::all();
+        return view('admin.ofrecimientoForm')->with('data',$viewData);
     }
 
     /**
@@ -102,12 +102,11 @@ class TipoController extends Controller
      */
     public function destroy($id)
     {
-        tipo::destroy($id);
+        ofrecimiento::destroy($id);
         $viewData = [];
-        $viewData['title'] = "Tipos de Propiedades";
-        $viewData['table'] = tipo::all();
+        $viewData['title'] = "Ofrecimientos";
+        $viewData['table'] = ofrecimiento::all();
 
-        return view('admin.tipoForm')->with('data',$viewData);
-        
+        return view('admin.ofrecimientoForm')->with('data',$viewData);
     }
 }

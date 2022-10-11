@@ -3,7 +3,7 @@
 @section('cuerpo')
 <div class="card mb-4">
 <div class="card-header">
-Escoja el formulario
+Editar Ofrecimiento
 </div>
 <div class="card-body">
 @if($errors->any())
@@ -13,23 +13,20 @@ Escoja el formulario
 @endforeach
 </ul>
 @endif
-<form method="GET" action="{{route('admin.controlForms')}}" enctype="form-data">
+<form method="POST" action="{{ route('admin.ofrecimientoForm.update', ['id'=> $viewData['ofrecimientos']->getId()]) }}" enctype="form-data">
 @csrf
+@method('PUT')
 <div class="row">
 <div class="col">
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Seleccione Formulario:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Ofrecimiento:</label>
 <div class="col-lg-10 col-md-6 col-sm-12">
-<select name="table" class="form-control">
-    @foreach($viewData['tables'] as $tabla =>$nombre)
-       <option value="{{$tabla}}">{{$nombre}}</option>
-    @endforeach
-</select>
+<input name="ofrecimiento" value="{{$viewData['ofrecimientos']->getOfrecimiento()}}" type="text" class="form-control">
 </div>
 </div>
 </div>
 </div>
-<button type="submit" class="btn btn-primary">Ir</button>
+<button type="submit" class="btn btn-primary">Editar</button>
 </form>
 
 </div>
