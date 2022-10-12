@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ofrecimientos', function (Blueprint $table) {
             $table->tinyIncrements('id_ofrecimiento');
-            $table->string('ofrecimiento',12);
+            $table->string('ofrecimiento',20);
             $table->timestamps();
         });
     }

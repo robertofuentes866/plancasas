@@ -3,6 +3,9 @@
 use App\Http\Controllers\Admin\tipoController;
 use App\Http\Controllers\Admin\recursoController;
 use App\Http\Controllers\Admin\ofrecimientoController;
+use App\Http\Controllers\Admin\ciudadController;
+use App\Http\Controllers\Admin\duracionController;
+use App\Http\Controllers\Admin\localizacionController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -61,5 +64,38 @@ Route::get('/{id}/admin.ofrecimientoForm.edit','App\Http\Controllers\Admin\ofrec
 Route::put('/{id}/admin.ofrecimientoForm.update',[ofrecimientoController::class,'update'])->name('admin.ofrecimientoForm.update');
 
 Route::delete('/{id}/admin.ofrecimientoForm.delete','App\Http\Controllers\Admin\ofrecimientoController@destroy')->name('admin.ofrecimientoForm.delete');
+
+// Relacionados al formulario CIUDADES.
+Route::get('/admin.ciudadForm.index','App\Http\Controllers\Admin\ciudadController@index')->name('admin.ciudadForm.index');
+
+Route::post('/admin.ciudadForm.store','App\Http\Controllers\Admin\ciudadController@store')->name('admin.ciudadForm.store');
+
+Route::get('/{id}/admin.ciudadForm.edit','App\Http\Controllers\Admin\ciudadController@edit')->name('admin.ciudadForm.edit');
+
+Route::put('/{id}/admin.ciudadForm.update',[ciudadController::class,'update'])->name('admin.ciudadForm.update');
+
+Route::delete('/{id}/admin.ciudadForm.delete','App\Http\Controllers\Admin\ciudadController@destroy')->name('admin.ciudadForm.delete');
+
+// Relacionados al formulario LOCALIZACIONES.
+Route::get('/admin.localizacionForm.index','App\Http\Controllers\Admin\localizacionController@index')->name('admin.localizacionForm.index');
+
+Route::post('/admin.localizacionForm.store','App\Http\Controllers\Admin\localizacionController@store')->name('admin.localizacionForm.store');
+
+Route::get('/{id}/admin.localizacionForm.edit','App\Http\Controllers\Admin\localizacionController@edit')->name('admin.localizacionForm.edit');
+
+Route::put('/{id}/admin.localizacionForm.update',[localizacionController::class,'update'])->name('admin.localizacionForm.update');
+
+Route::delete('/{id}/admin.localizacionForm.delete','App\Http\Controllers\Admin\localizacionController@destroy')->name('admin.localizacionForm.delete');
+
+// Relacionados al formulario DURACIONES.
+Route::get('/admin.duracionForm.index','App\Http\Controllers\Admin\duracionController@index')->name('admin.duracionForm.index');
+
+Route::post('/admin.duracionForm.store','App\Http\Controllers\Admin\duracionController@store')->name('admin.duracionForm.store');
+
+Route::get('/{id}/admin.duracionForm.edit','App\Http\Controllers\Admin\duracionController@edit')->name('admin.duracionForm.edit');
+
+Route::put('/{id}/admin.duracionForm.update',[duracionController::class,'update'])->name('admin.duracionForm.update');
+
+Route::delete('/{id}/admin.duracionForm.delete','App\Http\Controllers\Admin\duracionController@destroy')->name('admin.duracionForm.delete');
 
 Auth::routes();

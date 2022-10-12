@@ -14,6 +14,10 @@ class tipo extends Model
     protected $hidden = ['id_tipo'];
     protected $primaryKey = "id_tipo";
 
+    public static function validar($request) {
+        $request->validate(['tipo'=>'required|max:20']);
+    }
+
 
     public function obtenerTipos(){
         return Tipo::all();

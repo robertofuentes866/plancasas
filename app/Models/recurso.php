@@ -13,7 +13,10 @@ class recurso extends Model
     protected $fillable = ['recurso'];
     protected $hidden = ['id_recurso'];
     protected $primaryKey = "id_recurso";
-
+ 
+    public static function validar($request) {
+        $request->validate(['recurso'=>'required|max:25']);
+    }
 
     public function obtenerRecursos(){
         return recurso::all();

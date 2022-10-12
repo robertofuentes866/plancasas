@@ -3,7 +3,7 @@
 @section('cuerpo')
 <div class="card mb-4">
 <div class="card-header">
-Editar Ofrecimiento
+Editar Ciudad
 </div>
 <div class="card-body">
 @if($errors->any())
@@ -13,15 +13,15 @@ Editar Ofrecimiento
 @endforeach
 </ul>
 @endif
-<form method="POST" action="{{ route('admin.ofrecimientoForm.update', ['id'=> $viewData['ofrecimientos']->getId()]) }}" enctype="form-data">
+<form method="POST" action="{{ route('admin.ciudadForm.update', ['id'=> $viewData['ciudades']->getId()]) }}" enctype="form-data">
 @csrf
 @method('PUT')
 <div class="row">
 <div class="col">
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Ofrecimiento:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Tipo:</label>
 <div class="col-lg-10 col-md-6 col-sm-12">
-<input name="ofrecimiento" value="{{$viewData['ofrecimientos']->getOfrecimiento()}}" type="text" class="form-control">
+<input name="ciudad" value="{{$viewData['ciudades']->getCiudad()}}" type="text" class="form-control">
 </div>
 </div>
 </div>

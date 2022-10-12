@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\tipo;
 
-class TipoController extends Controller
+use App\Models\duracion;
+
+class duracionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
-    { 
+    {
         $viewData = [];
-        $viewData['title'] = "Formulario - Tipos de propiedades";
-        $viewData['table'] = tipo::all();
-        return view('admin.tipoForm')->with('data',$viewData);
+        $viewData['title'] = "Formulario - Ciudades";
+        $viewData['table'] = duracion::all();
+        return view('admin.duracionForm')->with('data',$viewData);
     }
 
     /**
@@ -40,12 +40,12 @@ class TipoController extends Controller
      */
     public function store(Request $request)
     {
-            tipo::validar($request);
-            $tipo = new tipo;
-            $tipo->tipo = $request->tipo;
-            $tipo->save();
-
-            return redirect()->route('admin.tipoForm.index');
+            duracion::validar($request);
+            $duracion = new duracion;
+            $duracion->duracion = $request->duracion;
+            $duracion->save();
+            
+            return redirect()->route('admin.duracionForm.index');
     }
 
     /**
@@ -68,9 +68,9 @@ class TipoController extends Controller
     public function edit($id)
     {
         $viewData = [];
-        $viewData['title'] = "Editar Tipo de propiedad";
-        $viewData['tipos'] = tipo::findOrFail($id);
-       return view('admin.tipoFormEdit')->with('viewData',$viewData);
+        $viewData['title'] = "Editar Duracion";
+        $viewData['duraciones'] = duracion::findOrFail($id);
+       return view('admin.duracionFormEdit')->with('viewData',$viewData);
     }
 
     /**
@@ -82,12 +82,12 @@ class TipoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        tipo::validar($request);
-        $tipo = tipo::findOrFail($id);
-        $tipo->setTipo($request->tipo);
-        $tipo->save();
+        duracion::validar($request);
+        $duracion = duracion::findOrFail($id);
+        $duracion->setDuracion($request->duracion);
+        $duracion->save();
         
-        return redirect()->route('admin.tipoForm.index');
+        return redirect()->route('admin.duracionForm.index');
     }
 
     /**
@@ -98,11 +98,11 @@ class TipoController extends Controller
      */
     public function destroy($id)
     {
-        tipo::destroy($id);
+        duracion::destroy($id);
         $viewData = [];
-        $viewData['title'] = "Tipos de Propiedades";
-        $viewData['table'] = tipo::all();
+        $viewData['title'] = "Duraciones";
+        $viewData['table'] = duracion::all();
 
-        return redirect()->route('admin.tipoForm.index');
+        return redirect()->route('admin.duracionForm.index');
     }
 }

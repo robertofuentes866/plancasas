@@ -40,14 +40,12 @@ class ofrecimientoController extends Controller
      */
     public function store(Request $request)
     {
+        ofrecimiento::validar($request);
         $ofrecimiento = new ofrecimiento();
         $ofrecimiento->ofrecimiento = $request->ofrecimiento;
         $ofrecimiento->save();
 
-        $viewData = [];
-        $viewData['title'] = "Ofrecimientos";
-        $viewData['table'] = ofrecimiento::all();
-        return view('admin.ofrecimientoForm')->with('data',$viewData);
+        return redirect()->route('admin.ofrecimientoForm.index');
     }
 
     /**
@@ -84,14 +82,12 @@ class ofrecimientoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        ofrecimiento::validar($request);
         $ofrecimiento = ofrecimiento::findOrFail($id);
         $ofrecimiento->setOfrecimiento($request->ofrecimiento);
         $ofrecimiento->save();
 
-        $viewData = [];
-        $viewData['title'] = "Editar Ofrecimiento";
-        $viewData['table'] = ofrecimiento::all();
-        return view('admin.ofrecimientoForm')->with('data',$viewData);
+        return redirect()->route('admin.ofrecimientoForm.index');
     }
 
     /**
@@ -106,7 +102,6 @@ class ofrecimientoController extends Controller
         $viewData = [];
         $viewData['title'] = "Ofrecimientos";
         $viewData['table'] = ofrecimiento::all();
-
-        return view('admin.ofrecimientoForm')->with('data',$viewData);
+        return redirect()->route('admin.ofrecimientoForm.index');
     }
 }

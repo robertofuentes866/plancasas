@@ -14,6 +14,9 @@ class ofrecimiento extends Model
     protected $hidden = ['id_ofrecimiento'];
     protected $primaryKey = "id_ofrecimiento";
 
+    public static function validar($request) {
+        $request->validate(['ofrecimiento'=>'required|max:20']);
+    }
 
     public function obtenerOfrecimientos(){
         return ofrecimiento::all();

@@ -1,25 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\tipo;
 
-class TipoController extends Controller
+use App\Models\localizacion;
+use App\Models\ciudad;
+
+class localizacionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
-    { 
+    {
         $viewData = [];
-        $viewData['title'] = "Formulario - Tipos de propiedades";
-        $viewData['table'] = tipo::all();
-        return view('admin.tipoForm')->with('data',$viewData);
+        $viewData['title'] = "Formulario - Localizaciones";
+        $viewData['localizaciones'] = localizacion::all();
+        $viewData['ciudades'] = ciudad::all();
+        return view('admin.localizacionForm')->with('data',$viewData);
     }
 
     /**
@@ -40,12 +42,13 @@ class TipoController extends Controller
      */
     public function store(Request $request)
     {
-            tipo::validar($request);
-            $tipo = new tipo;
-            $tipo->tipo = $request->tipo;
-            $tipo->save();
+            localizacion::validar($request);
+            $localizacion = new localizacion;
+            $localizacion->residencial = $request->residencial;
+            $localizacion->id_ciudad = $request->id_ciudad;
+            $localizacion->save();
 
-            return redirect()->route('admin.tipoForm.index');
+            return redirect()->route('admin.localizacionForm.index');
     }
 
     /**
@@ -68,9 +71,10 @@ class TipoController extends Controller
     public function edit($id)
     {
         $viewData = [];
-        $viewData['title'] = "Editar Tipo de propiedad";
-        $viewData['tipos'] = tipo::findOrFail($id);
-       return view('admin.tipoFormEdit')->with('viewData',$viewData);
+        $viewData['title'] = "Editar Localizacion";
+        $viewData['localizaciones'] = localizacion::findOrFail($id);
+        $viewData['ciudades'] = ciudad::all();
+       return view('admin.localizacionFormEdit')->with('viewData',$viewData);
     }
 
     /**
@@ -82,12 +86,13 @@ class TipoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        tipo::validar($request);
-        $tipo = tipo::findOrFail($id);
-        $tipo->setTipo($request->tipo);
-        $tipo->save();
+        localizacion::validar($request);
+        $localizacion = localizacion::findOrFail($id);
+        $localizacion->setLocalizacion($request->residencial);
+        $localizacion->setCiudad($request->id_ciudad);
+        $localizacion->save();
         
-        return redirect()->route('admin.tipoForm.index');
+        return redirect()->route('admin.localizacionForm.index');
     }
 
     /**
@@ -98,10 +103,12 @@ class TipoController extends Controller
      */
     public function destroy($id)
     {
-        tipo::destroy($id);
+        localizacion::destroy($id);
+
         $viewData = [];
-        $viewData['title'] = "Tipos de Propiedades";
-        $viewData['table'] = tipo::all();
+        $viewData['title'] = "Formulario - Localizaciones";
+        $viewData['localizaciones'] = localizacion::all();
+        $viewData['ciudades'] = ciudad::all();
 
         return redirect()->route('admin.tipoForm.index');
     }

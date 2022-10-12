@@ -41,14 +41,12 @@ class recursoController extends Controller
      */
     public function store(Request $request)
     {
+        recurso::validar($request);
         $recurso = new recurso;
         $recurso->recurso = $request->recurso;
         $recurso->save();
 
-        $viewData = [];
-        $viewData['title'] = "Recursos";
-        $viewData['table'] = recurso::all();
-        return view('admin.recursoForm')->with('data',$viewData);
+        return redirect()->route('admin.recursoForm.index');
     }
 
     /**
@@ -85,14 +83,12 @@ class recursoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        recurso::validar($request);
         $tipo = recurso::findOrFail($id);
         $tipo->setRecurso($request->recurso);
         $tipo->save();
 
-        $viewData = [];
-        $viewData['title'] = "Editar Recurso";
-        $viewData['table'] = recurso::all();
-        return view('admin.recursoForm')->with('data',$viewData);
+        return redirect()->route('admin.recursoForm.index');
     }
 
     /**
@@ -107,7 +103,6 @@ class recursoController extends Controller
         $viewData = [];
         $viewData['title'] = "Recursos";
         $viewData['table'] = recurso::all();
-
-        return view('admin.recursoForm')->with('data',$viewData);
+        return redirect()->route('admin.recursoForm.index');
     }
 }

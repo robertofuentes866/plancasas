@@ -27,6 +27,7 @@ Editar Recurso
 </div>
 </div>
 <button type="submit" class="btn btn-primary">Editar</button>
+<button type="button" onclick="goBack()" class="btn btn-primary">Regresar</button>
 </form>
 
 </div>

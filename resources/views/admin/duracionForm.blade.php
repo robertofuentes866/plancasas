@@ -3,7 +3,7 @@
 @section('cuerpo')
 <div class="card mb-4">
 <div class="card-header">
-Crear Tipo de propiedades
+Crear Duraciones
 </div>
 <div class="card-body">
 @if($errors->any())
@@ -13,14 +13,14 @@ Crear Tipo de propiedades
 @endforeach
 </ul>
 @endif
-<form method="POST" action="{{ route('admin.tipoForm.store') }}" enctype="form-data">
+<form method="POST" action="{{ route('admin.duracionForm.store') }}" enctype="form-data">
 @csrf
 <div class="row">
 <div class="col">
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Tipo:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Duracion:</label>
 <div class="col-lg-10 col-md-6 col-sm-12">
-<input name="tipo" value="{{ old('tipo') }}" type="text" class="form-control">
+<input name="duracion" value="{{ old('duracion') }}" type="text" class="form-control">
 </div>
 </div>
 </div>
@@ -33,30 +33,30 @@ Crear Tipo de propiedades
 </div>
 <div class="card">
 <div class="card-header">
-Ver Ciudades
+Ver Duraciones
 </div>
 <div class="card-body">
 <table class="table table-bordered table-striped">
 <thead>
 <tr>
 <th scope="col">ID</th>
-<th scope="col">TIPO</th>
+<th scope="col">DURACION</th>
 <th scope="col">EDITAR</th>
 <th scope="col">BORRAR</th>
 </tr>
 </thead>
 <tbody>
-@foreach ($data["table"] as $tipo)
+@foreach ($data["table"] as $duracion)
 <tr>
-<td>{{ $tipo->getId() }}</td>
-<td>{{ $tipo->getTipo() }}</td>
+<td>{{ $duracion->getId() }}</td>
+<td>{{ $duracion->getDuracion() }}</td>
 <td> 
-    <a class="btn btn-primary" href="{{route('admin.tipoForm.edit',['id'=>$tipo->getId()])}}">
+    <a class="btn btn-primary" href="{{route('admin.duracionForm.edit',['id'=>$duracion->getId()])}}">
     <i class="bi-pencil"></i>
     </a>
 </td>
 <td>
-<form action="{{ route('admin.tipoForm.delete',['id'=> $tipo->getId()])}}" method="post">
+<form action="{{ route('admin.duracionForm.delete',['id'=> $duracion->getId()])}}" method="post">
 @csrf
 @method('DELETE')
 <button class="btn btn-danger">

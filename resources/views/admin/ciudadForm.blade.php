@@ -3,7 +3,7 @@
 @section('cuerpo')
 <div class="card mb-4">
 <div class="card-header">
-Crear Tipo de propiedades
+Crear Ciudades
 </div>
 <div class="card-body">
 @if($errors->any())
@@ -13,14 +13,14 @@ Crear Tipo de propiedades
 @endforeach
 </ul>
 @endif
-<form method="POST" action="{{ route('admin.tipoForm.store') }}" enctype="form-data">
+<form method="POST" action="{{ route('admin.ciudadForm.store') }}" enctype="form-data">
 @csrf
 <div class="row">
 <div class="col">
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Tipo:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Ciudad:</label>
 <div class="col-lg-10 col-md-6 col-sm-12">
-<input name="tipo" value="{{ old('tipo') }}" type="text" class="form-control">
+<input name="ciudad" value="{{ old('ciudad') }}" type="text" class="form-control">
 </div>
 </div>
 </div>
@@ -40,23 +40,23 @@ Ver Ciudades
 <thead>
 <tr>
 <th scope="col">ID</th>
-<th scope="col">TIPO</th>
+<th scope="col">CIUDAD</th>
 <th scope="col">EDITAR</th>
 <th scope="col">BORRAR</th>
 </tr>
 </thead>
 <tbody>
-@foreach ($data["table"] as $tipo)
+@foreach ($data["table"] as $ciudad)
 <tr>
-<td>{{ $tipo->getId() }}</td>
-<td>{{ $tipo->getTipo() }}</td>
+<td>{{ $ciudad->getId() }}</td>
+<td>{{ $ciudad->getCiudad() }}</td>
 <td> 
-    <a class="btn btn-primary" href="{{route('admin.tipoForm.edit',['id'=>$tipo->getId()])}}">
+    <a class="btn btn-primary" href="{{route('admin.ciudadForm.edit',['id'=>$ciudad->getId()])}}">
     <i class="bi-pencil"></i>
     </a>
 </td>
 <td>
-<form action="{{ route('admin.tipoForm.delete',['id'=> $tipo->getId()])}}" method="post">
+<form action="{{ route('admin.ciudadForm.delete',['id'=> $ciudad->getId()])}}" method="post">
 @csrf
 @method('DELETE')
 <button class="btn btn-danger">
