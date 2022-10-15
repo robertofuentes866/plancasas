@@ -26,7 +26,7 @@ Crear Ciudades
 </div>
 </div>
 <button type="submit" class="btn btn-primary">Guardar</button>
-<button type="button" onclick="goBack()" class="btn btn-primary">Regresar</button>
+<button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{ route('adminForms')}}">Regresar</a></button>
 </form>
 
 </div>
@@ -56,10 +56,10 @@ Ver Ciudades
     </a>
 </td>
 <td>
-<form action="{{ route('admin.ciudadForm.delete',['id'=> $ciudad->getId()])}}" method="post">
+<form action="{{ route('admin.ciudadForm.delete',['id'=> $ciudad->getId()])}}" class="formulario_eliminar" method="post">
 @csrf
 @method('DELETE')
-<button class="btn btn-danger">
+<button type="submit" class="btn btn-danger">
 <i class="bi-trash"></i>
 </button>
 </form>
@@ -72,3 +72,6 @@ Ver Ciudades
 </div>
 </div>
 @endsection
+
+@extends('admin.botonEliminar')
+

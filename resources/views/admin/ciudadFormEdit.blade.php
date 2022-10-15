@@ -19,7 +19,7 @@ Editar Ciudad
 <div class="row">
 <div class="col">
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Tipo:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Ciudad:</label>
 <div class="col-lg-10 col-md-6 col-sm-12">
 <input name="ciudad" value="{{$viewData['ciudades']->getCiudad()}}" type="text" class="form-control">
 </div>
@@ -27,7 +27,7 @@ Editar Ciudad
 </div>
 </div>
 <button type="submit" class="btn btn-primary">Editar</button>
-<button type="button" onclick="goBack()" class="btn btn-primary">Regresar</button>
+<button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{ route('admin.ciudadForm.index')}}">Regresar</a></button>
 </form>
 
 </div>

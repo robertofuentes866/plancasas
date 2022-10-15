@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\localizacion;
 use App\Models\ciudad;
+use Illuminate\Support\Facades\DB;
 
 class localizacionController extends Controller
 {
@@ -16,11 +17,17 @@ class localizacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $viewData = [];
         $viewData['title'] = "Formulario - Localizaciones";
         $viewData['localizaciones'] = localizacion::all();
         $viewData['ciudades'] = ciudad::all();
+        $viewData['relacion'] = DB::table('localizaciones')
+                                    ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
+                                    ->select('localizaciones.id_localizacion','localizaciones.residencial',
+                                    'localizaciones.direccion','ciudades.ciudad')
+                                    ->get();
+        //print_r($viewData['relacion']);
         return view('admin.localizacionForm')->with('data',$viewData);
     }
 
@@ -44,8 +51,10 @@ class localizacionController extends Controller
     {
             localizacion::validar($request);
             $localizacion = new localizacion;
-            $localizacion->residencial = $request->residencial;
             $localizacion->id_ciudad = $request->id_ciudad;
+            $localizacion->residencial = $request->residencial;
+            $localizacion->direccion = $request->direccion;
+           
             $localizacion->save();
 
             return redirect()->route('admin.localizacionForm.index');
@@ -74,7 +83,7 @@ class localizacionController extends Controller
         $viewData['title'] = "Editar Localizacion";
         $viewData['localizaciones'] = localizacion::findOrFail($id);
         $viewData['ciudades'] = ciudad::all();
-       return view('admin.localizacionFormEdit')->with('viewData',$viewData);
+       return view('admin.localizacionFormEdit')->with('data',$viewData);
     }
 
     /**
@@ -88,8 +97,9 @@ class localizacionController extends Controller
     {
         localizacion::validar($request);
         $localizacion = localizacion::findOrFail($id);
-        $localizacion->setLocalizacion($request->residencial);
-        $localizacion->setCiudad($request->id_ciudad);
+        $localizacion->setResidencial($request->residencial);
+        $localizacion->setIdCiudad($request->id_ciudad);
+        $localizacion->setDireccion($request->direccion);
         $localizacion->save();
         
         return redirect()->route('admin.localizacionForm.index');
@@ -109,7 +119,12 @@ class localizacionController extends Controller
         $viewData['title'] = "Formulario - Localizaciones";
         $viewData['localizaciones'] = localizacion::all();
         $viewData['ciudades'] = ciudad::all();
+        $viewData['relacion'] = DB::table('localizaciones')
+                                    ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
+                                    ->select('localizaciones.id_localizacion','localizaciones.residencial',
+                                    'localizaciones.direccion','ciudades.ciudad')
+                                    ->get();
 
-        return redirect()->route('admin.tipoForm.index');
+        return redirect()->route('admin.localizacionForm.index');
     }
 }

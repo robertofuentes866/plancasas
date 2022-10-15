@@ -27,7 +27,7 @@ use Laravel\Sanctum\Sanctum;
 Route::get('/','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
 
 // prepara datos del menu de formularios.
-Route::get('/AdminForms','App\Http\Controllers\Admin\AdminFormsController@index');
+Route::get('/AdminForms','App\Http\Controllers\Admin\AdminFormsController@index')->name('adminForms');
 
 // llama al formulario de entrada de datos seleccionado. Solo para administradores.
 Route::get('/admin.controlForms','App\Http\Controllers\Admin\AdminFormsController@showForm')->name('admin.controlForms');

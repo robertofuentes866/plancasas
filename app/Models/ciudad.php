@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+
+use App\Models\localizacion;
 
 class ciudad extends Model
 {
@@ -40,8 +41,4 @@ class ciudad extends Model
         $this->attributes['ciudad'] = $ciudad;
     }
 
-    public function relCiudad(): HasMany
-    {
-        return $this->hasMany(localizacion::class);
-    }
 }

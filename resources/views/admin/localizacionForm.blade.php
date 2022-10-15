@@ -19,20 +19,29 @@ Crear Localizaciones
 <div class="col">
 <div class="mb-3 row">
 <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Ciudad:</label>
-<div class="col-lg-10 col-md-6 col-sm-12">
-<select name="localizacion" class="form-control">
+<div class="col-lg-10 col-md-6 col-sm-12"> 
+<select name="id_ciudad" class="form-control">
      @foreach ($data["ciudades"] as $ciudad)
        <option value="{{$ciudad['id_ciudad']}}">{{$ciudad['ciudad']}}</option>
      @endforeach
 </select> 
+</div>
+<div class="mb-3 row">
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Residencial:</label>
+<div class="col-lg-10 col-md-6 col-sm-12"> 
+
 <input name="residencial" value="{{ old('residencial') }}" type="text" class="form-control">
-<textarea name="direccion" >{{old('direccion')}} </textarea>    
+</div>
+<div class="mb-3 row">
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Direccion:</label>
+<textarea name="direccion" >{{old('direccion')}} </textarea> 
+</div>
 </div>
 </div>
 </div>
 </div>
 <button type="submit" class="btn btn-primary">Guardar</button>
-<button type="button" onclick="goBack()" class="btn btn-primary">Regresar</button>
+<button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{ route('adminForms')}}">Regresar</a></button>
 </form>
 </div>
 </div>
@@ -49,24 +58,26 @@ Ver Localizaciones
 <tr>
 <th scope="col">ID</th>
 <th scope="col">CIUDAD</th>
-<th scope="col">LOCALIZACION</th>
+<th scope="col">RESIDENCIAL</th>
 <th scope="col">DIRECCION</th>
 <th scope="col">EDITAR</th>
 <th scope="col">BORRAR</th>
 </tr>
 </thead>
 <tbody>
-@foreach ($data["ciudades"] as $ciudad)
+@foreach ($data["relacion"] as $relacion)
 <tr>
-<td>{{ $ciudad->getIdCiudad() }}</td>
-<td>{{ $ciudad->getCiudad() }}</td>
+<td>{{ $relacion->id_localizacion }}</td>
+<td>{{ $relacion->ciudad }}</td>
+<td>{{ $relacion->residencial }}</td>
+<td>{{ $relacion->direccion }}</td>
 <td> 
-    <a class="btn btn-primary" href="{{route('admin.ciudadForm.edit',['id'=>$ciudad->getId()])}}">
+    <a class="btn btn-primary" href="{{route('admin.localizacionForm.edit',['id'=>$relacion->id_localizacion])}}">
     <i class="bi-pencil"></i>
     </a>
 </td>
 <td>
-<form action="{{ route('admin.ciudadForm.delete',['id'=> $ciudad->getId()])}}" method="post">
+<form action="{{ route('admin.localizacionForm.delete',['id'=>$relacion->id_localizacion])}}" method="post" class="formulario_eliminar">
 @csrf
 @method('DELETE')
 <button class="btn btn-danger">
@@ -82,3 +93,4 @@ Ver Localizaciones
 </div>
 </div>
 @endsection
+@extends('admin.botonEliminar')

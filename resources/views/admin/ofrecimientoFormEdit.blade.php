@@ -27,7 +27,7 @@ Editar Ofrecimiento
 </div>
 </div>
 <button type="submit" class="btn btn-primary">Editar</button>
-<button type="button" onclick="goBack()" class="btn btn-primary">Regresar</button>
+<button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{ route('admin.ofrecimientoForm.index')}}">Regresar</a></button>
 </form>
 
 </div>

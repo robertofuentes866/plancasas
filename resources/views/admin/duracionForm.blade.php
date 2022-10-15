@@ -26,7 +26,7 @@ Crear Duraciones
 </div>
 </div>
 <button type="submit" class="btn btn-primary">Guardar</button>
-<button type="button" onclick="goBack()" class="btn btn-primary">Regresar</button>
+<button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{ route('adminForms')}}">Regresar</a></button>
 </form>
 
 </div>
@@ -56,7 +56,7 @@ Ver Duraciones
     </a>
 </td>
 <td>
-<form action="{{ route('admin.duracionForm.delete',['id'=> $duracion->getId()])}}" method="post">
+<form action="{{ route('admin.duracionForm.delete',['id'=> $duracion->getId()])}}" method="post" class="formulario_eliminar">
 @csrf
 @method('DELETE')
 <button class="btn btn-danger">
@@ -72,3 +72,4 @@ Ver Duraciones
 </div>
 </div>
 @endsection
+@extends('admin.botonEliminar')

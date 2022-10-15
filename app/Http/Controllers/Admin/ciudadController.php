@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\ciudad;
+use Exception;
+use Throwable;
 
 class ciudadController extends Controller
 {
@@ -100,7 +102,7 @@ class ciudadController extends Controller
     {
         ciudad::destroy($id);
         $viewData = [];
-        $viewData['title'] = "Ciudades";
+        $viewData['title'] = "Formulario - Ciudades";
         $viewData['table'] = ciudad::all();
 
         return redirect()->route('admin.ciudadForm.index');
