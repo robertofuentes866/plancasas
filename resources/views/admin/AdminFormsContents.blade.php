@@ -21,6 +21,7 @@ Escoja el formulario
 <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Seleccione Formulario:</label>
 <div class="col-lg-10 col-md-6 col-sm-12">
 <select name="table" class="form-control">
+    
     @foreach($viewData['tables'] as $tabla =>$nombre)
        <option value="{{$tabla}}">{{$nombre}}</option>
     @endforeach

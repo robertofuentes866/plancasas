@@ -98,9 +98,16 @@ class TipoController extends Controller
      */
     public function destroy($id)
     {
-        tipo::destroy($id);
+        try {
+            tipo::destroy($id);
+       } catch(\Exception $e) {
+          $data =[];
+          $data['mensaje'] = "Tipo NO eliminado por tener relacion con otros datos";
+          $data['ruta'] = 'admin.tipoForm.index';
+          return view('admin.errorPage')->with('data',$data);
+       }       
         $viewData = [];
-        $viewData['title'] = "Tipos de Propiedades";
+        $viewData['title'] = "Formulario - Tipo";
         $viewData['table'] = tipo::all();
 
         return redirect()->route('admin.tipoForm.index');

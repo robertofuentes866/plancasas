@@ -99,10 +99,18 @@ class recursoController extends Controller
      */
     public function destroy($id)
     {
-        recurso::destroy($id);
+        try {
+            recurso::destroy($id);
+       } catch(\Exception $e) {
+          $data =[];
+          $data['mensaje'] = "Recurso NO eliminado por tener relacion con otros datos";
+          $data['ruta'] = 'admin.recursoForm.index';
+          return view('admin.errorPage')->with('data',$data);
+       }       
         $viewData = [];
-        $viewData['title'] = "Recursos";
+        $viewData['title'] = "Formulario - Recurso";
         $viewData['table'] = recurso::all();
+
         return redirect()->route('admin.recursoForm.index');
     }
 }

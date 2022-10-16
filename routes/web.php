@@ -7,7 +7,6 @@ use App\Http\Controllers\Admin\ciudadController;
 use App\Http\Controllers\Admin\duracionController;
 use App\Http\Controllers\Admin\localizacionController;
 
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\Sanctum;
@@ -97,5 +96,27 @@ Route::get('/{id}/admin.duracionForm.edit','App\Http\Controllers\Admin\duracionC
 Route::put('/{id}/admin.duracionForm.update',[duracionController::class,'update'])->name('admin.duracionForm.update');
 
 Route::delete('/{id}/admin.duracionForm.delete','App\Http\Controllers\Admin\duracionController@destroy')->name('admin.duracionForm.delete');
+
+// Relacionados al formulario PRIVILEGIOS.
+Route::get('/admin.privilegioForm.index','App\Http\Controllers\Admin\privilegioController@index')->name('admin.privilegioForm.index');
+
+Route::post('/admin.privilegioForm.store','App\Http\Controllers\Admin\privilegioController@store')->name('admin.privilegioForm.store');
+
+Route::get('/{id}/admin.privilegioForm.edit','App\Http\Controllers\Admin\privilegioController@edit')->name('admin.privilegioForm.edit');
+
+Route::put('/{id}/admin.privilegioForm.update','App\Http\Controllers\Admin\privilegioController@update')->name('admin.privilegioForm.update');
+
+Route::delete('/{id}/admin.privilegioForm.delete','App\Http\Controllers\Admin\privilegioController@destroy')->name('admin.privilegioForm.delete');
+
+// Relacionados al formulario AGENTES.
+Route::get('/admin.agenteForm.index','App\Http\Controllers\Admin\agenteController@index')->name('admin.agenteForm.index');
+
+Route::post('/admin.agenteForm.store','App\Http\Controllers\Admin\agenteController@store')->name('admin.agenteForm.store');
+
+Route::get('/{id}/admin.agenteForm.edit','App\Http\Controllers\Admin\agenteController@edit')->name('admin.agenteForm.edit');
+
+Route::put('/{id}/admin.agenteForm.update','App\Http\Controllers\Admin\agenteController@update')->name('admin.agenteForm.update');
+
+Route::delete('/{id}/admin.agenteForm.delete','App\Http\Controllers\Admin\agenteController@destroy')->name('admin.agenteForm.delete');
 
 Auth::routes();

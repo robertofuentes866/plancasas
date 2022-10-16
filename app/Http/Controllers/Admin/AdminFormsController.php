@@ -15,7 +15,9 @@ class AdminFormsController extends Controller
                                 "admin.recursoForm.index"=>"Tabla Recursos",
                                 "admin.ciudadForm.index"=>"Tabla Ciudades",
                                  "admin.duracionForm.index"=>"Tabla Duraciones",
-                                 "admin.localizacionForm.index"=>"Tabla Localizaciones"];
+                                 "admin.localizacionForm.index"=>"Tabla Localizaciones",
+                                 "admin.privilegioForm.index"=>"Tabla Privilegios",
+                                 "admin.agenteForm.index"=>"Tabla Agentes"];
         return view('admin.AdminFormsContents')->with("viewData",$viewData);
     }
 

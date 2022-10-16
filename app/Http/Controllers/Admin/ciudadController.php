@@ -100,7 +100,14 @@ class ciudadController extends Controller
      */
     public function destroy($id)
     {
-        ciudad::destroy($id);
+       try {
+            ciudad::destroy($id);
+       } catch(\Exception $e) {
+          $data =[];
+          $data['mensaje'] = "Ciudad NO eliminada por tener relacion con otros datos";
+          $data['ruta'] = 'admin.ciudadForm.index';
+          return view('admin.errorPage')->with('data',$data);
+       }       
         $viewData = [];
         $viewData['title'] = "Formulario - Ciudades";
         $viewData['table'] = ciudad::all();

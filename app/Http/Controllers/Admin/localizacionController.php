@@ -113,8 +113,15 @@ class localizacionController extends Controller
      */
     public function destroy($id)
     {
-        localizacion::destroy($id);
 
+        try {
+            localizacion::destroy($id);
+       } catch(\Exception $e) {
+          $data =[];
+          $data['mensaje'] = "Localizacion NO eliminada por tener relacion con otros datos";
+          $data['ruta'] = 'admin.localizacionForm.index';
+          return view('admin.errorPage')->with('data',$data);
+       }       
         $viewData = [];
         $viewData['title'] = "Formulario - Localizaciones";
         $viewData['localizaciones'] = localizacion::all();

@@ -98,9 +98,16 @@ class duracionController extends Controller
      */
     public function destroy($id)
     {
-        duracion::destroy($id);
+        try {
+            duracion::destroy($id);
+       } catch(\Exception $e) {
+          $data =[];
+          $data['mensaje'] = "Duracion NO eliminada por tener relacion con otros datos";
+          $data['ruta'] = 'admin.duracionForm.index';
+          return view('admin.errorPage')->with('data',$data);
+       }       
         $viewData = [];
-        $viewData['title'] = "Duraciones";
+        $viewData['title'] = "Formulario - Duracion";
         $viewData['table'] = duracion::all();
 
         return redirect()->route('admin.duracionForm.index');

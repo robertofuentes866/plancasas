@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('privilegios', function (Blueprint $table) {
             $table->tinyIncrements('id_privilegio');
-            $table->string('nombre',12);
-            $table->boolean('select');
-            $table->boolean('insert');
-            $table->boolean('update');
-            $table->boolean('delete');
+            $table->string('nombre',20);
+            $table->boolean('select')->nullable();
+            $table->boolean('insert')->nullable();
+            $table->boolean('update')->nullable();
+            $table->boolean('delete')->nullable();
             $table->timestamps();
         });
     }
