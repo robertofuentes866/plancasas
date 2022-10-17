@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('localizaciones', function (Blueprint $table) {
             $table->smallIncrements('id_localizacion');
-            $table->string('residencial',35)->nullable(false);
-            $table->string('direccion',100)->nullable(false);
+            $table->string('residencial',35);
+            $table->string('direccion',100)->nullable();
             $table->unsignedTinyInteger('id_ciudad');
             $table->foreign('id_ciudad')->references('id_ciudad')->on('ciudades')->onDelete('restrict');
             $table->timestamps();

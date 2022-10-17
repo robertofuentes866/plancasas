@@ -7,6 +7,7 @@ use App\Models\agente;
 use App\Models\privilegio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class agenteController extends Controller
 {
@@ -23,7 +24,7 @@ class agenteController extends Controller
        $viewData['privilegios'] = privilegio::all();
        $viewData['relacion'] = DB::table('agentes')
                                    ->join('privilegios','agentes.id_privilegio','=','privilegios.id_privilegio')
-                                   ->select('agentes.id_agente','agentes.nombre',
+                                   ->select('agentes.id_agente','privilegios.nombre as privilegio','agentes.nombre',
                                    'agentes.apellidos','agentes.email','agentes.cel1',
                                    'agentes.cel2','agentes.password','agentes.foto_agente')
                                    ->get();
@@ -58,8 +59,9 @@ class agenteController extends Controller
         $agente->cel1 = $request->cel1;
         $agente->cel2 = $request->cel2;
         $agente->id_privilegio = $request->id_privilegio;
-
-        $agente->foto_agente = imagePath($request->foto_agente;
+        if (!empty($request->foto_agente)) {
+            $agente->foto_agente = storage::putFileAs('local',$request->foto_agente,'lixo.jpg');
+        }
         
         $agente->save();
 
@@ -80,25 +82,26 @@ class agenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\agente  $agente
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(agente $agente)
+    public function edit($id)
     {
         $viewData = [];
         $viewData['title'] = "Editar Agente";
         $viewData['agentes'] = agente::findOrFail($id);
-       return view('admin.agenteFormEdit')->with('viewData',$viewData);
+        $viewData['privilegios'] = privilegio::all();
+       return view('admin.agenteFormEdit')->with('data',$viewData);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\agente  $agente
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, agente $agente)
+    public function update(Request $request,$id)
     {
         agente::validar($request);
         $agente = agente::findOrFail($id);
@@ -119,7 +122,7 @@ class agenteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\agente  $agente
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('fotos_terrenos', function (Blueprint $table) {
             $table->bigIncrements('id_foto');
             $table->unsignedBigInteger('id_terreno');
-            $table->string('foto_normal',150);
-            $table->string('foto_thumb',150);
-            $table->string('leyenda',30);
-            $table->boolean('es_principal');
+            $table->string('foto_normal',150)->nullable();
+            $table->string('foto_thumb',150)->nullable();
+            $table->string('leyenda',30)->nullable();
+            $table->boolean('es_principal')->nullable();
             $table->foreign('id_terreno')->references('id_terreno')->on('terrenos')->onDelete('restrict');
             $table->timestamps();
         });

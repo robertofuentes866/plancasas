@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('fotos_bodegas', function (Blueprint $table) {
             $table->bigIncrements('id_foto');
             $table->UnsignedBigInteger('id_bodega');
-            $table->string('foto_normal',150);
-            $table->string('foto_thumb',150);
-            $table->string('leyenda',30);
-            $table->boolean('es_principal');
+            $table->string('foto_normal',150)->nullable();
+            $table->string('foto_thumb',150)->nullable();
+            $table->string('leyenda',30)->nullable();
+            $table->boolean('es_principal')->nullable();
             $table->foreign('id_bodega')->references('id_bodega')->on('bodegas')->onDelete('restrict');
             $table->timestamps();
         });

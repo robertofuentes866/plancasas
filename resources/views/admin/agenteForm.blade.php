@@ -96,10 +96,12 @@ Ver Agentes
 <table class="table table-bordered table-striped">
 <thead>
 <tr>
-<th scope="col">ID</th>
-<th scope="col">NOMBRE</th>
+<th scope="col">PRIVILEGIO</th>
+<th scope="col">NOMBRES</th>
 <th scope="col">APELLIDOS</th>
 <th scope="col">EMAIL</th>
+<th scope="col">CEL # 1</th>
+<th scope="col">CEL # 2</th>
 <th scope="col">EDITAR</th>
 <th scope="col">BORRAR</th>
 </tr>
@@ -107,10 +109,12 @@ Ver Agentes
 <tbody>
 @foreach ($data["relacion"] as $relacion)
 <tr>
-<td>{{ $relacion->id_agente }}</td>
+<td>{{ $relacion->privilegio }}</td>
 <td>{{ $relacion->nombre }}</td>
 <td>{{ $relacion->apellidos }}</td>
 <td>{{ $relacion->email }}</td>
+<td>{{ $relacion->cel1 }}</td>
+<td>{{ $relacion->cel2 }}</td>
 <td> 
     <a class="btn btn-primary" href="{{route('admin.agenteForm.edit',['id'=>$relacion->id_agente])}}">
     <i class="bi-pencil"></i>
