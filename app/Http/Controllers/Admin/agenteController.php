@@ -8,6 +8,7 @@ use App\Models\privilegio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class agenteController extends Controller
 {
@@ -55,16 +56,19 @@ class agenteController extends Controller
         $agente->nombre = $request->nombre;
         $agente->apellidos = $request->apellidos;
         $agente->email = $request->email;
-        $agente->password = $request->password;
+        $agente->password = hash::make($request->password);
         $agente->cel1 = $request->cel1;
         $agente->cel2 = $request->cel2;
         $agente->id_privilegio = $request->id_privilegio;
-        if (!empty($request->foto_agente)) {
-            $agente->foto_agente = storage::putFileAs('local',$request->foto_agente,'lixo.jpg');
+        $agente->save();
+        if ($request->hasFile('foto_agente')) {
+            $nombre_imagen = $agente->id_agente.".".$request->file('foto_agente')->extension();
+            //$request->file('foto_agente')->storeAs('agentes',$nombre_imagen);
+            Storage::putFileAs('agentes',$request->file('foto_agente'),$nombre_imagen);
+            $agente->foto_agente = $nombre_imagen;
+            $agente->save();
         }
         
-        $agente->save();
-
         return redirect()->route('admin.agenteForm.index');
     }
 
@@ -107,12 +111,16 @@ class agenteController extends Controller
         $agente = agente::findOrFail($id);
         $agente->setNombre($request->nombre);
         $agente->setApellidos($request->apellidos);
-        $agente->setPassword($request->password);
+        $agente->setPassword(hash::make($request->password));
         $agente->setEmail($request->email);
         $agente->setCel1($request->cel1);
         $agente->setCel2($request->cel2);
-        $agente->setFotoAgente($request->foto_agente);
         $agente->setIdPrivilegio($request->id_privilegio);
+        if ($request->hasFile('foto_agente')) {
+            $nombre_imagen = $agente->id_agente.".".$request->file('foto_agente')->extension();
+            $request->file('foto_agente')->storeAs('agentes',$nombre_imagen);
+            $agente->setFotoAgente($nombre_imagen);
+        }
 
         $agente->save();
         
@@ -128,13 +136,15 @@ class agenteController extends Controller
     public function destroy($id)
     {
         try {
+            $agente = agente::find($id);
+            Storage::delete('agentes/'.$agente->foto_agente);
             agente::destroy($id);
        } catch(\Exception $e) {
           $data =[];
           $data['mensaje'] = "Agente NO eliminado por tener relacion con otros datos";
           $data['ruta'] = 'admin.agenteForm.index';
           return view('admin.errorPage')->with('data',$data);
-       }       
+       }   
        $viewData = [];
        $viewData['title'] = "Formulario - Agentes";
        $viewData['agentes'] = agente::all();
