@@ -27,6 +27,7 @@ Editar Localizacion
      @endforeach
 </select> 
 </div>
+</div>
 <div class="mb-3 row">
 <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Residencial:</label>
 <div class="col-lg-10 col-md-6 col-sm-12"> 
@@ -40,9 +41,10 @@ Editar Localizacion
 </div>
 </div>
 </div>
-</div>
-<button type="submit" class="btn btn-primary">Editar</button>
+<button type="submit" class="btn btn-primary">Guardar</button>
 <button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{ route('admin.localizacionForm.index')}}">Regresar</a></button>
+</div>
+
 </form>
 </div>
 </div>

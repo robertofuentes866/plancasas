@@ -26,6 +26,7 @@ Crear Agentes
      @endforeach
 </select> 
 </div>
+</div>
 <div class="mb-3 row">
 <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Nombre:</label>
 <div class="col-lg-10 col-md-6 col-sm-12"> 
@@ -71,16 +72,17 @@ Crear Agentes
 <div class="mb-3 row">
 <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Agente:</label>
 <div class="col-lg-10 col-md-6 col-sm-12"> 
-<input name="foto_agente" id="foto_agente" value="{{old('foto_agente')}}" type="file" class="form-control"> 
+<input name="foto_agente" id="foto_agente" type="file" class="form-control"> 
 </div>
 </div>
 
 
-</div>
 </div>
 </div>
 <button type="submit" class="btn btn-primary">Guardar</button>
 <button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{ route('adminForms')}}">Regresar</a></button>
+</div>
+
 </form>
 </div>
 </div>

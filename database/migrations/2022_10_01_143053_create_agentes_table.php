@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password',250);
             $table->string('cel1',25);
             $table->string('cel2',25)->nullable();
-            $table->string('foto_agente',150)->nullable();
+            $table->string('foto_agente',30)->nullable();
             $table->unsignedTinyInteger('id_privilegio');
             $table->foreign('id_privilegio')->references('id_privilegio')->on('privilegios')->onDelete('restrict');
             $table->timestamps();

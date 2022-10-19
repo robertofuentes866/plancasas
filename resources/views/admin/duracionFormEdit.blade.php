@@ -26,7 +26,7 @@ Editar Duracion
 </div>
 </div>
 </div>
-<button type="submit" class="btn btn-primary">Editar</button>
+<button type="submit" class="btn btn-primary">Guardar</button>
 <button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{route('admin.duracionForm.index')}}">Regresar</a></button>
 </form>
 
