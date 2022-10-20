@@ -63,7 +63,6 @@ class agenteController extends Controller
         $agente->save();
         if ($request->hasFile('foto_agente')) {
             $nombre_imagen = $agente->id_agente.".".$request->file('foto_agente')->extension();
-            //$request->file('foto_agente')->storeAs('agentes',$nombre_imagen);
             Storage::putFileAs('agentes',$request->file('foto_agente'),$nombre_imagen);
             $agente->foto_agente = $nombre_imagen;
             $agente->save();
@@ -95,7 +94,15 @@ class agenteController extends Controller
         $viewData['title'] = "Editar Agente";
         $viewData['agentes'] = agente::findOrFail($id);
         $viewData['privilegios'] = privilegio::all();
-       return view('admin.agenteFormEdit')->with('data',$viewData);
+
+        $image = Storage::path('agentes/'.$viewData['agentes']->foto_agente);
+        
+        $imagenDatos = getimagesize($image);
+        $ratio = $this->calculateRatio(700,$imagenDatos[0],$imagenDatos[1]);
+        $viewData['thumbAncho'] = round($imagenDatos[0] * $ratio);
+        $viewData['thumbAlto'] = round($imagenDatos[1]* $ratio);
+
+        return view('admin.agenteFormEdit')->with('data',$viewData);
     }
 
     /**
@@ -157,5 +164,13 @@ class agenteController extends Controller
                                    ->get();
 
         return redirect()->route('admin.agenteForm.index');
+    }
+
+    private function calculateRatio($max,$width,$height){
+        if ($width > $height){
+            return $max / $width;
+        } else {
+            return $max / $height;
+        }
     }
 }
