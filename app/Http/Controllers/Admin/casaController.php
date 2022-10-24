@@ -1,0 +1,170 @@
+<?php
+
+namespace App\Http\Controllers\admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\casa;
+use App\Models\agente;
+use App\Models\tipo;
+use App\Models\localizacion;
+use App\Models\recurso;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
+
+class casaController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+       $viewData = [];
+       $viewData['title'] = "Formulario - Casas";
+       $viewData['agentes'] = agente::all();
+       $viewData['tipos'] = tipo::all();
+       $viewData['localizaciones'] = localizacion::all();
+       $viewData['recursos'] = recurso::all();
+       $viewData['relacion'] = DB::table('casas')
+                                   ->join('agentes','casas.id_agente','=','agentes.id_agente')
+                                   ->join('tipos','casas.id_tipo','=','tipos.id_tipo')
+                                   ->join('localizaciones','casas.id_localizacion','=','localizaciones.id_localizacion')
+                                   ->join('recursos','casas.id_recurso','=','recursos.id_recurso')
+                                   ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
+                                   ->select('casas.id_casa','agentes.nombre as nombreAgente','localizaciones.residencial',
+                                   'casas.casaNumero','ciudades.ciudad')
+                                   ->get();
+
+        return view('admin.casaForm')->with('data',$viewData);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        casa::validar($request);
+        $creationData = $request->only(["id_agente","id_tipo","id_localizacion","id_recurso","casaNumero","area_construccion",
+                        "area_terreno","plantas","garage","habitaciones","banos","bano_social","cuartoDomestica","piscina",
+                        "apartamento","destacado","disponibilidad","ano_construccion"]);
+                        print_r($creationData);
+        $creationData['piscina'] = $request->input('piscina')?1:0;
+        $creationData['apartamento'] = $request->input('apartamento')?1:0;
+        $creationData['bano_social'] = $request->input('bano_social')?1:0;
+        $creationData['cuartoDomestica'] = $request->input('cuartoDomestica')?1:0;
+        $creationData['disponibilidad'] = $request->input('disponibilidad')?1:0;
+        $creationData['destacado'] = $request->input('destacado')?1:0;
+        casa::create($creationData);
+        
+        return redirect()->route('admin.casaForm.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\casa  $casa
+     * @return \Illuminate\Http\Response
+     */
+    public function show(casa $casa)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $viewData = [];
+        $viewData['title'] = "Editar Casa";
+        $viewData['casas'] = casa::findOrFail($id);
+        $viewData['agentes'] = agente::all();
+        $viewData['localizaciones'] = localizacion::all();
+        $viewData['recursos'] = recurso::all();
+        return view('admin.casaFormEdit')->with('data',$viewData);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $casa = casa::find($id);
+        $updateData = $request->all();
+        $updateData['piscina'] = $request->input('piscina')?1:0;
+        $updateData['apartamento'] = $request->input('apartamento')?1:0;
+        $updateData['bano_social'] = $request->input('bano_social')?1:0;
+        $updateData['cuartoDomestica'] = $request->input('cuartoDomestica')?1:0;
+        $updateData['disponibilidad'] = $request->input('disponibilidad')?1:0;
+        $updateData['destacado'] = $request->input('destacado')?1:0;
+        
+        if ($casa->update($updateData)) {
+            return redirect()->route('admin.casaForm.index');
+        } else {
+            echo "No se pudo ejecutar el UPDATE";
+        }
+        
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        try {
+            casa::find($id);
+            /*$this->borrar_fotos($id);
+            $this->borrar_favoritos($id);
+            $this->borrar_valores($id);*/
+            casa::destroy($id);
+       } catch(\Exception $e) {
+          $data =[];
+          $data['mensaje'] = "Casa no encontrada. NO se pudo eliminar del sistema";
+          $data['ruta'] = 'admin.casaForm.index';
+          return view('admin.errorPage')->with('data',$data);
+       }   
+       $viewData = [];
+       $viewData['title'] = "Formulario - Casas";
+       $viewData['agentes'] = agente::all();
+       $viewData['tipos'] = tipo::all();
+       $viewData['localizaciones'] = localizacion::all();
+       $viewData['recursos'] = recurso::all();
+       $viewData['relacion'] = DB::table('casas')
+                                   ->join('agentes','casas.id_agente','=','agentes.id_agente')
+                                   ->join('tipos','casas.id_tipo','=','tipos.id_tipo')
+                                   ->join('localizaciones','casas.id_localizacion','=','localizaciones.id_localizacion')
+                                   ->join('recursos','casas.id_recurso','=','recursos.id_recurso')
+                                   ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
+                                   ->select('casas.id_casa','agentes.nombre as nombreAgente','localizaciones.residencial',
+                                   'casas.casaNumero','ciudades.ciudad')
+                                   ->get();
+
+        return view('admin.casaForm')->with('data',$viewData);
+    }
+}

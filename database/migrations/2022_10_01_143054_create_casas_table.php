@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('id_tipo');
             $table->char('plantas',2)->nullable();
             $table->char('garage',3)->nullable();
+            $table->string('CasaNumero',30);
             $table->float('area_construccion')->nullable();
             $table->float('area_terreno')->nullable();
             $table->char('habitaciones',2)->nullable();

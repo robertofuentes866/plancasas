@@ -13,6 +13,7 @@ Crear Agentes
 @endforeach
 </ul>
 @endif
+
 <form method="POST" action="{{ route('admin.agenteForm.store') }}" enctype="multipart/form-data">
 @csrf
 <div class="row">

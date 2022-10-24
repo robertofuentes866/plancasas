@@ -21,6 +21,7 @@ class agente extends Model
                              'email'=>'required|max:100',
                              'password'=>'required|max:250',
                             'cel1'=>'required|max:25',
+                            'foto_agente'=>'mimes:jpg,png,bmp,jpeg',
                              'id_privilegio'=>'required']);
     }
 

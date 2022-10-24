@@ -119,4 +119,15 @@ Route::put('/{id}/admin.agenteForm.update','App\Http\Controllers\Admin\agenteCon
 
 Route::delete('/{id}/admin.agenteForm.delete','App\Http\Controllers\Admin\agenteController@destroy')->name('admin.agenteForm.delete');
 
+// Relacionados al formulario CASAS.
+Route::get('/admin.casaForm.index','App\Http\Controllers\Admin\casaController@index')->name('admin.casaForm.index');
+
+Route::post('/admin.casaForm.store','App\Http\Controllers\Admin\casaController@store')->name('admin.casaForm.store');
+
+Route::get('/{id}/admin.casaForm.edit','App\Http\Controllers\Admin\casaController@edit')->name('admin.casaForm.edit');
+
+Route::put('/{id}/admin.casaForm.update','App\Http\Controllers\Admin\casaController@update')->name('admin.casaForm.update');
+
+Route::delete('/{id}/admin.casaForm.delete','App\Http\Controllers\Admin\casaController@destroy')->name('admin.casaForm.delete');
+
 Auth::routes();
