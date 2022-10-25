@@ -130,4 +130,15 @@ Route::put('/{id}/admin.casaForm.update','App\Http\Controllers\Admin\casaControl
 
 Route::delete('/{id}/admin.casaForm.delete','App\Http\Controllers\Admin\casaController@destroy')->name('admin.casaForm.delete');
 
+// Relacionados al formulario FOTOS CASA.
+Route::get('/admin.fotosCasaForm.index','App\Http\Controllers\Admin\FotosCasaController@index')->name('admin.fotosCasaForm.index');
+
+Route::post('/admin.fotosCasaForm.store','App\Http\Controllers\Admin\fotosCasaController@store')->name('admin.fotosCasaForm.store');
+
+Route::get('/{id}/admin.fotosCasaForm.edit','App\Http\Controllers\Admin\fotosCasaController@edit')->name('admin.fotosCasaForm.edit');
+
+Route::put('/{id}/admin.fotosCasaForm.update','App\Http\Controllers\Admin\fotosCasaController@update')->name('admin.fotosCasaForm.update');
+
+Route::delete('/{id}/admin.fotosCasaForm.delete','App\Http\Controllers\Admin\fotosCasaController@destroy')->name('admin.fotosCasaForm.delete');
+
 Auth::routes();
