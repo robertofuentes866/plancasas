@@ -39,13 +39,14 @@ Editar Foto - Casa
 <input name="foto_normal" id="foto_normal" type="file" class="form-control"> 
 </div>
 </div>
-
-<div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Normal:</label>
-<div class="col-lg-10 col-md-6 col-sm-12"> 
-<img src="{{asset('/storage/propiedades/'.$data['fotosCasa']->foto_normal)}}" class="form-control"> 
-</div>
-</div>
+@if(!is_null($data['fotosCasa']->foto_normal))
+    <div class="mb-3 row">
+    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Normal:</label>
+    <div class="col-lg-10 col-md-6 col-sm-12"> 
+    <img src="{{asset('/storage/propiedades/'.$data['fotosCasa']->foto_normal)}}" class="form-control"> 
+    </div>
+    </div>
+@endif
 
 <div class="mb-3 row">
 <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Pequeña: <b>[{{basename($data['fotosCasa']->foto_thumb)}}]</b></label>
@@ -53,13 +54,15 @@ Editar Foto - Casa
 <input name="foto_thumb" id="foto_thumb" type="file" class="form-control"> 
 </div>
 </div>
+@if(!is_null($data['fotosCasa']->foto_thumb))
+    <div class="mb-3 row">
+    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Pequeña:</label>
+    <div class="col-lg-10 col-md-6 col-sm-12"> 
+    <img width="{{$data['thumbAncho']}}" height="{{$data['thumbAlto']}}" src="{{asset('/storage/propiedades/'.$data['fotosCasa']->foto_thumb)}}" class="form-control"> 
+    </div>
+    </div>
+@endif
 
-<div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Pequeña:</label>
-<div class="col-lg-10 col-md-6 col-sm-12"> 
-<img width="{{$data['thumbAncho']}}" height="{{$data['thumbAlto']}}" src="{{asset('/storage/propiedades/'.$data['fotosCasa']->foto_thumb)}}" class="form-control"> 
-</div>
-</div>
 
 </div>
 </div>

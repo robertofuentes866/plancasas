@@ -17,20 +17,26 @@ class agenteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $viewData = [];
+
+    protected function viewData() { // solamente llamado de los metodos index y destroy.
+        
+        $viewData = [];
+        $viewData['title'] = "Formulario - Agentes";
+        $viewData['agentes'] = agente::all();
+        $viewData['privilegios'] = privilegio::all();
+        $viewData['relacion'] = DB::table('agentes')
+                                    ->join('privilegios','agentes.id_privilegio','=','privilegios.id_privilegio')
+                                    ->select('agentes.id_agente','privilegios.nombre as privilegio','agentes.nombre',
+                                    'agentes.apellidos','agentes.email','agentes.cel1',
+                                    'agentes.cel2','agentes.password','agentes.foto_agente')
+                                    ->get();
+        return $viewData;
+    }
+
     public function index()
     {
-       $viewData = [];
-       $viewData['title'] = "Formulario - Agentes";
-       $viewData['agentes'] = agente::all();
-       $viewData['privilegios'] = privilegio::all();
-       $viewData['relacion'] = DB::table('agentes')
-                                   ->join('privilegios','agentes.id_privilegio','=','privilegios.id_privilegio')
-                                   ->select('agentes.id_agente','privilegios.nombre as privilegio','agentes.nombre',
-                                   'agentes.apellidos','agentes.email','agentes.cel1',
-                                   'agentes.cel2','agentes.password','agentes.foto_agente')
-                                   ->get();
-
-        return view('admin.agenteForm')->with('data',$viewData);
+        return view('admin.agenteForm')->with('data',$this->viewData());
     }
 
     /**
@@ -94,13 +100,13 @@ class agenteController extends Controller
         $viewData['title'] = "Editar Agente";
         $viewData['agentes'] = agente::findOrFail($id);
         $viewData['privilegios'] = privilegio::all();
-
-        $image = Storage::path('agentes/'.$viewData['agentes']->foto_agente);
-        
-        $imagenDatos = getimagesize($image);
-        $ratio = $this->calculateRatio(700,$imagenDatos[0],$imagenDatos[1]);
-        $viewData['thumbAncho'] = round($imagenDatos[0] * $ratio);
-        $viewData['thumbAlto'] = round($imagenDatos[1]* $ratio);
+        if (!is_null($viewData['agentes']->foto_agente)) {
+            $image = Storage::path('agentes/'.$viewData['agentes']->foto_agente);
+            $imagenDatos = getimagesize($image);
+            $ratio = calculateRatio(700,$imagenDatos[0],$imagenDatos[1]);
+            $viewData['thumbAncho'] = round($imagenDatos[0] * $ratio);
+            $viewData['thumbAlto'] = round($imagenDatos[1]* $ratio);
+        }
 
         return view('admin.agenteFormEdit')->with('data',$viewData);
     }
@@ -150,27 +156,8 @@ class agenteController extends Controller
           $data =[];
           $data['mensaje'] = "Agente NO eliminado por tener relacion con otros datos";
           $data['ruta'] = 'admin.agenteForm.index';
-          return view('admin.errorPage')->with('data',$data);
+          return view('admin.errorPage')->with('data',$data); 
        }   
-       $viewData = [];
-       $viewData['title'] = "Formulario - Agentes";
-       $viewData['agentes'] = agente::all();
-       $viewData['privilegios'] = privilegio::all();
-       $viewData['relacion'] = DB::table('agentes')
-                                   ->join('privilegios','agentes.id_privilegio','=','privilegios.id_privilegio')
-                                   ->select('agentes.id_agente','agentes.nombre',
-                                   'agentes.apellidos','agentes.email','agentes.cel1',
-                                   'agentes.cel2','agentes.password','agentes.foto_agente')
-                                   ->get();
-
-        return redirect()->route('admin.agenteForm.index');
-    }
-
-    private function calculateRatio($max,$width,$height){
-        if ($width > $height){
-            return $max / $width;
-        } else {
-            return $max / $height;
-        }
+       return view('admin.agenteForm')->with('data',$this->viewData());
     }
 }

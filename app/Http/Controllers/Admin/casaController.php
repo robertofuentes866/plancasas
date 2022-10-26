@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\casa;
+use App\Models\fotosCasa;
 use App\Models\agente;
 use App\Models\tipo;
 use App\Models\localizacion;
@@ -139,16 +140,17 @@ class casaController extends Controller
     {
         try {
             casa::find($id);
-            /*$this->borrar_fotos($id);
-            $this->borrar_favoritos($id);
+            $this->borrar_fotos($id);
+            /*$this->borrar_favoritos($id);
             $this->borrar_valores($id);*/
             casa::destroy($id);
        } catch(\Exception $e) {
           $data =[];
-          $data['mensaje'] = "Casa no encontrada. NO se pudo eliminar del sistema";
+          $data['mensaje'] = "Casa NO se pudo eliminar del sistema";
           $data['ruta'] = 'admin.casaForm.index';
           return view('admin.errorPage')->with('data',$data);
        }   
+
        $viewData = [];
        $viewData['title'] = "Formulario - Casas";
        $viewData['agentes'] = agente::all();
@@ -166,5 +168,23 @@ class casaController extends Controller
                                    ->get();
 
         return view('admin.casaForm')->with('data',$viewData);
+    }
+
+    private function borrar_fotos($id) {
+        $fotos_casas = DB::table('fotos_casas')
+                     ->where('id_casa','=',$id)
+                     ->select('foto_normal','foto_thumb')->get();
+       
+        foreach($fotos_casas as $fotos) { // si no hay fotos en la tabla fotos_casas, no entra en este loop.
+            //var_dump($fotos->foto_normal);
+            if (!is_null($fotos->foto_normal)) {
+                Storage::delete('propiedades/'.$fotos->foto_normal);
+            }
+            
+            if (!is_null($fotos->foto_thumb)) {
+                Storage::delete('propiedades/'.$fotos->foto_thumb);
+            }
+            DB::delete('delete from fotos_casas where id_casa = ?',[$id]);
+        } 
     }
 }

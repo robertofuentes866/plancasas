@@ -93,13 +93,13 @@ class fotosCasaController extends Controller
         $viewData['title'] = "Editar Fotos Casa";
         $viewData['fotosCasa'] = fotosCasa::findOrFail($id);
         $viewData['casas'] = casa::all();
-
-        $image = Storage::path('propiedades/'.$viewData['fotosCasa']->foto_thumb);
-        
-        $imagenDatos = getimagesize($image);
-        $ratio = $this->calculateRatio(700,$imagenDatos[0],$imagenDatos[1]);
-        $viewData['thumbAncho'] = round($imagenDatos[0] * $ratio);
-        $viewData['thumbAlto'] = round($imagenDatos[1]* $ratio);
+        if (!is_null($viewData['fotosCasa']->foto_thumb)) {  // procesa si hay foto guardada.
+            $image = Storage::path('propiedades/'.$viewData['fotosCasa']->foto_thumb);
+            $imagenDatos = getimagesize($image);
+            $ratio = calculateRatio(100,$imagenDatos[0],$imagenDatos[1]);
+            $viewData['thumbAncho'] = round($imagenDatos[0] * $ratio);
+            $viewData['thumbAlto'] = round($imagenDatos[1]* $ratio);
+        }
 
         return view('admin.fotosCasaFormEdit')->with('data',$viewData);
     }
@@ -165,13 +165,5 @@ class fotosCasaController extends Controller
                                    ->get();
        
         return redirect()->route('admin.fotosCasaForm.index');
-    }
-
-    private function calculateRatio($max,$width,$height){
-        if ($width > $height){
-            return $max / $width;
-        } else {
-            return $max / $height;
-        }
     }
 }
