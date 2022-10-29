@@ -16,19 +16,24 @@ class fotosCasaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     protected $viewData = [];
+
+     protected function viewData () {
+        $viewData = [];
+        $viewData['title'] = "Formulario - Fotos Casa";
+        $viewData['fotosCasa'] = fotosCasa::all();
+        $viewData['casas'] = casa::all();
+        $viewData['relacion'] = DB::table('fotos_casas')
+                                    ->join('casas','fotos_casas.id_casa','=','casas.id_casa')
+                                    ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
+                                    ->select('localizaciones.residencial','casas.casaNumero','fotos_casas.leyenda','fotos_casas.id_foto')
+                                    ->get();
+        return $viewData;
+     }
     public function index()
     {
-       $viewData = [];
-       $viewData['title'] = "Formulario - Fotos Casa";
-       $viewData['fotosCasa'] = fotosCasa::all();
-       $viewData['casas'] = casa::all();
-       $viewData['relacion'] = DB::table('fotos_casas')
-                                   ->join('casas','fotos_casas.id_casa','=','casas.id_casa')
-                                   ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
-                                   ->select('localizaciones.residencial','casas.casaNumero','fotos_casas.leyenda','fotos_casas.id_foto')
-                                   ->get();
-
-        return view('admin.fotosCasaForm')->with('data',$viewData);
+        return view('admin.fotosCasaForm')->with('data',$this->viewData());
     }
 
     /**
@@ -50,6 +55,7 @@ class fotosCasaController extends Controller
     public function store(Request $request)
     {
         $fotosCasa = new fotosCasa();
+        $fotosCasa->validar($request);
         $fotosCasa->id_casa = $request->id_casa;
         $fotosCasa->leyenda = $request->leyenda;
         $fotosCasa->es_principal = $request->es_principal?1:0;
@@ -154,16 +160,6 @@ class fotosCasaController extends Controller
           return view('admin.errorPage')->with('data',$data);
        }
 
-       $viewData = [];
-       $viewData['title'] = "Formulario - Fotos Casa";
-       $viewData['fotosCasa'] = fotosCasa::all();
-       $viewData['casa'] = casa::all();
-       $viewData['relacion'] = DB::table('fotos_casas')
-                                   ->join('casas','fotos_casas.id_casa','=','casas.id_casa')
-                                   ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
-                                   ->select('localizaciones.residencial','casas.casaNumero','fotos_casas.leyenda','fotos_casas.id_foto')
-                                   ->get();
-       
-        return redirect()->route('admin.fotosCasaForm.index');
+        return $this->index();
     }
 }

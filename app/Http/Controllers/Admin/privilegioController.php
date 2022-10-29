@@ -15,12 +15,18 @@ class privilegioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    protected $viewData = [];
+
+    protected function viewData(){
         $viewData = [];
         $viewData['title'] = "Formulario - Privilegios";
         $viewData['table'] = privilegio::all();
-        return view('admin.privilegioForm')->with('data',$viewData);
+        return $viewData;
+    }
+
+    public function index()
+    {
+        return view('admin.privilegioForm')->with('data',$this->viewData());
     }
 
     /**
@@ -117,10 +123,6 @@ class privilegioController extends Controller
           $data['ruta'] = 'admin.privilegioForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        $viewData = [];
-        $viewData['title'] = "Formulario - Privilegio";
-        $viewData['table'] = privilegio::all();
-
-        return redirect()->route('admin.privilegioForm.index');
+        return $this->index();
     }
 }

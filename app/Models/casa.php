@@ -24,7 +24,11 @@ class casa extends Model
                              'area_terreno'=>'numeric',
                              'habitaciones'=>'max:2',
                             'banos'=>'max:2',
-                            'ano_construccion'=>'numeric']);
+                            'ano_construccion'=>'numeric',
+                             'id_agente'=>'required',
+                             'id_localizacion'=>'required',
+                             'id_recurso'=>'required',
+                            'id_tipo'=>'required']);
     }
 
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\casa;
-use App\Models\fotosCasa;
 use App\Models\agente;
 use App\Models\tipo;
 use App\Models\localizacion;
@@ -21,25 +20,31 @@ class casaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     protected $viewData = [];
+
+     private function viewData() {
+        $viewData = [];
+        $viewData['title'] = "Formulario - Casas";
+        $viewData['agentes'] = agente::all();
+        $viewData['tipos'] = tipo::all();
+        $viewData['localizaciones'] = localizacion::all();
+        $viewData['recursos'] = recurso::all();
+        $viewData['relacion'] = DB::table('casas')
+                                    ->join('agentes','casas.id_agente','=','agentes.id_agente')
+                                    ->join('tipos','casas.id_tipo','=','tipos.id_tipo')
+                                    ->join('localizaciones','casas.id_localizacion','=','localizaciones.id_localizacion')
+                                    ->join('recursos','casas.id_recurso','=','recursos.id_recurso')
+                                    ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
+                                    ->select('casas.id_casa','agentes.nombre as nombreAgente','localizaciones.residencial',
+                                    'casas.casaNumero','ciudades.ciudad')
+                                    ->get();
+        return $viewData;
+     }
+
     public function index()
     {
-       $viewData = [];
-       $viewData['title'] = "Formulario - Casas";
-       $viewData['agentes'] = agente::all();
-       $viewData['tipos'] = tipo::all();
-       $viewData['localizaciones'] = localizacion::all();
-       $viewData['recursos'] = recurso::all();
-       $viewData['relacion'] = DB::table('casas')
-                                   ->join('agentes','casas.id_agente','=','agentes.id_agente')
-                                   ->join('tipos','casas.id_tipo','=','tipos.id_tipo')
-                                   ->join('localizaciones','casas.id_localizacion','=','localizaciones.id_localizacion')
-                                   ->join('recursos','casas.id_recurso','=','recursos.id_recurso')
-                                   ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
-                                   ->select('casas.id_casa','agentes.nombre as nombreAgente','localizaciones.residencial',
-                                   'casas.casaNumero','ciudades.ciudad')
-                                   ->get();
-
-        return view('admin.casaForm')->with('data',$viewData);
+        return view('admin.casaForm')->with('data',$this->viewData());
     }
 
     /**
@@ -141,8 +146,8 @@ class casaController extends Controller
         try {
             casa::find($id);
             $this->borrar_fotos($id);
-            /*$this->borrar_favoritos($id);
-            $this->borrar_valores($id);*/
+            $this->borrar_valores($id);
+            /*$this->borrar_favoritos($id);*/
             casa::destroy($id);
        } catch(\Exception $e) {
           $data =[];
@@ -151,23 +156,7 @@ class casaController extends Controller
           return view('admin.errorPage')->with('data',$data);
        }   
 
-       $viewData = [];
-       $viewData['title'] = "Formulario - Casas";
-       $viewData['agentes'] = agente::all();
-       $viewData['tipos'] = tipo::all();
-       $viewData['localizaciones'] = localizacion::all();
-       $viewData['recursos'] = recurso::all();
-       $viewData['relacion'] = DB::table('casas')
-                                   ->join('agentes','casas.id_agente','=','agentes.id_agente')
-                                   ->join('tipos','casas.id_tipo','=','tipos.id_tipo')
-                                   ->join('localizaciones','casas.id_localizacion','=','localizaciones.id_localizacion')
-                                   ->join('recursos','casas.id_recurso','=','recursos.id_recurso')
-                                   ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
-                                   ->select('casas.id_casa','agentes.nombre as nombreAgente','localizaciones.residencial',
-                                   'casas.casaNumero','ciudades.ciudad')
-                                   ->get();
-
-        return view('admin.casaForm')->with('data',$viewData);
+        return $this->index();
     }
 
     private function borrar_fotos($id) {
@@ -176,7 +165,7 @@ class casaController extends Controller
                      ->select('foto_normal','foto_thumb')->get();
        
         foreach($fotos_casas as $fotos) { // si no hay fotos en la tabla fotos_casas, no entra en este loop.
-            //var_dump($fotos->foto_normal);
+            
             if (!is_null($fotos->foto_normal)) {
                 Storage::delete('propiedades/'.$fotos->foto_normal);
             }
@@ -186,5 +175,9 @@ class casaController extends Controller
             }
             DB::delete('delete from fotos_casas where id_casa = ?',[$id]);
         } 
+    }
+
+    private function borrar_valores($id){
+        DB::table('precios_casas')->where('id_casa','=',$id)->delete();
     }
 }

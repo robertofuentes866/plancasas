@@ -141,4 +141,15 @@ Route::put('/{id}/admin.fotosCasaForm.update','App\Http\Controllers\Admin\fotosC
 
 Route::delete('/{id}/admin.fotosCasaForm.delete','App\Http\Controllers\Admin\fotosCasaController@destroy')->name('admin.fotosCasaForm.delete');
 
+// Relacionados al formulario PRECIOS CASA.
+Route::get('/admin.preciosCasaForm.index','App\Http\Controllers\Admin\preciosCasaController@index')->name('admin.preciosCasaForm.index');
+
+Route::post('/admin.preciosCasaForm.store','App\Http\Controllers\Admin\preciosCasaController@store')->name('admin.preciosCasaForm.store');
+
+Route::get('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/{id_duracion}/id_recurso/{id_recurso}/casaNumero/{casaNumero}','App\Http\Controllers\Admin\preciosCasaController@edit')->name('admin.preciosCasaForm.edit');
+
+Route::put('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/{id_duracion}/id_recurso/{id_recurso}','App\Http\Controllers\Admin\preciosCasaController@update')->name('admin.preciosCasaForm.update');
+
+Route::delete('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/{id_duracion}/id_recurso/{id_recurso}','App\Http\Controllers\Admin\preciosCasaController@destroy')->name('admin.preciosCasaForm.delete');
+
 Auth::routes();

@@ -14,12 +14,20 @@ class ofrecimientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+
+     protected $viewData = [];
+
+     protected function viewData(){
         $viewData = [];
         $viewData['title'] = "Formulario - Ofrecimientos";
         $viewData['table'] = ofrecimiento::all();
-        return view('admin.ofrecimientoForm')->with('data',$viewData);
+
+        return $viewData;
+     }
+
+    public function index()
+    {  
+        return view('admin.ofrecimientoForm')->with('data',$this->viewData());
     }
 
     /**
@@ -106,10 +114,6 @@ class ofrecimientoController extends Controller
           $data['ruta'] = 'admin.ofrecimientoForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        $viewData = [];
-        $viewData['title'] = "Formulario - Ofrecimiento";
-        $viewData['table'] = ofrecimiento::all();
-
-        return redirect()->route('admin.ofrecimientoForm.index');
+        return $this->index();
     }
 }

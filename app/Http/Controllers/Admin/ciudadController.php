@@ -16,12 +16,21 @@ class ciudadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    protected $viewData = [];
+
+    protected function viewData() {
         $viewData = [];
         $viewData['title'] = "Formulario - Ciudades";
         $viewData['table'] = ciudad::all();
-        return view('admin.ciudadForm')->with('data',$viewData);
+
+        return $viewData;
+
+    }
+
+    public function index()
+    {
+
+        return view('admin.ciudadForm')->with('data',$this->viewData());
     }
 
     /**
@@ -108,10 +117,6 @@ class ciudadController extends Controller
           $data['ruta'] = 'admin.ciudadForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        $viewData = [];
-        $viewData['title'] = "Formulario - Ciudades";
-        $viewData['table'] = ciudad::all();
-
-        return redirect()->route('admin.ciudadForm.index');
+        return $this->index();
     }
 }

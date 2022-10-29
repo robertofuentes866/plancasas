@@ -168,6 +168,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => ["cel1"=>"Cel No.1","id_privilegio"=>"Privilegio","id_casa"=>"Casa","id_agente"=>"Agente",
+                      "id_localizacion"=>"Localizacion","id_tipo"=>"Tipo","id_recurso"=>"Recurso","id_duracion"=>"Duracion",
+                      "id_bodega"=>"Bodega","id_usuario"=>"Usuario","id_ciudad"=>"Ciudad","id_ofrecimiento"=>"Ofrecimiento"]
 
 ];

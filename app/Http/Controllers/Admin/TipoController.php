@@ -13,13 +13,18 @@ class TipoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     protected $viewData = [];
 
-    public function index()
-    { 
+     protected function viewData() {
         $viewData = [];
         $viewData['title'] = "Formulario - Tipos de propiedades";
         $viewData['table'] = tipo::all();
-        return view('admin.tipoForm')->with('data',$viewData);
+        return $viewData;
+     }
+
+    public function index()
+    { 
+        return view('admin.tipoForm')->with('data',$this->viewData());
     }
 
     /**
@@ -106,10 +111,6 @@ class TipoController extends Controller
           $data['ruta'] = 'admin.tipoForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        $viewData = [];
-        $viewData['title'] = "Formulario - Tipo";
-        $viewData['table'] = tipo::all();
-
-        return redirect()->route('admin.tipoForm.index');
+        return $this->index();
     }
 }

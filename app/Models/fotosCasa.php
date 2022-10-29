@@ -12,7 +12,7 @@ class fotosCasa extends Model
     use HasFactory;
 
     public static function validar($request) {
-        $request->validate([]);
+        $request->validate(['id_casa'=>'required']);
     }
 
     public function getId() {

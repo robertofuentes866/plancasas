@@ -16,8 +16,9 @@ class localizacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {   
+    protected $viewData = [];
+
+    protected function viewData (){
         $viewData = [];
         $viewData['title'] = "Formulario - Localizaciones";
         $viewData['localizaciones'] = localizacion::all();
@@ -27,8 +28,12 @@ class localizacionController extends Controller
                                     ->select('localizaciones.id_localizacion','localizaciones.residencial',
                                     'localizaciones.direccion','ciudades.ciudad')
                                     ->get();
-        //print_r($viewData['relacion']);
-        return view('admin.localizacionForm')->with('data',$viewData);
+        return $viewData;
+    }
+
+    public function index()
+    {   
+        return view('admin.localizacionForm')->with('data',$this->viewData());
     }
 
     /**
@@ -122,16 +127,6 @@ class localizacionController extends Controller
           $data['ruta'] = 'admin.localizacionForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        $viewData = [];
-        $viewData['title'] = "Formulario - Localizaciones";
-        $viewData['localizaciones'] = localizacion::all();
-        $viewData['ciudades'] = ciudad::all();
-        $viewData['relacion'] = DB::table('localizaciones')
-                                    ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
-                                    ->select('localizaciones.id_localizacion','localizaciones.residencial',
-                                    'localizaciones.direccion','ciudades.ciudad')
-                                    ->get();
-
-        return redirect()->route('admin.localizacionForm.index');
+        return $this->index();
     }
 }

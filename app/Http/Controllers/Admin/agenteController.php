@@ -158,6 +158,6 @@ class agenteController extends Controller
           $data['ruta'] = 'admin.agenteForm.index';
           return view('admin.errorPage')->with('data',$data); 
        }   
-       return view('admin.agenteForm')->with('data',$this->viewData());
+       return $this->index();
     }
 }

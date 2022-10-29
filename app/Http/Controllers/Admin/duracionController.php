@@ -14,12 +14,19 @@ class duracionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    protected $viewData = [];
+
+    protected function viewData(){
         $viewData = [];
         $viewData['title'] = "Formulario - Ciudades";
         $viewData['table'] = duracion::all();
-        return view('admin.duracionForm')->with('data',$viewData);
+        return $viewData;
+
+    }
+
+    public function index()
+    {
+        return view('admin.duracionForm')->with('data',$this->viewData());
     }
 
     /**
@@ -106,10 +113,7 @@ class duracionController extends Controller
           $data['ruta'] = 'admin.duracionForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        $viewData = [];
-        $viewData['title'] = "Formulario - Duracion";
-        $viewData['table'] = duracion::all();
 
-        return redirect()->route('admin.duracionForm.index');
+        return $this->index();
     }
 }

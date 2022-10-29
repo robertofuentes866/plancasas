@@ -15,12 +15,19 @@ class recursoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+
+     protected $viewData = [];
+
+     protected function viewData(){
         $viewData = [];
         $viewData['title'] = "Formulario - Recursos";
         $viewData['table'] = recurso::all();
-        return view('admin.recursoForm')->with('data',$viewData);
+        return $viewData;
+     }
+
+    public function index()
+    {
+        return view('admin.recursoForm')->with('data',$this->viewData());
     }
 
     /**
@@ -107,10 +114,6 @@ class recursoController extends Controller
           $data['ruta'] = 'admin.recursoForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        $viewData = [];
-        $viewData['title'] = "Formulario - Recurso";
-        $viewData['table'] = recurso::all();
-
-        return redirect()->route('admin.recursoForm.index');
+        return $this->index();
     }
 }
