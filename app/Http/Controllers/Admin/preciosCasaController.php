@@ -118,14 +118,15 @@ class preciosCasaController extends Controller
      */
     public function update(Request $request,$id_casa,$id_ofrecimiento,$id_duracion,$id_recurso)
     {
-        $casa = preciosCasa::where([['id_casa','=',$id_casa],['id_ofrecimiento','=',$id_ofrecimiento],
-                            ['id_duracion','=',$id_duracion],['id_recurso','=',$id_recurso]]);
-        $valores = $request->only(['valor']);
-        if ($casa->update($valores)) {
+        $rowAffected = preciosCasa::where([['id_casa','=',$id_casa],['id_ofrecimiento','=',$id_ofrecimiento],
+                            ['id_duracion','=',$id_duracion],['id_recurso','=',$id_recurso]])
+                            ->update(['valor'=>$request->valor]);
+        
+        if (!empty($rowAffected)) {
             return redirect()->route('admin.preciosCasaForm.index');
         } else {
             echo "No se pudo ejecutar el UPDATE";
-        }
+        } 
     }
 
     /**

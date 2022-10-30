@@ -43,7 +43,7 @@ Editar Foto - Casa
     <div class="mb-3 row">
     <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Normal:</label>
     <div class="col-lg-10 col-md-6 col-sm-12"> 
-    <img src="{{asset('/storage/propiedades/'.$data['fotosCasa']->foto_normal)}}" class="form-control"> 
+    <img src="{{asset('/storage/propiedades/'.$data['fotosCasa']->foto_normal)}}"> 
     </div>
     </div>
 @endif
@@ -58,7 +58,7 @@ Editar Foto - Casa
     <div class="mb-3 row">
     <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Pequeña:</label>
     <div class="col-lg-10 col-md-6 col-sm-12"> 
-    <img width="{{$data['thumbAncho']}}" height="{{$data['thumbAlto']}}" src="{{asset('/storage/propiedades/'.$data['fotosCasa']->foto_thumb)}}" class="form-control"> 
+    <img width="{{$data['thumbAncho']}}" height="{{$data['thumbAlto']}}" src="{{asset('/storage/propiedades/'.$data['fotosCasa']->foto_thumb)}}"> 
     </div>
     </div>
 @endif

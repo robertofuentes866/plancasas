@@ -103,9 +103,9 @@ class agenteController extends Controller
         if (!is_null($viewData['agentes']->foto_agente)) {
             $image = Storage::path('agentes/'.$viewData['agentes']->foto_agente);
             $imagenDatos = getimagesize($image);
-            $ratio = calculateRatio(700,$imagenDatos[0],$imagenDatos[1]);
-            $viewData['thumbAncho'] = round($imagenDatos[0] * $ratio);
-            $viewData['thumbAlto'] = round($imagenDatos[1]* $ratio);
+            $ratio = calculateRatio(100,$imagenDatos[0],$imagenDatos[1]);
+            $viewData['thumbAncho'] = round($imagenDatos[1] * $ratio);
+            $viewData['thumbAlto'] = round($imagenDatos[0] * $ratio);
         }
 
         return view('admin.agenteFormEdit')->with('data',$viewData);

@@ -79,9 +79,9 @@ Editar Agente
 
 @if (!is_null($data['agentes']->foto_agente))
     <div class="mb-3 row">
-    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Agente:</label>
+    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Agente: </label>
     <div class="col-lg-10 col-md-6 col-sm-12"> 
-    <img width="{{$data['thumbAncho']}}" height="{{$data['thumbAlto']}}" src="{{asset('/storage/agentes/'.$data['agentes']->foto_agente)}}" class="form-control"> 
+    <img width="{{$data['thumbAlto']}}" height="{{$data['thumbAncho']}}" src="{{asset('/storage/agentes/'.$data['agentes']->foto_agente)}}"> 
     </div>
     </div>
 @endif
