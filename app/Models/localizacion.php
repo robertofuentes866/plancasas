@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\Node\Expr\FuncCall;
 
 class localizacion extends Model
 {
     protected $table = "localizaciones";
     protected $primaryKey = "id_localizacion";
-    protected $fillable = ['id_ciudad','residencial','direccion'];
+    protected $fillable = ['id_ciudad','residencial','direccion','descripcion'];
     protected $hidden = ['id_localizacion','id_ciudad'];
     
 
@@ -41,6 +42,10 @@ class localizacion extends Model
         return $this->attributes['residencial'];
     }
 
+    public function getDescripcion(){
+        return $this->attributes['descripcion'];
+    }
+
     public function getDireccion() {
         return $this->attributes['direccion'];
     }
@@ -51,6 +56,10 @@ class localizacion extends Model
 
     public function setDireccion($direccion) {
         $this->attributes['direccion'] = $direccion;
+    }
+
+    public function setDescripcion($d) {
+        $this->attributes['descripcion'] = $d;
     }
 
     public function setId($id) {

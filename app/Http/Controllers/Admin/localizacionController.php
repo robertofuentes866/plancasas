@@ -59,6 +59,7 @@ class localizacionController extends Controller
             $localizacion->id_ciudad = $request->id_ciudad;
             $localizacion->residencial = $request->residencial;
             $localizacion->direccion = $request->direccion;
+            $localizacion->descripcion = $request->descripcion;
            
             $localizacion->save();
 
@@ -105,6 +106,7 @@ class localizacionController extends Controller
         $localizacion->setResidencial($request->residencial);
         $localizacion->setIdCiudad($request->id_ciudad);
         $localizacion->setDireccion($request->direccion);
+        $localizacion->setDescripcion($request->descripcion);
         $localizacion->save();
         
         return redirect()->route('admin.localizacionForm.index');

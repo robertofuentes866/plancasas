@@ -22,6 +22,7 @@ use Laravel\Sanctum\Sanctum;
 |
 */
 
+
 // llama pagina de inicio de plancasas. Cualquier usuario puede tener acceso.
 Route::get('/','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
 
@@ -153,3 +154,5 @@ Route::put('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/{id
 Route::delete('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/{id_duracion}/id_recurso/{id_recurso}','App\Http\Controllers\Admin\preciosCasaController@destroy')->name('admin.preciosCasaForm.delete');
 
 Auth::routes();
+
+Route::post('/busquedaPorFormulario','App\Http\Controllers\busquedaPorFormularioController@index')->name('busquedaPorFormulario');

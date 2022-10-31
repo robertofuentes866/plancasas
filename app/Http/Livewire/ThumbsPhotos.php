@@ -12,7 +12,6 @@ class ThumbsPhotos extends Component
     public function render()
     {
         $imagenes_casas = $this->casas_destacadas();
-        //print_r($imagenes_casas);
         return view('livewire.thumbs-photos')->with('imagenes_casas',$imagenes_casas);
     }
 

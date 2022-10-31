@@ -17,6 +17,7 @@ return new class extends Migration
             $table->smallIncrements('id_localizacion');
             $table->string('residencial',35);
             $table->string('direccion',100)->nullable();
+            $table->text('descripcion')->nullable();
             $table->unsignedTinyInteger('id_ciudad');
             $table->foreign('id_ciudad')->references('id_ciudad')->on('ciudades')->onDelete('restrict');
             $table->timestamps();

@@ -18,26 +18,33 @@ Crear Localizaciones
 <div class="row">
 <div class="col">
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Ciudad:</label>
-<div class="col-lg-10 col-md-6 col-sm-12"> 
-<select name="id_ciudad" class="form-control">
-     @foreach ($data["ciudades"] as $ciudad)
-       <option value="{{$ciudad['id_ciudad']}}">{{$ciudad['ciudad']}}</option>
-     @endforeach
-</select> 
+    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Ciudad:</label>
+    <div class="col-lg-10 col-md-6 col-sm-12"> 
+        <select name="id_ciudad" class="form-control">
+            @foreach ($data["ciudades"] as $ciudad)
+              <option value="{{$ciudad['id_ciudad']}}">{{$ciudad['ciudad']}}</option>
+            @endforeach
+        </select> 
+    </div>
 </div>
-</div>
-<div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Residencial:</label>
-<div class="col-lg-10 col-md-6 col-sm-12"> 
 
-<input name="residencial" value="{{ old('residencial') }}" type="text" class="form-control">
-</div>
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Direccion:</label>
-<textarea name="direccion" >{{old('direccion')}} </textarea> 
+    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Residencial:</label>
+    <div class="col-lg-10 col-md-6 col-sm-12"> 
+        <input name="residencial" value="{{ old('residencial') }}" type="text" class="form-control">
+    </div>
 </div>
+
+<div class="mb-3 row">
+    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Direccion:</label>
+    <textarea name="direccion" >{{old('direccion')}} </textarea> 
 </div>
+
+<div class="mb-3 row">
+    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Descripcion:</label>
+    <textarea name="descripcion" >{{old('descripcion')}} </textarea> 
+</div>
+
 </div>
 </div>
 <button type="submit" class="btn btn-primary">Guardar</button>
