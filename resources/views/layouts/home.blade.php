@@ -21,42 +21,45 @@
 <div class="container">
     <div class="row my-3 ">
         <div class="col-lg-12 nav-justified">
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                    <a class = "@yield('nav_link_inicio')" href="{{Route('menu.inicio')}}">INICIO</a>
-            </li>
-           @guest
-             <li class="nav-item">
-                    <a class = "@yield('nav_link_registrar')" href="{{Route('register')}}">REGISTRARSE</a>
-            </li>
-            <li class="nav-item">
-                    <a class = "@yield('nav_link_entrar')" href="{{Route('login')}}">ENTRAR</a>
-            </li>
-            @else
-             <li class="nav-item">
-             <form id="logout" action="{{ route('logout') }}" method="POST">
-                    <a role="button" class="nav-link"
-                    onclick="document.getElementById('logout').submit();">Salir</a>
-                    @csrf
-             </form>
-             </li>
-             @endguest
-        </ul>
-    </div>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                            <a class = "@yield('nav_link_inicio')" href="{{Route('menu.inicio')}}">INICIO</a>
+                    </li>
+                @guest
+                    <li class="nav-item">
+                            <a class = "@yield('nav_link_registrar')" href="{{Route('register')}}">REGISTRARSE</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class = "@yield('nav_link_entrar')" href="{{Route('login')}}">ENTRAR</a>
+                    </li>
+                    @else
+                    <li class="nav-item">
+                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                            <a role="button" class="nav-link"
+                            onclick="document.getElementById('logout').submit();">Salir</a>
+                            @csrf
+                    </form>
+                    </li>
+                    @endguest
+                </ul>
+        </div>
         
+    </div>
 </div>
- </div>
-    <div class="container">
-        <div class="row">
-            @yield('cuerpo')
-        </div>
+
+
+<div class="container">
+    <div class="row">
+        @yield('cuerpo')
     </div>
-    <div class="row my-2">
-        <div class="col-lg-12 bg-primary text-center">
-            Copyright - <b>Managua</b> - <b>Nicaragua</b>
-        </div>
+</div>
+
+<div class="row my-2">
+    <div class="col-lg-12 bg-primary text-center">
+        Copyright - <b>Managua</b> - <b>Nicaragua</b>
     </div>
-    @livewireScripts
-    @yield('js')
+</div>
+@livewireScripts
+@yield('js')
 </body>
 </html>

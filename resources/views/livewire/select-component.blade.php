@@ -1,4 +1,4 @@
-<div>
+
 <div class="form-group row">
     <label for="ciudad" class="col-lg-4 col-form-label">Ciudades</label>
     <div class="col-lg-4">
@@ -24,4 +24,4 @@
    </div>
 </div>
 @endif
-</div>
+

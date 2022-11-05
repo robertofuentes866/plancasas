@@ -6,11 +6,11 @@
 @section('cuerpo')
 
 <div class="col-lg-4 bg-primary">
-<div class="text-nowrap bg-light border" style="width: 13.5rem; text-align:center; margin:0 auto;margin-bottom:1.2rem">
-  FORMULARIO DE BUSQUEDA
-</div>
-    <form method="post" action="{{route('busquedaPorFormulario')}}">
-       @csrf
+    <div class="text-nowrap bg-light border" style="width: 13.5rem; text-align:center; margin:0 auto;margin-bottom:1.2rem">
+        FORMULARIO DE BUSQUEDA
+    </div>
+    <form method="post" action="{{route('busquedaPorFormulario')}}" class="form-class">
+            @csrf
             <div class="form-group row">
                 <label for="tipo" class="col-lg-4 col-form-label">Tipo</label>
                 <div class="col-lg-4">
@@ -42,17 +42,5 @@
             </div>
     </form>
 </div>
-
-<div class="col-lg-4 bg-secondary">
-<div class="text-nowrap bg-light border" style="width: 13.5rem; text-align:center; margin:0 auto;margin-bottom:1.2rem">
-     DESTACADOS
-</div>
-    <livewire:thumbs-photos/>
-</div>
-
-<div class="col-lg-4 bg-primary">
-<div class="text-nowrap bg-light border" style="width: 13.5rem; text-align:center; margin:0 auto;margin-bottom:1.2rem">
-  PATROCINIO
-</div>
-</div>
+@livewire('thumbs-photos')
 @endsection

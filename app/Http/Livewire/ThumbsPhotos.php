@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class ThumbsPhotos extends Component
 {
+    public $fotoNormal = '';
+    public $descripcion = '';
+
     public function render()
     {
         $imagenes_casas = $this->casas_destacadas();
@@ -20,6 +23,12 @@ class ThumbsPhotos extends Component
                                    ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                                    ->where([['casas.destacado','=',1],['casas.disponibilidad','=',1],
                                             ['fotos_casas.es_principal','=',1]])
-                                   ->select('casas.casaNumero','localizaciones.residencial','fotos_casas.foto_thumb')->get();
+                                   ->select('casas.casaNumero','localizaciones.residencial','fotos_casas.foto_thumb',
+                                             'fotos_casas.foto_normal','localizaciones.descripcion')->get();
+    }
+
+    public function selectNormalImagen($foto,$descrip) {
+        $this->fotoNormal = $foto;
+        $this->descripcion = $descrip;
     }
 }

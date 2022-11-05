@@ -11,7 +11,7 @@
 </div>
     <div class="container">
         <div class="row row-cols-2">
-        
+            
             @foreach($imagenes_casas as $imagen_casa)
                 <div class="col">
                     <figure> 
