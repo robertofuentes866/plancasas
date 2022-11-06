@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="container">
-    <div class="row my-3 ">
+    <div class="row my-2 ">
         <div class="col-lg-12 nav-justified">
                 <ul class="nav nav-pills">
                     <li class="nav-item">

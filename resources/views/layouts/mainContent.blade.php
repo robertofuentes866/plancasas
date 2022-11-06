@@ -10,7 +10,7 @@
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
     <div class="card-header" style="text-align:center"><strong>Búsqueda de Propiedad </strong></div>
     <div class="card-body">
-    <form method="post" action="{{route('busquedaPorFormulario')}}" >
+    <form method="get">
             @csrf
             <div class="form-group row">
                 <label for="tipo" class="col-lg-6 col-form-label">Tipo</label>
@@ -41,7 +41,7 @@
                
             <div class="form-group row my-3">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-secondary">Buscar</button>
+                    <button type="submit" name="submit" class="btn btn-secondary">Buscar</button>
                 </div>
             </div>
     </form>
@@ -49,6 +49,13 @@
     </div>
     
 </div>
-@livewire('thumbs-photos')  <!-- en este livewire estan las otras dos columnas. -->
+@if (!isset($_GET['submit']))
+
+    @livewire('thumbs-photos',['tipo'=>0,'ofrecimiento'=>0,'ciudad'=>0,'localizacion'=>0,'titulo'=>'Propiedades Destacadas'])  <!-- muestra fotos destacadas en la pagina principal  -->
+@else
+
+    @livewire('thumbs-photos',['tipo'=>1,'ofrecimiento'=>$_GET['id_ofrecimiento'],'ciudad'=>$_GET['id_ciudad'],
+                                'localizacion'=>$_GET['id_localizacion'],'titulo'=>'Resultado de busqueda'])  <!-- muestra resultado del formulario en la pagina principal  -->
+@endif
 
 @endsection
