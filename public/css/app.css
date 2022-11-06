@@ -1,13 +1,16 @@
 body {
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    background-color:aliceblue;
 }
 
 figure {
-    border: thin #c0c0c0 solid;
-    display: flex;
+    
+    display: block;
     flex-flow: column;
     padding: 5px;
     margin: auto;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 30px;
 }
 
 figcaption {
@@ -16,6 +19,7 @@ figcaption {
     font: italic smaller sans-serif;
     padding: 3px;
     text-align: center;
+    height: 50px;
 }
 
 #headerP {
@@ -31,6 +35,5 @@ figcaption {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: medium;
     margin-left: 15px;
+    color:khaki;
 }
-
-

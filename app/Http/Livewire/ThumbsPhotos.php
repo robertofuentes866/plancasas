@@ -11,11 +11,12 @@ class ThumbsPhotos extends Component
 {
     public $fotoNormal = '';
     public $descripcion = '';
+    public $contador = 0;
 
-    public function render()
-    {
+    public function render() {
+
         $imagenes_casas = $this->casas_destacadas();
-        return view('livewire.thumbs-photos')->with('imagenes_casas',$imagenes_casas);
+        return view('livewire.thumbs-photos')->with('imagenes_casas',$imagenes_casas);                                  
     }
 
     private function casas_destacadas() {
@@ -28,6 +29,7 @@ class ThumbsPhotos extends Component
     }
 
     public function selectNormalImagen($foto,$descrip) {
+        $this->contador++;
         $this->fotoNormal = $foto;
         $this->descripcion = $descrip;
     }

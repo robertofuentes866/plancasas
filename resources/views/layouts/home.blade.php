@@ -51,6 +51,7 @@
 <div class="container">
     <div class="row">
         @yield('cuerpo')
+        
     </div>
 </div>
 
