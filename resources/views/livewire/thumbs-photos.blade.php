@@ -13,7 +13,8 @@
                             <figure wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
                                     {{$comillas.$imagen_casa->descripcion.$comillas}},
                                     {{$comillas.$imagen_casa->residencial.$comillas}},
-                                    {{$comillas.$imagen_casa->casaNumero.$comillas}} )"> 
+                                    {{$comillas.$imagen_casa->casaNumero.$comillas}},
+                                    {{$comillas.$imagen_casa->id_casa.$comillas}} )"> 
                                 <img class="img-thumbnail" style="padding: 5px"
                                     src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
                                     alt="Sierras Doradas" width="84" height="54">
@@ -34,7 +35,7 @@
                         <div class="card-body">
                         <h5 class="card-title">{{$residencial.'-'.$casaNumero}}</h5>
                         <p class="card-text"> {{$descripcion}}</p>
-                        <a href="#" class="btn btn-primary">Mas detalles...</a>
+                        <a href="{{route('menu.inicio',['gestion'=>2,'id_propiedad'=>$id_propiedad])}}" class="btn btn-primary">Mas detalles...</a>
                         </div>
                     </div>
                 @endif

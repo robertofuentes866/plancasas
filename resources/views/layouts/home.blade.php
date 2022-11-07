@@ -23,7 +23,8 @@
         <div class="col-lg-12 nav-justified">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                            <a class = "@yield('nav_link_inicio')" href="{{Route('menu.inicio')}}">INICIO</a>
+                            <a class = "@yield('nav_link_inicio')" 
+                            href="{{Route('menu.inicio',['gestion'=>0,'id_propiedad'=>0])}}">INICIO</a>
                     </li>
                 @guest
                     <li class="nav-item">

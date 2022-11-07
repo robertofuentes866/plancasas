@@ -10,7 +10,7 @@
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
     <div class="card-header" style="text-align:center"><strong>Búsqueda de Propiedad </strong></div>
     <div class="card-body">
-    <form method="get">
+    <form method="get" action="{{route('menu.inicio',['gestion'=>1,'id_propiedad'=>0])}}">
             @csrf
             <div class="form-group row">
                 <label for="tipo" class="col-lg-6 col-form-label">Tipo</label>
@@ -49,13 +49,24 @@
     </div>
     
 </div>
-@if (!isset($_GET['submit']))
 
-    @livewire('thumbs-photos',['tipo'=>0,'ofrecimiento'=>0,'ciudad'=>0,'localizacion'=>0,'titulo'=>'Propiedades Destacadas'])  <!-- muestra fotos destacadas en la pagina principal  -->
-@else
+@switch ($viewData['gestion']) 
+ 
+  @case (0)    @livewire('thumbs-photos',['tipo'=>0,'ofrecimiento'=>0,'ciudad'=>0,'localizacion'=>0,
+                 'titulo'=>'Propiedades Destacadas','id_propiedad'=>0])  <!-- muestra fotos destacadas en la pagina principal  -->
+              @break
 
-    @livewire('thumbs-photos',['tipo'=>1,'ofrecimiento'=>$_GET['id_ofrecimiento'],'ciudad'=>$_GET['id_ciudad'],
-                                'localizacion'=>$_GET['id_localizacion'],'titulo'=>'Resultado de busqueda'])  <!-- muestra resultado del formulario en la pagina principal  -->
-@endif
+  @case (1)
+
+        @livewire('thumbs-photos',['tipo'=>1,'ofrecimiento'=>$_GET['id_ofrecimiento'],'ciudad'=>$_GET['id_ciudad'],
+                                'localizacion'=>$_GET['id_localizacion'],'titulo'=>'Resultado de busqueda',
+                                  'id_propiedad'=>0])  <!-- muestra resultado del formulario en la pagina principal  -->
+        @break
+  @case (2)
+    @livewire('thumbs-photos',['tipo'=>2,'ofrecimiento'=>0,'ciudad'=>0,
+                                'localizacion'=>0,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad']])  <!-- muestra resultado del formulario en la pagina principal  -->
+        @break
+
+@endswitch
 
 @endsection

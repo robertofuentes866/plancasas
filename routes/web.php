@@ -22,9 +22,10 @@ use Laravel\Sanctum\Sanctum;
 |
 */
 
+Route::get('/lixo/{gestion}/{id}','App\Http\Controllers\menuController@lixo');
 
 // llama pagina de inicio de plancasas. Cualquier usuario puede tener acceso.
-Route::get('/','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
+Route::get('/{gestion}/{id_propiedad}','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
 
 // prepara datos del menu de formularios.
 Route::get('/AdminForms','App\Http\Controllers\Admin\AdminFormsController@index')->name('adminForms');
