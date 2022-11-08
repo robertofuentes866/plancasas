@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('admin.home')
 @section('title', $viewData["title"])
 @section('cuerpo')
 <div class="card mb-4">

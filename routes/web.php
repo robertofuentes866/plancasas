@@ -22,10 +22,7 @@ use Laravel\Sanctum\Sanctum;
 |
 */
 
-Route::get('/lixo/{gestion}/{id}','App\Http\Controllers\menuController@lixo');
-
-// llama pagina de inicio de plancasas. Cualquier usuario puede tener acceso.
-Route::get('/{gestion}/{id_propiedad}','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
+Route::get('/','App\Http\Controllers\menuController@indexacion');
 
 // prepara datos del menu de formularios.
 Route::get('/AdminForms','App\Http\Controllers\Admin\AdminFormsController@index')->name('adminForms');
@@ -115,7 +112,7 @@ Route::get('/admin.agenteForm.index','App\Http\Controllers\Admin\agenteControlle
 
 Route::post('/admin.agenteForm.store','App\Http\Controllers\Admin\agenteController@store')->name('admin.agenteForm.store');
 
-Route::get('/{id}/admin.agenteForm.edit','App\Http\Controllers\Admin\agenteController@edit')->name('admin.agenteForm.edit');
+Route::get('{id}/admin.agenteForm.edit','App\Http\Controllers\Admin\agenteController@edit')->name('admin.agenteForm.edit');
 
 Route::put('/{id}/admin.agenteForm.update','App\Http\Controllers\Admin\agenteController@update')->name('admin.agenteForm.update');
 
@@ -156,4 +153,5 @@ Route::delete('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/
 
 Auth::routes();
 
-Route::post('/busquedaPorFormulario','App\Http\Controllers\busquedaPorFormularioController@index')->name('busquedaPorFormulario');
+// llama pagina de inicio de plancasas. Cualquier usuario puede tener acceso.
+Route::get('/{gestion}/{id_propiedad}/inicio','App\Http\Controllers\menuController@inicio')->name('menu.inicio');

@@ -9,3 +9,20 @@ function calculateRatio($max,$width,$height){
         }
 }
 
+function propiedadIncluida($id_casa,$id_foto,&$arrayProp) {
+    if (!in_array($id_casa.$id_foto,$arrayProp)) {
+        $arrayProp[] = $id_casa.$id_foto;
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function precioIncluido($id_casa,$id_ofr,$id_dur,$id_rec,&$arrayProp) {
+    if (!in_array($id_casa.$id_ofr.$id_dur.$id_rec,$arrayProp)) {
+        $arrayProp[] = $id_casa.$id_ofr.$id_dur.$id_rec;
+        return false;
+    } else {
+        return true;
+    }
+}

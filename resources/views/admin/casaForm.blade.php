@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('admin.home')
 @section('title', $data["title"])
 @section('cuerpo')
 <div class="card mb-4">
@@ -218,7 +218,7 @@ Ver Casas
 </button>
 </form>
 
-</td>
+</td> 
 </tr>
 @endforeach
 </tbody>

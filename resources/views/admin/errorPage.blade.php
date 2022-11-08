@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('admin.home')
 @section('title', "MENSAJE ")
 @section('cuerpo')
    <h1>{{$data['mensaje']}}</h1>

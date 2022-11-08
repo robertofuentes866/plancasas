@@ -23,8 +23,8 @@ class menuController extends Controller
         return view('layouts/mainContent')->with("viewData",$viewData);
     }
 
-    public function lixo($v1,$v2) {
-        echo "$v1 - $v2";
+    public function indexacion() {
+        return $this->inicio(0,0);
     }
 
 }

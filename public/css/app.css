@@ -19,7 +19,8 @@ figcaption {
     font: italic smaller sans-serif;
     padding: 3px;
     text-align: center;
-    height: 50px;
+    height:auto;
+    margin-top:5px;
 }
 
 #headerP {
