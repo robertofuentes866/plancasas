@@ -9,7 +9,7 @@ class casa extends Model
 {
     protected $table = "casas";
     protected $primaryKey = "id_casa";
-    protected $fillable = ["id_agente","id_tipo","id_localizacion","id_recurso","casaNumero","area_construccion",
+    protected $fillable = ["id_agente","id_tipo","id_localizacion","casaNumero","area_construccion",
     "area_terreno","plantas","garage","habitaciones","banos","piscina","apartamento","cuartoDomestica",
    "bano_social","disponibilidad","destacado","ano_construccion"];
     protected $hidden = ['id_casa'];
@@ -27,7 +27,6 @@ class casa extends Model
                             'ano_construccion'=>'numeric',
                              'id_agente'=>'required',
                              'id_localizacion'=>'required',
-                             'id_recurso'=>'required',
                             'id_tipo'=>'required']);
     }
 
@@ -79,14 +78,6 @@ class casa extends Model
 
     public function setIdLocalizacion($id_localizacion) {
         $this->attributes['id_localizacion'] = $id_localizacion;
-    }
-
-    public function getIdRecurso(){
-        return $this->attributes['id_recurso'];
-    }
-
-    public function setIdRecurso($id_recurso) {
-        $this->attributes['id_recurso'] = $id_recurso;
     }
 
     public function getPlantas() {

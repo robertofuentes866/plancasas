@@ -34,8 +34,6 @@ return new class extends Migration
             $table->foreign('id_tipo')->references('id_tipo')->on('tipos')->onDelete('restrict');
             $table->unsignedSmallInteger('id_localizacion');
             $table->foreign('id_localizacion')->references('id_localizacion')->on('localizaciones')->onDelete('restrict');
-            $table->unsignedTinyInteger('id_recurso');
-            $table->foreign('id_recurso')->references('id_recurso')->on('recursos')->onDelete('restrict');
             $table->timestamps();
         });
     }

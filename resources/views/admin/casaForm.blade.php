@@ -43,19 +43,6 @@ Crear Casas
 
     </div>
 
-    <div class="col-4">
-                <div class="mb-3 row">
-                <label class="col-lg-4 col-md-6 col-sm-12 col-form-label">Recurso:</label>
-                <div class="col-lg-10 col-md-6 col-sm-12"> 
-                <select name="id_recurso" class="form-control">
-                    @foreach ($data["recursos"] as $recurso)
-                    <option value="{{$recurso['id_recurso']}}">{{$recurso['recurso']}}</option>
-                    @endforeach
-                </select> 
-                </div>
-                </div>
-    </div>
-
 </div>  <!-- Fin de row -->
 
 <div class="row">

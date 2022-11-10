@@ -52,9 +52,15 @@
 
 @switch ($viewData['gestion']) 
  
-  @case (0)    @livewire('thumbs-photos',['tipo'=>0,'ofrecimiento'=>0,'ciudad'=>0,'localizacion'=>0,
-                 'titulo'=>'Propiedades Destacadas','id_propiedad'=>0])  <!-- muestra fotos destacadas en la pagina principal  -->
-              @break
+  @case (0)    
+            @if($viewData['propiedades_destacadas'])
+              
+                @livewire('thumbs-photos',['tipo'=>0,'ofrecimiento'=>0,'ciudad'=>0,'localizacion'=>0,
+                    'titulo'=>'Propiedades Destacadas','id_propiedad'=>0])  <!-- muestra fotos destacadas en la pagina principal  -->
+            @else
+                @livewire('imagenes-grupo')
+            @endif
+            @break
 
   @case (1)
 

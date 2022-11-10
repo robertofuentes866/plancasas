@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Admin\tipoController;
 use App\Http\Controllers\Admin\recursoController;

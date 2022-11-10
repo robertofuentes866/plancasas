@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ofrecimiento;
 use App\Models\ciudad;
 use App\Models\tipo;
+use Illuminate\Support\Facades\DB;
 
 class menuController extends Controller
 {   
@@ -20,6 +21,7 @@ class menuController extends Controller
         $viewData['ciudad'] = ciudad::all();
         $viewData['gestion'] = $gestion;
         $viewData['id_propiedad'] = $id_propiedad;
+        $viewData['propiedades_destacadas'] = count(DB::table('casas')->where([['destacado','=',1],['disponibilidad','=',1]])->get());
         return view('layouts/mainContent')->with("viewData",$viewData);
     }
 

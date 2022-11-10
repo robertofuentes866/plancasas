@@ -40,7 +40,7 @@ class ThumbsPhotos extends Component
     public function render() {
        
         $imagenes_casas = $this->get_casas();
-        if (!$this->contador) {
+        if (!$this->contador && count($imagenes_casas)) {
             $this->contador++;
 
             $this->fotoNormal = $imagenes_casas[0]->foto_normal;
@@ -49,7 +49,6 @@ class ThumbsPhotos extends Component
             $this->casaNumero = $imagenes_casas[0]->casaNumero;
             $this->id_propiedad = $imagenes_casas[0]->id_casa;
             $this->leyenda = $imagenes_casas[0]->leyenda;
-   
          }
         return view('livewire.thumbs-photos')->with('imagenes_casas',$imagenes_casas);                                  
     }
@@ -96,7 +95,7 @@ class ThumbsPhotos extends Component
                       ->join('recursos','recursos.id_recurso','=','precios_casas.id_recurso')
                       ->join('agentes','agentes.id_agente','=','casas.id_agente')
                       ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
-                      ->where('casas.id_casa','=',$this->id_propiedad)
+                      ->where([['casas.id_casa','=',$this->id_propiedad],['casas.disponibilidad','=',1]])
                       ->select('casas.casaNumero','localizaciones.residencial','localizaciones.descripcion','fotos_casas.foto_thumb',
                                 'fotos_casas.foto_normal','casas.id_casa','fotos_casas.id_foto','fotos_casas.leyenda',
                                'casas.area_construccion','casas.area_terreno','casas.ano_construccion',

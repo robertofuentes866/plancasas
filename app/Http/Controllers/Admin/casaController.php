@@ -29,12 +29,10 @@ class casaController extends Controller
         $viewData['agentes'] = agente::all();
         $viewData['tipos'] = tipo::all();
         $viewData['localizaciones'] = localizacion::all();
-        $viewData['recursos'] = recurso::all();
         $viewData['relacion'] = DB::table('casas')
                                     ->join('agentes','casas.id_agente','=','agentes.id_agente')
                                     ->join('tipos','casas.id_tipo','=','tipos.id_tipo')
                                     ->join('localizaciones','casas.id_localizacion','=','localizaciones.id_localizacion')
-                                    ->join('recursos','casas.id_recurso','=','recursos.id_recurso')
                                     ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
                                     ->select('casas.id_casa','agentes.nombre as nombreAgente','localizaciones.residencial',
                                     'casas.casaNumero','ciudades.ciudad')
@@ -66,7 +64,7 @@ class casaController extends Controller
     public function store(Request $request)
     {
         casa::validar($request);
-        $creationData = $request->only(["id_agente","id_tipo","id_localizacion","id_recurso","casaNumero","area_construccion",
+        $creationData = $request->only(["id_agente","id_tipo","id_localizacion","casaNumero","area_construccion",
                         "area_terreno","plantas","garage","habitaciones","banos","bano_social","cuartoDomestica","piscina",
                         "apartamento","destacado","disponibilidad","ano_construccion"]);
                         print_r($creationData);
@@ -105,7 +103,6 @@ class casaController extends Controller
         $viewData['casas'] = casa::findOrFail($id);
         $viewData['agentes'] = agente::all();
         $viewData['localizaciones'] = localizacion::all();
-        $viewData['recursos'] = recurso::all();
         return view('admin.casaFormEdit')->with('data',$viewData);
     }
 
