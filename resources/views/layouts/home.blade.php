@@ -13,9 +13,10 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-lg-12 bg-dark text-white">
+    <div id="encabezado" class="col-lg-12 bg-dark text-white">
         <p class="placeholder-wave" id="headerP">PLANCASAS BIENES RAICES </p>
         <p class="placeholder-wave"><small id="smallHeader">Te ofrecemos un lugar Accesible, Cómodo y Seguro para vivir en familia.</small> </p>
+
     </div>
 </div>
 <div class="container">

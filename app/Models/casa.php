@@ -11,7 +11,8 @@ class casa extends Model
     protected $primaryKey = "id_casa";
     protected $fillable = ["id_agente","id_tipo","id_localizacion","casaNumero","area_construccion",
     "area_terreno","plantas","garage","habitaciones","banos","piscina","apartamento","cuartoDomestica",
-   "bano_social","disponibilidad","destacado","ano_construccion"];
+   "bano_social","disponibilidad","destacado","ano_construccion","aires_acondicionado","abanicos_techo",
+    "agua_caliente","tanque_agua","sistema_seguridad"];
     protected $hidden = ['id_casa'];
     
     use HasFactory;
@@ -182,4 +183,43 @@ class casa extends Model
         $this->attributes['cuartoDomestica'] = $cd;
     }
 
+    public function getAiresAcondicionado(){
+        return $this->attributes['aires_acondicionado'];
+    }
+
+    public function setAiresAcondicionado($cd) {
+        $this->attributes['aires_acondicionado'] = $cd;
+    }
+
+    public function getAbanicosTecho(){
+        return $this->attributes['abanicos_techo'];
+    }
+
+    public function setAbanicosTecho($cd) {
+        $this->attributes['abanicos_techo'] = $cd;
+    }
+
+    public function getAguaCaliente(){
+        return $this->attributes['agua_caliente'];
+    }
+
+    public function setAguaCaliente($cd) {
+        $this->attributes['agua_caliente'] = $cd;
+    }
+
+    public function getTanqueAgua(){
+        return $this->attributes['tanque_agua'];
+    }
+
+    public function setTanqueAgua($cd) {
+        $this->attributes['tanque_agua'] = $cd;
+    }
+
+    public function getSistemaSeguridad(){
+        return $this->attributes['sistema_seguridad'];
+    }
+
+    public function setSistemaSeguridad($cd) {
+        $this->attributes['sistema_seguridad'] = $cd;
+    }
 }

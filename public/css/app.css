@@ -29,12 +29,30 @@ figcaption {
     font-size:xx-large;
     color: aqua;
     margin-left: 15px;
+    
 }
 
 #smallHeader {
     font-style: italic;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: medium;
-    margin-left: 15px;
+    
     color:khaki;
+
+}
+
+#title_page_left {
+    text-align:center;
+    color:white;
+}
+
+#title_page_left_container {
+   background-color: black; 
+}
+
+#encabezado {
+   background-image:url("../storage/imagenes_app/encabezado.jpg");
+   background-repeat: no-repeat;
+   background-position:right;
+   background-size: 50%;
 }

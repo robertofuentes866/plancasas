@@ -29,6 +29,11 @@ return new class extends Migration
             $table->boolean('apartamento')->nullable();
             $table->boolean('destacado')->nullable();
             $table->year('ano_construccion')->nullable();
+            $table->char('aires_acondicionado',2)->nullable();
+            $table->char('abanicos_techo',2)->nullable();
+            $table->boolean('agua_caliente')->nullable();
+            $table->boolean('tanque_agua')->nullable();
+            $table->boolean('sistema_seguridad')->nullable();
             $table->unsignedBigInteger('id_agente');
             $table->foreign('id_agente')->references('id_agente')->on('agentes')->onDelete('restrict');
             $table->foreign('id_tipo')->references('id_tipo')->on('tipos')->onDelete('restrict');

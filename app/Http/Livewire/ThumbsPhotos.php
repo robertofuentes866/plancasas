@@ -15,24 +15,38 @@ class ThumbsPhotos extends Component
     public $residencial = '';
     public $casaNumero = '';
     public $leyenda = '';
-    public $id_propiedad = 0;
     public $contador = 0;
     public $arrayProp = [];
     public $arrayPrecio = [];
 
-    public $ofrecimiento = '';
-    public $ciudad = '';
-    public $localizacion = '';
+    public $id_ofrecimiento = '';
+    public $id_ciudad = '';
+    public $id_localizacion = '';
+    public $id_recurso = '';
+    public $id_duracion = '';
+    public $id_propiedad = 0;
     public $tipo = '';
     public $titulo = '';
 
-    public function mount($tipo,$ofrecimiento,$ciudad,$localizacion,$titulo,$id_propiedad){
-       $this->tipo = $tipo;
-       $this->ofrecimiento = $ofrecimiento;
-       $this->ciudad = $ciudad;
-       $this->localizacion = $localizacion;
-       $this->titulo = $titulo;
-       $this->id_propiedad = $id_propiedad;
+    public function mount(...$argumentos){
+       switch ($argumentos[0]) {
+         case 0: 
+            $this->tipo = $argumentos[0];
+            $this->titulo = $argumentos[1];
+            break;
+         case 1: 
+            $this->tipo = $argumentos[0];
+            $this->id_ofrecimiento = $argumentos[1];
+            $this->id_ciudad = $argumentos[2];
+            $this->id_localizacion = $argumentos[3];
+            $this->titulo = $argumentos[4];
+            break;
+        case 2: 
+            $this->tipo = $argumentos[0];
+            $this->titulo = $argumentos[1];
+            $this->id_propiedad = $argumentos[2];
+            break;
+       }
        $this->render();
     }
 
@@ -74,9 +88,9 @@ class ThumbsPhotos extends Component
                 ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                 ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
                 ->join('ofrecimientos','ofrecimientos.id_ofrecimiento','=','precios_casas.id_ofrecimiento')
-                ->where([['precios_casas.id_ofrecimiento','=',$this->ofrecimiento],
-                        ['localizaciones.id_ciudad','=',$this->ciudad],
-                        ['localizaciones.id_localizacion','=',$this->localizacion],
+                ->where([['precios_casas.id_ofrecimiento','=',$this->id_ofrecimiento],
+                        ['localizaciones.id_ciudad','=',$this->id_ciudad],
+                        ['localizaciones.id_localizacion','=',$this->id_localizacion],
                     ['fotos_casas.es_principal','=',1],
                     ['casas.disponibilidad','=',1]])
                 ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
@@ -103,7 +117,34 @@ class ThumbsPhotos extends Component
                                'casas.piscina','casas.cuartoDomestica','casas.bano_social',
                                 'recursos.recurso','ofrecimientos.ofrecimiento','duraciones.duracion',
                                 'precios_casas.valor','ofrecimientos.id_ofrecimiento','duraciones.id_duracion',
-                                'recursos.id_recurso')->get();
+                                'recursos.id_recurso',DB::raw("CONCAT(agentes.nombre,' ',agentes.apellidos) as nombre_agente"),
+                                'agentes.cel1','agentes.cel2','agentes.email','agentes.foto_agente',
+                                'casas.aires_acondicionado','casas.abanicos_techo','casas.agua_caliente','casas.tanque_agua',
+                                'casas.sistema_seguridad')->get();
+
+            case 3: // llamado del formulario detallado.
+       
+                return DB::table('casas')
+                ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
+                ->join('ciudades','ciudades.id_ciudad','=','localizaciones.id_ciudad')
+                ->join('recursos','recursos.id_recurso','=','precios_casas.id_recurso')
+                ->join('duraciones','duraciones.id_duracion','=','precios_casas.id_duracion')
+                ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
+                ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
+                ->join('ofrecimientos','ofrecimientos.id_ofrecimiento','=','precios_casas.id_ofrecimiento')
+                ->where([['precios_casas.id_recurso','=',$this->id_recurso],
+                        ['localizaciones.id_ciudad','=',$this->id_ciudad],
+                        ['precios_casas.id_duracion','=',$this->id_duracion],
+                    ['fotos_casas.es_principal','=',1],
+
+                    ['casas.habitaciones','=',1],
+
+                    ['casas.disponibilidad','=',1]])
+                ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
+                        'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto')
+                ->groupBy('casas.casaNumero')->get();
+
+                break;
 
         }
     }

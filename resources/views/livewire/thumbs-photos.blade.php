@@ -1,8 +1,8 @@
  
  <div class="col-lg-8">
         
-        <div class="row" style="background-color:#000;">
-            <p style="text-align:center;color:white"><strong> {{$titulo}}</strong> </p>
+        <div id="title_page_left_container" class="row">
+            <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
         </div>
         <div class="row">
             <div class="col-4" style="background-color:antiquewhite; padding:5px">
@@ -83,15 +83,23 @@
                     </tr>
                     <tr>
                         <td>Baño social: {{ $imagenes_casas[0]->bano_social?'Si':'No' }}</td>
+                        <td>Aires Acond: {{ $imagenes_casas[0]->aires_acondicionado}}</td>
                     </tr>
                     <tr>
                         <td>Cuarto Doméstica: {{ $imagenes_casas[0]->cuartoDomestica?'Si':'No' }}</td>
+                        <td>Abanicos: {{ $imagenes_casas[0]->abanicos_techo}}</td>
                     </tr>
                     <tr>
                         <td>Garage: {{ $imagenes_casas[0]->garage }}</td>
+                        <td>Agua Caliente: {{ $imagenes_casas[0]->agua_caliente?'Si':'No' }}</td>
                     </tr>
                     <tr>
                         <td>Piscina: {{ $imagenes_casas[0]->piscina?'Si':'No' }}</td>
+                        <td>Tanque Agua: {{ $imagenes_casas[0]->tanque_agua?'Si':'No' }}</td>
+                    <tr>
+
+                    <tr>
+                        <td>Sist. Seguridad: {{ $imagenes_casas[0]->sistema_seguridad?'Si':'No' }}</td>
                     <tr>
                     </tbody>
                     </table>
@@ -108,8 +116,8 @@
                             <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">OFRECIMIENTO</th>
-                                    <th scope="col">DURACION</th>
+                                    <th scope="col">OFRECE</th>
+                                    <th scope="col">CONTRATO</th>
                                     <th scope="col">RECURSO</th>
                                     <th scope="col">PRECIO</th>
                                 </tr>
@@ -122,13 +130,41 @@
                                         <td>{{ $imagen_casa->ofrecimiento}}</td>
                                         <td>{{ $imagen_casa->duracion}}</td>
                                         <td>{{ $imagen_casa->recurso}}</td>
-                                        <td>{{ $imagen_casa->valor}}</td>
+                                        <td>{{ 'US$ ' . number_format($imagen_casa->valor)}}</td>
                                     </tr>
                                 @endif
                             @endforeach
                             </tbody>
                             </table>
                         </div>
+                    </div>
+
+                     <!-- Agente Inmobiliario -->
+
+                    <div class="card mt-3 mb-3">
+                    <div class="card-header">
+                      <strong>Agente Inmobiliario</strong>
+                    </div>
+                    <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                
+                    <tbody>
+                        <tr>
+                            <img src="{{asset('storage/agentes/'. $imagenes_casas[0]->foto_agente)}}">
+                        </tr>
+                    <tr>
+                        <td>Nombre: {{ $imagenes_casas[0]->nombre_agente}}</td>
+
+                        <td>Celular Tigo: {{ $imagenes_casas[0]->cel1}} </td>
+                    </tr>
+                    <tr>
+                       <td> Celular Claro: {{ $imagenes_casas[0]->cel2}}</td>
+
+                       <td> Email: {{ $imagenes_casas[0]->email}}</td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    </div>
                     </div>
                 @endif
                         

@@ -66,14 +66,18 @@ class casaController extends Controller
         casa::validar($request);
         $creationData = $request->only(["id_agente","id_tipo","id_localizacion","casaNumero","area_construccion",
                         "area_terreno","plantas","garage","habitaciones","banos","bano_social","cuartoDomestica","piscina",
-                        "apartamento","destacado","disponibilidad","ano_construccion"]);
-                        print_r($creationData);
+                        "apartamento","destacado","disponibilidad","ano_construccion","aires_acondicionado",
+                        "abanicos_techo"]);
         $creationData['piscina'] = $request->input('piscina')?1:0;
         $creationData['apartamento'] = $request->input('apartamento')?1:0;
         $creationData['bano_social'] = $request->input('bano_social')?1:0;
         $creationData['cuartoDomestica'] = $request->input('cuartoDomestica')?1:0;
         $creationData['disponibilidad'] = $request->input('disponibilidad')?1:0;
         $creationData['destacado'] = $request->input('destacado')?1:0;
+
+        $creationData['destacado'] = $request->input('agua_caliente')?1:0;
+        $creationData['destacado'] = $request->input('tanque_agua')?1:0;
+        $creationData['destacado'] = $request->input('sistema_seguridad')?1:0;
         casa::create($creationData);
         
         return redirect()->route('admin.casaForm.index');
@@ -123,6 +127,10 @@ class casaController extends Controller
         $updateData['cuartoDomestica'] = $request->input('cuartoDomestica')?1:0;
         $updateData['disponibilidad'] = $request->input('disponibilidad')?1:0;
         $updateData['destacado'] = $request->input('destacado')?1:0;
+
+        $updateData['agua_caliente'] = $request->input('agua_caliente')?1:0;
+        $updateData['tanque_agua'] = $request->input('tanque_agua')?1:0;
+        $updateData['sistema_seguridad'] = $request->input('sistema_seguridad')?1:0;
         
         if ($casa->update($updateData)) {
             return redirect()->route('admin.casaForm.index');
