@@ -19,14 +19,11 @@ class ThumbsPhotos extends Component
     public $arrayProp = [];
     public $arrayPrecio = [];
 
-    public $id_ofrecimiento = '';
-    public $id_ciudad = '';
-    public $id_localizacion = '';
-    public $id_recurso = '';
-    public $id_duracion = '';
-    public $id_propiedad = 0;
-    public $tipo = '';
-    public $titulo = '';
+    public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
+           $id_propiedad = 0,$tipo = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',
+           $abanicos_techo='',$precio_minimo=0,$precio_maximo=0,$agua_caliente='',$tanque_agua='',
+           $sistema_seguridad='',$cuartoDomestica='',$piscina='';
+
 
     public function mount(...$argumentos){
        switch ($argumentos[0]) {
@@ -46,6 +43,23 @@ class ThumbsPhotos extends Component
             $this->titulo = $argumentos[1];
             $this->id_propiedad = $argumentos[2];
             break;
+        case 3:
+            $this->tipo = $argumentos[0];
+            $this->titulo = $argumentos[1];
+            $this->id_ciudad = $argumentos[2];
+            $this->id_recurso = $argumentos[3];
+            $this->id_duracion = $argumentos[4];
+            $this->habitaciones = $argumentos[5];
+            $this->banos = $argumentos[6];
+            $this->aires_acondicionado = $argumentos[7];
+            $this->abanicos_techo = $argumentos[8];
+            $this->precio_minimo = $argumentos[9];
+            $this->precio_maximo = $argumentos[10];
+            $this->agua_caliente = $argumentos[11]?['casas.agua_caliente','=',1]:['casas.disponibilidad','=',1];
+            $this->tanque_agua = $argumentos[12]?['casas.tanque_agua','=',1]:['casas.disponibilidad','=',1];
+            $this->sistema_seguridad = $argumentos[13]?['casas.sistema_seguridad','=',1]:['casas.disponibilidad','=',1];
+            $this->cuartoDomestica = $argumentos[14]?['casas.cuartoDomestica','=',1]:['casas.disponibilidad','=',1];
+            $this->piscina = $argumentos[15]?['casas.piscina','=',1]:['casas.disponibilidad','=',1];
        }
        $this->render();
     }
@@ -127,18 +141,26 @@ class ThumbsPhotos extends Component
                 return DB::table('casas')
                 ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
                 ->join('ciudades','ciudades.id_ciudad','=','localizaciones.id_ciudad')
-                ->join('recursos','recursos.id_recurso','=','precios_casas.id_recurso')
+                ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
                 ->join('duraciones','duraciones.id_duracion','=','precios_casas.id_duracion')
                 ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
-                ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
                 ->join('ofrecimientos','ofrecimientos.id_ofrecimiento','=','precios_casas.id_ofrecimiento')
-                ->where([['precios_casas.id_recurso','=',$this->id_recurso],
+                ->join('recursos','recursos.id_recurso','=','precios_casas.id_recurso')
+                ->where([['recursos.id_recurso','=',$this->id_recurso],
                         ['localizaciones.id_ciudad','=',$this->id_ciudad],
                         ['precios_casas.id_duracion','=',$this->id_duracion],
                     ['fotos_casas.es_principal','=',1],
-
-                    ['casas.habitaciones','=',1],
-
+                    ['casas.habitaciones','>=',$this->habitaciones],
+                    ['casas.banos','>=',$this->banos],
+                    ['casas.aires_acondicionado','>=',$this->aires_acondicionado],
+                    ['casas.abanicos_techo','>=',$this->abanicos_techo],
+                    [$this->agua_caliente[0],$this->agua_caliente[1],$this->agua_caliente[2]],
+                    [$this->tanque_agua[0],$this->tanque_agua[1],$this->tanque_agua[2]],
+                    [$this->sistema_seguridad[0],$this->sistema_seguridad[1],$this->sistema_seguridad[2]],
+                    [$this->cuartoDomestica[0],$this->cuartoDomestica[1],$this->cuartoDomestica[2]],
+                    [$this->piscina[0],$this->piscina[1],$this->piscina[2]],
+                    ['precios_casas.valor','>=',$this->precio_minimo],
+                    ['precios_casas.valor','<=',$this->precio_maximo],
                     ['casas.disponibilidad','=',1]])
                 ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto')

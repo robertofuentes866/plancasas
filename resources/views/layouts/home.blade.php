@@ -10,6 +10,19 @@
     <title>@yield('mainTitle','Plancasas Bienes Raices')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
     @livewireStyles
+    <script>
+        function changeValueRange1(val){
+            document.getElementById("Range1Val").innerHTML='US$ '+val;
+            document.getElementById("Range2").min =val;
+        }
+
+        function changeValueRange2(val){
+            if (document.getElementById("Range1Val").nodeValue < val) {
+                 document.getElementById("Range2Val").innerHTML='US$ '+val;
+            }
+        }
+    </script>
+
 </head>
 <body>
 <div class="row">

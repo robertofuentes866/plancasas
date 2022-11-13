@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 @else
-                <div class="alert alert-success" role="alert">{{"No hay propiedades destacadas"}} </div>
+                <div class="alert alert-success" role="alert">{{$piscina?1:0 || 1!=1 }} </div>
                 <div class="alert alert-success" role="alert">{{"No hay propiedades destacadas"}} </div>
                 @endif
 
