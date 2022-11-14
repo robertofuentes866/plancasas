@@ -9,31 +9,62 @@
                 
                 <?php $comillas = '"'; ?>
                 @if(count($imagenes_casas))
-                    
-                    <div class="row row-cols-2" style="border:2px solid  #000 ;background-color:white; margin-left:5px;margin-right:2px">
-                            @foreach($imagenes_casas as $imagen_casa)
-                        
-                            @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
-                                    <figure wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
-                                            {{$comillas.$imagen_casa->descripcion.$comillas}},
-                                            {{$comillas.$imagen_casa->residencial.$comillas}},
-                                            {{$comillas.$imagen_casa->casaNumero.$comillas}},
-                                            {{$comillas.$imagen_casa->id_casa.$comillas}},
-                                            {{$comillas.$imagen_casa->leyenda.$comillas}} )"> 
-                                        <img class="img-thumbnail" style="padding: 5px"
-                                            src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
-                                            alt="Sierras Doradas" width="84" height="54">
-                                        <figcaption> {{$imagen_casa->leyenda}} </figcaption>
-                                    </figure>
-                            @endif 
-                            @endforeach
+                    <!-- Destacados en thumbnail-->
+                    <div class="card text-black bg-light mb-3 mt-2 mx-auto"> 
+                        <div class="card-header" style="text-align:center"><strong>{{$titulo_thumbnail}}</strong></div>
+                            <div class="card-body">
+                                <div id="container_destacados" class="row row-cols-2">
+                                        @foreach($imagenes_casas as $imagen_casa) 
+                                             
+                                            @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
+                                                    <figure wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
+                                                            {{$comillas.$imagen_casa->descripcion.$comillas}},
+                                                            {{$comillas.$imagen_casa->residencial.$comillas}},
+                                                            {{$comillas.$imagen_casa->casaNumero.$comillas}},
+                                                            {{$comillas.$imagen_casa->id_casa.$comillas}},
+                                                            {{$comillas.$imagen_casa->leyenda.$comillas}} )"> 
+                                                        <img class="img-thumbnail" style="padding: 5px"
+                                                            src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
+                                                            alt="Sierras Doradas" width="84" height="54">
+                                                        <figcaption> {{$imagen_casa->leyenda}} </figcaption>
+                                                    </figure>
+                                            @endif 
+                                        @endforeach
+                                    
+                                </div>
+                            </div>
+                         
+                    </div>  
+                    <!-- Favoritos thumbnails-->
+                    <div class="card text-black bg-light mb-3 mt-2 mx-auto">
+                        <div class="card-header" style="text-align:center"><strong>Mis Favoritos </strong></div>
+                            <div class="card-body">
+                                <div id="container_favoritos" class="row row-cols-2"> <!-- favoritos-->
+                                    
+                                    @foreach($favoritos_casas as $favorito_casa) 
+                                        @if (! propiedadIncluida($favorito_casa->id_casa,$favorito_casa->id_foto,$arrayFav))
+                                            <figure wire:click="selectNormalImagen({{$comillas.$favorito_casa->foto_normal.$comillas}},
+                                                    {{$comillas.$favorito_casa->descripcion.$comillas}},
+                                                    {{$comillas.$favorito_casa->residencial.$comillas}},
+                                                    {{$comillas.$favorito_casa->casaNumero.$comillas}},
+                                                    {{$comillas.$favorito_casa->id_casa.$comillas}},
+                                                    {{$comillas.$favorito_casa->leyenda.$comillas}} )"> 
+                                                <img class="img-thumbnail" style="padding: 5px"
+                                                    src="{{asset('storage/propiedades/'.$favorito_casa->foto_thumb)}}" 
+                                                    alt="Sierras Doradas" width="84" height="54">
+                                                <figcaption> {{$favorito_casa->leyenda}} </figcaption>
+                                            </figure>
+                                        @endif 
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
                 @else
                  
                 @endif
-            
-            </div>
-    
+
             <div class="col-8 mt-1" style="background-color:antiquewhite">
                 
                 @if(count($imagenes_casas))   
@@ -46,13 +77,15 @@
 
                             <a href="{{route('menu.inicio',['gestion'=>2,'id_propiedad'=>$id_propiedad])}}" class="btn btn-primary">Mas detalles...</a>
                             @else
-                            <h5 class="card-title">{{$leyenda. ' en '. $casaNumero}}</h5>
+                            <p class="card-title">
+                            <button data-toggle="tooltip" data-placement="bottom" title="{{buscarFavorito($id_propiedad,1)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}" type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" name="buscarFavoritos" id="buscarFavoritos" class="btn {{buscarFavorito($id_propiedad,1)?'btn-danger':'btn-secondary'}}"><i class="bi bi-house-fill"></i></button>
+                            <strong>{{$leyenda. ' en '. $casaNumero}}</strong>
+                            </p>
                             @endif
                         </div>
                     </div>
                 @else
-                <div class="alert alert-success" role="alert">{{$piscina?1:0 || 1!=1 }} </div>
-                <div class="alert alert-success" role="alert">{{"No hay propiedades destacadas"}} </div>
+                    <div class="alert alert-success" role="alert">{{"No hay propiedades destacadas"}} </div>
                 @endif
 
                 <!-- Características de la casa -->
@@ -169,6 +202,6 @@
                 @endif
                         
             </div>
-        </div> 
-</div>
+        </div>
 
+</div>

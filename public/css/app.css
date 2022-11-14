@@ -70,3 +70,19 @@ legend {
     border-bottom: 0.5px solid;
     text-align: left;
 }
+
+#container_favoritos,#container_destacados{
+    border:2px solid  #000 ;
+    background-color:white;
+    margin-left:5px;
+    margin-right:2px
+
+}
+#container_favoritos {
+    margin-top:10px;
+}
+
+#buscarFavoritos{
+    margin-left: 5px;
+    margin-right: 5px;
+}

@@ -101,13 +101,13 @@
 
                 <label for="Range1" class="form-label">Precio mínimo</label>
                 <span id="Range1Val" style="color:red;"></span>
-                <input type="range" name="precio_minimo" min="0" max="5000" step="100" class="form-range" id="Range1"
-                  oninput=changeValueRange1(this.value)>
+                <input type="range" value="100" name="precio_minimo" min="0" max="5000" step="100" class="form-range" id="Range1"
+                  oninput=changeValueRange1(this.value) onload="changeValueRange1('100')">
 
                 <label for="Range2" class="form-label">Precio máximo</label>
                 <span id="Range2Val" style="color:red;"></span>
-                <input type="range" name="precio_maximo" min="0" max="5000" step="100" class="form-range" id="Range2"
-                  oninput="changeValueRange2(this.value)">
+                <input type="range" value="500" name="precio_maximo" min="0" max="5000" step="100" class="form-range" id="Range2"
+                  oninput="changeValueRange2(this.value)" onload="changeValueRange2('500')">
          
             </div>
         <fieldset> 

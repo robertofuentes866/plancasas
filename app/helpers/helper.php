@@ -26,3 +26,9 @@ function precioIncluido($id_casa,$id_ofr,$id_dur,$id_rec,&$arrayProp) {
         return true;
     }
 }
+
+function buscarFavorito($id_casa,$id_usuario) {
+    return count(DB::table('favoritos_casas')->where([['favoritos_casas.id_casa','=',$id_casa],
+                            ['favoritos_casas.id_usuario','=',$id_usuario]])->get());
+}
+

@@ -17,7 +17,10 @@ class ThumbsPhotos extends Component
     public $leyenda = '';
     public $contador = 0;
     public $arrayProp = [];
+    public $arrayFav = [];
     public $arrayPrecio = [];
+    public $id_usuario = 1;
+    public $titulo_thumbnail = '';
 
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
            $id_propiedad = 0,$tipo = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',
@@ -27,23 +30,26 @@ class ThumbsPhotos extends Component
 
     public function mount(...$argumentos){
        switch ($argumentos[0]) {
-         case 0: 
+         case 0: // propiedades destacadas
             $this->tipo = $argumentos[0];
             $this->titulo = $argumentos[1];
+            $this->titulo_thumbnail = "Destacadas";
             break;
-         case 1: 
+         case 1: // llamada del formulario principal.
             $this->tipo = $argumentos[0];
             $this->id_ofrecimiento = $argumentos[1];
             $this->id_ciudad = $argumentos[2];
             $this->id_localizacion = $argumentos[3];
             $this->titulo = $argumentos[4];
+            $this->titulo_thumbnail = "Resultado busqueda";
             break;
-        case 2: 
+        case 2: // propiedad seleccionada clicando thumbnail.
             $this->tipo = $argumentos[0];
             $this->titulo = $argumentos[1];
             $this->id_propiedad = $argumentos[2];
+            $this->titulo_thumbnail = "Ambientes";
             break;
-        case 3:
+        case 3:  // llamada del formulario detallado.
             $this->tipo = $argumentos[0];
             $this->titulo = $argumentos[1];
             $this->id_ciudad = $argumentos[2];
@@ -60,6 +66,7 @@ class ThumbsPhotos extends Component
             $this->sistema_seguridad = $argumentos[13]?['casas.sistema_seguridad','=',1]:['casas.disponibilidad','=',1];
             $this->cuartoDomestica = $argumentos[14]?['casas.cuartoDomestica','=',1]:['casas.disponibilidad','=',1];
             $this->piscina = $argumentos[15]?['casas.piscina','=',1]:['casas.disponibilidad','=',1];
+            $this->titulo_thumbnail = "Resultado busqueda";
        }
        $this->render();
     }
@@ -68,6 +75,7 @@ class ThumbsPhotos extends Component
     public function render() {
        
         $imagenes_casas = $this->get_casas();
+        $favoritos_casas = $this->get_favoritos_casas();
         if (!$this->contador && count($imagenes_casas)) {
             $this->contador++;
 
@@ -78,7 +86,8 @@ class ThumbsPhotos extends Component
             $this->id_propiedad = $imagenes_casas[0]->id_casa;
             $this->leyenda = $imagenes_casas[0]->leyenda;
          }
-        return view('livewire.thumbs-photos')->with('imagenes_casas',$imagenes_casas);                                  
+        return view('livewire.thumbs-photos')->with('imagenes_casas',$imagenes_casas)
+                                            ->with('favoritos_casas',$favoritos_casas);                                  
     }
 
     private function get_casas() {
@@ -178,5 +187,43 @@ class ThumbsPhotos extends Component
         $this->residencial = $residencial;
         $this->casaNumero = $casaNumero;
         $this->leyenda = $leyenda;
+    }
+
+    public function accionFavorito($id) {
+        $hallo = $this->buscarFavorito($id);
+        if ($hallo) {   //borrar Favorito.
+            $result = $this->borrarFavorito($id);
+        } else {  // registrar Favorito.
+            $result = $this->insertarFavorito($id);
+        }
+    }
+
+    public function buscarFavorito($id_casa) {
+        return count(DB::table('favoritos_casas')->where([['favoritos_casas.id_casa','=',$id_casa],
+                                ['favoritos_casas.id_usuario','=',$this->id_usuario]])->get());
+    }
+    
+    private function borrarFavorito($id_casa) {
+        return DB::table('favoritos_casas')->where([['favoritos_casas.id_casa','=',$id_casa],
+                                    ['favoritos_casas.id_usuario','=',$this->id_usuario]])->delete();
+    }
+
+    private function insertarFavorito($id_casa){
+        return DB::table('favoritos_casas')->insert(
+            array('id_casa' => $id_casa, 'id_usuario' => 1));
+        
+    }
+
+    private function get_favoritos_casas(){
+        return DB::table('favoritos_casas')
+                ->join('casas','casas.id_casa','=','favoritos_casas.id_casa')
+                ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
+                ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
+                ->where([['casas.disponibilidad','=',1],
+                            ['fotos_casas.es_principal','=',1],
+                            ['favoritos_casas.id_usuario','=',$this->id_usuario]])
+                ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'fotos_casas.foto_thumb',
+                            'fotos_casas.foto_normal','fotos_casas.id_foto','localizaciones.descripcion',
+                            'casas.id_casa','casas.casaNumero','localizaciones.residencial')->get();
     }
 }
