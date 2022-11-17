@@ -22,6 +22,10 @@ use Laravel\Sanctum\Sanctum;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/lixo',function(){
+   return view('lixo');
+   
+});
 
 Route::get('/','App\Http\Controllers\menuController@indexacion');
 

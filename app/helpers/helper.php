@@ -32,3 +32,7 @@ function buscarFavorito($id_casa,$id_usuario) {
                             ['favoritos_casas.id_usuario','=',$id_usuario]])->get());
 }
 
+function incrementaIndice(&$i) {
+    return $i++;
+}
+

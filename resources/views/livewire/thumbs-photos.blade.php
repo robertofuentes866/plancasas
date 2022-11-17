@@ -5,39 +5,70 @@
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
         </div>
         <div class="row">
-            <div class="col-4" style="background-color:antiquewhite; padding:5px">
+            <div class="col-4" style="background-color:antiquewhite;"> <!-- Columna thumbnails -->
                 
                 <?php $comillas = '"'; ?>
                 @if(count($imagenes_casas))
                     <!-- Destacados en thumbnail-->
                     <div class="card text-black bg-light mb-3 mt-2 mx-auto"> 
-                        <div class="card-header" style="text-align:center"><strong>{{$titulo_thumbnail}}</strong></div>
+                        <div class="card-header" style="text-align:center">
+                           <strong>{{$titulo_thumbnail}}</strong>
+                        </div>
                             <div class="card-body">
                                 <div id="container_destacados" class="row row-cols-2">
-                                        @foreach($imagenes_casas as $imagen_casa) 
-                                             
-                                            @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
-                                                    <figure wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
-                                                            {{$comillas.$imagen_casa->descripcion.$comillas}},
-                                                            {{$comillas.$imagen_casa->residencial.$comillas}},
-                                                            {{$comillas.$imagen_casa->casaNumero.$comillas}},
-                                                            {{$comillas.$imagen_casa->id_casa.$comillas}},
-                                                            {{$comillas.$imagen_casa->leyenda.$comillas}} )"> 
-                                                        <img class="img-thumbnail" style="padding: 5px"
-                                                            src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
-                                                            alt="Sierras Doradas" width="84" height="54">
-                                                        <figcaption> {{$imagen_casa->leyenda}} </figcaption>
-                                                    </figure>
-                                            @endif 
-                                        @endforeach
-                                    
-                                </div>
-                            </div>
-                         
-                    </div>  
+
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
+                                        <div class="carousel-indicators">
+                                            <button type="button" data-target="#carouselExampleIndicators" data-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                            <button type="button" data-target="#carouselExampleIndicators" data-slide-to="1" aria-label="Slide 2"></button>
+                        
+                                        </div>
+                                        <div class="carousel-inner">
+                                                                       
+                                            @foreach($imagenes_casas as $imagen_casa)
+                                                @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
+                                                        @if (!($i % 4))
+                                                        <!-- <div class="carousel-item {{$i==0?'active':''}}"> -->
+                                                        @endif  
+                                                        <?php incrementaIndice($i) ?>
+                                                        <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
+                                                                {{$comillas.$imagen_casa->descripcion.$comillas}},
+                                                                {{$comillas.$imagen_casa->residencial.$comillas}},
+                                                                {{$comillas.$imagen_casa->casaNumero.$comillas}},
+                                                                {{$comillas.$imagen_casa->id_casa.$comillas}},
+                                                                {{$comillas.$imagen_casa->leyenda.$comillas}} )"> 
+                                                            <img class="img-thumbnail" 
+                                                                src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
+                                                                alt=" " width="84" height="54">
+                                                            <figcaption> {{$imagen_casa->leyenda.'-'.$imagenes_casas->count().'-'.$i}} </figcaption>
+                                                        </figure>
+                                                        @if ((!($i % 4)) or ($i+1 >= $imagenes_casas->count() - count($arrayProp)))
+                                                        <!--</div>  -->
+                                                        @endif
+                                                   
+                                                @endif 
+                                                
+                                            @endforeach
+                                        </div> <!-- End Inner --> 
+                                        <button class="carousel-control-prev bg-dark" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next bg-dark" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+
+                                    </div> <!-- End Main Carousel -->
+                                </div>  <!-- End Destacados -->
+                            </div> <!-- End Card Body -->
+
+                    </div> <!-- End Card text-black -->
                     <!-- Favoritos thumbnails-->
                     <div class="card text-black bg-light mb-3 mt-2 mx-auto">
-                        <div class="card-header" style="text-align:center"><strong>Mis Favoritos </strong></div>
+                        <div class="card-header" style="text-align:center">
+                            <strong>Mis Favoritos </strong>
+                        </div>
                             <div class="card-body">
                                 <div id="container_favoritos" class="row row-cols-2"> <!-- favoritos-->
                                     
@@ -58,14 +89,14 @@
                                     @endforeach
                                 </div>
                             </div>
-                        </div>
                     </div>
+                    
                     
                 @else
                  
                 @endif
-
-            <div class="col-8 mt-1" style="background-color:antiquewhite">
+            </div>  <!-- PRUEBA -->
+            <div class="col-8 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
                 
                 @if(count($imagenes_casas))   
                     <div class="card">
@@ -202,6 +233,6 @@
                 @endif
                         
             </div>
-        </div>
+        </div>  <!-- End Row -->
 
-</div>
+</div> <!-- End Columna 8 de derecha.

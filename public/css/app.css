@@ -74,9 +74,7 @@ legend {
 #container_favoritos,#container_destacados{
     border:2px solid  #000 ;
     background-color:white;
-    margin-left:5px;
-    margin-right:2px
-
+   
 }
 #container_favoritos {
     margin-top:10px;

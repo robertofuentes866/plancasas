@@ -21,6 +21,8 @@ class ThumbsPhotos extends Component
     public $arrayPrecio = [];
     public $id_usuario = 1;
     public $titulo_thumbnail = '';
+    public $i = 0;
+
 
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
            $id_propiedad = 0,$tipo = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',
@@ -29,6 +31,7 @@ class ThumbsPhotos extends Component
 
 
     public function mount(...$argumentos){
+       
        switch ($argumentos[0]) {
          case 0: // propiedades destacadas
             $this->tipo = $argumentos[0];
