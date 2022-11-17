@@ -28,6 +28,10 @@
                  document.getElementById("Range2Val").innerHTML='US$ '+val;
             }
         }
+
+        function habilitaSubmitButton(){
+           document.getElementById('localizacion').disabled = false;
+        }
     </script>
     
 </head>

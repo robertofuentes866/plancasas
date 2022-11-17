@@ -22,6 +22,7 @@ class ThumbsPhotos extends Component
     public $id_usuario = 1;
     public $titulo_thumbnail = '';
     public $i = 0;
+    public $i_total = 0;
 
 
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',

@@ -10,26 +10,24 @@
                 <?php $comillas = '"'; ?>
                 @if(count($imagenes_casas))
                     <!-- Destacados en thumbnail-->
-                    <div class="card text-black bg-light mb-3 mt-2 mx-auto"> 
-                        <div class="card-header" style="text-align:center">
+                    <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
+                        <div class="card-header text-white" style="text-align:center">
                            <strong>{{$titulo_thumbnail}}</strong>
                         </div>
-                            <div class="card-body">
-                                <div id="container_destacados" class="row row-cols-2">
+                            <div class="card-body bg-light px-0">
 
                                     <div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
-                                        <div class="carousel-indicators">
-                                            <button type="button" data-target="#carouselExampleIndicators" data-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                            <button type="button" data-target="#carouselExampleIndicators" data-slide-to="1" aria-label="Slide 2"></button>
-                        
-                                        </div>
+                                        
                                         <div class="carousel-inner">
                                                                        
                                             @foreach($imagenes_casas as $imagen_casa)
+                                                <?php incrementaIndice($i_total)?>
+                                                @if (!($i % 4))
+                                                <div class="carousel-item {{$i==0?'active ':''}} row row-cols-2">
+                                                  
+                                                @endif  
                                                 @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
-                                                        @if (!($i % 4))
-                                                        <!-- <div class="carousel-item {{$i==0?'active':''}}"> -->
-                                                        @endif  
+                                                        <div class="col" style=" float:right; height:120px;">
                                                         <?php incrementaIndice($i) ?>
                                                         <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
                                                                 {{$comillas.$imagen_casa->descripcion.$comillas}},
@@ -40,36 +38,35 @@
                                                             <img class="img-thumbnail" 
                                                                 src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
                                                                 alt=" " width="84" height="54">
-                                                            <figcaption> {{$imagen_casa->leyenda.'-'.$imagenes_casas->count().'-'.$i}} </figcaption>
+                                                            <figcaption> {{$imagen_casa->leyenda}} </figcaption>
                                                         </figure>
-                                                        @if ((!($i % 4)) or ($i+1 >= $imagenes_casas->count() - count($arrayProp)))
-                                                        <!--</div>  -->
-                                                        @endif
-                                                   
+                                                        </div>
                                                 @endif 
-                                                
+                                                @if ( (!($i % 4)) or ($i_total >= $imagenes_casas->count()) )
+                                                </div> 
+                                                @endif
                                             @endforeach
                                         </div> <!-- End Inner --> 
-                                        <button class="carousel-control-prev bg-dark" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+                                        <button class="carousel-control-prev bg-dark ml-0" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Previous</span>
                                         </button>
-                                        <button class="carousel-control-next bg-dark" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+                                        <button class="carousel-control-next bg-dark mr-0" type="button" data-target="#carouselExampleIndicators" data-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Next</span>
                                         </button>
 
                                     </div> <!-- End Main Carousel -->
-                                </div>  <!-- End Destacados -->
+                            
                             </div> <!-- End Card Body -->
 
-                    </div> <!-- End Card text-black -->
+                    </div> <!-- End Card text-black de Destacados o Ambientes thumbnails-->
                     <!-- Favoritos thumbnails-->
-                    <div class="card text-black bg-light mb-3 mt-2 mx-auto">
-                        <div class="card-header" style="text-align:center">
+                    <div class="card text-black bg-dark mb-3 mt-2 mx-auto">
+                        <div class="card-header text-white" style="text-align:center">
                             <strong>Mis Favoritos </strong>
                         </div>
-                            <div class="card-body">
+                            <div class="card-body bg-light">
                                 <div id="container_favoritos" class="row row-cols-2"> <!-- favoritos-->
                                     
                                     @foreach($favoritos_casas as $favorito_casa) 
@@ -95,7 +92,8 @@
                 @else
                  
                 @endif
-            </div>  <!-- PRUEBA -->
+            </div>  <!-- End container de los 2 grupos de thumbnails: Destacados y Favoritos -->
+
             <div class="col-8 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
                 
                 @if(count($imagenes_casas))   

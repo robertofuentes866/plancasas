@@ -71,13 +71,11 @@ legend {
     text-align: left;
 }
 
-#container_favoritos,#container_destacados{
+#container_favoritos{
     border:2px solid  #000 ;
     background-color:white;
-   
-}
-#container_favoritos {
     margin-top:10px;
+   
 }
 
 #buscarFavoritos{

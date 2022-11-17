@@ -41,7 +41,7 @@
                
             <div class="form-group row my-3">
                 <div class="col-sm-10">
-                    <button type="submit" name="submit" class="btn btn-secondary">Buscar</button>
+                    <button disabled type="submit" name="submit" class="btn btn-secondary">Buscar</button>
                 </div>
             </div>
     </form>
