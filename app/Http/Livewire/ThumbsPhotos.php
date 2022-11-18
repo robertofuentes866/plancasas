@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 
 use Illuminate\Support\Facades\DB;
+use Orchid\Support\Facades\Toast;
 
 
 class ThumbsPhotos extends Component
@@ -80,18 +81,21 @@ class ThumbsPhotos extends Component
        
         $imagenes_casas = $this->get_casas();
         $favoritos_casas = $this->get_favoritos_casas();
-        if (!$this->contador && count($imagenes_casas)) {
+        if (!$this->contador && ($imagenes_casas->count() || $favoritos_casas->count())) {
             $this->contador++;
 
-            $this->fotoNormal = $imagenes_casas[0]->foto_normal;
-            $this->descripcion = $imagenes_casas[0]->descripcion;
-            $this->residencial = $imagenes_casas[0]->residencial;
-            $this->casaNumero = $imagenes_casas[0]->casaNumero;
-            $this->id_propiedad = $imagenes_casas[0]->id_casa;
-            $this->leyenda = $imagenes_casas[0]->leyenda;
+            $this->fotoNormal = $imagenes_casas[0]->foto_normal??$favoritos_casas[0]->foto_normal??'';
+            $this->descripcion = $imagenes_casas[0]->descripcion??$favoritos_casas[0]->descripcion??'';
+            $this->residencial = $imagenes_casas[0]->residencial??$favoritos_casas[0]->residencial??'';
+            $this->casaNumero = $imagenes_casas[0]->casaNumero??$favoritos_casas[0]->casaNumero??'';
+            $this->id_propiedad = $imagenes_casas[0]->id_casa??$favoritos_casas[0]->id_casa??'';
+            $this->leyenda = $imagenes_casas[0]->leyenda??$favoritos_casas[0]->leyenda??'';
          }
-        return view('livewire.thumbs-photos')->with('imagenes_casas',$imagenes_casas)
-                                            ->with('favoritos_casas',$favoritos_casas);                                  
+       
+         
+            return view('livewire.thumbs-photos')->with('imagenes_casas',$imagenes_casas)
+                                            ->with('favoritos_casas',$favoritos_casas);
+                         
     }
 
     private function get_casas() {
@@ -224,8 +228,8 @@ class ThumbsPhotos extends Component
                 ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
                 ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                 ->where([['casas.disponibilidad','=',1],
-                            ['fotos_casas.es_principal','=',1],
-                            ['favoritos_casas.id_usuario','=',$this->id_usuario]])
+                         ['fotos_casas.es_principal','=',1],
+                         ['favoritos_casas.id_usuario','=',$this->id_usuario]])
                 ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'fotos_casas.foto_thumb',
                             'fotos_casas.foto_normal','fotos_casas.id_foto','localizaciones.descripcion',
                             'casas.id_casa','casas.casaNumero','localizaciones.residencial')->get();

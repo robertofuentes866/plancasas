@@ -27,7 +27,7 @@ Route::get('/lixo',function(){
    
 });
 
-Route::get('/','App\Http\Controllers\menuController@indexacion');
+Route::get('/','App\Http\Controllers\menuController@indexacion')->name('menuIndex');
 
 // prepara datos del menu de formularios.
 Route::get('/AdminForms','App\Http\Controllers\Admin\AdminFormsController@index')->name('adminForms');

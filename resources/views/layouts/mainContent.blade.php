@@ -8,7 +8,9 @@
 <div class="col-lg-4 bg-primary">  <!-- Primera columna, la del formulario -->
 
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
-    <div class="card-header" style="text-align:center"><strong>Búsqueda de Propiedad </strong></div>
+        <div class="card-header" style="text-align:center">
+            <strong>Búsqueda de Propiedad </strong>
+        </div>
     <div class="card-body">
     <form method="get" action="{{route('menu.inicio',['gestion'=>1,'id_propiedad'=>0])}}">
             @csrf
@@ -41,7 +43,7 @@
                
             <div class="form-group row my-3">
                 <div class="col-sm-10">
-                    <button disabled type="submit" name="submit" class="btn btn-secondary">Buscar</button>
+                    <button type="submit" id="submitForm1" name="submit" class="btn btn-secondary">Buscar</button>
                 </div>
             </div>
     </form>
@@ -83,7 +85,7 @@
             <div class="form-group row">
                 <label for="duracion" class="col-lg-6 col-form-label">Contrato por</label>
          
-                <select id="duracion" name="id_duracion"> 
+                <select onchange=ajustarPrecios(this.value) onloadeddata=ajustarPrecios(this.value) id="duracion" name="id_duracion"> 
                 
                         @foreach($viewData['duracion'] as $duracion)
                             <option value="{{$duracion->id_duracion}}">{{$duracion->duracion}}</option>
@@ -101,12 +103,12 @@
 
                 <label for="Range1" class="form-label">Precio mínimo</label>
                 <span id="Range1Val" style="color:red;"></span>
-                <input type="range" value="100" name="precio_minimo" min="0" max="5000" step="100" class="form-range" id="Range1"
+                <input type="range" value="100" name="precio_minimo" min="1000" max="500000" step="1000" class="form-range" id="Range1"
                   oninput=changeValueRange1(this.value) onload="changeValueRange1('100')">
 
                 <label for="Range2" class="form-label">Precio máximo</label>
                 <span id="Range2Val" style="color:red;"></span>
-                <input type="range" value="500" name="precio_maximo" min="0" max="5000" step="100" class="form-range" id="Range2"
+                <input type="range" value="500" name="precio_maximo" min="1000" max="500000" step="1000" class="form-range" id="Range2"
                   oninput="changeValueRange2(this.value)" onload="changeValueRange2('500')">
          
             </div>
@@ -132,36 +134,37 @@
                 <input name="abanicos_techo" value="0" type="number" min="0" max="25" >
             </div>
         </fieldset>
+
         <fieldset>
             <legend> Marque lo requerido</legend> 
             <div class="form-group mt-2">
                 <label class="form-check-label" for="cuartoDomestica"> Cuarto Domestica?</label>
-                <input class="form-check-input" type="checkbox" name= "cuartoDomestica" id="cuartoDomestica">
+                <input class="form-check-input ms-2" type="checkbox" name= "cuartoDomestica" id="cuartoDomestica">
 
-                <label class="form-check-label ms-3" for="piscina"> Piscina?</label>
-                <input class="form-check-input" type="checkbox" name= "piscina" id="piscina">
+                <label class="form-check-label ms-5" for="piscina"> Piscina?</label>
+                <input class="form-check-input ms-2" type="checkbox" name= "piscina" id="piscina">
                 
             </div>
 
             <div class="form-group mt-2">
                 <label class="form-check-label" for="agua_caliente"> Agua Caliente?</label>
-                <input class="form-check-input" type="checkbox" name= "agua_caliente" id="agua_caliente">
+                <input class="form-check-input ms-2" type="checkbox" name= "agua_caliente" id="agua_caliente">
 
-                <label class="form-check-label" for="tanque_agua">Tanque Agua?</label>
-                <input class="form-check-input" type="checkbox" name="tanque_agua" id="tanque_agua">
+                <label class="form-check-label ms-5" for="tanque_agua">Tanque Agua?</label>
+                <input class="form-check-input ms-2" type="checkbox" name="tanque_agua" id="tanque_agua">
                 
             </div>
 
             <div class="form-group mt-2">
                 <label class="form-check-label" for="sistema_seguridad">Sist. Seguridad?</label>
-                <input class="form-check-input" type="checkbox" name= "sistema_seguridad" id="sistema_seguridad">
+                <input class="form-check-input ms-3" type="checkbox" name= "sistema_seguridad" id="sistema_seguridad">
                 
             </div>
         </fieldset>
                
             <div class="form-group row my-3">
                 <div class="col-sm-10">
-                    <button type="submit" name="buscar" class="btn btn-secondary">Buscar</button>
+                    <button type="submit" id="submitForm2" name="buscar" class="btn btn-secondary">Buscar</button>
                 </div>
             </div>
     </form>
@@ -174,31 +177,27 @@
 @switch ($viewData['gestion']) 
  
   @case (0)    
-            @if($viewData['propiedades_destacadas'])
-              
-                @livewire('thumbs-photos',['tipo'=>0,'titulo'=>'Propiedades Destacadas'])  <!-- muestra fotos destacadas en la pagina principal  -->
-            @else
-                @livewire('imagenes-grupo')
-            @endif
+            @livewire('thumbs-photos',['tipo'=>0,'titulo'=>'Propiedades Destacadas'])  <!-- muestra fotos destacadas en la pagina principal  -->
             @break
 
   @case (1)
 
-        @livewire('thumbs-photos',['tipo'=>1,'ofrecimiento'=>$_GET['id_ofrecimiento'],'ciudad'=>$_GET['id_ciudad'],
-                                'localizacion'=>$_GET['id_localizacion'],'titulo'=>'Resultado de busqueda'])  <!-- muestra resultado del formulario en la pagina principal.  -->
+        @livewire('thumbs-photos',['tipo'=>1,'ofrecimiento'=>$_GET['id_ofrecimiento']??0,'ciudad'=>$_GET['id_ciudad']??0,
+                                'localizacion'=>$_GET['id_localizacion']??0,'titulo'=>'Resultado de busqueda'])  <!-- muestra resultado del formulario en la pagina principal.  -->
         @break
   @case (2)
     @livewire('thumbs-photos',['tipo'=>2,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
         @break
 
  @case (3)
-    @livewire('thumbs-photos',['tipo'=>3,'titulo'=>'Detalle de la propiedad seleccionada','id_ciudad'=>$_GET['id_ciudad'],
-    'id_recurso'=>$_GET['id_recurso'],'id_duracion'=>$_GET['id_duracion'],'habitaciones'=>$_GET['habitaciones'],
-    'banos'=>$_GET['banos'],'aires_acondicionado'=>$_GET['aires_acondicionado'],
-    'abanicos_techo'=>$_GET['abanicos_techo'],'precio_minimo'=>$_GET['precio_minimo'],'precio_maximo'=>$_GET['precio_maximo'],
+    @livewire('thumbs-photos',['tipo'=>3,'titulo'=>'Detalle de la propiedad seleccionada','id_ciudad'=>$_GET['id_ciudad']??0,
+    'id_recurso'=>$_GET['id_recurso']??0,'id_duracion'=>$_GET['id_duracion']??0,'habitaciones'=>$_GET['habitaciones']??0,
+    'banos'=>$_GET['banos']??0,'aires_acondicionado'=>$_GET['aires_acondicionado']??0,
+    'abanicos_techo'=>$_GET['abanicos_techo']??0,'precio_minimo'=>$_GET['precio_minimo']??0,'precio_maximo'=>$_GET['precio_maximo']??0,
     'agua_caliente'=>$_GET['agua_caliente']??0,'tanque_agua'=>$_GET['tanque_agua']??0,'sistema_seguridad'=>$_GET['sistema_seguridad']??0,
-    'cuartoDomestica'=>$_GET['cuartoDomestica']??0,'piscina'=>$_GET['piscina']??0])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
+    'cuartoDomestica'=>$_GET['cuartoDomestica']??0,'piscina'=>$_GET['piscina']??0])  <!-- muestra resultado del formulario detallado.  -->
        @break
+
 @endswitch
 
 @endsection

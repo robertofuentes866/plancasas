@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -29,8 +31,23 @@
             }
         }
 
-        function habilitaSubmitButton(){
-           document.getElementById('localizacion').disabled = false;
+        function ajustarPrecios(val){
+           
+            if (val==1) { 
+                $("#Range1").attr("min",1000);
+                $("#Range1").attr("max",500000);
+                $("#Range1").attr("step",1000);
+                $("#Range2").attr("min",1000);
+                $("#Range2").attr("max",500000);
+                $("#Range2").attr("step",1000);
+            } else {
+                $("#Range1").attr("min",100);
+                $("#Range1").attr("max",3000);
+                $("#Range1").attr("step",100);
+                $("#Range2").attr("min",100);
+                $("#Range2").attr("max",3000);
+                $("#Range2").attr("step",100);
+            }
         }
     </script>
     
