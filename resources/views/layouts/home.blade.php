@@ -40,6 +40,8 @@
                 $("#Range2").attr("min",1000);
                 $("#Range2").attr("max",500000);
                 $("#Range2").attr("step",1000);
+                document.getElementById("Range1Val").innerHTML='US$ '+1000;
+                document.getElementById("Range2Val").innerHTML='US$ '+500000;
             } else {
                 $("#Range1").attr("min",100);
                 $("#Range1").attr("max",3000);
@@ -47,6 +49,8 @@
                 $("#Range2").attr("min",100);
                 $("#Range2").attr("max",3000);
                 $("#Range2").attr("step",100);
+                document.getElementById("Range1Val").innerHTML='US$ '+100;
+                document.getElementById("Range2Val").innerHTML='US$ '+3000;
             }
         }
     </script>
@@ -79,7 +83,7 @@
                     <li class="nav-item">
                     <form id="logout" action="{{ route('logout') }}" method="POST">
                             <a role="button" class="nav-link"
-                            onclick="document.getElementById('logout').submit();">Salir</a>
+                            onclick="document.getElementById('logout').submit();">{{Auth::user()->name}} {Salir}</a>
                             @csrf
                     </form>
                     </li>

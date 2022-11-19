@@ -53,7 +53,7 @@
     <!-- Formulario detallado -->
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
     <div class="card-header" style="text-align:center"><strong>Búsqueda detallada </strong></div>
-    <div class="card-body">
+    <div class="card-body bg-danger">
     <form method="get" action="{{route('menu.inicio',['gestion'=>3,'id_propiedad'=>0])}}">
             @csrf
         <fieldset>
@@ -61,7 +61,7 @@
             <div class="form-group row">
                 <label for="ciudad" class="col-lg-6 col-form-label">Ciudades</label>
          
-                <select id="ciudad" name="id_ciudad"> 
+                <select class="w-75 ms-3" id="ciudad" name="id_ciudad"> 
                 
                         @foreach($viewData['ciudad'] as $ciudad)
                             <option value="{{$ciudad->id_ciudad}}">{{$ciudad->ciudad}}</option>
@@ -73,7 +73,7 @@
             <div class="form-group row">
                 <label for="recurso" class="col-lg-6 col-form-label">Recurso</label>
          
-                <select id="recurso" name="id_recurso"> 
+                <select class="w-75 ms-3" id="recurso" name="id_recurso"> 
                 
                         @foreach($viewData['recurso'] as $recurso)
                             <option value="{{$recurso->id_recurso}}">{{$recurso->recurso}}</option>
@@ -85,7 +85,7 @@
             <div class="form-group row">
                 <label for="duracion" class="col-lg-6 col-form-label">Contrato por</label>
          
-                <select onchange=ajustarPrecios(this.value) onloadeddata=ajustarPrecios(this.value) id="duracion" name="id_duracion"> 
+                <select class="w-75 ms-3" onchange=ajustarPrecios(this.value) id="duracion" name="id_duracion"> 
                 
                         @foreach($viewData['duracion'] as $duracion)
                             <option value="{{$duracion->id_duracion}}">{{$duracion->duracion}}</option>
@@ -94,25 +94,7 @@
          
             </div>
         </fieldset>
-            <div class="form-group row">
-                <!--<label for="precio_minimo" class="col-lg-4 col-form-label">Precio Mínimo</label>
-                <input name="precio_minimo" value="1" type="number" min="1" max="5000000">
-
-                <label for="precio_maximo" class="col-lg-4 col-form-label">Precio Maximo</label>
-                <input name="precio_maximo" value="1" type="number" min="1" max="5000000">  -->
-
-                <label for="Range1" class="form-label">Precio mínimo</label>
-                <span id="Range1Val" style="color:red;"></span>
-                <input type="range" value="100" name="precio_minimo" min="1000" max="500000" step="1000" class="form-range" id="Range1"
-                  oninput=changeValueRange1(this.value) onload="changeValueRange1('100')">
-
-                <label for="Range2" class="form-label">Precio máximo</label>
-                <span id="Range2Val" style="color:red;"></span>
-                <input type="range" value="500" name="precio_maximo" min="1000" max="500000" step="1000" class="form-range" id="Range2"
-                  oninput="changeValueRange2(this.value)" onload="changeValueRange2('500')">
-         
-            </div>
-        <fieldset> 
+        <fieldset>
             <legend>Declare lo mínimo de:</legend>   
             <div class="form-group mt-2">
                 <label for="habitaciones" >Habitaciones Mínima:</label>
@@ -161,6 +143,27 @@
                 
             </div>
         </fieldset>
+
+        </fieldset>
+            <div class="form-group row">
+                <label for="precio_minimo" class="col-lg-4 col-form-label">Precio Mínimo</label>
+                <input class="w-75 ms-3" name="precio_minimo" value="1" type="number" min="1" max="2000000">
+
+                <label for="precio_maximo" class="col-lg-4 col-form-label">Precio Maximo</label>
+                <input class="w-75 ms-3" name="precio_maximo" value="1" type="number" min="1" max="2000000">
+
+                <!--<label for="Range1" class="form-label">Precio mínimo</label>
+                <span id="Range1Val" style="color:red;">US$ 0</span>
+                <input type="range" value="100" name="precio_minimo" min="1000" max="500000" step="1000" class="form-range" id="Range1"
+                  oninput=changeValueRange1(this.value)>
+
+                <label for="Range2" class="form-label">Precio máximo</label>
+                <span id="Range2Val" style="color:red;">US$ 1000</span>
+                <input type="range" value="500" name="precio_maximo" min="1000" max="500000" step="1000" class="form-range" id="Range2"
+                  oninput="changeValueRange2(this.value)"> -->
+         
+            </div>
+        
                
             <div class="form-group row my-3">
                 <div class="col-sm-10">

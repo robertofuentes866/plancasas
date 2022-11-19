@@ -13,6 +13,7 @@
         
         <div id="title_page_left_container" class="row">
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
+            <p id="subtitle_page_left"><small>{Clique la imagen pequeña para visualizarla en tamaño normal}</small></p>
         </div>
         <div class="row">
             <div class="col-4" style="background-color:antiquewhite;"> <!-- Columna thumbnails -->
@@ -24,7 +25,7 @@
                         <div class="card-header text-white" style="text-align:center">
                            <strong>{{$titulo_thumbnail}}</strong>
                         </div>
-                            <div class="card-body bg-light px-0">
+                            <div class="card-body bg-body px-0">
 
                                     <div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
                                         
@@ -44,7 +45,8 @@
                                                                 {{$comillas.$imagen_casa->residencial.$comillas}},
                                                                 {{$comillas.$imagen_casa->casaNumero.$comillas}},
                                                                 {{$comillas.$imagen_casa->id_casa.$comillas}},
-                                                                {{$comillas.$imagen_casa->leyenda.$comillas}} )"> 
+                                                                {{$comillas.$imagen_casa->leyenda.$comillas}},
+                                                                {{$comillas.$titulo_thumbnail.$comillas}})"> 
                                                             <img class="img-thumbnail" 
                                                                 src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
                                                                 alt=" " width="84" height="54">
@@ -57,11 +59,11 @@
                                                 @endif
                                             @endforeach
                                         </div> <!-- End Inner --> 
-                                        <button class="carousel-control-prev bg-dark ml-0" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+                                        <button  class="carousel-control-prev bg-light ml-0 flechas" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Previous</span>
                                         </button>
-                                        <button class="carousel-control-next bg-dark mr-0" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+                                        <button class="carousel-control-next bg-light mr-0 flechas" type="button" data-target="#carouselExampleIndicators" data-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Next</span>
                                         </button>
@@ -89,7 +91,8 @@
                                                     {{$comillas.$favorito_casa->residencial.$comillas}},
                                                     {{$comillas.$favorito_casa->casaNumero.$comillas}},
                                                     {{$comillas.$favorito_casa->id_casa.$comillas}},
-                                                    {{$comillas.$favorito_casa->leyenda.$comillas}} )"> 
+                                                    {{$comillas.$favorito_casa->leyenda.$comillas}},
+                                                    {{$comillas.$favorito_casa->titulo.$comillas}})"> 
                                                 <img class="img-thumbnail" style="padding: 5px"
                                                     src="{{asset('storage/propiedades/'.$favorito_casa->foto_thumb)}}" 
                                                     alt="Sierras Doradas" width="84" height="54">
@@ -109,7 +112,9 @@
                     <div class="col-8 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
                             <div class="card">
                                 <img src="{{asset('storage/propiedades/'.$fotoNormal)}}" class="card-img-top" alt="...">
+                                <div id="procedencia">{{$titulo_en_foto_normal}}</div>
                                 <div class="card-body">
+                                    
                                     @if($tipo!=2)
                                     <h5 class="card-title">{{$residencial.'-'.$casaNumero}}</h5>
                                     <p class="card-text"> {{$descripcion}}</p>
@@ -172,11 +177,11 @@
                             <tr>
                                 <td>Piscina: {{ $imagenes_casas[0]->piscina?'Si':'No' }}</td>
                                 <td>Tanque Agua: {{ $imagenes_casas[0]->tanque_agua?'Si':'No' }}</td>
-                            <tr>
+                            </tr>
 
                             <tr>
                                 <td>Sist. Seguridad: {{ $imagenes_casas[0]->sistema_seguridad?'Si':'No' }}</td>
-                            <tr>
+                            </tr>
                             </tbody>
                             </table>
                             </div>
