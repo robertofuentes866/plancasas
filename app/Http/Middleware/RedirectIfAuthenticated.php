@@ -26,7 +26,6 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::HOME);
             }
         }
-        echo "handle of redirectifAuthenticated.php";
         return $next($request);
     }
 }

@@ -6,7 +6,8 @@
 </script>
 @endif
 
- @if ($imagenes_casas->count() or $favoritos_casas->count())
+
+@if ($imagenes_casas->count() or $favoritos_casas->count())
  <div class="col-lg-8">
         
         <div id="title_page_left_container" class="row">
@@ -115,7 +116,9 @@
                                     <a href="{{route('menu.inicio',['gestion'=>2,'id_propiedad'=>$id_propiedad])}}" class="btn btn-primary">Mas detalles...</a>
                                     @else
                                     <p class="card-title">
-                                    <button data-toggle="tooltip" data-placement="bottom" title="{{buscarFavorito($id_propiedad,1)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}" type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" name="buscarFavoritos" id="buscarFavoritos" class="btn {{buscarFavorito($id_propiedad,1)?'btn-danger':'btn-secondary'}}"><i class="bi bi-house-fill"></i></button>
+                                    @if(Auth::check())
+                                        <button data-toggle="tooltip" data-placement="bottom" title="{{buscarFavorito($id_propiedad,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}" type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" name="buscarFavoritos" id="buscarFavoritos" class="btn {{buscarFavorito($id_propiedad,$this->id_usuario)?'btn-danger':'btn-secondary'}}"><i class="bi bi-house-fill"></i></button>
+                                    @endif    
                                     <strong>{{$leyenda. ' en '. $casaNumero}}</strong>
                                     </p>
                                     @endif

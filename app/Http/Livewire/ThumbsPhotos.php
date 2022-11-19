@@ -5,8 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 
 use Illuminate\Support\Facades\DB;
-use Orchid\Support\Facades\Toast;
-
+use Illuminate\Support\Facades\Auth;
 
 class ThumbsPhotos extends Component
 {
@@ -20,7 +19,7 @@ class ThumbsPhotos extends Component
     public $arrayProp = [];
     public $arrayFav = [];
     public $arrayPrecio = [];
-    public $id_usuario = 1;
+    public $id_usuario = 0;
     public $titulo_thumbnail = '';
     public $i = 0;
     public $i_total = 0;
@@ -78,7 +77,7 @@ class ThumbsPhotos extends Component
 
 
     public function render() {
-       
+        $this->id_usuario = Auth::check()?Auth::id():0;
         $imagenes_casas = $this->get_casas();
         $favoritos_casas = $this->get_favoritos_casas();
         if (!$this->contador && ($imagenes_casas->count() || $favoritos_casas->count())) {
@@ -218,7 +217,7 @@ class ThumbsPhotos extends Component
 
     private function insertarFavorito($id_casa){
         return DB::table('favoritos_casas')->insert(
-            array('id_casa' => $id_casa, 'id_usuario' => 1));
+            array('id_casa' => $id_casa, 'id_usuario' => $this->id_usuario));
         
     }
 
