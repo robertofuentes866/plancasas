@@ -4,10 +4,11 @@
 <script>
    Swal.fire('Busqueda con resultado vacio');
 </script>
+@php($swal = 1)
 @endif
 
 
-@if ($imagenes_casas->count() or $favoritos_casas->count())
+@if (($imagenes_casas->count() or $favoritos_casas->count()) && !isset($swal)  )
  <div class="col-lg-8">
         
         <div id="title_page_left_container" class="row">
@@ -16,7 +17,7 @@
         <div class="row">
             <div class="col-4" style="background-color:antiquewhite;"> <!-- Columna thumbnails -->
                 
-                <?php $comillas = '"'; ?>
+                @php($comillas = '"')
                 @if($imagenes_casas->count())
                     <!-- Destacados o Resultado de busqueda en thumbnail -->
                     <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
@@ -30,14 +31,14 @@
                                         <div class="carousel-inner">
                                                                        
                                             @foreach($imagenes_casas as $imagen_casa)
-                                                <?php incrementaIndice($i_total)?>
+                                                @php(incrementaIndice($i_total))
                                                 @if (!($i % 4))
                                                 <div class="carousel-item {{$i==0?'active ':''}} row row-cols-2">
                                                   
                                                 @endif  
                                                 @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
                                                         <div class="col" style=" float:right; height:120px;">
-                                                        <?php incrementaIndice($i) ?>
+                                                        @php(incrementaIndice($i))
                                                         <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
                                                                 {{$comillas.$imagen_casa->descripcion.$comillas}},
                                                                 {{$comillas.$imagen_casa->residencial.$comillas}},
@@ -114,6 +115,7 @@
                                     <p class="card-text"> {{$descripcion}}</p>
 
                                     <a href="{{route('menu.inicio',['gestion'=>2,'id_propiedad'=>$id_propiedad])}}" class="btn btn-primary">Mas detalles...</a>
+                                    
                                     @else
                                     <p class="card-title">
                                     @if(Auth::check())
@@ -122,6 +124,7 @@
                                     <strong>{{$leyenda. ' en '. $casaNumero}}</strong>
                                     </p>
                                     @endif
+                                    
                                 </div>
                             </div>
                         
@@ -246,5 +249,9 @@
 
 </div> <!-- End Columna 8 de derecha. -->
 @else 
-    @livewire('imagenes-grupo')
+    @if ($tipo==1 or $tipo==3) 
+        @livewire('thumbs-photos',['tipo'=>0,'titulo'=>'Propiedades Destacadas'])
+    @else
+        @livewire('imagenes-grupo')
+    @endif
 @endif

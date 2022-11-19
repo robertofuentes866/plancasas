@@ -77,6 +77,7 @@ class ThumbsPhotos extends Component
 
 
     public function render() {
+        
         $this->id_usuario = Auth::check()?Auth::id():0;
         $imagenes_casas = $this->get_casas();
         $favoritos_casas = $this->get_favoritos_casas();
@@ -90,7 +91,6 @@ class ThumbsPhotos extends Component
             $this->id_propiedad = $imagenes_casas[0]->id_casa??$favoritos_casas[0]->id_casa??'';
             $this->leyenda = $imagenes_casas[0]->leyenda??$favoritos_casas[0]->leyenda??'';
          }
-       
          
             return view('livewire.thumbs-photos')->with('imagenes_casas',$imagenes_casas)
                                             ->with('favoritos_casas',$favoritos_casas);
@@ -98,9 +98,10 @@ class ThumbsPhotos extends Component
     }
 
     private function get_casas() {
+        
         switch ($this->tipo) {
             case 0:  // propiedades destacadas.
-        
+                
                 return DB::table('casas')->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
                                     ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                                     ->where([['casas.destacado','=',1],['casas.disponibilidad','=',1],
