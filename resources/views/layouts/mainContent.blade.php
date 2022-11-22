@@ -147,10 +147,10 @@
         </fieldset>
             <div class="form-group row">
                 <label for="precio_minimo" class="col-lg-4 col-form-label">Precio Mínimo</label>
-                <input class="w-75 ms-3" name="precio_minimo" value="1" type="number" min="1" max="2000000">
+                <input class="w-75 ms-3" name="precio_minimo" value="100" type="number" min="1" max="2000000">
 
                 <label for="precio_maximo" class="col-lg-4 col-form-label">Precio Maximo</label>
-                <input class="w-75 ms-3" name="precio_maximo" value="1" type="number" min="1" max="2000000">
+                <input class="w-75 ms-3" name="precio_maximo" value="1000" type="number" min="1" max="2000000">
 
                 <!--<label for="Range1" class="form-label">Precio mínimo</label>
                 <span id="Range1Val" style="color:red;">US$ 0</span>
