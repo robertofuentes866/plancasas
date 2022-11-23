@@ -23,6 +23,8 @@ class ThumbsPhotos extends Component
     public $titulo_thumbnail = '';
     public $i = 0;
     public $i_total = 0;
+    public $accionFav = "";
+
 
 
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
@@ -42,8 +44,8 @@ class ThumbsPhotos extends Component
          case 1: // llamada del formulario principal.
             $this->tipo = $argumentos[0];
             $this->id_ofrecimiento = $argumentos[1];
-            $this->id_ciudad = $argumentos[2];
-            $this->id_localizacion = $argumentos[3];
+            $this->id_ciudad = $argumentos[2]?['localizaciones.id_ciudad','=',$argumentos[2]]:['casas.disponibilidad','=',1];
+            $this->id_localizacion = $argumentos[3]?['localizaciones.id_localizacion','=',$argumentos[3]]:['casas.disponibilidad','=',1];;
             $this->titulo = $argumentos[4];
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
@@ -56,9 +58,9 @@ class ThumbsPhotos extends Component
         case 3:  // llamada del formulario detallado.
             $this->tipo = $argumentos[0];
             $this->titulo = $argumentos[1];
-            $this->id_ciudad = $argumentos[2];
-            $this->id_recurso = $argumentos[3];
-            $this->id_duracion = $argumentos[4];
+            $this->id_ciudad = $argumentos[2]?['localizaciones.id_ciudad','=',$argumentos[2]]:['casas.disponibilidad','=',1];
+            $this->id_recurso = $argumentos[3]?['recursos.id_recurso','=',$argumentos[3]]:['casas.disponibilidad','=',1];
+            $this->id_duracion = $argumentos[4]?['precios_casas.id_duracion','=',$argumentos[4]]:['casas.disponibilidad','=',1];
             $this->habitaciones = $argumentos[5];
             $this->banos = $argumentos[6];
             $this->aires_acondicionado = $argumentos[7];
@@ -71,7 +73,9 @@ class ThumbsPhotos extends Component
             $this->cuartoDomestica = $argumentos[14]?['casas.cuartoDomestica','=',1]:['casas.disponibilidad','=',1];
             $this->piscina = $argumentos[15]?['casas.piscina','=',1]:['casas.disponibilidad','=',1];
             $this->titulo_thumbnail = "Resultado busqueda";
+            break;
        }
+       //print_r($this->id_ciudad);
        $this->render();
     }
 
@@ -122,8 +126,8 @@ class ThumbsPhotos extends Component
                 ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
                 ->join('ofrecimientos','ofrecimientos.id_ofrecimiento','=','precios_casas.id_ofrecimiento')
                 ->where([['precios_casas.id_ofrecimiento','=',$this->id_ofrecimiento],
-                        ['localizaciones.id_ciudad','=',$this->id_ciudad],
-                        ['localizaciones.id_localizacion','=',$this->id_localizacion],
+                        [$this->id_ciudad[0],$this->id_ciudad[1],$this->id_ciudad[2] ],
+                        [$this->id_localizacion[0],$this->id_localizacion[1],$this->id_localizacion[2]],
                     ['fotos_casas.es_principal','=',1],
                     ['casas.disponibilidad','=',1]])
                 ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
@@ -166,9 +170,9 @@ class ThumbsPhotos extends Component
                 ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                 ->join('ofrecimientos','ofrecimientos.id_ofrecimiento','=','precios_casas.id_ofrecimiento')
                 ->join('recursos','recursos.id_recurso','=','precios_casas.id_recurso')
-                ->where([['recursos.id_recurso','=',$this->id_recurso],
-                        ['localizaciones.id_ciudad','=',$this->id_ciudad],
-                        ['precios_casas.id_duracion','=',$this->id_duracion],
+                ->where([[$this->id_recurso[0],$this->id_recurso[1],$this->id_recurso[2]],
+                        [$this->id_ciudad[0],$this->id_ciudad[1],$this->id_ciudad[2]],
+                        [$this->id_duracion[0],$this->id_duracion[1],$this->id_duracion[2]],
                     ['fotos_casas.es_principal','=',1],
                     ['casas.habitaciones','>=',$this->habitaciones],
                     ['casas.banos','>=',$this->banos],
@@ -206,22 +210,29 @@ class ThumbsPhotos extends Component
         $hallo = $this->buscarFavorito($id);
         if ($hallo) {   //borrar Favorito.
             $result = $this->borrarFavorito($id);
+            
         } else {  // registrar Favorito.
             $result = $this->insertarFavorito($id);
+            
         }
     }
 
     public function buscarFavorito($id_casa) {
-        return count(DB::table('favoritos_casas')->where([['favoritos_casas.id_casa','=',$id_casa],
-                                ['favoritos_casas.id_usuario','=',$this->id_usuario]])->get());
+         
+        $tuplas = count(DB::table('favoritos_casas')->where([['favoritos_casas.id_casa','=',$id_casa],
+                               ['favoritos_casas.id_usuario','=',$this->id_usuario]])->get());
+        $this->accionFav = $tuplas?"Agregado a Mis Favoritos":"Borrado de Mis Favoritos";
+        return $tuplas;
     }
     
     private function borrarFavorito($id_casa) {
+       
         return DB::table('favoritos_casas')->where([['favoritos_casas.id_casa','=',$id_casa],
                                     ['favoritos_casas.id_usuario','=',$this->id_usuario]])->delete();
     }
 
     private function insertarFavorito($id_casa){
+        
         return DB::table('favoritos_casas')->insert(
             array('id_casa' => $id_casa, 'id_usuario' => $this->id_usuario));
         

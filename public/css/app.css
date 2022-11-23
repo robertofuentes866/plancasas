@@ -47,6 +47,10 @@ figcaption {
     height: 0.5em;
 }
 
+#subtitle_page_left {
+    color:gold
+}
+
 #title_page_left_container {
    background-color: black; 
 }

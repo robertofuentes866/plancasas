@@ -20,6 +20,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
     @livewireStyles
     <script>
+        function alertaMensaje(msg) {
+            Swal.fire(msg);
+        }
+
         function changeValueRange1(val){
             document.getElementById("Range1Val").innerHTML='US$ '+val;
             document.getElementById("Range2").min =val;

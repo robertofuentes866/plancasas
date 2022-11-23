@@ -8,12 +8,12 @@
 @endif
 
 
+
 @if (($imagenes_casas->count() or $favoritos_casas->count()) && !isset($swal)  )
  <div class="col-lg-8">
         
         <div id="title_page_left_container" class="row">
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
-            <p id="subtitle_page_left"><small>{Clique la imagen pequeña para visualizarla en tamaño normal}</small></p>
         </div>
         <div class="row">
             <div class="col-4" style="background-color:antiquewhite;"> <!-- Columna thumbnails -->
@@ -22,8 +22,9 @@
                 @if($imagenes_casas->count())
                     <!-- Destacados o Resultado de busqueda en thumbnail -->
                     <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
-                        <div class="card-header text-white" style="text-align:center">
-                           <strong>{{$titulo_thumbnail}}</strong>
+                        <div class="card-header text-white" style="text-align:center;height:5em">
+                        <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
+                           <p id="subtitle_page_left"><small>{Clique imagen pequeña para ver amplia  ===>}</small></p>
                         </div>
                             <div class="card-body bg-body px-0">
 
@@ -78,8 +79,9 @@
                 @if ($favoritos_casas->count()) 
                     <!-- Favoritos thumbnails-->
                     <div class="card text-black bg-dark mb-3 mt-2 mx-auto">
-                        <div class="card-header text-white" style="text-align:center">
-                            <strong>Mis Favoritos </strong>
+                        <div class="card-header text-white" style="text-align:center;height:5em">
+                        <p id="title_page_left"><strong>Mis Favoritos</strong></p>
+                           <p id="subtitle_page_left"><small>{Clique imagen pequeña para ver amplia  ===>}</small></p>
                         </div>
                             <div class="card-body bg-light">
                                 <div id="container_favoritos" class="row row-cols-2"> <!-- favoritos-->
@@ -106,8 +108,6 @@
                      
                 @endif
             </div>  <!-- End container de los 2 grupos de thumbnails: Destacados y Favoritos -->
-
-           
             
                     <div class="col-8 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
                             <div class="card">
@@ -124,7 +124,7 @@
                                     @else
                                     <p class="card-title">
                                     @if(Auth::check())
-                                        <button data-toggle="tooltip" data-placement="bottom" title="{{buscarFavorito($id_propiedad,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}" type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" name="buscarFavoritos" id="buscarFavoritos" class="btn {{buscarFavorito($id_propiedad,$this->id_usuario)?'btn-danger':'btn-secondary'}}"><i class="bi bi-house-fill"></i></button>
+                                        <button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip" data-placement="bottom" title="{{buscarFavorito($id_propiedad,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}" type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" name="buscarFavoritos" id="buscarFavoritos" class="btn {{buscarFavorito($id_propiedad,$this->id_usuario)?'btn-danger':'btn-secondary'}}"><i class="bi bi-house-fill"></i></button>
                                     @endif    
                                     <strong>{{$leyenda. ' en '. $casaNumero}}</strong>
                                     </p>
@@ -132,9 +132,6 @@
                                     
                                 </div>
                             </div>
-                        
-                            
-                        
 
                         <!-- Características de la casa -->
 

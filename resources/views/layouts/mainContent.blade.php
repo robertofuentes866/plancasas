@@ -62,7 +62,7 @@
                 <label for="ciudad" class="col-lg-6 col-form-label">Ciudades</label>
          
                 <select class="w-75 ms-3" id="ciudad" name="id_ciudad"> 
-                
+                     <option value="">**Ciudad**</option>
                         @foreach($viewData['ciudad'] as $ciudad)
                             <option value="{{$ciudad->id_ciudad}}">{{$ciudad->ciudad}}</option>
                         @endforeach
@@ -74,7 +74,7 @@
                 <label for="recurso" class="col-lg-6 col-form-label">Recurso</label>
          
                 <select class="w-75 ms-3" id="recurso" name="id_recurso"> 
-                
+                        <option value="">**Requerir muebles**</option>
                         @foreach($viewData['recurso'] as $recurso)
                             <option value="{{$recurso->id_recurso}}">{{$recurso->recurso}}</option>
                         @endforeach
@@ -86,7 +86,7 @@
                 <label for="duracion" class="col-lg-6 col-form-label">Contrato por</label>
          
                 <select class="w-75 ms-3" onchange=ajustarPrecios(this.value) id="duracion" name="id_duracion"> 
-                
+                        <option value="">**Contrato por**</option>
                         @foreach($viewData['duracion'] as $duracion)
                             <option value="{{$duracion->id_duracion}}">{{$duracion->duracion}}</option>
                         @endforeach
@@ -193,7 +193,7 @@
         @break
 
  @case (3)
-    @livewire('thumbs-photos',['tipo'=>3,'titulo'=>'Detalle de la propiedad seleccionada','id_ciudad'=>$_GET['id_ciudad']??0,
+    @livewire('thumbs-photos',['tipo'=>3,'titulo'=>'Resultado de busqueda','id_ciudad'=>$_GET['id_ciudad']??0,
     'id_recurso'=>$_GET['id_recurso']??0,'id_duracion'=>$_GET['id_duracion']??0,'habitaciones'=>$_GET['habitaciones']??0,
     'banos'=>$_GET['banos']??0,'aires_acondicionado'=>$_GET['aires_acondicionado']??0,
     'abanicos_techo'=>$_GET['abanicos_techo']??0,'precio_minimo'=>$_GET['precio_minimo']??0,'precio_maximo'=>$_GET['precio_maximo']??0,
