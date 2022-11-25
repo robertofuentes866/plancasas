@@ -86,7 +86,7 @@
                 <label for="duracion" class="col-lg-6 col-form-label">Contrato por</label>
          
                 <select class="w-75 ms-3" onchange=ajustarPrecios(this.value) id="duracion" name="id_duracion"> 
-                        <option value="">**Contrato por**</option>
+                        <option value="">**Duracion del Contrato**</option>
                         @foreach($viewData['duracion'] as $duracion)
                             <option value="{{$duracion->id_duracion}}">{{$duracion->duracion}}</option>
                         @endforeach

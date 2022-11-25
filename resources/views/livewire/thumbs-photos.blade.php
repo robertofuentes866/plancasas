@@ -11,9 +11,18 @@
 
 @if (($imagenes_casas->count() or $favoritos_casas->count()) && !isset($swal)  )
  <div class="col-lg-8">
-        
         <div id="title_page_left_container" class="row">
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
+            <p style="color:gold">
+                @if(isset($arrayOpcionesForm))
+                     
+                    @foreach($arrayOpcionesForm as $opciones)
+                       @if (!empty($opciones))
+                            {{$opciones.' - '}}
+                        @endif
+                    @endforeach
+                @endif
+            </p>
         </div>
         <div class="row">
             <div class="col-4" style="background-color:antiquewhite;"> <!-- Columna thumbnails -->
@@ -112,7 +121,9 @@
                     <div class="col-8 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
                             <div class="card">
                                 <img src="{{asset('storage/propiedades/'.$fotoNormal)}}" class="card-img-top" alt="...">
-                                <div id="procedencia">{{$titulo_en_foto_normal}}</div>
+                                <div id="procedencia">
+                                    {{$titulo_en_foto_normal}}
+                                </div>
                                 <div class="card-body">
                                     
                                     @if($tipo!=2)
@@ -251,7 +262,7 @@
 
 </div> <!-- End Columna 8 de derecha. -->
 @else 
-    @if ($tipo==1 or $tipo==3) 
+    @if ($tipo==1 or $tipo==3) <!-- si viene de cualquier formulario con resultados vacios -->
         @livewire('thumbs-photos',['tipo'=>0,'titulo'=>'Propiedades Destacadas'])
     @else
         @livewire('imagenes-grupo')

@@ -16,7 +16,7 @@
          <label for="localizacion" class="col-lg-4 col-form-label">Localizacion</label>
         
             <select name="id_localizacion" id="localizacion">
-                    
+                        <option value="">**Residencial**</option>
                         @foreach($localizaciones as $localizacion)
                            <option value="{{$localizacion->id_localizacion}}">{{$localizacion->residencial}}</option>
                         @endforeach

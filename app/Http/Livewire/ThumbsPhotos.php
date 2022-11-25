@@ -6,6 +6,10 @@ use Livewire\Component;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\tipo;
+use App\Models\ofrecimiento;
+use App\Models\localizacion;
+use App\Models\ciudad;
 
 class ThumbsPhotos extends Component
 {
@@ -24,8 +28,7 @@ class ThumbsPhotos extends Component
     public $i = 0;
     public $i_total = 0;
     public $accionFav = "";
-
-
+    public $arrayOpcionesForm = [];
 
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
            $id_propiedad = 0,$tipo = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',
@@ -42,10 +45,19 @@ class ThumbsPhotos extends Component
             $this->titulo_thumbnail = "Destacados";
             break;
          case 1: // llamada del formulario principal.
+            
             $this->tipo = $argumentos[0];
+            $instance = tipo::find($this->tipo,'tipo');
+            $this->arrayOpcionesForm[] = 'Tipo: '. $instance->tipo;
             $this->id_ofrecimiento = $argumentos[1];
+            $instance = ofrecimiento::find($this->id_ofrecimiento,'ofrecimiento');
+            $this->arrayOpcionesForm[] = $argumentos[1]?'Ofrecimiento: '. $instance->ofrecimiento:' ';
             $this->id_ciudad = $argumentos[2]?['localizaciones.id_ciudad','=',$argumentos[2]]:['casas.disponibilidad','=',1];
-            $this->id_localizacion = $argumentos[3]?['localizaciones.id_localizacion','=',$argumentos[3]]:['casas.disponibilidad','=',1];;
+            $instance = $argumentos[2]?ciudad::find($argumentos[2],'ciudad'):' ';
+            $this->arrayOpcionesForm[] = $argumentos[2]?'Ciudad: '. $instance->ciudad:' ';
+            $this->id_localizacion = $argumentos[3]?['localizaciones.id_localizacion','=',$argumentos[3]]:['casas.disponibilidad','=',1];
+            $instance = $argumentos[3]?localizacion::find($argumentos[3],'residencial'):' ';
+            $this->arrayOpcionesForm[] = $argumentos[3]?'Residencial: '. $instance->residencial:' ';
             $this->titulo = $argumentos[4];
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
@@ -75,19 +87,20 @@ class ThumbsPhotos extends Component
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
        }
-       //print_r($this->id_ciudad);
-       $this->render();
+       //$this->render();
     }
 
 
     public function render() {
-        
+
         $this->id_usuario = Auth::check()?Auth::id():0;
         $imagenes_casas = $this->get_casas();
         $favoritos_casas = $this->get_favoritos_casas();
-        if (!$this->contador && ($imagenes_casas->count() || $favoritos_casas->count())) {
-            $this->contador++;
 
+        if (!$this->contador && ($imagenes_casas->count() || $favoritos_casas->count())) {
+            // Entra aqui para mostrar la foto tamaño normal inicial y sus leyendas.
+            $this->contador++;
+ 
             $this->fotoNormal = $imagenes_casas[0]->foto_normal??$favoritos_casas[0]->foto_normal??'';
             $this->descripcion = $imagenes_casas[0]->descripcion??$favoritos_casas[0]->descripcion??'';
             $this->residencial = $imagenes_casas[0]->residencial??$favoritos_casas[0]->residencial??'';
