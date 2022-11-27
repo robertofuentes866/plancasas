@@ -36,3 +36,10 @@ function incrementaIndice(&$i) {
     return $i++;
 }
 
+function init_variables(&$i,&$t,&$a) {
+    $i = 0;
+    $t = 0;
+    $a = [];
+}
+
+

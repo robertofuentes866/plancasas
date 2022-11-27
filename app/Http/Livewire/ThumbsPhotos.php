@@ -25,10 +25,12 @@ class ThumbsPhotos extends Component
     public $arrayPrecio = [];
     public $id_usuario = 0;
     public $titulo_thumbnail = '';
+    public $titulo_thumbnail_lastQuery = '';
     public $i = 0;
     public $i_total = 0;
     public $accionFav = "";
     public $arrayOpcionesForm = [];
+    public $lastQuery = '';
 
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
            $id_propiedad = 0,$tipo = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',
@@ -41,8 +43,8 @@ class ThumbsPhotos extends Component
        switch ($argumentos[0]) {
          case 0: // propiedades destacadas
             $this->tipo = $argumentos[0];
-            $this->titulo = $argumentos[1];
-            $this->titulo_thumbnail = "Destacados";
+            $this->titulo = $argumentos[1]; // titulo en la barra superior derecha.
+            $this->titulo_thumbnail = "Destacados"; 
             break;
          case 1: // llamada del formulario principal.
             
@@ -61,11 +63,12 @@ class ThumbsPhotos extends Component
             $this->titulo = $argumentos[4];
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
-        case 2: // propiedad seleccionada clicando thumbnail.
+        case 2: // propiedad seleccionada clicando boton MAS DETALLES...
             $this->tipo = $argumentos[0];
             $this->titulo = $argumentos[1];
             $this->id_propiedad = $argumentos[2];
-            $this->titulo_thumbnail = "Ambientes";
+            $this->titulo_thumbnail = "Fotos de la propiedad";
+            $this->titulo_thumbnail_lastQuery = "Mas propiedades";
             break;
         case 3:  // llamada del formulario detallado.
             $this->tipo = $argumentos[0];
@@ -87,7 +90,6 @@ class ThumbsPhotos extends Component
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
        }
-       //$this->render();
     }
 
 
@@ -95,6 +97,7 @@ class ThumbsPhotos extends Component
 
         $this->id_usuario = Auth::check()?Auth::id():0;
         $imagenes_casas = $this->get_casas();
+        $this->lastQuery = $this->selectLastQuery(1);
         $favoritos_casas = $this->get_favoritos_casas();
 
         if (!$this->contador && ($imagenes_casas->count() || $favoritos_casas->count())) {
@@ -120,7 +123,7 @@ class ThumbsPhotos extends Component
         switch ($this->tipo) {
             case 0:  // propiedades destacadas.
                 
-                return DB::table('casas')->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
+                $this->lastQuery = DB::table('casas')->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
                                     ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                                     ->where([['casas.destacado','=',1],['casas.disponibilidad','=',1],
                                                 ['fotos_casas.es_principal','=',1]])
@@ -128,11 +131,15 @@ class ThumbsPhotos extends Component
                                                 'fotos_casas.foto_normal','fotos_casas.id_foto','localizaciones.descripcion',
                                                 'casas.id_casa','casas.casaNumero','localizaciones.residencial',
                                                 DB::raw("'Destacados' as titulo" ))->get();
+                                           
+                $this->actualizarLastQuery($this->lastQuery,'1');
+                $this->titulo_thumbnail_lastQuery = "Destacados";
+                return $this->lastQuery;
                 break;  
 
             case 1: // llamado del formulario de busqueda.
        
-                return DB::table('casas')
+                $this->lastQuery =  DB::table('casas')
                 ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
                 ->join('ciudades','ciudades.id_ciudad','=','localizaciones.id_ciudad')
                 ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
@@ -147,7 +154,9 @@ class ThumbsPhotos extends Component
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
-
+                $this->actualizarLastQuery($this->lastQuery,1);
+                $this->titulo_thumbnail_lastQuery = "Resultado de Busqueda";
+                return $this->lastQuery;
                 break;
 
            case 2:   // detalles de la propiedad.
@@ -172,10 +181,12 @@ class ThumbsPhotos extends Component
                                 'agentes.cel1','agentes.cel2','agentes.email','agentes.foto_agente',
                                 'casas.aires_acondicionado','casas.abanicos_techo','casas.agua_caliente','casas.tanque_agua',
                                 'casas.sistema_seguridad',DB::raw("'Ambientes' as titulo" ))->get();
+                $this->titulo_thumbnail_lastQuery = "Mas propiedades";
+                break;
 
             case 3: // llamado del formulario detallado.
        
-                return DB::table('casas')
+               $this->lastQuery = DB::table('casas')
                 ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
                 ->join('ciudades','ciudades.id_ciudad','=','localizaciones.id_ciudad')
                 ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
@@ -203,7 +214,9 @@ class ThumbsPhotos extends Component
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
-
+                $this->actualizarLastQuery($this->lastQuery,1);
+                $this->titulo_thumbnail_lastQuery = "Resultado de Busqueda";
+              return $this->lastQuery;
                 break;
 
         }
@@ -249,6 +262,16 @@ class ThumbsPhotos extends Component
         return DB::table('favoritos_casas')->insert(
             array('id_casa' => $id_casa, 'id_usuario' => $this->id_usuario));
         
+    }
+
+    private function actualizarLastQuery($lastQuery,$id) { 
+        DB::table('lastquery')->where('id',$id)->update(['lastQuery'=>$lastQuery]);
+    }
+
+    public function selectLastQuery($id) {
+
+        $lastQ = DB::table('lastquery')->where('id',$id)->get('lastQuery');
+       return json_decode($lastQ[0]->lastQuery);
     }
 
     private function get_favoritos_casas(){

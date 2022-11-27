@@ -9,7 +9,7 @@
 
 
 
-@if (($imagenes_casas->count() or $favoritos_casas->count()) && !isset($swal)  )
+@if ((count($lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
  <div class="col-lg-8">
         <div id="title_page_left_container" class="row">
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
@@ -29,42 +29,46 @@
                 
                 @php($comillas = '"')
                 @if($imagenes_casas->count())
-                    <!-- Destacados o Resultado de busqueda en thumbnail -->
+                    <!-- Destacados, Resultado de busqueda o Ambientes de la propiedad en thumbnail -->
+                    
                     <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                         <div class="card-header text-white" style="text-align:center;height:5em">
-                        <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
-                           <p id="subtitle_page_left"><small>{Clique imagen pequeña para ver amplia  ===>}</small></p>
+                            <p id="title_page_left"><strong>{{$titulo_thumbnail_lastQuery}}</strong></p>
+                            <p id="subtitle_page_left"><small>{Clique imagen pequeña para ampliar  ===>}</small></p>
                         </div>
                             <div class="card-body bg-body px-0">
 
                                     <div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
                                         
                                         <div class="carousel-inner">
-                                                                       
-                                            @foreach($imagenes_casas as $imagen_casa)
+                                            @php(init_variables($i,$i_total,$arrayProp))
+                                          
+                                            @foreach($lastQuery as $imagen_casa)
+                                               
                                                 @php(incrementaIndice($i_total))
+                                               
                                                 @if (!($i % 4))
                                                 <div class="carousel-item {{$i==0?'active ':''}} row row-cols-2">
                                                   
                                                 @endif  
                                                 @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
                                                         <div class="col" style=" float:right; height:120px;">
-                                                        @php(incrementaIndice($i))
-                                                        <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
-                                                                {{$comillas.$imagen_casa->descripcion.$comillas}},
-                                                                {{$comillas.$imagen_casa->residencial.$comillas}},
-                                                                {{$comillas.$imagen_casa->casaNumero.$comillas}},
-                                                                {{$comillas.$imagen_casa->id_casa.$comillas}},
-                                                                {{$comillas.$imagen_casa->leyenda.$comillas}},
-                                                                {{$comillas.$titulo_thumbnail.$comillas}})"> 
-                                                            <img class="img-thumbnail" 
-                                                                src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
-                                                                alt=" " width="84" height="54">
-                                                            <figcaption> {{$imagen_casa->leyenda}} </figcaption>
-                                                        </figure>
+                                                            @php(incrementaIndice($i))
+                                                            <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
+                                                                    {{$comillas.$imagen_casa->descripcion.$comillas}},
+                                                                    {{$comillas.$imagen_casa->residencial.$comillas}},
+                                                                    {{$comillas.$imagen_casa->casaNumero.$comillas}},
+                                                                    {{$comillas.$imagen_casa->id_casa.$comillas}},
+                                                                    {{$comillas.$imagen_casa->leyenda.$comillas}},
+                                                                    {{$comillas.$titulo_thumbnail.$comillas}})"> 
+                                                                <img class="img-thumbnail" 
+                                                                    src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
+                                                                    alt=" " width="84" height="54">
+                                                                <figcaption> {{$imagen_casa->leyenda}} </figcaption>
+                                                            </figure>
                                                         </div>
                                                 @endif 
-                                                @if ( (!($i % 4)) or ($i_total >= $imagenes_casas->count()) )
+                                                @if ( (!($i % 4)) or ($i_total >= count($lastQuery)) )
                                                 </div> 
                                                 @endif
                                             @endforeach
@@ -82,7 +86,8 @@
                             
                             </div> <!-- End Card Body -->
 
-                    </div> <!-- End Card text-black de Destacados o Ambientes thumbnails-->
+                    </div> <!-- End Card text-black de Destacados,Resulta de busqueda o Ambientes thumbnails-->
+                    
                 @endif
 
                 @if ($favoritos_casas->count()) 
@@ -129,13 +134,20 @@
                                     @if($tipo!=2)
                                     <h5 class="card-title">{{$residencial.'-'.$casaNumero}}</h5>
                                     <p class="card-text"> {{$descripcion}}</p>
-
-                                    <a href="{{route('menu.inicio',['gestion'=>2,'id_propiedad'=>$id_propiedad])}}" class="btn btn-primary">Mas detalles...</a>
+                                    <a class="btn btn-primary" href="{{route('menu.inicio',['gestion'=>2,'id_propiedad'=>$id_propiedad])}}"
+                                          role="button">Mas detalles...</a>
                                     
                                     @else
                                     <p class="card-title">
                                     @if(Auth::check())
-                                        <button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip" data-placement="bottom" title="{{buscarFavorito($id_propiedad,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}" type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" name="buscarFavoritos" id="buscarFavoritos" class="btn {{buscarFavorito($id_propiedad,$this->id_usuario)?'btn-danger':'btn-secondary'}}"><i class="bi bi-house-fill"></i></button>
+                                        <button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip"
+                                            data-placement="bottom" 
+                                            title="{{buscarFavorito($id_propiedad,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}"
+                                            type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" 
+                                            name="buscarFavoritos" id="buscarFavoritos"
+                                            class="btn {{buscarFavorito($id_propiedad,$this->id_usuario)?'btn-danger':'btn-secondary'}}">
+                                            <i class="bi bi-house-fill"></i>
+                                        </button>
                                     @endif    
                                     <strong>{{$leyenda. ' en '. $casaNumero}}</strong>
                                     </p>
@@ -143,57 +155,113 @@
                                     
                                 </div>
                             </div>
+                            <!-- Carousel de thumbnail  abajo de la foto normal -->
+                            @if ($tipo==2 )
+                                <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
+                                    <div class="card-header text-white" style="text-align:center;height:3.5em">
+                                        <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
+                                        <p id="subtitle_page_left"><small>{Clique imagen pequeña para ver amplia  ===>}</small></p>
+                                    </div>
+                                    <div class="card-body bg-body px-0">
+
+                                        <div id="carouselAmbientes" class="carousel slide" data-interval="false">
+                                            
+                                            <div class="carousel-inner">
+                                                @php(init_variables($i,$i_total,$arrayProp))               
+                                                @foreach($imagenes_casas as $imagen_casa)
+                                                    @php(incrementaIndice($i_total))
+                                                    @if (!($i % 4))
+                                                    <div class="carousel-item {{$i==0?'active ':''}} row row-cols-2">
+                                                    
+                                                    @endif  
+                                                    @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
+                                                            <div class="col" style=" float:right; height:120px;">
+                                                                @php(incrementaIndice($i))
+                                                                <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
+                                                                        {{$comillas.$imagen_casa->descripcion.$comillas}},
+                                                                        {{$comillas.$imagen_casa->residencial.$comillas}},
+                                                                        {{$comillas.$imagen_casa->casaNumero.$comillas}},
+                                                                        {{$comillas.$imagen_casa->id_casa.$comillas}},
+                                                                        {{$comillas.$imagen_casa->leyenda.$comillas}},
+                                                                        {{$comillas.$titulo_thumbnail.$comillas}})"> 
+                                                                    <img class="img-thumbnail" 
+                                                                        src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
+                                                                        alt=" " width="84" height="54">
+                                                                    <figcaption> {{$imagen_casa->leyenda}} </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                    @endif 
+                                                    @if ( (!($i % 4)) or ($i_total >= $imagenes_casas->count()) )
+                                                    </div> 
+                                                    @endif
+                                                @endforeach
+                                            </div> <!-- End Inner --> 
+                                            <button  class="carousel-control-prev bg-light ml-0 flechas" type="button" data-target="#carouselAmbientes" data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next bg-light mr-0 flechas" type="button" data-target="#carouselAmbientes" data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+
+                                        </div> <!-- End Main Carousel -->
+                                
+                                    </div> <!-- End Card Body -->
+
+                                </div> <!-- End Card text-black de Destacados o Ambientes thumbnails-->
+                            @endif
 
                         <!-- Características de la casa -->
 
                         @if($tipo == 2 && $imagenes_casas->count())  
                             <div class="card mt-3 mb-3">
-                            <div class="card-header">
-                            <strong>Características de la propiedad</strong>
-                            </div>
-                            <div class="card-body">
-                            <table class="table table-bordered table-striped">
-                        
-                            <tbody>
-                            <tr>
-                                <td>Plantas: {{ $imagenes_casas[0]->plantas}}</td>
+                                <div class="card-header">
+                                    <strong>Características de la propiedad</strong>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered table-striped">
+                                
+                                    <tbody>
+                                    <tr>
+                                        <td>Plantas: {{ $imagenes_casas[0]->plantas}}</td>
 
-                                <td>Area Construccion: {{ $imagenes_casas[0]->area_construccion}} mt2</td>
-                            </tr>
-                            <tr>
-                            <td> Habitaciones: {{ $imagenes_casas[0]->habitaciones}}</td>
+                                        <td>Area Construccion: {{ $imagenes_casas[0]->area_construccion}} mt2</td>
+                                    </tr>
+                                    <tr>
+                                    <td> Habitaciones: {{ $imagenes_casas[0]->habitaciones}}</td>
 
-                            <td> Area Terreno: {{ $imagenes_casas[0]->area_terreno}} mt2</td>
-                            </tr>
-                            <tr>
-                                <td>Baños: {{ $imagenes_casas[0]->banos }}</td>
+                                    <td> Area Terreno: {{ $imagenes_casas[0]->area_terreno}} mt2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Baños: {{ $imagenes_casas[0]->banos }}</td>
 
-                                <td>Año Construccion: {{ $imagenes_casas[0]->ano_construccion}}</td>
-                            </tr>
-                            <tr>
-                                <td>Baño social: {{ $imagenes_casas[0]->bano_social?'Si':'No' }}</td>
-                                <td>Aires Acond: {{ $imagenes_casas[0]->aires_acondicionado}}</td>
-                            </tr>
-                            <tr>
-                                <td>Cuarto Doméstica: {{ $imagenes_casas[0]->cuartoDomestica?'Si':'No' }}</td>
-                                <td>Abanicos: {{ $imagenes_casas[0]->abanicos_techo}}</td>
-                            </tr>
-                            <tr>
-                                <td>Garage: {{ $imagenes_casas[0]->garage }}</td>
-                                <td>Agua Caliente: {{ $imagenes_casas[0]->agua_caliente?'Si':'No' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Piscina: {{ $imagenes_casas[0]->piscina?'Si':'No' }}</td>
-                                <td>Tanque Agua: {{ $imagenes_casas[0]->tanque_agua?'Si':'No' }}</td>
-                            </tr>
+                                        <td>Año Construccion: {{ $imagenes_casas[0]->ano_construccion}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Baño social: {{ $imagenes_casas[0]->bano_social?'Si':'No' }}</td>
+                                        <td>Aires Acond: {{ $imagenes_casas[0]->aires_acondicionado}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cuarto Doméstica: {{ $imagenes_casas[0]->cuartoDomestica?'Si':'No' }}</td>
+                                        <td>Abanicos: {{ $imagenes_casas[0]->abanicos_techo}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Garage: {{ $imagenes_casas[0]->garage }}</td>
+                                        <td>Agua Caliente: {{ $imagenes_casas[0]->agua_caliente?'Si':'No' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Piscina: {{ $imagenes_casas[0]->piscina?'Si':'No' }}</td>
+                                        <td>Tanque Agua: {{ $imagenes_casas[0]->tanque_agua?'Si':'No' }}</td>
+                                    </tr>
 
-                            <tr>
-                                <td>Sist. Seguridad: {{ $imagenes_casas[0]->sistema_seguridad?'Si':'No' }}</td>
-                            </tr>
-                            </tbody>
-                            </table>
-                            </div>
-                            </div>
+                                    <tr>
+                                        <td>Sist. Seguridad: {{ $imagenes_casas[0]->sistema_seguridad?'Si':'No' }}</td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                 </div> <!--End card body -->
+                            </div>  <!--End card -->
                         
                             <!-- Precios de renta o venta de la propiedad -->
                         

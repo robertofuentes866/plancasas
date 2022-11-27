@@ -74,7 +74,7 @@
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                             <a class = "@yield('nav_link_inicio')" 
-                            href="{{Route('menu.inicio',['gestion'=>0,'id_propiedad'=>0])}}">INICIO</a>
+                            href="{{Route('menu.inicio',['gestion'=>0,'id_propiedad'=>0,'lastSql'=>' '])}}">INICIO</a>
                     </li>
                 @guest
                     <li class="nav-item">

@@ -159,4 +159,4 @@ Route::delete('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/
 Auth::routes();
 
 // llama pagina de inicio de plancasas. Cualquier usuario puede tener acceso.
-Route::get('/{gestion}/{id_propiedad}/inicio','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
+Route::get('/{gestion}/{id_propiedad?}/inicio','App\Http\Controllers\menuController@inicio')->name('menu.inicio');

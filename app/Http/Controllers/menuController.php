@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class menuController extends Controller
 {   
 
-    public function inicio($gestion,$id_propiedad) {
+    public function inicio($gestion,$id_propiedad=0) {
         $viewData = [];
         $viewData['titulo'] = "Plancasas BR - Sea Bienvenido";
         $viewData['nav_link_inicio'] = "nav-link active";
@@ -30,7 +30,7 @@ class menuController extends Controller
     }
 
     public function indexacion() {
-        return $this->inicio(0,0);
+        return $this->inicio(0);
     }
 
 }
