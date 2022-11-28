@@ -12,7 +12,7 @@
             <strong>Búsqueda de Propiedad </strong>
         </div>
     <div class="card-body">
-    <form method="get" action="{{route('menu.inicio',['gestion'=>1,'id_propiedad'=>0,'lastSql'=>' '])}}">
+    <form method="get" action="{{route('menu.inicio',['gestion'=>1])}}">
             @csrf
             <div class="form-group row">
                 <label for="tipo" class="col-lg-6 col-form-label">Tipo</label>
@@ -54,7 +54,7 @@
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
     <div class="card-header" style="text-align:center"><strong>Búsqueda detallada </strong></div>
     <div class="card-body bg-danger">
-    <form method="get" action="{{route('menu.inicio',['gestion'=>3,'id_propiedad'=>0,'lastSql'=>' '])}}">
+    <form method="get" action="{{route('menu.inicio',['gestion'=>3])}}">
             @csrf
         <fieldset>
             <legend>Seleccione</legend>    
@@ -189,7 +189,7 @@
                                 'localizacion'=>$_GET['id_localizacion']??0,'titulo'=>'Resultado de busqueda'])  <!-- muestra resultado del formulario en la pagina principal.  -->
         @break
   @case (2)
-    @livewire('thumbs-photos',['tipo'=>2,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
+    @livewire('thumbs-photos',['tipo'=>2,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad'],'busqueda'=>$viewData['resultadoBusqueda']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
         @break
 
  @case (3)

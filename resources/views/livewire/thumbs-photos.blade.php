@@ -14,13 +14,9 @@
         <div id="title_page_left_container" class="row">
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
             <p style="color:gold">
-                @if(isset($arrayOpcionesForm))
-                     
-                    @foreach($arrayOpcionesForm as $opciones)
-                       @if (!empty($opciones))
-                            {{$opciones.' - '}}
-                        @endif
-                    @endforeach
+                @if(!empty($arrayOpcionesForm))
+                
+                   {{$arrayOpcionesForm}}
                 @endif
             </p>
         </div>
@@ -134,13 +130,12 @@
                                     @if($tipo!=2)
                                     <h5 class="card-title">{{$residencial.'-'.$casaNumero}}</h5>
                                     <p class="card-text"> {{$descripcion}}</p>
-                                    <a class="btn btn-primary" href="{{route('menu.inicio',['gestion'=>2,'id_propiedad'=>$id_propiedad])}}"
-                                          role="button">Mas detalles...</a>
-                                    
+                                   
+                                    <a class="btn btn-primary" href="{{route('menu.inicio',['gestion'=>2,'id_propiedad'=>$id_propiedad,'busqueda'=>$arrayOpcionesForm])}}" role="button">Mas detalles...</a>
                                     @else
                                     <p class="card-title">
                                     @if(Auth::check())
-                                        <button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip"
+                                        <button onclick="{{'alertaMensaje($accionFav)'}}" data-toggle="tooltip"
                                             data-placement="bottom" 
                                             title="{{buscarFavorito($id_propiedad,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}"
                                             type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" 
@@ -160,7 +155,7 @@
                                 <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                                     <div class="card-header text-white" style="text-align:center;height:3.5em">
                                         <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
-                                        <p id="subtitle_page_left"><small>{Clique imagen pequeña para ver amplia  ===>}</small></p>
+                                        <p id="subtitle_page_left"><small>{Clique imagen pequeña para ver amplia}</small></p>
                                     </div>
                                     <div class="card-body bg-body px-0">
 

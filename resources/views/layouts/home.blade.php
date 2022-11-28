@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
 
-    <title>@yield('mainTitle','Plancasas Bienes Raices')</title>
+    <title>@yield('mainTitle','Donde Vivir Real Estate')</title>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
     @livewireStyles
@@ -63,7 +63,7 @@
 <body>
 <div class="row">
     <div id="encabezado" class="col-lg-12 bg-dark text-white">
-        <p class="placeholder-wave" id="headerP">PLANCASAS BIENES RAICES </p>
+        <p class="placeholder-wave" id="headerP">DONDE VIVIR REAL ESTATE </p>
         <p class="placeholder-wave"><small id="smallHeader">Te ofrecemos un lugar Accesible, Cómodo y Seguro para vivir en familia.</small> </p>
 
     </div>
@@ -73,8 +73,9 @@
         <div class="col-lg-12 nav-justified">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                            <a class = "@yield('nav_link_inicio')" 
-                            href="{{Route('menu.inicio',['gestion'=>0,'id_propiedad'=>0,'lastSql'=>' '])}}">INICIO</a>
+                            
+                            <a class = "@yield('nav_link_inicio')" href="{{Route('menu.inicio')}}">INICIO</a>
+                           
                     </li>
                 @guest
                     <li class="nav-item">
