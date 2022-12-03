@@ -30,7 +30,7 @@ class ThumbsPhotos extends Component
     public $titulo_thumbnail_lastQuery = '';
     public $i = 0;
     public $i_total = 0;
-    public $accionFav = "";
+    public $accionFav = "Mis Favoritos";
     public $arrayOpcionesForm = '';
     public $lastQuery = '';
 
@@ -73,55 +73,56 @@ class ThumbsPhotos extends Component
             $this->id_propiedad = $argumentos[2];
             $this->arrayOpcionesForm = $argumentos[3];
             $this->titulo_thumbnail = "Fotos de la propiedad seleccionada";
+            
             break;
         case 3:  // llamada del formulario detallado.
             $this->tipo = $argumentos[0];
             $this->titulo = $argumentos[1];
             $this->id_ciudad = $argumentos[2]?['localizaciones.id_ciudad','=',$argumentos[2]]:['casas.disponibilidad','=',1];
             $instance = $argumentos[2]?ciudad::find($argumentos[2],'ciudad'):' ';
-            if ($argumentos[2]) {$this->arrayOpcionesForm .= ' Ciudad: '. $instance->ciudad.'-';}
+            if ($argumentos[2]) {$this->arrayOpcionesForm .= 'Ciudad: '. $instance->ciudad.'- ';}
 
             $this->id_recurso = $argumentos[3]?['recursos.id_recurso','=',$argumentos[3]]:['casas.disponibilidad','=',1];
             $instance = $argumentos[3]?recurso::find($argumentos[3],'recurso'):' ';
-            if ($argumentos[3]) {$this->arrayOpcionesForm .= ' Recurso: '. $instance->recurso.'-';}
+            if ($argumentos[3]) {$this->arrayOpcionesForm .= 'Recurso: '. $instance->recurso.'- ';}
 
             $this->id_duracion = $argumentos[4]?['precios_casas.id_duracion','=',$argumentos[4]]:['casas.disponibilidad','=',1];
             $instance = $argumentos[4]?duracion::find($argumentos[4],'duracion'):' ';
-            if ($argumentos[4]) {$this->arrayOpcionesForm .= ' Duracion: '. $instance->duracion.'-';}
+            if ($argumentos[4]) {$this->arrayOpcionesForm .= 'Duracion: '. $instance->duracion.'- ';}
 
             $this->habitaciones = $argumentos[5];
-            if($argumentos[5]){ $this->arrayOpcionesForm .= ' Habitaciones Minima: '. $argumentos[5].'-';}
+            if($argumentos[5]){ $this->arrayOpcionesForm .= 'Habitaciones Minima: '. $argumentos[5].'- ';}
 
             $this->banos = $argumentos[6];
-            if($argumentos[6]){ $this->arrayOpcionesForm .= ' Baños Minimo: '. $argumentos[6].'-';}
+            if($argumentos[6]){ $this->arrayOpcionesForm .= 'Banos Minimo: '. $argumentos[6].'- ';}
 
             $this->aires_acondicionado = $argumentos[7];
-            if($argumentos[7]){ $this->arrayOpcionesForm .= ' A/A Minimo: '. $argumentos[7].'-';}
+            if($argumentos[7]){ $this->arrayOpcionesForm .= 'Aire Acond. Minimo: '. $argumentos[7].'- ';}
 
             $this->abanicos_techo = $argumentos[8];
-            if($argumentos[8]){ $this->arrayOpcionesForm .= ' Abanicos Minimo: '. $argumentos[8].'-';}
+            if($argumentos[8]){ $this->arrayOpcionesForm .= 'Abanicos Minimo: '. $argumentos[8].'- ';}
 
             $this->precio_minimo = $argumentos[9];
-            if($argumentos[9]){ $this->arrayOpcionesForm .= ' Precio Minimo: '. $argumentos[9].'-';}
+            if($argumentos[9]){ $this->arrayOpcionesForm .= 'Precio Minimo: '. $argumentos[9].'- ';}
 
             $this->precio_maximo = $argumentos[10];
-            if($argumentos[10]){ $this->arrayOpcionesForm .= ' Precio Maximo: '. $argumentos[10].'-';}
+            if($argumentos[10]){ $this->arrayOpcionesForm .= 'Precio Maximo: '. $argumentos[10].'- ';}
 
             $this->agua_caliente = $argumentos[11]?['casas.agua_caliente','=',1]:['casas.disponibilidad','=',1];
-            if($argumentos[11]){ $this->arrayOpcionesForm .= ' Agua caliente -';  }
+            if($argumentos[11]){ $this->arrayOpcionesForm .= 'Agua caliente - ';  }
 
             $this->tanque_agua = $argumentos[12]?['casas.tanque_agua','=',1]:['casas.disponibilidad','=',1];
-            if($argumentos[12]){ $this->arrayOpcionesForm .= ' Tanque de agua -';  }
+            if($argumentos[12]){ $this->arrayOpcionesForm .= 'Tanque de agua - ';  }
 
             $this->sistema_seguridad = $argumentos[13]?['casas.sistema_seguridad','=',1]:['casas.disponibilidad','=',1];
-            if($argumentos[13]){ $this->arrayOpcionesForm .= ' Sistema de seguridad -';  }
+            if($argumentos[13]){ $this->arrayOpcionesForm .= 'Sistema de seguridad - ';  }
 
             $this->cuartoDomestica = $argumentos[14]?['casas.cuartoDomestica','=',1]:['casas.disponibilidad','=',1];
-            if($argumentos[14]){ $this->arrayOpcionesForm .= ' Cuarto de domestica -';  }
+            if($argumentos[14]){ $this->arrayOpcionesForm .= 'Cuarto de domestica - ';  }
 
             $this->piscina = $argumentos[15]?['casas.piscina','=',1]:['casas.disponibilidad','=',1];
-            if($argumentos[15]){ $this->arrayOpcionesForm .= ' Piscina';  }
-
+            if($argumentos[15]){ $this->arrayOpcionesForm .= 'Piscina ';  }
+            
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
        }
@@ -271,10 +272,10 @@ class ThumbsPhotos extends Component
         $hallo = $this->buscarFavorito($id);
         if ($hallo) {   //borrar Favorito.
             $result = $this->borrarFavorito($id);
-            $this->accionFav = "Borrado de Mis Favoritos";
+            $this->accionFav = "Agregado a Mis Favoritos";
         } else {  // registrar Favorito.
             $result = $this->insertarFavorito($id);
-            $this->accionFav = "Agregado a Mis Favoritos";
+            $this->accionFav = "Borrado de Mis Favoritos";
         }
     }
 

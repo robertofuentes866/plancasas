@@ -18,7 +18,7 @@
                 <label for="tipo" class="col-lg-6 col-form-label">Tipo</label>
                 
                     <select name="id_tipo" id="tipo">
-                                    <option value="">** Tipo **</option>
+                                    <option value="">** Tipo de propiedad **</option>
                                     @foreach($viewData['tipo'] as $tipo)
                                         <option value="{{$tipo->id_tipo}}">{{$tipo->tipo}} </option>
                                     @endforeach
@@ -30,7 +30,7 @@
                 <label for="ofrecimiento" class="col-lg-6 col-form-label">Ofrecimiento</label>
                 
                     <select name="id_ofrecimiento" id="ofrecimiento">
-                                    <option value="">*** Ofrecimiento ***</option>
+                                    <option value="">*** Desea comprar o alquilar ? ***</option>
                                     @foreach($viewData['ofrecimiento'] as $ofrecimiento)
                                         <option value="{{$ofrecimiento->id_ofrecimiento}}">{{$ofrecimiento->ofrecimiento}} </option>
                                     @endforeach
@@ -62,7 +62,7 @@
                 <label for="ciudad" class="col-lg-6 col-form-label">Ciudades</label>
          
                 <select class="w-75 ms-3" id="ciudad" name="id_ciudad"> 
-                     <option value="">**Ciudad**</option>
+                     <option value="">**Ubicacion Ciudad **</option>
                         @foreach($viewData['ciudad'] as $ciudad)
                             <option value="{{$ciudad->id_ciudad}}">{{$ciudad->ciudad}}</option>
                         @endforeach
@@ -74,7 +74,7 @@
                 <label for="recurso" class="col-lg-6 col-form-label">Recurso</label>
          
                 <select class="w-75 ms-3" id="recurso" name="id_recurso"> 
-                        <option value="">**Requerir muebles**</option>
+                        <option value="">**Requerir muebles ?**</option>
                         @foreach($viewData['recurso'] as $recurso)
                             <option value="{{$recurso->id_recurso}}">{{$recurso->recurso}}</option>
                         @endforeach
@@ -95,58 +95,71 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend>Declare lo mínimo de:</legend>   
-            <div class="form-group mt-2">
-                <label for="habitaciones" >Habitaciones Mínima:</label>
-                <input name="habitaciones" value="1" type="number" min="1" max="25" >
-            </div>
-
-            <div class="form-group mt-2">
-                <label for="banos" >Baños Mínimo:</label>
-                <input name="banos" value="1" type="number" min="1" max="25" >
-            </div>
-
-            <div class="form-group mt-2">
-                <label for="aires_acondicionado" >Aire Acond. Mínimo:</label>
-                <input name="aires_acondicionado" value="0" type="number" min="0" max="25" >
-            </div>
-
-            <div class="form-group mt-2">
-                <label for="abanicos_techo" >Abanicos Mínimo:</label>
-                <input name="abanicos_techo" value="0" type="number" min="0" max="25" >
-            </div>
+            <legend>Declare lo minimo de:</legend>
+            <table class="tabla_de_formulario">
+                <tr> 
+                    <div class="form-group mt-2">
+                       <td> <label for="habitaciones" >Habitaciones Minima:</label></td>
+                        <td class="tabla_de_formulario_columna"><input name="habitaciones" value="1" type="number" min="1" max="25" ></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="form-group mt-2">
+                       <td> <label for="banos" >Banos Minimo:</label></td>
+                       <td class="tabla_de_formulario_columna"> <input name="banos" value="1" type="number" min="1" max="25" ></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="form-group mt-2">
+                        <td><label for="aires_acondicionado" >Aire Acond. Minimo:</label></td>
+                        <td class="tabla_de_formulario_columna"><input name="aires_acondicionado" value="0" type="number" min="0" max="25" ></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="form-group mt-2">
+                        <td><label for="abanicos_techo" >Abanicos Minimo:</label></td>
+                        <td class="tabla_de_formulario_columna"><input name="abanicos_techo" value="0" type="number" min="0" max="25" ></td>
+                    </div>
+                </tr>
+            </table>
         </fieldset>
 
         <fieldset>
             <legend> Marque lo requerido</legend> 
+            <table class="tabla_de_formulario">
+                <tr>
             <div class="form-group mt-2">
-                <label class="form-check-label" for="cuartoDomestica"> Cuarto Domestica?</label>
-                <input class="form-check-input ms-2" type="checkbox" name= "cuartoDomestica" id="cuartoDomestica">
+                <td><label class="form-check-label" for="cuartoDomestica"> Cuarto Domestica?</label></td>
+                <td class="tabla_de_formulario_columna_check"><input class="form-check-input ms-2" type="checkbox" name= "cuartoDomestica" id="cuartoDomestica"></td>
 
-                <label class="form-check-label ms-5" for="piscina"> Piscina?</label>
-                <input class="form-check-input ms-2" type="checkbox" name= "piscina" id="piscina">
+                <td><label class="form-check-label ms-5" for="piscina"> Piscina?</label></td>
+                <td class="tabla_de_formulario_columna_check"><input class="form-check-input ms-2" type="checkbox" name= "piscina" id="piscina"></td>
                 
             </div>
-
+                </tr>
+                <tr>
             <div class="form-group mt-2">
-                <label class="form-check-label" for="agua_caliente"> Agua Caliente?</label>
-                <input class="form-check-input ms-2" type="checkbox" name= "agua_caliente" id="agua_caliente">
+                <td><label class="form-check-label" for="agua_caliente"> Agua Caliente?</label></td>
+                <td class="tabla_de_formulario_columna_check"><input class="form-check-input ms-2" type="checkbox" name= "agua_caliente" id="agua_caliente"></td>
 
-                <label class="form-check-label ms-5" for="tanque_agua">Tanque Agua?</label>
-                <input class="form-check-input ms-2" type="checkbox" name="tanque_agua" id="tanque_agua">
+                <td><label class="form-check-label ms-5" for="tanque_agua">Tanque Agua?</label></td>
+                <td class="tabla_de_formulario_columna_check"><input class="form-check-input ms-2" type="checkbox" name="tanque_agua" id="tanque_agua"></td>
                 
             </div>
-
+                </tr>
+                <tr>
             <div class="form-group mt-2">
-                <label class="form-check-label" for="sistema_seguridad">Sist. Seguridad?</label>
-                <input class="form-check-input ms-3" type="checkbox" name= "sistema_seguridad" id="sistema_seguridad">
+                <td><label class="form-check-label" for="sistema_seguridad">Sist. Seguridad?</label></td>
+                <td class="tabla_de_formulario_columna_check"><input class="form-check-input ms-2" type="checkbox" name= "sistema_seguridad" id="sistema_seguridad"></td>
                 
             </div>
+                </tr>
+            </table>
         </fieldset>
 
         </fieldset>
             <div class="form-group row">
-                <label for="precio_minimo" class="col-lg-4 col-form-label">Precio Mínimo</label>
+                <label for="precio_minimo" class="col-lg-4 col-form-label">Precio Minimo</label>
                 <input class="w-75 ms-3" name="precio_minimo" value="100" type="number" min="1" max="2000000">
 
                 <label for="precio_maximo" class="col-lg-4 col-form-label">Precio Maximo</label>

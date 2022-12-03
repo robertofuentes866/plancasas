@@ -27,6 +27,8 @@ Route::get('/lixo',function(){
    
 });
 
+Route::get('/menu.inicio/{gestion?}/{id_propiedad?}/{busqueda?}','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
+
 Route::get('/','App\Http\Controllers\menuController@indexacion')->name('menuIndex');
 
 // prepara datos del menu de formularios.
@@ -159,5 +161,3 @@ Route::delete('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/
 Auth::routes();
 
 // llama pagina de inicio de plancasas. Cualquier usuario puede tener acceso.
-
-Route::get('/inicio/{gestion?}/{id_propiedad?}/{busqueda?}','App\Http\Controllers\menuController@inicio')->name('menu.inicio');

@@ -3,7 +3,7 @@
          <label for="ciudad" class="col-lg-4 col-form-label">Ciudades</label>
          
                <select wire:model="selectedCiudad" id="ciudad" name="id_ciudad"> 
-                     <option value="">**Ciudad**</option>
+                     <option value="">**Ubicacion Ciudad**</option>
                      @foreach($ciudades as $ciudad)
                         <option value="{{$ciudad->id_ciudad}}">{{$ciudad->ciudad}}</option>
                      @endforeach

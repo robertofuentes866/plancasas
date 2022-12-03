@@ -1,5 +1,5 @@
  
- @if ((! $imagenes_casas->count()) && ($tipo==1 or $tipo==3))  <!-- Formularios con resultados vacios -->
+ @if ((! $imagenes_casas->count()))  <!-- Formularios con resultados vacios -->
 
 <script>
    Swal.fire('Busqueda con resultado vacio');
@@ -130,12 +130,12 @@
                                     @if($tipo!=2)
                                     <h5 class="card-title">{{$residencial.'-'.$casaNumero}}</h5>
                                     <p class="card-text"> {{$descripcion}}</p>
-                                   
-                                    <a class="btn btn-primary" href="{{route('menu.inicio',['gestion'=>2,'id_propiedad'=>$id_propiedad,'busqueda'=>$arrayOpcionesForm])}}" role="button">Mas detalles...</a>
+                                    
+                                    <a class="btn btn-primary" href="{{route('menu.inicio',[2,$id_propiedad,$arrayOpcionesForm])}}" role="button">Mas detalles...</a>
                                     @else
                                     <p class="card-title">
                                     @if(Auth::check())
-                                        <button onclick="{{'alertaMensaje($accionFav)'}}" data-toggle="tooltip"
+                                        <button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip"
                                             data-placement="bottom" 
                                             title="{{buscarFavorito($id_propiedad,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}"
                                             type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" 
@@ -313,6 +313,39 @@
                             <td> Celular Claro: {{ $imagenes_casas[0]->cel2}}</td>
 
                             <td> Email: {{ $imagenes_casas[0]->email}}</td>
+                            </tr>
+                            <tr>
+                                <td> Mensaje de esta propiedad</td>
+                                <td>
+                                    @if (isset($_GET['submitEmail']))
+                                            Mail::raw($_GET['emailBody'], function($message)
+                                            {
+                                                $message->from($_GET['from'], 'Laravel');
+                                            
+                                                $message->to( $imagenes_casas[0]->email)
+                                                        ->cc('robertofuentes866@hotmail.com');
+                                            });
+                                    
+                                        @if ($result)
+                                            <script>
+                                                Swal.fire('Email enviado exitosamente');
+                                            </script>
+                                        @else
+                                            <script>
+                                                Swal.fire('Email no enviado.Revise los campos');
+                                            </script>
+                                        @endif
+                                    @endif
+                                    <form action="{{htmlentities($_SERVER['PHP_SELF'])}}" method="get">
+                                         @csrf
+                                         <label for="from" >From:</label>
+                                         <input size="25px" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}">
+                                         <label for="mensaje">Mensaje:</label>
+                                        <textarea id="mensaje" required name="emailBody" rows="5" cols="30" placeholder="Mensaje"></textarea>
+                                        <input type="submit" name="submitEmail" value="Enviar">
+                                        <input type="reset" value="Limpiar">
+                                    </form>
+                                </td>
                             </tr>
                             </tbody>
                             </table>

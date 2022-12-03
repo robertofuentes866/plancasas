@@ -60,6 +60,7 @@ figcaption {
    background-repeat: no-repeat;
    background-position:right;
    background-size: 50%;
+   background-position-y:20%;
 }
 fieldset {
     background-color: rgb(205, 218, 213);
@@ -101,4 +102,14 @@ legend {
 
 .flechas {
     opacity:0.1;
+}
+
+.tabla_de_formulario .tabla_de_formulario_columna {
+    padding-left: 20px;
+}
+
+.tabla_de_formulario .tabla_de_formulario_columna_check {  
+    margin-left: 5px;
+    padding-bottom: 25px;
+  
 }
