@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\infoPropiedad;
-use App\Mail\lixo;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,22 +25,13 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/lixo/{nombre}',function($nombre){
-   $lixotemp = new lixo($nombre);
-   dd($lixotemp);
-   Mail::to('robertofuentes866@gmail.com')->send($lixotemp);
-
-   return "Email enviado a Mailtrap";
-   
-});
 
 Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
       
      $sendMail = new infoPropiedad($_GET['from'],$_GET['emailBody'],$nombreAgente,$_GET['casaNumero']);
      Mail::to($to)->send($sendMail);
-     $urlVista = $_GET['vista'];
-     dump($urlVista);
-     return view('/menu.inicio/2/27');
+     return redirect(URL::previous());
+
 })->name('infoPropiedad');
 
 Route::get('/menu.inicio/{gestion?}/{id_propiedad?}/{busqueda?}','App\Http\Controllers\menuController@inicio')->name('menu.inicio');

@@ -1,10 +1,16 @@
  
- @if ((! $imagenes_casas->count()))  <!-- Formularios con resultados vacios -->
+@if ((! $imagenes_casas->count()))  <!-- Formularios con resultados vacios -->
 
-<script>
-   Swal.fire('Busqueda con resultado vacio');
-</script>
-@php($swal = 1)
+    <script>
+        Swal.fire('Busqueda con resultado vacio');
+    </script>
+    @php($swal = 1)
+@endif
+
+@if (session('emailEnviado') != null)
+    <script>
+        Swal.fire("Mensaje Enviado");
+    </script>
 @endif
 
 
@@ -324,7 +330,6 @@
                                          <label for="mensaje">Mensaje:</label>
                                         <textarea id="mensaje" required name="emailBody" rows="5" cols="30" placeholder="Mensaje"></textarea>
                                         <input hidden name="casaNumero" value="{{$casaNumero}}">
-                                        <input hidden name="vista" value="{{$_SERVER['PHP_SELF']}}">
                                         <input type="submit" name="submitEmail" value="Enviar">
                                         <input type="reset" value="Limpiar">
                                     </form>
