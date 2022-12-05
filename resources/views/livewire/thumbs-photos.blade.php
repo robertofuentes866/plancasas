@@ -317,31 +317,14 @@
                             <tr>
                                 <td> Mensaje de esta propiedad</td>
                                 <td>
-                                    @if (isset($_GET['submitEmail']))
-                                            Mail::raw($_GET['emailBody'], function($message)
-                                            {
-                                                $message->from($_GET['from'], 'Laravel');
-                                            
-                                                $message->to( $imagenes_casas[0]->email)
-                                                        ->cc('robertofuentes866@hotmail.com');
-                                            });
-                                    
-                                        @if ($result)
-                                            <script>
-                                                Swal.fire('Email enviado exitosamente');
-                                            </script>
-                                        @else
-                                            <script>
-                                                Swal.fire('Email no enviado.Revise los campos');
-                                            </script>
-                                        @endif
-                                    @endif
-                                    <form action="{{htmlentities($_SERVER['PHP_SELF'])}}" method="get">
+                                    <form action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
                                          @csrf
                                          <label for="from" >From:</label>
                                          <input size="25px" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}">
                                          <label for="mensaje">Mensaje:</label>
                                         <textarea id="mensaje" required name="emailBody" rows="5" cols="30" placeholder="Mensaje"></textarea>
+                                        <input hidden name="casaNumero" value="{{$casaNumero}}">
+                                        <input hidden name="vista" value="{{$_SERVER['PHP_SELF']}}">
                                         <input type="submit" name="submitEmail" value="Enviar">
                                         <input type="reset" value="Limpiar">
                                     </form>

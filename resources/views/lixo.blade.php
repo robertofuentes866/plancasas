@@ -1,18 +1,14 @@
-@extends('layouts/home')
-@section('mainTitle','titulo')
-@section('nav_link_inicio','nav-link active')
-@section('nav_link_registrar','nav-link')
-@section('nav_link_entrar','nav-link')
-@section('cuerpo')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    Hola {{$cliente}}
 
-<div class="row row-cols-2" style="background-color:black">
-  <div class="col" style="background-color:green">UNO</div>
-  <div class="col" style="background-color:yellow">DOS</div>
-  <div class="col" style="background-color:yellow">TRES</div>
-
-  <div class="col" style="background-color:green">CUATRO</div>
-
-  <div class="col" style="background-color:green">CINCO</div>
-</div>
-
-@endsection
+    Este es mi primer email exitoso.
+</body>
+</html>
