@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\infoPropiedad;
-use Illuminate\Support\Facades\URL;
 
 
 /*
@@ -30,7 +29,8 @@ Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
       
      $sendMail = new infoPropiedad($_GET['from'],$_GET['emailBody'],$nombreAgente,$_GET['casaNumero']);
      Mail::to($to)->send($sendMail);
-     return redirect(URL::previous());
+     //echo "<script> Swal.fire('Mensaje enviado') </script>";
+     return redirect()->back();
 
 })->name('infoPropiedad');
 

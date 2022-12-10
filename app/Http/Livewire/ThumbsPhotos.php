@@ -133,7 +133,9 @@ class ThumbsPhotos extends Component
 
         $this->id_usuario = Auth::check()?Auth::id():0;
         $imagenes_casas = $this->get_casas();
-        $this->lastQuery = $this->selectLastQuery(1);
+        //dd(session()->getId());
+        $this->lastQuery = $this->selectLastQuery(session()->getId());
+        
         $favoritos_casas = $this->get_favoritos_casas();
 
         if (!$this->contador && ($imagenes_casas->count() || $favoritos_casas->count())) {
@@ -168,7 +170,7 @@ class ThumbsPhotos extends Component
                                                 'casas.id_casa','casas.casaNumero','localizaciones.residencial',
                                                 DB::raw("'Destacados' as titulo" ))->get();
                                            
-                $this->actualizarLastQuery($this->lastQuery,'1');
+                $this->actualizarLastQuery($this->lastQuery,session()->getId());
                 $this->titulo_thumbnail_lastQuery = "Destacados";
                 return $this->lastQuery;
                 break;  
@@ -190,7 +192,7 @@ class ThumbsPhotos extends Component
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
-                $this->actualizarLastQuery($this->lastQuery,1);
+                $this->actualizarLastQuery($this->lastQuery,session()->getId());
                 $this->titulo_thumbnail_lastQuery = "Resultado de Busqueda";
                 return $this->lastQuery;
                 break;
@@ -250,7 +252,7 @@ class ThumbsPhotos extends Component
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
-                $this->actualizarLastQuery($this->lastQuery,1);
+                $this->actualizarLastQuery($this->lastQuery,session()->getId());
                 $this->titulo_thumbnail_lastQuery = "Resultado de Busqueda";
               return $this->lastQuery;
                 break;
@@ -299,16 +301,6 @@ class ThumbsPhotos extends Component
         
     }
 
-    private function actualizarLastQuery($lastQuery,$id) { 
-        DB::table('lastquery')->where('id',$id)->update(['lastQuery'=>$lastQuery]);
-    }
-
-    public function selectLastQuery($id) {
-
-        $lastQ = DB::table('lastquery')->where('id',$id)->get('lastQuery');
-       return json_decode($lastQ[0]->lastQuery);
-    }
-
     private function get_favoritos_casas(){
         return DB::table('favoritos_casas')
                 ->join('casas','casas.id_casa','=','favoritos_casas.id_casa')
@@ -322,4 +314,22 @@ class ThumbsPhotos extends Component
                             'casas.id_casa','casas.casaNumero','localizaciones.residencial',
                           DB::raw("'Favoritos' as titulo" ))->get();
     }
+
+    private function actualizarLastQuery($lastQuery,$id) { 
+       
+        DB::table('sessions')->upsert([
+             ['payload'=>$lastQuery,'id'=>$id]
+            ],
+            ['id'],
+            ['payload']
+          );
+    }
+
+    public function selectLastQuery($id) {
+
+        $lastQ = DB::table('sessions')->where('id',$id)->get('payload');
+        
+       return json_decode($lastQ[0]->payload);
+    }
+
 }

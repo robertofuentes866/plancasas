@@ -14,6 +14,7 @@ class menuController extends Controller
 
     public function inicio($gestion=0,$id_propiedad=0,$busqueda=' ') {
         
+        session()->put('actualId',session()->getId());
         $viewData = [];
         $viewData['titulo'] = "Visual Home Real Estate";
         $viewData['nav_link_inicio'] = "nav-link active";

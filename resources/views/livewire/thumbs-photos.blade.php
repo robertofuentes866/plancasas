@@ -7,14 +7,6 @@
     @php($swal = 1)
 @endif
 
-@if (session('emailEnviado') != null)
-    <script>
-        Swal.fire("Mensaje Enviado");
-    </script>
-@endif
-
-
-
 @if ((count($lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
  <div class="col-lg-8">
         <div id="title_page_left_container" class="row">
@@ -321,17 +313,25 @@
                             <td> Email: {{ $imagenes_casas[0]->email}}</td>
                             </tr>
                             <tr>
-                                <td> Mensaje de esta propiedad</td>
+                                <td> Pedir mayor Info de: <strong>{{$casaNumero}}</strong></td>
                                 <td>
-                                    <form action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
+                                    <form id="emailForm" action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
                                          @csrf
-                                         <label for="from" >From:</label>
-                                         <input size="25px" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}">
-                                         <label for="mensaje">Mensaje:</label>
-                                        <textarea id="mensaje" required name="emailBody" rows="5" cols="30" placeholder="Mensaje"></textarea>
-                                        <input hidden name="casaNumero" value="{{$casaNumero}}">
-                                        <input type="submit" name="submitEmail" value="Enviar">
-                                        <input type="reset" value="Limpiar">
+                                         <table>
+                                            <tr> 
+                                               <td><label for="from" >De:</label></td>
+                                               <td> <input size="25px" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}"></td>
+                                            </tr>
+                                            <tr>    
+                                               <td><label for="mensaje">Mensaje:</label></td>
+                                               <td><textarea id="mensaje" required name="emailBody" rows="5" cols="30" placeholder="Mensaje"></textarea></td>
+                                               <input hidden name="casaNumero" value="{{$casaNumero}}">
+                                            </tr>
+                                            <tr>
+                                            <td colspan="2"><input type="submit" name="submitEmail" value="Enviar">
+                                             <input type="reset" value="Limpiar"></td>
+                                            </tr>
+                                         </table>
                                     </form>
                                 </td>
                             </tr>

@@ -57,10 +57,18 @@
                 document.getElementById("Range2Val").innerHTML='US$ '+3000;
             }
         }
+
+        
     </script>
+    <script>
+        function cerrarSession(){
+            @php(DB::table('sessions')->where('id','=',session()->get('actualId'))->delete());
+        }
+    </script>
+
     
 </head>
-<body>
+<body onunload="javascript:cerrarSession()">
 <div class="row">
     <div id="encabezado" class="col-lg-12 bg-dark text-white">
         <p class="placeholder-wave" id="headerP">VISUAL HOME REAL ESTATE NICARAGUA </p>
@@ -88,7 +96,7 @@
                     <li class="nav-item">
                     <form id="logout" action="{{ route('logout') }}" method="POST">
                             <a role="button" class="nav-link"
-                            onclick="document.getElementById('logout').submit();">{{Auth::user()->name}} {Salir}</a>
+                            onclick="document.getElementById('logout').submit();"><strong>{{Auth::user()->name}} {Salir}</strong></a>
                             @csrf
                     </form>
                     </li>
