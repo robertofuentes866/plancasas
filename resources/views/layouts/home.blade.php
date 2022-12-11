@@ -60,15 +60,9 @@
 
         
     </script>
-    <script>
-        function cerrarSession(){
-            @php(DB::table('sessions')->where('id','=',session()->get('actualId'))->delete());
-        }
-    </script>
-
     
 </head>
-<body onunload="javascript:cerrarSession()">
+<body>
 <div class="row">
     <div id="encabezado" class="col-lg-12 bg-dark text-white">
         <p class="placeholder-wave" id="headerP">VISUAL HOME REAL ESTATE NICARAGUA </p>

@@ -133,7 +133,6 @@ class ThumbsPhotos extends Component
 
         $this->id_usuario = Auth::check()?Auth::id():0;
         $imagenes_casas = $this->get_casas();
-        //dd(session()->getId());
         $this->lastQuery = $this->selectLastQuery(session()->getId());
         
         $favoritos_casas = $this->get_favoritos_casas();
@@ -317,19 +316,22 @@ class ThumbsPhotos extends Component
 
     private function actualizarLastQuery($lastQuery,$id) { 
        
-        DB::table('sessions')->upsert([
+       /* DB::table('sessions')->upsert([
              ['payload'=>$lastQuery,'id'=>$id]
             ],
             ['id'],
             ['payload']
-          );
+          );*/
+
+          session(['id'=>$lastQuery]);
     }
 
     public function selectLastQuery($id) {
 
-        $lastQ = DB::table('sessions')->where('id',$id)->get('payload');
+        //$lastQ = DB::table('sessions')->where('id',$id)->get('payload');
+        $lastQ = session('id');
         
-       return json_decode($lastQ[0]->payload);
+       return $lastQ;
     }
 
 }

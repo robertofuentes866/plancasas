@@ -29,7 +29,6 @@ Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
       
      $sendMail = new infoPropiedad($_GET['from'],$_GET['emailBody'],$nombreAgente,$_GET['casaNumero']);
      Mail::to($to)->send($sendMail);
-     //echo "<script> Swal.fire('Mensaje enviado') </script>";
      return redirect()->back();
 
 })->name('infoPropiedad');
