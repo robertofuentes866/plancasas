@@ -42,41 +42,59 @@ function init_variables(&$i,&$t,&$a) {
     $a = [];
 }
 
-function agregarThumbsToCarrousel() {
+function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
+    $comillas = htmlentities('"');
     init_variables($i,$i_total,$arrayProp);
-    $permiteAbrirGrupoCarrusel= true;       
-    foreach($imagenes_casas as $imagen_casa)
-        incrementaIndice($i_total)
+    $permiteAbrirGrupoCarrusel= true;
     
-        if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
-            if ((!($i % 4)) && $permiteAbrirGrupoCarrusel)
-            
-            echo '<div class="carousel-item {{$i==0?'active ':''}} row row-cols-2">';
-            
-            @endif  
+    echo '<div id="'.$nombreCarrusel.'" class="carousel slide" data-interval="false">
+        <div class="carousel-inner">';
 
-                <div class="col" style=" float:right; height:120px;">
-                    @php(incrementaIndice($i))
-                    @php($permiteAbrirGrupoCarrusel=false)
-                    <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
-                            {{$comillas.$imagen_casa->descripcion.$comillas}},
-                            {{$comillas.$imagen_casa->residencial.$comillas}},
-                            {{$comillas.$imagen_casa->casaNumero.$comillas}},
-                            {{$comillas.$imagen_casa->id_casa.$comillas}},
-                            {{$comillas.$imagen_casa->leyenda.$comillas}},
-                            {{$comillas.$titulo_thumbnail.$comillas}})"> 
-                        <img class="img-thumbnail" 
-                            src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
-                            alt=" " width="84" height="54">
-                        <figcaption> {{$imagen_casa->leyenda}} </figcaption>
+    foreach($fotos_thumb as $imagen_casa) {
+        incrementaIndice($i_total);
+    
+        if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp)) {
+            if ((!($i % 4)) && $permiteAbrirGrupoCarrusel) {
+
+                if ($i==0) {
+                    echo '<div class="carousel-item active row row-cols-2">';
+                } else {
+                    echo '<div class="carousel-item row row-cols-2">';
+                }
+            
+            } 
+
+                echo '<div class="col" style=" float:right; height:120px;">';
+                    incrementaIndice($i);
+                    $permiteAbrirGrupoCarrusel=false;
+                    echo "<figure wire:click=\"selectNormalImagen($comillas$imagen_casa->foto_normal$comillas,
+                            $comillas$imagen_casa->descripcion$comillas,
+                            $comillas$imagen_casa->residencial$comillas,
+                            $comillas$imagen_casa->casaNumero$comillas,
+                            $comillas$imagen_casa->id_casa$comillas,
+                            $comillas$imagen_casa->leyenda$comillas,
+                            $comillas$titulo$comillas)\">
+                        <img class='img-thumbnail' 
+                            src=". asset('storage/propiedades/'.$imagen_casa->foto_thumb) 
+                            ." width=\"84\" height=\"54\">
+                        <figcaption> $imagen_casa->leyenda </figcaption>
                     </figure>
-                </div>
-        @endif 
-        @if ( ( (!($i % 4)) or ($i_total >= $imagenes_casas->count()) ) && !$permiteAbrirGrupoCarrusel )
-        @php($permiteAbrirGrupoCarrusel=true)
-        </div> 
-        @endif
-    @endforeach
+                </div>";
+        }
+        if ( ( (!($i % 4)) or ($i_total >= $fotos_thumb->count()) ) && !$permiteAbrirGrupoCarrusel ) {
+            $permiteAbrirGrupoCarrusel=true;
+            echo '</div>'; 
+        }
+    }
+
+    echo'</div> 
+        <button  class="carousel-control-prev bg-light ml-0 flechas" type="button" data-target="#'.$nombreCarrusel.'" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span></button>
+        <button class="carousel-control-next bg-light mr-0 flechas" type="button" data-target="#'.$nombreCarrusel.'" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span></button>
+        </div>';
 }
 
 

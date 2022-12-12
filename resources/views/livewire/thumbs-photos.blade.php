@@ -32,53 +32,7 @@
                             <p class="subtitle_page_left"><small>{Vea otras usando flechas}</small></p>
                         </div>
                             <div class="card-body bg-body px-0">
-
-                                    <div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
-                                        
-                                        <div class="carousel-inner">
-                                            @php(init_variables($i,$i_total,$arrayProp))
-                                          
-                                            @foreach($lastQuery as $imagen_casa)
-                                               
-                                                @php(incrementaIndice($i_total))
-                                               
-                                                @if (!($i % 4))
-                                                <div class="carousel-item {{$i==0?'active ':''}} row row-cols-2">
-                                                  
-                                                @endif  
-                                                @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
-                                                        <div class="col" style=" float:right; height:120px;">
-                                                            @php(incrementaIndice($i))
-                                                            <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
-                                                                    {{$comillas.$imagen_casa->descripcion.$comillas}},
-                                                                    {{$comillas.$imagen_casa->residencial.$comillas}},
-                                                                    {{$comillas.$imagen_casa->casaNumero.$comillas}},
-                                                                    {{$comillas.$imagen_casa->id_casa.$comillas}},
-                                                                    {{$comillas.$imagen_casa->leyenda.$comillas}},
-                                                                    {{$comillas.$titulo_thumbnail.$comillas}})"> 
-                                                                <img class="img-thumbnail" 
-                                                                    src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
-                                                                    alt=" " width="84" height="54">
-                                                                <figcaption> {{$imagen_casa->leyenda}} </figcaption>
-                                                            </figure>
-                                                        </div>
-                                                @endif 
-                                                @if ( (!($i % 4)) or ($i_total >= count($lastQuery)) )
-                                                </div> 
-                                                @endif
-                                            @endforeach
-                                        </div> <!-- End Inner --> 
-                                        <button  class="carousel-control-prev bg-light ml-0 flechas" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next bg-light mr-0 flechas" type="button" data-target="#carouselExampleIndicators" data-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
-
-                                    </div> <!-- End Main Carousel -->
-                            
+                                    @php(agregarThumbsToCarrousel($lastQuery,$titulo_thumbnail_lastQuery,"carousel1"))
                             </div> <!-- End Card Body -->
 
                     </div> <!-- End Card text-black de Destacados,Resulta de busqueda o Ambientes thumbnails-->
@@ -91,27 +45,10 @@
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>Mis Favoritos</strong></p>
                             <p class="subtitle_page_left"><small>{Clique imagen y amplíe}</small></p>
+                            <p class="subtitle_page_left"><small>{Vea otras usando flechas}</small></p>
                         </div>
                             <div class="card-body bg-light">
-                                <div id="container_favoritos" class="row row-cols-2"> <!-- favoritos-->
-                                    
-                                    @foreach($favoritos_casas as $favorito_casa) 
-                                        @if (! propiedadIncluida($favorito_casa->id_casa,$favorito_casa->id_foto,$arrayFav))
-                                            <figure wire:click="selectNormalImagen({{$comillas.$favorito_casa->foto_normal.$comillas}},
-                                                    {{$comillas.$favorito_casa->descripcion.$comillas}},
-                                                    {{$comillas.$favorito_casa->residencial.$comillas}},
-                                                    {{$comillas.$favorito_casa->casaNumero.$comillas}},
-                                                    {{$comillas.$favorito_casa->id_casa.$comillas}},
-                                                    {{$comillas.$favorito_casa->leyenda.$comillas}},
-                                                    {{$comillas.$favorito_casa->titulo.$comillas}})"> 
-                                                <img class="img-thumbnail" style="padding: 5px"
-                                                    src="{{asset('storage/propiedades/'.$favorito_casa->foto_thumb)}}" 
-                                                    alt="Sierras Doradas" width="84" height="54">
-                                                <figcaption> {{$favorito_casa->leyenda}} </figcaption>
-                                            </figure>
-                                        @endif 
-                                    @endforeach
-                                </div>
+                                @php(agregarThumbsToCarrousel($favoritos_casas,"Mis Favoritos",'carousel2'))
                             </div>  
                     </div>
                      
@@ -158,56 +95,7 @@
                                         <p class="subtitle_page_left"><small>{Vea otras usando flechas}</small></p>
                                     </div>
                                     <div class="card-body bg-body px-0">
-
-                                        <div id="carouselAmbientes" class="carousel slide" data-interval="false">
-                                            
-                                            <div class="carousel-inner">
-                                                @php(init_variables($i,$i_total,$arrayProp))  
-                                                @php($permiteAbrirGrupoCarrusel= true)             
-                                                @foreach($imagenes_casas as $imagen_casa)
-                                                    @php(incrementaIndice($i_total))
-                                                   
-                                                    @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
-                                                        @if ((!($i % 4)) && $permiteAbrirGrupoCarrusel)
-                                                        
-                                                        <div class="carousel-item {{$i==0?'active ':''}} row row-cols-2">
-                                                        
-                                                        @endif  
-
-                                                            <div class="col" style=" float:right; height:120px;">
-                                                                @php(incrementaIndice($i))
-                                                                @php($permiteAbrirGrupoCarrusel=false)
-                                                                <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
-                                                                        {{$comillas.$imagen_casa->descripcion.$comillas}},
-                                                                        {{$comillas.$imagen_casa->residencial.$comillas}},
-                                                                        {{$comillas.$imagen_casa->casaNumero.$comillas}},
-                                                                        {{$comillas.$imagen_casa->id_casa.$comillas}},
-                                                                        {{$comillas.$imagen_casa->leyenda.$comillas}},
-                                                                        {{$comillas.$titulo_thumbnail.$comillas}})"> 
-                                                                    <img class="img-thumbnail" 
-                                                                        src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
-                                                                        alt=" " width="84" height="54">
-                                                                    <figcaption> {{$imagen_casa->leyenda}} </figcaption>
-                                                                </figure>
-                                                            </div>
-                                                    @endif 
-                                                    @if ( ( (!($i % 4)) or ($i_total >= $imagenes_casas->count()) ) && !$permiteAbrirGrupoCarrusel )
-                                                      @php($permiteAbrirGrupoCarrusel=true)
-                                                    </div> 
-                                                    @endif
-                                                @endforeach
-                                            </div> <!-- End Inner --> 
-                                            <button  class="carousel-control-prev bg-light ml-0 flechas" type="button" data-target="#carouselAmbientes" data-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Previous</span>
-                                            </button>
-                                            <button class="carousel-control-next bg-light mr-0 flechas" type="button" data-target="#carouselAmbientes" data-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Next</span>
-                                            </button>
-
-                                        </div> <!-- End Main Carousel -->
-                                
+                                       @php(agregarThumbsToCarrousel($imagenes_casas,$titulo_thumbnail,'carouselAmbientes'))
                                     </div> <!-- End Card Body -->
 
                                 </div> <!-- End Card text-black de Destacados o Ambientes thumbnails-->
