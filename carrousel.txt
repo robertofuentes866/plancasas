@@ -1,0 +1,34 @@
+php(init_variables($i,$i_total,$arrayProp))  
+                                                @php($permiteAbrirGrupoCarrusel= true)             
+                                                @foreach($imagenes_casas as $imagen_casa)
+                                                    @php(incrementaIndice($i_total))
+                                                   
+                                                    @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
+                                                        @if ((!($i % 4)) && $permiteAbrirGrupoCarrusel)
+                                                        
+                                                        <div class="carousel-item {{$i==0?'active ':''}} row row-cols-2">
+                                                        
+                                                        @endif  
+
+                                                            <div class="col" style=" float:right; height:120px;">
+                                                                @php(incrementaIndice($i))
+                                                                @php($permiteAbrirGrupoCarrusel=false)
+                                                                <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
+                                                                        {{$comillas.$imagen_casa->descripcion.$comillas}},
+                                                                        {{$comillas.$imagen_casa->residencial.$comillas}},
+                                                                        {{$comillas.$imagen_casa->casaNumero.$comillas}},
+                                                                        {{$comillas.$imagen_casa->id_casa.$comillas}},
+                                                                        {{$comillas.$imagen_casa->leyenda.$comillas}},
+                                                                        {{$comillas.$titulo_thumbnail.$comillas}})"> 
+                                                                    <img class="img-thumbnail" 
+                                                                        src="{{asset('storage/propiedades/'.$imagen_casa->foto_thumb)}}" 
+                                                                        alt=" " width="84" height="54">
+                                                                    <figcaption> {{$imagen_casa->leyenda}} </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                    @endif 
+                                                    @if ( ( (!($i % 4)) or ($i_total >= $imagenes_casas->count()) ) && !$permiteAbrirGrupoCarrusel )
+                                                      @php($permiteAbrirGrupoCarrusel=true)
+                                                    </div> 
+                                                    @endif
+                                                @endforeach

@@ -47,8 +47,9 @@ figcaption {
     height: 0.5em;
 }
 
-#subtitle_page_left {
-    color:gold
+.subtitle_page_left {
+    color:gold;
+    line-height: .5em;
 }
 
 #title_page_left_container {
@@ -101,7 +102,7 @@ legend {
 }
 
 .flechas {
-    opacity:0.1;
+    opacity:0.5;
 }
 
 .tabla_de_formulario .tabla_de_formulario_columna {

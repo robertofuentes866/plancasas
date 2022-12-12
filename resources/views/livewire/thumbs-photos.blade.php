@@ -28,7 +28,8 @@
                     <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>{{$titulo_thumbnail_lastQuery}}</strong></p>
-                            <p id="subtitle_page_left"><small>{Clique imagen pequeña para ampliar  ===>}</small></p>
+                            <p class="subtitle_page_left"><small>{Clique imagen y amplíe}</small></p>
+                            <p class="subtitle_page_left"><small>{Vea otras usando flechas}</small></p>
                         </div>
                             <div class="card-body bg-body px-0">
 
@@ -88,8 +89,8 @@
                     <!-- Favoritos thumbnails-->
                     <div class="card text-black bg-dark mb-3 mt-2 mx-auto">
                         <div class="card-header text-white" style="text-align:center;height:5em">
-                        <p id="title_page_left"><strong>Mis Favoritos</strong></p>
-                           <p id="subtitle_page_left"><small>{Clique imagen pequeña para ver amplia  ===>}</small></p>
+                            <p id="title_page_left"><strong>Mis Favoritos</strong></p>
+                            <p class="subtitle_page_left"><small>{Clique imagen y amplíe}</small></p>
                         </div>
                             <div class="card-body bg-light">
                                 <div id="container_favoritos" class="row row-cols-2"> <!-- favoritos-->
@@ -151,25 +152,31 @@
                             <!-- Carousel de thumbnail  abajo de la foto normal -->
                             @if ($tipo==2 )
                                 <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
-                                    <div class="card-header text-white" style="text-align:center;height:3.5em">
+                                    <div class="card-header text-white" style="text-align:center;height:4.5em">
                                         <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
-                                        <p id="subtitle_page_left"><small>{Clique imagen pequeña para ver amplia}</small></p>
+                                        <p class="subtitle_page_left"><small>{Clique imagen y amplíe}</small></p>
+                                        <p class="subtitle_page_left"><small>{Vea otras usando flechas}</small></p>
                                     </div>
                                     <div class="card-body bg-body px-0">
 
                                         <div id="carouselAmbientes" class="carousel slide" data-interval="false">
                                             
                                             <div class="carousel-inner">
-                                                @php(init_variables($i,$i_total,$arrayProp))               
+                                                @php(init_variables($i,$i_total,$arrayProp))  
+                                                @php($permiteAbrirGrupoCarrusel= true)             
                                                 @foreach($imagenes_casas as $imagen_casa)
                                                     @php(incrementaIndice($i_total))
-                                                    @if (!($i % 4))
-                                                    <div class="carousel-item {{$i==0?'active ':''}} row row-cols-2">
-                                                    
-                                                    @endif  
+                                                   
                                                     @if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp))
+                                                        @if ((!($i % 4)) && $permiteAbrirGrupoCarrusel)
+                                                        
+                                                        <div class="carousel-item {{$i==0?'active ':''}} row row-cols-2">
+                                                        
+                                                        @endif  
+
                                                             <div class="col" style=" float:right; height:120px;">
                                                                 @php(incrementaIndice($i))
+                                                                @php($permiteAbrirGrupoCarrusel=false)
                                                                 <figure  wire:click="selectNormalImagen({{$comillas.$imagen_casa->foto_normal.$comillas}},
                                                                         {{$comillas.$imagen_casa->descripcion.$comillas}},
                                                                         {{$comillas.$imagen_casa->residencial.$comillas}},
@@ -184,7 +191,8 @@
                                                                 </figure>
                                                             </div>
                                                     @endif 
-                                                    @if ( (!($i % 4)) or ($i_total >= $imagenes_casas->count()) )
+                                                    @if ( ( (!($i % 4)) or ($i_total >= $imagenes_casas->count()) ) && !$permiteAbrirGrupoCarrusel )
+                                                      @php($permiteAbrirGrupoCarrusel=true)
                                                     </div> 
                                                     @endif
                                                 @endforeach
