@@ -47,7 +47,7 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
     init_variables($i,$i_total,$arrayProp);
     $permiteAbrirGrupoCarrusel= true;
     
-    echo '<div id="'.$nombreCarrusel.'" class="carousel slide" data-interval="false">
+    echo '<div id="'.$nombreCarrusel.'" class="carousel carousel-dark slide" data-interval="false">
         <div class="carousel-inner">';
 
     foreach($fotos_thumb as $imagen_casa) {

@@ -53,16 +53,16 @@ class ThumbsPhotos extends Component
          case 1: // llamada del formulario principal.
             
             $this->tipo = $argumentos[0];
-            $instance = tipo::find($this->tipo,'tipo');
+            $instance = tipo::findOrFail($this->tipo,'tipo');
             $this->arrayOpcionesForm .= 'Tipo: '. $instance->tipo.'-';
             $this->id_ofrecimiento = $argumentos[1];
-            $instance = ofrecimiento::find($this->id_ofrecimiento,'ofrecimiento');
+            $instance = ofrecimiento::findOrFail($this->id_ofrecimiento,'ofrecimiento');
             if ($argumentos[1]) {$this->arrayOpcionesForm .= ' Ofrecimiento: '. $instance->ofrecimiento.'-';}
             $this->id_ciudad = $argumentos[2]?['localizaciones.id_ciudad','=',$argumentos[2]]:['casas.disponibilidad','=',1];
-            $instance = $argumentos[2]?ciudad::find($argumentos[2],'ciudad'):' ';
+            $instance = $argumentos[2]?ciudad::findOrFail($argumentos[2],'ciudad'):' ';
             if ($argumentos[2]) {$this->arrayOpcionesForm .= ' Ciudad: '. $instance->ciudad.'-';}
             $this->id_localizacion = $argumentos[3]?['localizaciones.id_localizacion','=',$argumentos[3]]:['casas.disponibilidad','=',1];
-            $instance = $argumentos[3]?localizacion::find($argumentos[3],'residencial'):' ';
+            $instance = $argumentos[3]?localizacion::findOrFail($argumentos[3],'residencial'):' ';
             if ($argumentos[3]) {$this->arrayOpcionesForm .= ' Residencial: '. $instance->residencial;}
             $this->titulo = $argumentos[4];
             $this->titulo_thumbnail = "Resultado busqueda";
@@ -79,15 +79,15 @@ class ThumbsPhotos extends Component
             $this->tipo = $argumentos[0];
             $this->titulo = $argumentos[1];
             $this->id_ciudad = $argumentos[2]?['localizaciones.id_ciudad','=',$argumentos[2]]:['casas.disponibilidad','=',1];
-            $instance = $argumentos[2]?ciudad::find($argumentos[2],'ciudad'):' ';
+            $instance = $argumentos[2]?ciudad::findOrFail($argumentos[2],'ciudad'):' ';
             if ($argumentos[2]) {$this->arrayOpcionesForm .= 'Ciudad: '. $instance->ciudad.'- ';}
 
             $this->id_recurso = $argumentos[3]?['recursos.id_recurso','=',$argumentos[3]]:['casas.disponibilidad','=',1];
-            $instance = $argumentos[3]?recurso::find($argumentos[3],'recurso'):' ';
+            $instance = $argumentos[3]?recurso::findOrFail($argumentos[3],'recurso'):' ';
             if ($argumentos[3]) {$this->arrayOpcionesForm .= 'Recurso: '. $instance->recurso.'- ';}
 
             $this->id_duracion = $argumentos[4]?['precios_casas.id_duracion','=',$argumentos[4]]:['casas.disponibilidad','=',1];
-            $instance = $argumentos[4]?duracion::find($argumentos[4],'duracion'):' ';
+            $instance = $argumentos[4]?duracion::findOrFail($argumentos[4],'duracion'):' ';
             if ($argumentos[4]) {$this->arrayOpcionesForm .= 'Duracion: '. $instance->duracion.'- ';}
 
             $this->habitaciones = $argumentos[5];

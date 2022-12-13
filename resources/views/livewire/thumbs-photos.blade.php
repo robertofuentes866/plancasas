@@ -23,13 +23,13 @@
                 
                 @php($comillas = '"')
                 @if($imagenes_casas->count())
-                    <!-- Destacados, Resultado de busqueda o Ambientes de la propiedad en thumbnail -->
+                    <!-- Destacados y Resultado de formularios en thumbnail -->
                     
                     <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>{{$titulo_thumbnail_lastQuery}}</strong></p>
                             <p class="subtitle_page_left"><small>{Clique imagen y amplíe}</small></p>
-                            <p class="subtitle_page_left"><small>{Vea otras usando flechas}</small></p>
+                            <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
                             <div class="card-body bg-body px-0">
                                     @php(agregarThumbsToCarrousel($lastQuery,$titulo_thumbnail_lastQuery,"carousel1"))
@@ -45,7 +45,7 @@
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>Mis Favoritos</strong></p>
                             <p class="subtitle_page_left"><small>{Clique imagen y amplíe}</small></p>
-                            <p class="subtitle_page_left"><small>{Vea otras usando flechas}</small></p>
+                            <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
                             <div class="card-body bg-light">
                                 @php(agregarThumbsToCarrousel($favoritos_casas,"Mis Favoritos",'carousel2'))
@@ -53,9 +53,9 @@
                     </div>
                      
                 @endif
-            </div>  <!-- End container de los 2 grupos de thumbnails: Destacados y Favoritos -->
+            </div>  <!-- End container de los 2 grupos de thumbnails: Destacados/Formularios y Favoritos -->
             
-                    <div class="col-8 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
+            <div class="col-8 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
                             <div class="card">
                                 <img src="{{asset('storage/propiedades/'.$fotoNormal)}}" class="card-img-top" alt="...">
                                 <div id="procedencia">
@@ -92,7 +92,7 @@
                                     <div class="card-header text-white" style="text-align:center;height:4.5em">
                                         <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
                                         <p class="subtitle_page_left"><small>{Clique imagen y amplíe}</small></p>
-                                        <p class="subtitle_page_left"><small>{Vea otras usando flechas}</small></p>
+                                        <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                                     </div>
                                     <div class="card-body bg-body px-0">
                                        @php(agregarThumbsToCarrousel($imagenes_casas,$titulo_thumbnail,'carouselAmbientes'))
@@ -109,7 +109,7 @@
                                     <strong>Características de la propiedad</strong>
                                 </div>
                                 <div class="card-body">
-                                    <table class="table table-bordered table-striped">
+                                    <table class="table table-bordered table-striped table-primary">
                                 
                                     <tbody>
                                     <tr>
@@ -187,52 +187,56 @@
 
                             <!-- Agente Inmobiliario -->
 
-                            <div class="card mt-3 mb-3">
+                            <div class="card mb-3">
                             <div class="card-header">
-                            <strong>Agente Inmobiliario</strong>
+                                <strong>Agente Inmobiliario</strong>
                             </div>
                             <div class="card-body">
-                            <table class="table table-bordered table-striped">
-                        
-                            <tbody>
-                                <tr>
-                                    <img src="{{asset('storage/agentes/'. $imagenes_casas[0]->foto_agente)}}">
-                                </tr>
-                            <tr>
-                                <td>Nombre: {{ $imagenes_casas[0]->nombre_agente}}</td>
-
-                                <td>Celular Tigo: {{ $imagenes_casas[0]->cel1}} </td>
-                            </tr>
-                            <tr>
-                            <td> Celular Claro: {{ $imagenes_casas[0]->cel2}}</td>
-
-                            <td> Email: {{ $imagenes_casas[0]->email}}</td>
-                            </tr>
-                            <tr>
-                                <td> Pedir mayor Info de: <strong>{{$casaNumero}}</strong></td>
-                                <td>
-                                    <form id="emailForm" action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
-                                         @csrf
-                                         <table>
-                                            <tr> 
-                                               <td><label for="from" >De:</label></td>
-                                               <td> <input size="25px" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}"></td>
-                                            </tr>
-                                            <tr>    
-                                               <td><label for="mensaje">Mensaje:</label></td>
-                                               <td><textarea id="mensaje" required name="emailBody" rows="5" cols="30" placeholder="Mensaje"></textarea></td>
-                                               <input hidden name="casaNumero" value="{{$casaNumero}}">
-                                            </tr>
-                                            <tr>
-                                            <td colspan="2"><input type="submit" name="submitEmail" value="Enviar">
-                                             <input type="reset" value="Limpiar"></td>
-                                            </tr>
-                                         </table>
-                                    </form>
-                                </td>
-                            </tr>
-                            </tbody>
-                            </table>
+                                <table class=" table-striped table table-dark tabla_agente">
+                                    <tr>
+                                    <td>Nombre: {{ $imagenes_casas[0]->nombre_agente}}</td>
+                                        <td>
+                                            <img src="{{asset('storage/agentes/'. $imagenes_casas[0]->foto_agente)}}">
+                                        </td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td>Celular Tigo: {{ $imagenes_casas[0]->cel1}}</td>
+                                    </tr>
+                                    <tr>
+                                    <td>Celular Claro: {{ $imagenes_casas[0]->cel2}}</td>
+                                    </tr>
+                                    <tr>
+                                    <td>Email: {{ $imagenes_casas[0]->email}}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <form id="emailForm" action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
+                                                @csrf
+                                                <table class="table table-primary table-striped">
+                                                <tr>
+                                    <td colspan="2"> Solicitar mayor informacion de: <strong>{{$casaNumero}}</strong></td>
+                                    </tr>
+                                                    <tr> 
+                                                    <td><label for="from" >De:</label></td>
+                                                    <td> <input size="25px" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}"></td>
+                                                    </tr>
+                                                    <tr>    
+                                                    <td><label for="mensaje">Mensaje:</label></td>
+                                                    <td><textarea id="mensaje" required name="emailBody" rows="5" cols="30" placeholder="Mensaje"></textarea></td>
+                                                    <input hidden name="casaNumero" value="{{$casaNumero}}">
+                                                    </tr>
+                                                    <tr>
+                                                    <td colspan="2"><input type="submit" name="submitEmail" value="Enviar" class="btn btn-primary">
+                                                    <input type="reset" value="Limpiar" class="btn btn-primary"></td>
+                                                    </tr>
+                                                </table>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    
+                                    </table>
                             </div>
                             </div>
                         @endif
