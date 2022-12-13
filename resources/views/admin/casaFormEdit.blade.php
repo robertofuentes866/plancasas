@@ -52,6 +52,14 @@ Editar Casa
                 </div>
                 </div>
     </div>
+    <div class="col-12">
+                <div class="mb-3 row">
+                <label for="descripcion" class="col-lg-4 col-md-6 col-sm-12 col-form-label">Descripcion:</label>
+                <div class="col-lg-10 col-md-6 col-sm-12"> 
+                <textarea name="descripcion" class="form-control" id="descripcion" rows="5">{{$data['casas']->getDescripcion()}}</textarea>
+                </div>
+                </div>
+    </div>
 
 </div>  <!-- Fin de row -->
 

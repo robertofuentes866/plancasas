@@ -35,7 +35,7 @@ class casaController extends Controller
                                     ->join('localizaciones','casas.id_localizacion','=','localizaciones.id_localizacion')
                                     ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
                                     ->select('casas.id_casa','agentes.nombre as nombreAgente','localizaciones.residencial',
-                                    'casas.casaNumero','ciudades.ciudad')
+                                    'casas.casaNumero','ciudades.ciudad','casas.descripcion')
                                     ->get();
         return $viewData;
      }
@@ -67,7 +67,7 @@ class casaController extends Controller
         $creationData = $request->only(["id_agente","id_tipo","id_localizacion","casaNumero","area_construccion",
                         "area_terreno","plantas","garage","habitaciones","banos","bano_social","cuartoDomestica","piscina",
                         "apartamento","destacado","disponibilidad","ano_construccion","aires_acondicionado",
-                        "abanicos_techo"]);
+                        "abanicos_techo","descripcion"]);
         $creationData['piscina'] = $request->input('piscina')?1:0;
         $creationData['apartamento'] = $request->input('apartamento')?1:0;
         $creationData['bano_social'] = $request->input('bano_social')?1:0;
@@ -75,9 +75,9 @@ class casaController extends Controller
         $creationData['disponibilidad'] = $request->input('disponibilidad')?1:0;
         $creationData['destacado'] = $request->input('destacado')?1:0;
 
-        $creationData['destacado'] = $request->input('agua_caliente')?1:0;
-        $creationData['destacado'] = $request->input('tanque_agua')?1:0;
-        $creationData['destacado'] = $request->input('sistema_seguridad')?1:0;
+        $creationData['agua_caliente'] = $request->input('agua_caliente')?1:0;
+        $creationData['tanque_agua'] = $request->input('tanque_agua')?1:0;
+        $creationData['sistema_seguridad'] = $request->input('sistema_seguridad')?1:0;
         casa::create($creationData);
         
         return redirect()->route('admin.casaForm.index');

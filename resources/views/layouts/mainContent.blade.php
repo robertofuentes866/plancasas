@@ -9,7 +9,7 @@
 
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
         <div class="card-header" style="text-align:center">
-            <strong>Búsqueda de Propiedad </strong>
+            <strong>Búsqueda por Residencial/Condominio </strong>
         </div>
     <div class="card-body">
     <form method="get" action="{{route('menu.inicio',['gestion'=>1])}}">
@@ -52,7 +52,7 @@
 
     <!-- Formulario detallado -->
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
-    <div class="card-header" style="text-align:center"><strong>Búsqueda detallada </strong></div>
+    <div class="card-header" style="text-align:center"><strong>Búsqueda Detallada </strong></div>
     <div class="card-body bg-danger">
     <form method="get" action="{{route('menu.inicio',['gestion'=>3])}}">
             @csrf

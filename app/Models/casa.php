@@ -12,7 +12,7 @@ class casa extends Model
     protected $fillable = ["id_agente","id_tipo","id_localizacion","casaNumero","area_construccion",
     "area_terreno","plantas","garage","habitaciones","banos","piscina","apartamento","cuartoDomestica",
    "bano_social","disponibilidad","destacado","ano_construccion","aires_acondicionado","abanicos_techo",
-    "agua_caliente","tanque_agua","sistema_seguridad"];
+    "agua_caliente","tanque_agua","sistema_seguridad","descripcion"];
     protected $hidden = ['id_casa'];
     
     use HasFactory;
@@ -221,5 +221,14 @@ class casa extends Model
 
     public function setSistemaSeguridad($cd) {
         $this->attributes['sistema_seguridad'] = $cd;
+    }
+
+
+    public function getDescripcion(){
+        return $this->attributes['descripcion'];
+    }
+
+    public function setDescripcion($cd) {
+        $this->attributes['descripcion'] = $cd;
     }
 }

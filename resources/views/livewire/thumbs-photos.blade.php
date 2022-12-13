@@ -113,39 +113,42 @@
                                 
                                     <tbody>
                                     <tr>
-                                        <td>Plantas: {{ $imagenes_casas[0]->plantas}}</td>
+                                        <td><u>Plantas:</u> {{ $imagenes_casas[0]->plantas}}</td>
 
-                                        <td>Area Construccion: {{ $imagenes_casas[0]->area_construccion}} mt2</td>
+                                        <td><u>Area Construccion:</u> {{ $imagenes_casas[0]->area_construccion}} mt2</td>
                                     </tr>
                                     <tr>
-                                    <td> Habitaciones: {{ $imagenes_casas[0]->habitaciones}}</td>
+                                    <td> <u>Habitaciones:</u> {{ $imagenes_casas[0]->habitaciones}}</td>
 
-                                    <td> Area Terreno: {{ $imagenes_casas[0]->area_terreno}} mt2</td>
+                                    <td> <u>Area Terreno:</u> {{ $imagenes_casas[0]->area_terreno}} mt2</td>
                                     </tr>
                                     <tr>
-                                        <td>Baños: {{ $imagenes_casas[0]->banos }}</td>
+                                        <td><u>Baños:</u> {{ $imagenes_casas[0]->banos }}</td>
 
-                                        <td>Año Construccion: {{ $imagenes_casas[0]->ano_construccion}}</td>
+                                        <td><u>Año Construccion:</u> {{ $imagenes_casas[0]->ano_construccion}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Baño social: {{ $imagenes_casas[0]->bano_social?'Si':'No' }}</td>
-                                        <td>Aires Acond: {{ $imagenes_casas[0]->aires_acondicionado}}</td>
+                                        <td><u>Baño social:</u> {{ $imagenes_casas[0]->bano_social?'Si':'No' }}</td>
+                                        <td><u>Aires Acond:</u> {{ $imagenes_casas[0]->aires_acondicionado}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Cuarto Doméstica: {{ $imagenes_casas[0]->cuartoDomestica?'Si':'No' }}</td>
-                                        <td>Abanicos: {{ $imagenes_casas[0]->abanicos_techo}}</td>
+                                        <td><u>Cuarto Doméstica:</u> {{ $imagenes_casas[0]->cuartoDomestica?'Si':'No' }}</td>
+                                        <td><u>Abanicos:</u> {{ $imagenes_casas[0]->abanicos_techo}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Garage: {{ $imagenes_casas[0]->garage }}</td>
-                                        <td>Agua Caliente: {{ $imagenes_casas[0]->agua_caliente?'Si':'No' }}</td>
+                                        <td><u>Garage:</u> {{ $imagenes_casas[0]->garage }}</td>
+                                        <td><u>Agua Caliente:</u> {{ $imagenes_casas[0]->agua_caliente?'Si':'No' }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Piscina: {{ $imagenes_casas[0]->piscina?'Si':'No' }}</td>
-                                        <td>Tanque Agua: {{ $imagenes_casas[0]->tanque_agua?'Si':'No' }}</td>
+                                        <td><u>Piscina:</u> {{ $imagenes_casas[0]->piscina?'Si':'No' }}</td>
+                                        <td><u>Tanque Agua:</u> {{ $imagenes_casas[0]->tanque_agua?'Si':'No' }}</td>
                                     </tr>
 
                                     <tr>
-                                        <td>Sist. Seguridad: {{ $imagenes_casas[0]->sistema_seguridad?'Si':'No' }}</td>
+                                        <td><u>Sist. Seguridad:</u> {{ $imagenes_casas[0]->sistema_seguridad?'Si':'No' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><u>Descripcion:</u> {{$imagenes_casas[0]->descripcion}}</td>
                                     </tr>
                                     </tbody>
                                     </table>
