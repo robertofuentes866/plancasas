@@ -63,16 +63,18 @@
     
 </head>
 <body>
-<div class="row">
-    <div id="encabezado" class="col-lg-12 bg-dark text-white">
-        <p class="placeholder-wave" id="headerP">VISUAL HOME REAL ESTATE NICARAGUA </p>
-        <p class="placeholder-wave"><small id="smallHeader">Te ofrecemos un lugar Accesible, Cómodo y Seguro para vivir en familia.</small> </p>
+<div class="container">
+    <div class="row">
+        <div id="encabezado" class="col-12 bg-dark text-white">
+            <p class="placeholder-wave" id="headerP">VISUAL HOME REAL ESTATE NICARAGUA </p>
+            <p class="placeholder-wave"><small id="smallHeader">Te ofrecemos un lugar Accesible, Cómodo y Seguro para vivir en familia.</small> </p>
 
+        </div>
     </div>
 </div>
 <div class="container">
     <div class="row my-2 ">
-        <div class="col-lg-12 nav-justified">
+        <div class="col-12 nav-justified">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                             
@@ -109,9 +111,11 @@
     </div>
 </div>
 
-<div class="row my-2">
-    <div class="col-lg-12 bg-primary text-center">
-        Copyright - <b>Managua</b> - <b>Nicaragua</b>
+<div class="container">
+    <div class="row my-2">
+        <div class="col-12 bg-primary text-center">
+            Copyright - <b>Managua</b> - <b>Nicaragua</b>
+        </div>
     </div>
 </div>
 @livewireScripts

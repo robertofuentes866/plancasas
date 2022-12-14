@@ -29,6 +29,7 @@ figcaption {
     font-size:xx-large;
     color: aqua;
     margin-left: 15px;
+    width: auto;
     
 }
 
@@ -36,9 +37,8 @@ figcaption {
     font-style: italic;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: medium;
-    
     color:khaki;
-
+    width:auto;
 }
 
 #title_page_left,#subtitle_page_left {

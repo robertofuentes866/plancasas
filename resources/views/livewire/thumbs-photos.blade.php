@@ -8,7 +8,7 @@
 @endif
 
 @if ((count($lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
- <div class="col-lg-8">
+ <div class="col-lg-8 col-12">
         <div id="title_page_left_container" class="row">
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
             <p style="color:gold">
@@ -19,7 +19,7 @@
             </p>
         </div>
         <div class="row">
-            <div class="col-4" style="background-color:antiquewhite;"> <!-- Columna thumbnails -->
+            <div class="col-lg-4 col-12" style="background-color:antiquewhite;"> <!-- Columna thumbnails -->
                 
                 @php($comillas = '"')
                 @if($imagenes_casas->count())
@@ -55,7 +55,7 @@
                 @endif
             </div>  <!-- End container de los 2 grupos de thumbnails: Destacados/Formularios y Favoritos -->
             
-            <div class="col-8 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
+            <div class="col-lg-8 col-12 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
                             <div class="card">
                                 <img src="{{asset('storage/propiedades/'.$fotoNormal)}}" class="card-img-top" alt="...">
                                 <div id="procedencia">
@@ -183,6 +183,9 @@
                                             </tr>
                                         @endif
                                     @endforeach
+                                    <tr>
+                                        <td colspan="4"><i> Los precios para contrato: anual, medio año o mes son pagos mensuales.</i></td> 
+                                    </tr>
                                     </tbody>
                                     </table>
                                 </div>
@@ -214,7 +217,7 @@
                                     </tr>
                                     
                                     <tr>
-                                        <td>
+                                        <td colspan="3">
                                             <form id="emailForm" action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
                                                 @csrf
                                                 <table class="table table-primary table-striped">
@@ -224,11 +227,11 @@
                                     </tr>
                                                     <tr> 
                                                     <td><label for="from" >De:</label></td>
-                                                    <td> <input size="25px" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}"></td>
+                                                    <td> <input size="40px" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}"></td>
                                                     </tr>
                                                     <tr>    
                                                     <td><label for="mensaje">Mensaje:</label></td>
-                                                    <td><textarea id="mensaje" required name="emailBody" rows="5" cols="30" placeholder="Mensaje"></textarea></td>
+                                                    <td><textarea id="mensaje" required name="emailBody" rows="5" cols="45" placeholder="Mensaje"></textarea></td>
                                                     <input hidden name="casaNumero" value="{{$casaNumero}}">
                                                     </tr>
                                                     <tr>

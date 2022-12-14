@@ -5,7 +5,7 @@
 @section('nav_link_entrar',$viewData['nav_link_entrar'])
 @section('cuerpo')
 
-<div class="col-lg-4 bg-primary">  <!-- Primera columna, la del formulario -->
+<div class="col-lg-4 col-12 bg-primary">  <!-- Primera columna, la del formulario -->
 
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
         <div class="card-header" style="text-align:center">
