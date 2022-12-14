@@ -30,6 +30,7 @@ class agenteController extends Controller
                                     ->select('agentes.id_agente','privilegios.nombre as privilegio','agentes.nombre',
                                     'agentes.apellidos','agentes.email','agentes.cel1',
                                     'agentes.cel2','agentes.password','agentes.foto_agente')
+                                    ->orderBy('agentes.id_privilegio')
                                     ->get();
         return $viewData;
     }

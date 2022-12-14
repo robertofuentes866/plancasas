@@ -36,6 +36,7 @@ class casaController extends Controller
                                     ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
                                     ->select('casas.id_casa','agentes.nombre as nombreAgente','localizaciones.residencial',
                                     'casas.casaNumero','ciudades.ciudad','casas.descripcion')
+                                    ->orderBy('casas.casaNumero')
                                     ->get();
         return $viewData;
      }

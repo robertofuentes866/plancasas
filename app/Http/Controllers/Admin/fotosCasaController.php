@@ -28,6 +28,7 @@ class fotosCasaController extends Controller
                                     ->join('casas','fotos_casas.id_casa','=','casas.id_casa')
                                     ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
                                     ->select('localizaciones.residencial','casas.casaNumero','fotos_casas.leyenda','fotos_casas.id_foto')
+                                    ->orderBy('casas.id_casa')
                                     ->get();
         return $viewData;
      }

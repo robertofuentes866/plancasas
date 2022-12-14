@@ -57,14 +57,14 @@ Editar Agente
 </div>
 
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Cel No. 1:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Cel Tigo:</label>
 <div class="col-lg-10 col-md-6 col-sm-12"> 
 <input name="cel1" value="{{$data['agentes']->cel1}}" type="text" class="form-control"> 
 </div>
 </div>
 
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Cel No. 2:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Cel Claro:</label>
 <div class="col-lg-10 col-md-6 col-sm-12"> 
 <input name="cel2" value="{{$data['agentes']->cel2}}" type="text" class="form-control"> 
 </div>

@@ -37,6 +37,8 @@ class preciosCasaController extends Controller
                                     ->select('recursos.recurso','ofrecimientos.ofrecimiento','casas.casaNumero','precios_casas.valor',
                                     'duraciones.duracion','precios_casas.id_casa','precios_casas.id_casa','precios_casas.id_ofrecimiento',
                                     'precios_casas.id_duracion','precios_casas.id_recurso')
+                                    ->orderBy('casas.id_casa')
+                                    ->orderBy('precios_casas.id_ofrecimiento')
                                     ->get();
         return $viewData;
      } 

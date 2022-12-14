@@ -28,7 +28,7 @@
                     <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>{{$titulo_thumbnail_lastQuery}}</strong></p>
-                            <p class="subtitle_page_left"><small>{Clique imagen y amplíe}</small></p>
+                            <p class="subtitle_page_left"><small>{Clique imagen para ampliarla}</small></p>
                             <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
                             <div class="card-body bg-body px-0">
@@ -44,7 +44,7 @@
                     <div class="card text-black bg-dark mb-3 mt-2 mx-auto">
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>Mis Favoritos</strong></p>
-                            <p class="subtitle_page_left"><small>{Clique imagen y amplíe}</small></p>
+                            <p class="subtitle_page_left"><small>{Clique imagen para ampliarla}</small></p>
                             <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
                             <div class="card-body bg-light">
@@ -91,7 +91,7 @@
                                 <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                                     <div class="card-header text-white" style="text-align:center;height:4.5em">
                                         <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
-                                        <p class="subtitle_page_left"><small>{Clique imagen y amplíe}</small></p>
+                                        <p class="subtitle_page_left"><small>{Clique imagen para ampliarla}</small></p>
                                         <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                                     </div>
                                     <div class="card-body bg-body px-0">
@@ -219,7 +219,8 @@
                                                 @csrf
                                                 <table class="table table-primary table-striped">
                                                 <tr>
-                                    <td colspan="2"> Solicitar mayor informacion de: <strong>{{$casaNumero}}</strong></td>
+                                    <td colspan="2"> <p>Solicitar mayor informacion de: <strong>{{$casaNumero}}</strong></p>
+                                                     <p>O detállanos la propiedad que buscas</p> </td>
                                     </tr>
                                                     <tr> 
                                                     <td><label for="from" >De:</label></td>

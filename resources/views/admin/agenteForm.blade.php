@@ -57,14 +57,14 @@ Crear Agentes
 </div>
 
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Cel No. 1:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Cel Tigo:</label>
 <div class="col-lg-10 col-md-6 col-sm-12"> 
 <input name="cel1" value="{{old('cel1')}}" type="text" class="form-control"> 
 </div>
 </div>
 
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Cel No. 2:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Cel Claro:</label>
 <div class="col-lg-10 col-md-6 col-sm-12"> 
 <input name="cel2" value="{{old('cel2')}}" type="text" class="form-control"> 
 </div>
@@ -102,8 +102,8 @@ Ver Agentes
 <th scope="col">NOMBRES</th>
 <th scope="col">APELLIDOS</th>
 <th scope="col">EMAIL</th>
-<th scope="col">CEL # 1</th>
-<th scope="col">CEL # 2</th>
+<th scope="col">CEL. TIGO</th>
+<th scope="col">CEL. CLARO</th>
 <th scope="col">EDITAR</th>
 <th scope="col">BORRAR</th>
 </tr>

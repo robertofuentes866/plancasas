@@ -44,6 +44,7 @@ function init_variables(&$i,&$t,&$a) {
 
 function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
     $comillas = htmlentities('"');
+    $numPropPorRotacion = 4; // Debe ser numero par diferente de CERO.
     init_variables($i,$i_total,$arrayProp);
     $permiteAbrirGrupoCarrusel= true;
     
@@ -54,16 +55,21 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
         incrementaIndice($i_total);
     
         if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp)) {
-            if ((!($i % 4)) && $permiteAbrirGrupoCarrusel) {
+            if ((!($i % $numPropPorRotacion)) && $permiteAbrirGrupoCarrusel) {
 
                 if ($i==0) {
                     echo '<div class="carousel-item active row row-cols-2">';
                 } else {
                     echo '<div class="carousel-item row row-cols-2">';
                 }
+               // echo '<table>';
             
             } 
 
+           /* if (!($i % 2)) {
+                echo '<tr>';
+            }
+                echo '<td>';*/
                 echo '<div class="col" style=" float:right; height:120px;">';
                     incrementaIndice($i);
                     $permiteAbrirGrupoCarrusel=false;
@@ -80,9 +86,14 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                         <figcaption> $imagen_casa->leyenda </figcaption>
                     </figure>
                 </div>";
+                /*echo '</td>';
+            if (!($i % 2)) {
+                echo '</tr>';
+            }*/
         }
-        if ( ( (!($i % 4)) or ($i_total >= $fotos_thumb->count()) ) && !$permiteAbrirGrupoCarrusel ) {
+        if ( ( (!($i % $numPropPorRotacion)) or ($i_total >= $fotos_thumb->count()) ) && !$permiteAbrirGrupoCarrusel ) {
             $permiteAbrirGrupoCarrusel=true;
+            echo '</table>';
             echo '</div>'; 
         }
     }

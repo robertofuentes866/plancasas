@@ -27,6 +27,8 @@ class localizacionController extends Controller
                                     ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
                                     ->select('localizaciones.id_localizacion','localizaciones.residencial',
                                     'localizaciones.direccion','ciudades.ciudad')
+                                    ->orderBy('localizaciones.id_ciudad')
+                                    ->orderBy('localizaciones.residencial')
                                     ->get();
         return $viewData;
     }

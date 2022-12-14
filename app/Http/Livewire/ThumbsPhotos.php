@@ -109,19 +109,19 @@ class ThumbsPhotos extends Component
             if($argumentos[10]){ $this->arrayOpcionesForm .= 'Precio Maximo: '. $argumentos[10].'- ';}
 
             $this->agua_caliente = $argumentos[11]?['casas.agua_caliente','=',1]:['casas.disponibilidad','=',1];
-            if($argumentos[11]){ $this->arrayOpcionesForm .= 'Agua caliente - ';  }
+            if($argumentos[11]){ $this->arrayOpcionesForm .= 'Con agua caliente - ';  }
 
             $this->tanque_agua = $argumentos[12]?['casas.tanque_agua','=',1]:['casas.disponibilidad','=',1];
-            if($argumentos[12]){ $this->arrayOpcionesForm .= 'Tanque de agua - ';  }
+            if($argumentos[12]){ $this->arrayOpcionesForm .= 'Con tanque de agua - ';  }
 
             $this->sistema_seguridad = $argumentos[13]?['casas.sistema_seguridad','=',1]:['casas.disponibilidad','=',1];
-            if($argumentos[13]){ $this->arrayOpcionesForm .= 'Sistema de seguridad - ';  }
+            if($argumentos[13]){ $this->arrayOpcionesForm .= 'Con sistema de seguridad - ';  }
 
             $this->cuartoDomestica = $argumentos[14]?['casas.cuartoDomestica','=',1]:['casas.disponibilidad','=',1];
-            if($argumentos[14]){ $this->arrayOpcionesForm .= 'Cuarto de domestica - ';  }
+            if($argumentos[14]){ $this->arrayOpcionesForm .= 'Con cuarto de domestica - ';  }
 
             $this->piscina = $argumentos[15]?['casas.piscina','=',1]:['casas.disponibilidad','=',1];
-            if($argumentos[15]){ $this->arrayOpcionesForm .= 'Piscina ';  }
+            if($argumentos[15]){ $this->arrayOpcionesForm .= 'Con piscina ';  }
             
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
