@@ -25,38 +25,38 @@
                 @if($imagenes_casas->count())
                     <!-- Destacados y Resultado de formularios en thumbnail -->
                     
-                    <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
+                    <article class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>{{$titulo_thumbnail_lastQuery}}</strong></p>
-                            <p class="subtitle_page_left"><small>{Clique imagen para ampliarla}</small></p>
+                            <p class="subtitle_page_left"><small>{Clique las fotos para ampliarlas}</small></p>
                             <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
                             <div class="card-body bg-body px-0">
                                     @php(agregarThumbsToCarrousel($lastQuery,$titulo_thumbnail_lastQuery,"carousel1"))
                             </div> <!-- End Card Body -->
 
-                    </div> <!-- End Card text-black de Destacados,Resulta de busqueda o Ambientes thumbnails-->
+                    </article> <!-- End Card text-black de Destacados,Resulta de busqueda o Ambientes thumbnails-->
                     
                 @endif
 
                 @if ($favoritos_casas->count()) 
                     <!-- Favoritos thumbnails-->
-                    <div class="card text-black bg-dark mb-3 mt-2 mx-auto">
+                    <article class="card text-black bg-dark mb-3 mt-2 mx-auto">
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>Mis Favoritos</strong></p>
-                            <p class="subtitle_page_left"><small>{Clique imagen para ampliarla}</small></p>
+                            <p class="subtitle_page_left"><small>{Clique las fotos para ampliarlas}</small></p>
                             <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
                             <div class="card-body bg-light">
                                 @php(agregarThumbsToCarrousel($favoritos_casas,"Mis Favoritos",'carousel2'))
                             </div>  
-                    </div>
+                    </article>
                      
                 @endif
             </div>  <!-- End container de los 2 grupos de thumbnails: Destacados/Formularios y Favoritos -->
             
             <div class="col-lg-8 col-12 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
-                            <div class="card">
+                            <article class="card">
                                 <img src="{{asset('storage/propiedades/'.$fotoNormal)}}" class="card-img-top" alt="...">
                                 <div id="procedencia">
                                     {{$titulo_en_foto_normal}}
@@ -70,41 +70,45 @@
                                     <a class="btn btn-primary" href="{{route('menu.inicio',[2,$id_propiedad,$arrayOpcionesForm])}}" role="button">Mas detalles...</a>
                                     @else
                                     <p class="card-title">
+                                    <strong>{{$leyenda. ' en '. $casaNumero}}</strong> </p>
                                     @if(Auth::check())
-                                        <button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip"
+                                    <span class="d-block p-1 bg-primary text-white rounded-start">
+                                        <p><button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip"
                                             data-placement="bottom" 
                                             title="{{buscarFavorito($id_propiedad,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}"
                                             type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" 
                                             name="buscarFavoritos" id="buscarFavoritos"
                                             class="btn {{buscarFavorito($id_propiedad,$this->id_usuario)?'btn-danger':'btn-secondary'}}">
                                             <i class="bi bi-house-fill"></i>
-                                        </button>
+                                        </button> &#10232; Agregar/Borrar en lista Favoritos </p>
+                                        
+                                    </span>
                                     @endif    
-                                    <strong>{{$leyenda. ' en '. $casaNumero}}</strong>
-                                    </p>
+                                   
+                                    
                                     @endif
                                     
                                 </div>
-                            </div>
+                            </article>
                             <!-- Carousel de thumbnail  abajo de la foto normal -->
                             @if ($tipo==2 )
-                                <div class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
+                                <article class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                                     <div class="card-header text-white" style="text-align:center;height:4.5em">
                                         <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
-                                        <p class="subtitle_page_left"><small>{Clique imagen para ampliarla}</small></p>
+                                        <p class="subtitle_page_left"><small>{Clique las fotos para ampliarlas}</small></p>
                                         <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                                     </div>
                                     <div class="card-body bg-body px-0">
                                        @php(agregarThumbsToCarrousel($imagenes_casas,$titulo_thumbnail,'carouselAmbientes'))
                                     </div> <!-- End Card Body -->
 
-                                </div> <!-- End Card text-black de Destacados o Ambientes thumbnails-->
+                                </article> <!-- End Card text-black de Destacados o Ambientes thumbnails-->
                             @endif
 
                         <!-- Características de la casa -->
 
                         @if($tipo == 2 && $imagenes_casas->count())  
-                            <div class="card mt-3 mb-3">
+                            <article class="card mt-3 mb-3">
                                 <div class="card-header">
                                     <strong>Características de la propiedad</strong>
                                 </div>
@@ -153,11 +157,11 @@
                                     </tbody>
                                     </table>
                                  </div> <!--End card body -->
-                            </div>  <!--End card -->
+                            </article>  <!--End card -->
                         
                             <!-- Precios de renta o venta de la propiedad -->
                         
-                            <div class="card mt-3 mb-3">
+                            <article class="card mt-3 mb-3">
                                 <div class="card-header">
                                     <strong>Precios de la propiedad</strong>
                                 </div>
@@ -189,11 +193,11 @@
                                     </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </article>
 
                             <!-- Agente Inmobiliario -->
 
-                            <div class="card mb-3">
+                            <article class="card mb-3">
                             <div class="card-header">
                                 <strong>Agente Inmobiliario</strong>
                             </div>
@@ -245,7 +249,7 @@
                                     
                                     </table>
                             </div>
-                            </div>
+                            </article>
                         @endif
                                 
                     </div>

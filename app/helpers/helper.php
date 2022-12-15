@@ -44,7 +44,7 @@ function init_variables(&$i,&$t,&$a) {
 
 function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
     $comillas = htmlentities('"');
-    $numPropPorRotacion = 4; // Debe ser numero par diferente de CERO.
+    $numPropPorRotacion = 4; // Numero de propiedades por pagina.
     init_variables($i,$i_total,$arrayProp);
     $permiteAbrirGrupoCarrusel= true;
     
@@ -62,14 +62,7 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                 } else {
                     echo '<div class="carousel-item row row-cols-2">';
                 }
-               // echo '<table>';
-            
             } 
-
-           /* if (!($i % 2)) {
-                echo '<tr>';
-            }
-                echo '<td>';*/
                 echo '<div class="col" style=" float:right; height:120px;">';
                     incrementaIndice($i);
                     $permiteAbrirGrupoCarrusel=false;
@@ -86,15 +79,15 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                         <figcaption> $imagen_casa->leyenda </figcaption>
                     </figure>
                 </div>";
-                /*echo '</td>';
-            if (!($i % 2)) {
-                echo '</tr>';
-            }*/
         }
         if ( ( (!($i % $numPropPorRotacion)) or ($i_total >= $fotos_thumb->count()) ) && !$permiteAbrirGrupoCarrusel ) {
             $permiteAbrirGrupoCarrusel=true;
-            echo '</table>';
+            /*echo '<div class="carousel-caption d-none d-md-block">
+                     <h5>'.ceil($i / $numPropPorRotacion).'</h5>
+                    </div>'; */
+
             echo '</div>'; 
+           
         }
     }
 
@@ -106,6 +99,7 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span></button>
         </div>';
+        
 }
 
 

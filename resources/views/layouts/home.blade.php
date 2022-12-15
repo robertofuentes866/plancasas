@@ -72,7 +72,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<nav class="container">
     <div class="row my-2 ">
         <div class="col-12 nav-justified">
                 <ul class="nav nav-pills">
@@ -101,23 +101,23 @@
         </div>
         
     </div>
-</div>
+    </nav>
 
 
-<div class="container">
+<main class="container">
     <div class="row">
         @yield('cuerpo')
         
     </div>
-</div>
+</main>
 
-<div class="container">
+<foot class="container">
     <div class="row my-2">
         <div class="col-12 bg-primary text-center">
             Copyright - <b>Managua</b> - <b>Nicaragua</b>
         </div>
     </div>
-</div>
+</foot>
 @livewireScripts
 @yield('js')
 
