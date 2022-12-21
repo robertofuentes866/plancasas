@@ -15,6 +15,7 @@ Crear Casas
 @endif
 <form method="POST" action="{{ route('admin.casaForm.store') }}" enctype="multipart/form-data">
 @csrf
+<input name="id_tipo" value="1" type="hidden">
 <div class="row">
     <div class="col-4">
                 <div class="mb-3 row">
@@ -135,7 +136,6 @@ Crear Casas
                 <input name="banos" value="{{old('banos')}}" type="number" min="1" max="25" class="form-control"> 
                 </div>
                 </div>
-                <input name="id_tipo" value="1" type="hidden">
     </div>
      
     <div class="col-4">

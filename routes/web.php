@@ -37,6 +37,8 @@ Route::get('/menu.inicio/{gestion?}/{id_propiedad?}/{busqueda?}','App\Http\Contr
 
 Route::get('/','App\Http\Controllers\menuController@indexacion')->name('menuIndex');
 
+Route::middleware('auth')->group(function(){
+
 // prepara datos del menu de formularios.
 Route::get('/AdminForms','App\Http\Controllers\Admin\AdminFormsController@index')->name('adminForms');
 
@@ -163,6 +165,8 @@ Route::get('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/{id
 Route::put('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/{id_duracion}/id_recurso/{id_recurso}','App\Http\Controllers\Admin\preciosCasaController@update')->name('admin.preciosCasaForm.update');
 
 Route::delete('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/{id_duracion}/id_recurso/{id_recurso}','App\Http\Controllers\Admin\preciosCasaController@destroy')->name('admin.preciosCasaForm.delete');
+
+});
 
 Auth::routes();
 

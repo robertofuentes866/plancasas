@@ -35,7 +35,7 @@ class ThumbsPhotos extends Component
     public $lastQuery = '';
 
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
-           $id_propiedad = 0,$tipo = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',
+           $id_propiedad = 0,$gestion = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',
            $abanicos_techo='',$precio_minimo=0,$precio_maximo=0,$agua_caliente='',$tanque_agua='',
            $sistema_seguridad='',$cuartoDomestica='',$piscina='';
 
@@ -45,19 +45,21 @@ class ThumbsPhotos extends Component
        switch ($argumentos[0]) {
          case 0: // propiedades destacadas
             
-            $this->tipo = $argumentos[0];
+            $this->gestion = $argumentos[0];
             $this->titulo = $argumentos[1]; // titulo en la barra superior derecha.
             $this->titulo_thumbnail = "Destacados"; 
             
             break;
          case 1: // llamada del formulario principal.
             
-            $this->tipo = $argumentos[0];
-            $instance = tipo::findOrFail($this->tipo,'tipo');
-            $this->arrayOpcionesForm .= 'Tipo: '. $instance->tipo.'-';
+            $this->gestion = $argumentos[0];
+            $instance = tipo::find($argumentos[5],'tipo');
+            if ($argumentos[5]) {$this->arrayOpcionesForm .= ' Tipo: '. $instance->tipo.'-';}
+
             $this->id_ofrecimiento = $argumentos[1];
             $instance = ofrecimiento::find($this->id_ofrecimiento,'ofrecimiento');
             if ($argumentos[1]) {$this->arrayOpcionesForm .= ' Ofrecimiento: '. $instance->ofrecimiento.'-';}
+
             $this->id_ciudad = $argumentos[2]?['localizaciones.id_ciudad','=',$argumentos[2]]:['casas.disponibilidad','=',1];
             $instance = $argumentos[2]?ciudad::find($argumentos[2],'ciudad'):' ';
             if ($argumentos[2]) {$this->arrayOpcionesForm .= ' Ciudad: '. $instance->ciudad.'-';}
@@ -68,7 +70,7 @@ class ThumbsPhotos extends Component
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
         case 2: // propiedad seleccionada clicando boton MAS DETALLES...
-            $this->tipo = $argumentos[0];
+            $this->gestion = $argumentos[0];
             $this->titulo = $argumentos[1];
             $this->id_propiedad = $argumentos[2];
             $this->arrayOpcionesForm = $argumentos[3];
@@ -76,7 +78,7 @@ class ThumbsPhotos extends Component
             
             break;
         case 3:  // llamada del formulario detallado.
-            $this->tipo = $argumentos[0];
+            $this->gestion = $argumentos[0];
             $this->titulo = $argumentos[1];
             $this->id_ciudad = $argumentos[2]?['localizaciones.id_ciudad','=',$argumentos[2]]:['casas.disponibilidad','=',1];
             $instance = $argumentos[2]?ciudad::find($argumentos[2],'ciudad'):' ';
@@ -133,6 +135,7 @@ class ThumbsPhotos extends Component
 
         $this->id_usuario = Auth::check()?Auth::id():0;
         $imagenes_casas = $this->get_casas();
+
         $this->lastQuery = $this->selectLastQuery(session()->getId());
         
         $favoritos_casas = $this->get_favoritos_casas();
@@ -157,7 +160,7 @@ class ThumbsPhotos extends Component
 
     private function get_casas() {
         
-        switch ($this->tipo) {
+        switch ($this->gestion) {
             case 0:  // propiedades destacadas.
                 
                 $this->lastQuery = DB::table('casas')->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
@@ -191,6 +194,7 @@ class ThumbsPhotos extends Component
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
+
                 $this->actualizarLastQuery($this->lastQuery,session()->getId());
                 $this->titulo_thumbnail_lastQuery = "Resultado de Busqueda";
                 return $this->lastQuery;
@@ -314,23 +318,12 @@ class ThumbsPhotos extends Component
                           DB::raw("'Favoritos' as titulo" ))->get();
     }
 
-    private function actualizarLastQuery($lastQuery,$id) { 
-       
-       /* DB::table('sessions')->upsert([
-             ['payload'=>$lastQuery,'id'=>$id]
-            ],
-            ['id'],
-            ['payload']
-          );*/
-
+    private function actualizarLastQuery($lastQuery,$id) {
           session(['id'=>$lastQuery]);
     }
 
     public function selectLastQuery($id) {
-
-        //$lastQ = DB::table('sessions')->where('id',$id)->get('payload');
         $lastQ = session('id');
-        
        return $lastQ;
     }
 

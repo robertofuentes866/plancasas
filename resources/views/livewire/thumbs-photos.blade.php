@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="card-body">
                                     
-                                    @if($tipo!=2)
+                                    @if($gestion!=2)
                                     <h5 class="card-title">{{$residencial.'-'.$casaNumero}}</h5>
                                     <p class="card-text"> {{$descripcion}}</p>
                                     
@@ -91,7 +91,7 @@
                                 </div>
                             </article>
                             <!-- Carousel de thumbnail  abajo de la foto normal -->
-                            @if ($tipo==2 )
+                            @if ($gestion==2 )
                                 <article class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                                     <div class="card-header text-white" style="text-align:center;height:4.5em">
                                         <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
@@ -107,7 +107,7 @@
 
                         <!-- Características de la casa -->
 
-                        @if($tipo == 2 && $imagenes_casas->count())  
+                        @if($gestion == 2 && $imagenes_casas->count())  
                             <article class="card mt-3 mb-3">
                                 <div class="card-header">
                                     <strong>Características de la propiedad</strong>
@@ -257,8 +257,8 @@
 
 </div> <!-- End Columna 8 de derecha. -->
 @else 
-    @if ($tipo==1 or $tipo==3) <!-- si viene de cualquier formulario con resultados vacios -->
-        @livewire('thumbs-photos',['tipo'=>0,'titulo'=>'Propiedades Destacadas'])
+    @if ($gestion==1 or $gestion==3) <!-- si viene de cualquier formulario con resultados vacios -->
+        @livewire('thumbs-photos',['gestion'=>0,'titulo'=>'Propiedades Destacadas'])
     @else
         @livewire('imagenes-grupo')
     @endif

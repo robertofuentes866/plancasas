@@ -193,20 +193,20 @@
 @switch ($viewData['gestion']) 
  
   @case (0)    
-            @livewire('thumbs-photos',['tipo'=>0,'titulo'=>'Propiedades Destacadas'])  <!-- muestra fotos destacadas en la pagina principal  -->
+            @livewire('thumbs-photos',['gestion'=>0,'titulo'=>'Propiedades Destacadas'])  <!-- muestra fotos destacadas en la pagina principal  -->
             @break
 
   @case (1)
 
-        @livewire('thumbs-photos',['tipo'=>1,'ofrecimiento'=>$_GET['id_ofrecimiento']??0,'ciudad'=>$_GET['id_ciudad']??0,
-                                'localizacion'=>$_GET['id_localizacion']??0,'titulo'=>'Resultado de busqueda'])  <!-- muestra resultado del formulario en la pagina principal.  -->
+        @livewire('thumbs-photos',['gestion'=>1,'ofrecimiento'=>$_GET['id_ofrecimiento']??0,'ciudad'=>$_GET['id_ciudad']??0,
+                                'localizacion'=>$_GET['id_localizacion']??0,'titulo'=>'Resultado de busqueda','tipo'=>$_GET['id_tipo']??1])  <!-- muestra resultado del formulario en la pagina principal.  -->
         @break
   @case (2)
-    @livewire('thumbs-photos',['tipo'=>2,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad'],'busqueda'=>$viewData['resultadoBusqueda']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
+    @livewire('thumbs-photos',['gestion'=>2,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad'],'busqueda'=>$viewData['resultadoBusqueda']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
         @break
 
  @case (3)
-    @livewire('thumbs-photos',['tipo'=>3,'titulo'=>'Resultado de busqueda','id_ciudad'=>$_GET['id_ciudad']??0,
+    @livewire('thumbs-photos',['gestion'=>3,'titulo'=>'Resultado de busqueda','id_ciudad'=>$_GET['id_ciudad']??0,
     'id_recurso'=>$_GET['id_recurso']??0,'id_duracion'=>$_GET['id_duracion']??0,'habitaciones'=>$_GET['habitaciones']??0,
     'banos'=>$_GET['banos']??0,'aires_acondicionado'=>$_GET['aires_acondicionado']??0,
     'abanicos_techo'=>$_GET['abanicos_techo']??0,'precio_minimo'=>$_GET['precio_minimo']??0,'precio_maximo'=>$_GET['precio_maximo']??0,
