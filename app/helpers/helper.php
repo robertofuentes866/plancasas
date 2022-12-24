@@ -66,7 +66,7 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                 echo '<div class="col" style=" float:right; height:120px;">';
                     incrementaIndice($i);
                     $permiteAbrirGrupoCarrusel=false;
-                    echo "<figure wire:click=\"selectNormalImagen($comillas$imagen_casa->foto_normal$comillas,
+                    echo "<a href=\"#procedencia\"><figure wire:click=\"selectNormalImagen($comillas$imagen_casa->foto_normal$comillas,
                             $comillas$imagen_casa->descripcion$comillas,
                             $comillas$imagen_casa->residencial$comillas,
                             $comillas$imagen_casa->casaNumero$comillas,
@@ -77,14 +77,11 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                             src=". asset('storage/propiedades/'.$imagen_casa->foto_thumb) 
                             ." width=\"84\" height=\"54\">
                         <figcaption> $imagen_casa->leyenda </figcaption>
-                    </figure>
+                    </figure></a>
                 </div>";
         }
         if ( ( (!($i % $numPropPorRotacion)) or ($i_total >= $fotos_thumb->count()) ) && !$permiteAbrirGrupoCarrusel ) {
             $permiteAbrirGrupoCarrusel=true;
-            /*echo '<div class="carousel-caption d-none d-md-block">
-                     <h5>'.ceil($i / $numPropPorRotacion).'</h5>
-                    </div>'; */
 
             echo '</div>'; 
            

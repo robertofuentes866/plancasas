@@ -57,6 +57,9 @@
             
             <div class="col-lg-8 col-12 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
                             <article class="card">
+
+
+                            
                                 <img src="{{asset('storage/propiedades/'.$fotoNormal)}}" class="card-img-top" alt="...">
                                 <div id="procedencia">
                                     {{$titulo_en_foto_normal}}
@@ -189,7 +192,7 @@
                                         @endif
                                     @endforeach
                                     <tr>
-                                        <td colspan="4"><i> Los precios para contrato: anual, medio año o mes son pagos mensuales.</i></td> 
+                                        <td colspan="4"><i> Los precios para contrato de renta: <u>anual</u>, <u>medio año</u> o <u>mes</u> son pagos mensuales.</i></td> 
                                     </tr>
                                     </tbody>
                                     </table>
@@ -205,20 +208,20 @@
                             <div class="card-body">
                                 <table class=" table-striped table table-dark tabla_agente">
                                     <tr>
-                                    <td>Nombre: {{ $imagenes_casas[0]->nombre_agente}}</td>
+                                    <td><u>Nombre:</u> {{ $imagenes_casas[0]->nombre_agente}}</td>
                                         <td>
                                             <img src="{{asset('storage/agentes/'. $imagenes_casas[0]->foto_agente)}}">
                                         </td>
                                         
                                     </tr>
                                     <tr>
-                                        <td>Celular Tigo: {{ $imagenes_casas[0]->cel1}}</td>
+                                        <td><u>Celular Tigo:</u> {{ $imagenes_casas[0]->cel1}}</td>
                                     </tr>
                                     <tr>
-                                    <td>Celular Claro: {{ $imagenes_casas[0]->cel2}}</td>
+                                    <td><u>Celular Claro:</u> {{ $imagenes_casas[0]->cel2}}</td>
                                     </tr>
                                     <tr>
-                                    <td>Email: {{ $imagenes_casas[0]->email}}</td>
+                                    <td><u>Email:</u> {{ $imagenes_casas[0]->email}}</td>
                                     </tr>
                                     
                                     <tr>
