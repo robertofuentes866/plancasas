@@ -12,6 +12,7 @@ use App\Models\localizacion;
 use App\Models\ciudad;
 use App\Models\recurso;
 use App\Models\duracion;
+use App\Models\subtipo;
 
 class ThumbsPhotos extends Component
 {
@@ -37,7 +38,7 @@ class ThumbsPhotos extends Component
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
            $id_propiedad = 0,$gestion = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',
            $abanicos_techo='',$precio_minimo=0,$precio_maximo=0,$agua_caliente='',$tanque_agua='',
-           $sistema_seguridad='',$cuartoDomestica='',$piscina='';
+           $sistema_seguridad='',$cuartoDomestica='',$piscina='',$id_tipo=1;
 
 
     public function mount(...$argumentos){
@@ -50,11 +51,19 @@ class ThumbsPhotos extends Component
             $this->titulo_thumbnail = "Destacados"; 
             
             break;
-         case 1: // llamada del formulario principal.
+         case 1: // llamada del formulario principal Residencial/Condominio.
             
             $this->gestion = $argumentos[0];
-            $instance = tipo::find($argumentos[5],'tipo');
-            if ($argumentos[5]) {$this->arrayOpcionesForm .= ' Tipo: '. $instance->tipo.'-';}
+
+            $this->id_tipo = $argumentos[5]?$argumentos[5]:0;
+            $instance = subtipo::where('id_subtipo','=',$argumentos[5])
+                                 ->where('id_tipo','=',1)
+                                 ->select('subtipo')->get();
+                                 
+            if ($instance->count()){
+                
+                $this->arrayOpcionesForm .= 'Tipo: '.$instance[0]->subtipo . '-';
+            } 
 
             $this->id_ofrecimiento = $argumentos[1];
             $instance = ofrecimiento::find($this->id_ofrecimiento,'ofrecimiento');
@@ -70,6 +79,7 @@ class ThumbsPhotos extends Component
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
         case 2: // propiedad seleccionada clicando boton MAS DETALLES...
+            
             $this->gestion = $argumentos[0];
             $this->titulo = $argumentos[1];
             $this->id_propiedad = $argumentos[2];
@@ -148,6 +158,7 @@ class ThumbsPhotos extends Component
             $this->descripcion = $imagenes_casas[0]->descripcion??$favoritos_casas[0]->descripcion??'';
             $this->residencial = $imagenes_casas[0]->residencial??$favoritos_casas[0]->residencial??'';
             $this->casaNumero = $imagenes_casas[0]->casaNumero??$favoritos_casas[0]->casaNumero??'';
+           
             $this->id_propiedad = $imagenes_casas[0]->id_casa??$favoritos_casas[0]->id_casa??'';
             $this->leyenda = $imagenes_casas[0]->leyenda??$favoritos_casas[0]->leyenda??'';
             $this->titulo_en_foto_normal = $imagenes_casas[0]->titulo??$favoritos_casas[0]->titulo??'';
@@ -177,15 +188,16 @@ class ThumbsPhotos extends Component
                 return $this->lastQuery;
                 break;  
 
-            case 1: // llamado del formulario de busqueda.
-       
+            case 1: // llamado del formulario de busqueda Residencial/Condominio.
+                
                 $this->lastQuery =  DB::table('casas')
                 ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
                 ->join('ciudades','ciudades.id_ciudad','=','localizaciones.id_ciudad')
                 ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                 ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
                 ->join('ofrecimientos','ofrecimientos.id_ofrecimiento','=','precios_casas.id_ofrecimiento')
-                ->where([['precios_casas.id_ofrecimiento','=',$this->id_ofrecimiento],
+                ->where([['casas.id_subtipo','=',$this->id_tipo],
+                        ['precios_casas.id_ofrecimiento','=',$this->id_ofrecimiento],
                         [$this->id_ciudad[0],$this->id_ciudad[1],$this->id_ciudad[2] ],
                         [$this->id_localizacion[0],$this->id_localizacion[1],$this->id_localizacion[2]],
                     ['fotos_casas.es_principal','=',1],

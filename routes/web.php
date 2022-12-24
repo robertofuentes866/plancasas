@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Admin\tipoController;
 use App\Http\Controllers\Admin\recursoController;
@@ -7,6 +6,7 @@ use App\Http\Controllers\Admin\ofrecimientoController;
 use App\Http\Controllers\Admin\ciudadController;
 use App\Http\Controllers\Admin\duracionController;
 use App\Http\Controllers\Admin\localizacionController;
+use App\Http\Controllers\Admin\subTipoController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +55,17 @@ Route::get('/{id}/admin.tipoForm.edit','App\Http\Controllers\Admin\tipoControlle
 Route::put('/{id}/admin.tipoForm.update',[tipoController::class,'update'])->name('admin.tipoForm.update');
 
 Route::delete('/{id}/admin.tipoForm.delete','App\Http\Controllers\Admin\tipoController@destroy')->name('admin.tipoForm.delete');
+
+// Relacionados al formulario SUBTIPO DE PROPIEDADES.
+Route::get('/admin.subTipoForm.index','App\Http\Controllers\Admin\subTipoController@index')->name('admin.subTipoForm.index');
+
+Route::post('/admin.subTipoForm.store','App\Http\Controllers\Admin\subTipoController@store')->name('admin.subTipoForm.store');
+
+Route::get('/{id_subtipo}/admin.subTipoForm.edit','App\Http\Controllers\Admin\subTipoController@edit')->name('admin.subTipoForm.edit');
+
+Route::put('/{id_subtipo}/admin.subTipoForm.update',[subTipoController::class,'update'])->name('admin.subTipoForm.update');
+
+Route::delete('/{id_subtipo}/admin.subTipoForm.delete','App\Http\Controllers\Admin\subTipoController@destroy')->name('admin.subTipoForm.delete');
 
 // Relacionados al formulario RECURSOS.
 Route::get('/admin.recursoForm.index','App\Http\Controllers\Admin\recursoController@index')->name('admin.recursoForm.index');

@@ -66,8 +66,9 @@
                                     @if($gestion!=2)
                                     <h5 class="card-title">{{$residencial.'-'.$casaNumero}}</h5>
                                     <p class="card-text"> {{$descripcion}}</p>
-                                    
+                                   
                                     <a class="btn btn-primary" href="{{route('menu.inicio',[2,$id_propiedad,$arrayOpcionesForm])}}" role="button">Mas detalles...</a>
+                                   
                                     @else
                                     <p class="card-title">
                                     <strong>{{$leyenda. ' en '. $casaNumero}}</strong> </p>

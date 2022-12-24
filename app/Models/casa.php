@@ -10,9 +10,9 @@ class casa extends Model
     protected $table = "casas";
     protected $primaryKey = "id_casa";
     protected $fillable = ["id_agente","id_tipo","id_localizacion","casaNumero","area_construccion",
-    "area_terreno","plantas","garage","habitaciones","banos","piscina","apartamento","cuartoDomestica",
+    "area_terreno","plantas","garage","habitaciones","banos","piscina","cuartoDomestica",
    "bano_social","disponibilidad","destacado","ano_construccion","aires_acondicionado","abanicos_techo",
-    "agua_caliente","tanque_agua","sistema_seguridad","descripcion"];
+    "agua_caliente","tanque_agua","sistema_seguridad","descripcion",'id_subtipo'];
     protected $hidden = ['id_casa'];
     
     use HasFactory;
@@ -159,14 +159,6 @@ class casa extends Model
         $this->attributes['disponibilidad'] = $disp;
     }
 
-    public function getApartamento(){
-        return $this->attributes['apartamento'];
-    }
-
-    public function setApartamento($apto) {
-        $this->attributes['apartamento'] = $apto;
-    }
-
     public function getDestacado(){
         return $this->attributes['destacado'];
     }
@@ -230,5 +222,13 @@ class casa extends Model
 
     public function setDescripcion($cd) {
         $this->attributes['descripcion'] = $cd;
+    }
+
+    public function getIdSubTipo(){
+        return $this->attributes['id_subtipo'];
+    }
+
+    public function setIdSubTipo($cd) {
+        $this->attributes['id_subtipo'] = $cd;
     }
 }

@@ -11,6 +11,7 @@ class AdminFormsController extends Controller
         $viewData = [];
         $viewData['title'] = "Panel de Administracion - Plancasas";
         $viewData['tables'] = ["admin.tipoForm.index"=>"Tabla Tipos de propiedades",
+                               "admin.subTipoForm.index"=>"Tabla Sub-tipos de propiedades",
                                 "admin.ofrecimientoForm.index"=>"Tabla Ofrecimientos",
                                 "admin.recursoForm.index"=>"Tabla Recursos",
                                 "admin.ciudadForm.index"=>"Tabla Ciudades",

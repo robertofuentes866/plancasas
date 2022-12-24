@@ -122,3 +122,7 @@ legend {
 .card-title {
     text-align: center;
 }
+
+.requerido {
+    color:crimson;
+}

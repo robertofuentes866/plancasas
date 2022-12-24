@@ -5,7 +5,7 @@
 @section('nav_link_entrar',$viewData['nav_link_entrar'])
 @section('cuerpo')
 
-<div class="col-lg-4 col-12 bg-primary">  <!-- Primera columna, la del formulario -->
+<div class="col-lg-4 col-12 bg-primary">  <!-- Primera columna, la del formulario Residencial/Condonimio -->
 
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
         <div class="card-header" style="text-align:center">
@@ -14,32 +14,8 @@
     <div class="card-body">
     <form method="get" action="{{route('menu.inicio',['gestion'=>1])}}">
             @csrf
-            <div class="form-group row">
-                <label for="tipo" class="col-lg-6 col-form-label">Tipo</label>
-                
-                    <select name="id_tipo" id="tipo">
-                                    <option value="">** Tipo de propiedad **</option>
-                                    @foreach($viewData['tipo'] as $tipo)
-                                        <option value="{{$tipo->id_tipo}}">{{$tipo->tipo}} </option>
-                                    @endforeach
-                    </select> 
-                
-            </div>
-
-            <div class="form-group row">
-                <label for="ofrecimiento" class="col-lg-8 col-form-label">Ofrecimiento (Requerido)</label>
-                
-                    <select name="id_ofrecimiento" id="ofrecimiento">
-                                    <option value="">*** Desea comprar o alquilar ? ***</option>
-                                    @foreach($viewData['ofrecimiento'] as $ofrecimiento)
-                                        <option value="{{$ofrecimiento->id_ofrecimiento}}">{{$ofrecimiento->ofrecimiento}} </option>
-                                    @endforeach
-                    </select> 
-                
-            </div>
-            
-                <livewire:select-component/>
-            
+           
+            @livewire('select-component',['viewData'=>$viewData])
                
             <div class="form-group row my-3">
                 <div class="col-sm-10">
@@ -59,11 +35,11 @@
         <fieldset>
             <legend>Seleccione</legend>    
             <div class="form-group row">
-                <label for="ciudad" class="col-lg-6 col-form-label">Ciudades</label>
+                <label for="ciudad" class="col-lg-6 col-form-label">Ciudad</label>
          
                 <select class="w-75 ms-3" id="ciudad" name="id_ciudad"> 
                      <option value="">**Ubicacion Ciudad **</option>
-                        @foreach($viewData['ciudad'] as $ciudad)
+                        @foreach($viewData['ciudades'] as $ciudad)
                             <option value="{{$ciudad->id_ciudad}}">{{$ciudad->ciudad}}</option>
                         @endforeach
                 </select>
@@ -83,7 +59,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="duracion" class="col-lg-6 col-form-label">Contrato por</label>
+                <label for="duracion" class="col-lg-6 col-form-label">Contrato</label>
          
                 <select class="w-75 ms-3" onchange=ajustarPrecios(this.value) id="duracion" name="id_duracion"> 
                         <option value="">**Duracion del Contrato**</option>
@@ -197,9 +173,9 @@
             @break
 
   @case (1)
-
+       
         @livewire('thumbs-photos',['gestion'=>1,'ofrecimiento'=>$_GET['id_ofrecimiento']??0,'ciudad'=>$_GET['id_ciudad']??0,
-                                'localizacion'=>$_GET['id_localizacion']??0,'titulo'=>'Resultado de busqueda','tipo'=>$_GET['id_tipo']??1])  <!-- muestra resultado del formulario en la pagina principal.  -->
+                                'localizacion'=>$_GET['id_localizacion']??0,'titulo'=>'Resultado de busqueda','tipo'=>$_GET['id_tipo']])  <!-- muestra resultado del formulario en la pagina principal.  -->
         @break
   @case (2)
     @livewire('thumbs-photos',['gestion'=>2,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad'],'busqueda'=>$viewData['resultadoBusqueda']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->

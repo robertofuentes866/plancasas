@@ -7,7 +7,7 @@ use App\Models\casa;
 use App\Models\agente;
 use App\Models\tipo;
 use App\Models\localizacion;
-use App\Models\recurso;
+use App\Models\subtipo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -29,9 +29,11 @@ class casaController extends Controller
         $viewData['agentes'] = agente::all();
         $viewData['tipos'] = tipo::all();
         $viewData['localizaciones'] = localizacion::all();
+        $viewData['subtipos'] = subtipo::all();
         $viewData['relacion'] = DB::table('casas')
                                     ->join('agentes','casas.id_agente','=','agentes.id_agente')
                                     ->join('tipos','casas.id_tipo','=','tipos.id_tipo')
+                                    ->join('subtipos','casas.id_subtipo','=','subtipos.id_subtipo')
                                     ->join('localizaciones','casas.id_localizacion','=','localizaciones.id_localizacion')
                                     ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
                                     ->select('casas.id_casa','agentes.nombre as nombreAgente','localizaciones.residencial',
@@ -67,10 +69,9 @@ class casaController extends Controller
         casa::validar($request);
         $creationData = $request->only(["id_agente","id_tipo","id_localizacion","casaNumero","area_construccion",
                         "area_terreno","plantas","garage","habitaciones","banos","bano_social","cuartoDomestica","piscina",
-                        "apartamento","destacado","disponibilidad","ano_construccion","aires_acondicionado",
-                        "abanicos_techo","descripcion"]);
+                        "destacado","disponibilidad","ano_construccion","aires_acondicionado",
+                        "abanicos_techo","descripcion","id_subtipo"]);
         $creationData['piscina'] = $request->input('piscina')?1:0;
-        $creationData['apartamento'] = $request->input('apartamento')?1:0;
         $creationData['bano_social'] = $request->input('bano_social')?1:0;
         $creationData['cuartoDomestica'] = $request->input('cuartoDomestica')?1:0;
         $creationData['disponibilidad'] = $request->input('disponibilidad')?1:0;
@@ -108,6 +109,7 @@ class casaController extends Controller
         $viewData['casas'] = casa::findOrFail($id);
         $viewData['agentes'] = agente::all();
         $viewData['localizaciones'] = localizacion::all();
+        $viewData['subtipos'] = subtipo::all();
         return view('admin.casaFormEdit')->with('data',$viewData);
     }
 
@@ -123,7 +125,6 @@ class casaController extends Controller
         $casa = casa::find($id);
         $updateData = $request->all();
         $updateData['piscina'] = $request->input('piscina')?1:0;
-        $updateData['apartamento'] = $request->input('apartamento')?1:0;
         $updateData['bano_social'] = $request->input('bano_social')?1:0;
         $updateData['cuartoDomestica'] = $request->input('cuartoDomestica')?1:0;
         $updateData['disponibilidad'] = $request->input('disponibilidad')?1:0;
