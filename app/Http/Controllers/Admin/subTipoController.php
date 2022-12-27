@@ -119,6 +119,7 @@ class subTipoController extends Controller
           $data['ruta'] = 'admin.subTipoForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        return $this->index();
+        //return $this->index();
+        return back();
     }
 }

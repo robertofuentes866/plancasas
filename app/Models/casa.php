@@ -19,15 +19,13 @@ class casa extends Model
 
     public static function validar($request) {
         $request->validate(['plantas'=>'max:2',
-                            'casaNumero'=>'max:30',
+                            'casaNumero'=>'required|max:30',
                             'garage'=>'max:3',
-                             'area_construccion'=>'numeric',
-                             'area_terreno'=>'numeric',
                              'habitaciones'=>'max:2',
                             'banos'=>'max:2',
-                            'ano_construccion'=>'numeric',
                              'id_agente'=>'required',
                              'id_localizacion'=>'required',
+                             'id_subtipo'=>'required',
                             'id_tipo'=>'required']);
     }
 

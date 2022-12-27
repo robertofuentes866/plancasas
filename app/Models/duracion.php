@@ -15,7 +15,7 @@ class duracion extends Model
     use HasFactory;
 
     public static function validar($request) {
-        $request->validate(['duracion'=>'required|max:12']);
+        $request->validate(['duracion'=>'required|alpha_num|not_regex:/^[0-9]*$/|max:12']);
     }
 
 

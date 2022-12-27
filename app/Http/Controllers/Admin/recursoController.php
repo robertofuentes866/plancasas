@@ -114,6 +114,7 @@ class recursoController extends Controller
           $data['ruta'] = 'admin.recursoForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        return $this->index();
+        //return $this->index();
+        return back();
     }
 }

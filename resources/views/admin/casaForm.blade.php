@@ -71,7 +71,7 @@ Crear Casas
                 <div class="mb-3 row">
                 <label for="descripcion" class="col-lg-12 col-form-label">Descripcion:</label>
                 <div class="col-lg-12"> 
-                <textarea name="descripcion" class="form-control" id="descripcion" rows="5"></textarea>
+                <textarea name="descripcion" class="form-control" id="descripcion" rows="5">{{old('descripcion')}}</textarea>
                 </div>
                 </div>
     </div>

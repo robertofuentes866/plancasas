@@ -123,6 +123,7 @@ class privilegioController extends Controller
           $data['ruta'] = 'admin.privilegioForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        return $this->index();
+        //return $this->index();
+        return back();
     }
 }

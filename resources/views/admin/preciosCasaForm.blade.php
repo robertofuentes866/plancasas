@@ -90,10 +90,15 @@ Crear Precios Casas
 </div>
 </div>
 
-
 <div class="card">
 <div class="card-header">
-Ver Precios Casas
+    <nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">Ver Precios Casas</a>
+    <form class="form-inline" method="get">
+        <input name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="search">
+        <a href="{{'#'.$_GET['buscar']??''}}"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+    </nav>
 </div>
 <div class="card-body">
 <table class="table table-bordered table-striped">
@@ -107,9 +112,15 @@ Ver Precios Casas
 </tr>
 </thead>
 <tbody>
+@php(session(['casaKey'=>'none']))
 @foreach ($data["relacion"] as $relacion)
 <tr>
-<td>{{ $relacion->casaNumero }}</td>
+@if (! (session('casaKey') == $relacion->casaNumero))
+   <td id="{{ $relacion->casaNumero }}">{{ $relacion->casaNumero }}</td>
+   @php(session(['casaKey'=>$relacion->casaNumero]))
+@else 
+    <td>{{ $relacion->casaNumero }}</td>
+@endif
 <td>{{ $relacion->ofrecimiento }}</td>
 <td>{{ $relacion->duracion }}</td>
 <td>{{ $relacion->recurso }}</td>

@@ -152,6 +152,7 @@ class preciosCasaController extends Controller
           $data['ruta'] = 'admin.preciosCasaForm.index';
           return view('admin.errorPage')->with('data',$data);
        }
-       return $this->index();
+       //return $this->index();
+       return back();
     }
 }

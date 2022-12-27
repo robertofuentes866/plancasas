@@ -114,6 +114,7 @@ class ofrecimientoController extends Controller
           $data['ruta'] = 'admin.ofrecimientoForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        return $this->index();
+        //return $this->index();
+        return back();
     }
 }

@@ -9,8 +9,7 @@ class agente extends Model
 {
     protected $table = "agentes";
     protected $primaryKey = "id_agente";
-    protected $fillable = ['id_privilegio','nombre','apellidos','email','password','cel1','cel2'
-    ,'foto_agente'];
+    protected $fillable = ['id_privilegio','nombre','apellidos','email','password','cel1','cel2','foto_agente'];
     protected $hidden = ['id_privilegio','id_agente'];
     
     use HasFactory;
@@ -18,9 +17,10 @@ class agente extends Model
     public static function validar($request) {
         $request->validate(['nombre'=>'required|max:50',
                             'apellidos'=>'required|max:50',
-                             'email'=>'required|max:100',
+                             'email'=>'required|email|max:100',
                              'password'=>'required|max:250',
-                            'cel1'=>'required|max:25',
+                            'cel1'=>'required|numeric|max:25',
+                            'cel2'=>'numeric|max:25',
                             'foto_agente'=>'mimes:jpg,png,bmp,jpeg',
                              'id_privilegio'=>'required']);
     }

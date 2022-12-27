@@ -111,6 +111,7 @@ class TipoController extends Controller
           $data['ruta'] = 'admin.tipoForm.index';
           return view('admin.errorPage')->with('data',$data);
        }       
-        return $this->index();
+        //return $this->index();
+        return back();
     }
 }
