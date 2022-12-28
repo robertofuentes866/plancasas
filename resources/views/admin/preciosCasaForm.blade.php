@@ -1,6 +1,13 @@
 @extends('admin.home')
 @section('title', $data["title"])
 @section('cuerpo')
+
+@if (isset($_GET['buscaInfo']))
+   <script>
+      window.location.href="{{'#'.strtoupper($_GET['buscaInfo'])}}";
+    </script>
+@endif
+
 <div class="card mb-4">
 <div class="card-header">
 Crear Precios Casas
@@ -92,13 +99,22 @@ Crear Precios Casas
 
 <div class="card">
 <div class="card-header">
-    <nav class="navbar navbar-light bg-light justify-content-between">
-    <a class="navbar-brand">Ver Precios Casas</a>
-    <form class="form-inline" method="get">
-        <input name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="search">
-        <a href="{{'#'.$_GET['buscar']??''}}"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
-    </nav>
+    <!-- copiar desde aqui -->
+    <div class="row">
+        <div class="col-lg-8">
+        VER PRECIOS VIVIENDAS
+        </div>
+        <nav class="navbar navbar-light bg-light col-lg-4">
+            <div class="container-fluid">
+                <form class="d-flex">
+                    @csrf
+                <input name="buscaInfo" class="form-control me-2" type="search" placeholder="Casa Numero" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+      <!-- hasta aqui -->
 </div>
 <div class="card-body">
 <table class="table table-bordered table-striped">
@@ -112,15 +128,17 @@ Crear Precios Casas
 </tr>
 </thead>
 <tbody>
-@php(session(['casaKey'=>'none']))
+
+@php(session(['searchKey'=>'none']))
 @foreach ($data["relacion"] as $relacion)
 <tr>
-@if (! (session('casaKey') == $relacion->casaNumero))
-   <td id="{{ $relacion->casaNumero }}">{{ $relacion->casaNumero }}</td>
-   @php(session(['casaKey'=>$relacion->casaNumero]))
+@if (! (session('searchKey') == strtoupper($relacion->casaNumero)))
+   <td id="{{ strtoupper($relacion->casaNumero) }}">{{ $relacion->casaNumero }}</td>
+   @php(session(['searchKey'=>strtoupper($relacion->casaNumero)]))
 @else 
     <td>{{ $relacion->casaNumero }}</td>
 @endif
+
 <td>{{ $relacion->ofrecimiento }}</td>
 <td>{{ $relacion->duracion }}</td>
 <td>{{ $relacion->recurso }}</td>
