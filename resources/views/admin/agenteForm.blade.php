@@ -1,6 +1,13 @@
 @extends('admin.home')
 @section('title', $data["title"])
 @section('cuerpo')
+
+@if (isset($_GET['buscaInfo'])) 
+   <script>
+      window.location.href="{{'#'.strtoupper($_GET['buscaInfo'])}}";
+    </script>
+@endif
+
 <div class="card mb-4">
 <div class="card-header">
 Crear Agentes
@@ -92,7 +99,27 @@ Crear Agentes
 
 <div class="card">
 <div class="card-header">
-Ver Agentes
+ <!-- copiar desde aqui -->
+ <div class="row">
+        <div class="col-lg-8">
+        VER AGENTES
+        </div>
+        <nav class="navbar navbar-light bg-light col-lg-4">
+            <div class="container-fluid">
+                <form class="d-flex">
+                    @csrf
+                    <select name="buscaInfo" class="form-control">
+                        <option value= " ">**Seleccione Email**</option>
+                    @foreach ($data["agentes"] as $buscarFila)
+                    <option value="{{$buscarFila->email}}"> {{$buscarFila->email}}</option>
+                    @endforeach
+                    </select> 
+                    <button class="btn btn-outline-success mx-2" type="submit">Buscar</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <!-- hasta aqui -->
 </div>
 <div class="card-body">
 <table class="table table-bordered table-striped">
@@ -109,8 +136,16 @@ Ver Agentes
 </tr>
 </thead>
 <tbody>
+<!--copiar desde aqui -->
+@php(session(['searchKey'=>'none']))
 @foreach ($data["relacion"] as $relacion)
-<tr>
+@if (! (session('searchKey') == strtoupper($relacion->email)))
+   <tr id="{{ strtoupper($relacion->email) }}">
+   @php(session(['searchKey'=>strtoupper($relacion->email)]))
+@else 
+    <tr>
+@endif
+<!-- hasta aqui -->
 <td>{{ $relacion->privilegio }}</td>
 <td>{{ $relacion->nombre }}</td>
 <td>{{ $relacion->apellidos }}</td>

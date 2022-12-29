@@ -103,15 +103,15 @@ Crear Localizaciones
 <!--copiar desde aqui -->
 @php(session(['searchKey'=>'none']))
 @foreach ($data["relacion"] as $relacion)
-<tr>
-<td>{{ $relacion->ciudad }}</td>
 @if (! (session('searchKey') == strtoupper($relacion->residencial)))
-   <td id="{{ strtoupper($relacion->residencial) }}">{{ $relacion->residencial }}</td>
+   <tr id="{{ strtoupper($relacion->residencial) }}">
    @php(session(['searchKey'=>strtoupper($relacion->residencial)]))
 @else 
-    <td>{{ $relacion->residencial }}</td>
+    <tr>
 @endif
 <!-- hasta aqui -->
+<td>{{ $relacion->ciudad }}</td>
+<td>{{ $relacion->residencial }}</td>
 <td>{{ $relacion->direccion }}</td>
 <td> 
     <a class="btn btn-primary" href="{{route('admin.localizacionForm.edit',['id'=>$relacion->id_localizacion])}}">
