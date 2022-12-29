@@ -1,6 +1,14 @@
 @extends('admin.home')
 @section('title', $data["title"])
 @section('cuerpo')
+
+<!-- copiar desde aqui -->
+@if (isset($_GET['buscaInfo']))
+   <script>
+      window.location.href="{{'#'.strtoupper($_GET['buscaInfo'])}}";
+    </script>
+@endif
+<!-- hasta aqui -->
 <div class="card mb-4">
 <div class="card-header">
 Crear Fotos - Casa
@@ -71,7 +79,27 @@ Crear Fotos - Casa
 
 <div class="card">
 <div class="card-header">
-Ver Fotos
+     <!-- copiar desde aqui -->
+    <div class="row">
+        <div class="col-lg-8">
+        VER FOTOS VIVIENDAS
+        </div>
+        <nav class="navbar navbar-light bg-light col-lg-4">
+            <div class="container-fluid">
+                <form class="d-flex">
+                    @csrf
+                    <select name="buscaInfo" class="form-control">
+                        <option value= " ">**Seleccione Casa**</option>
+                    @foreach ($data["buscarFilas"] as $buscarFila)
+                    <option value="{{$buscarFila->casaNumero}}"> {{$buscarFila->casaNumero}}</option>
+                    @endforeach
+                </select> 
+                <button class="btn btn-outline-success mx-2" type="submit">Buscar</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+      <!-- hasta aqui -->
 </div>
 <div class="card-body">
 <table class="table table-bordered table-striped">
@@ -83,8 +111,16 @@ Ver Fotos
 </tr>
 </thead>
 <tbody>
+<!--copiar desde aqui -->
+@php(session(['searchKey'=>'none']))
 @foreach ($data["relacion"] as $relacion)
-<tr>
+@if (! (session('searchKey') == strtoupper($relacion->casaNumero)))
+   <tr id="{{ strtoupper($relacion->casaNumero) }}">
+   @php(session(['searchKey'=>strtoupper($relacion->casaNumero)]))
+@else 
+    <tr>
+@endif
+<!-- hasta aqui -->
 <td>{{ $relacion->residencial }}</td>
 <td>{{ $relacion->casaNumero }}</td>
 <td>{{ $relacion->leyenda }}</td>

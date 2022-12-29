@@ -29,6 +29,11 @@ class preciosCasaController extends Controller
         $viewData['ofrecimientos'] = ofrecimiento::all();
         $viewData['duraciones'] = duracion::all();
         $viewData['recursos'] = recurso::all();
+        $viewData['buscarFilas'] = DB::table('precios_casas')
+                                  ->join('casas','precios_casas.id_casa','=','casas.id_casa')
+                                  ->select('casas.casaNumero')
+                                  ->groupBy('casas.casaNumero')->get();
+
         $viewData['relacion'] = DB::table('precios_casas')
                                     ->join('ofrecimientos','precios_casas.id_ofrecimiento','=','ofrecimientos.id_ofrecimiento')
                                     ->join('duraciones','precios_casas.id_duracion','=','duraciones.id_duracion')

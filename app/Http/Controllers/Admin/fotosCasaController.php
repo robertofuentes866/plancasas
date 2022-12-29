@@ -24,6 +24,11 @@ class fotosCasaController extends Controller
         $viewData['title'] = "Formulario - Fotos Casa";
         $viewData['fotosCasa'] = fotosCasa::all();
         $viewData['casas'] = casa::all();
+        $viewData['buscarFilas'] = DB::table('fotos_casas')
+                                  ->join('casas','fotos_casas.id_casa','=','casas.id_casa')
+                                  ->select('casas.casaNumero')
+                                  ->groupBy('casas.casaNumero')->get();
+
         $viewData['relacion'] = DB::table('fotos_casas')
                                     ->join('casas','fotos_casas.id_casa','=','casas.id_casa')
                                     ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')

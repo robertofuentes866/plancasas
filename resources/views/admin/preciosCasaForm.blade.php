@@ -2,11 +2,13 @@
 @section('title', $data["title"])
 @section('cuerpo')
 
+<!-- copiar desde aqui -->
 @if (isset($_GET['buscaInfo']))
    <script>
       window.location.href="{{'#'.strtoupper($_GET['buscaInfo'])}}";
     </script>
 @endif
+<!-- hasta aqui -->
 
 <div class="card mb-4">
 <div class="card-header">
@@ -99,6 +101,7 @@ Crear Precios Casas
 
 <div class="card">
 <div class="card-header">
+
     <!-- copiar desde aqui -->
     <div class="row">
         <div class="col-lg-8">
@@ -108,13 +111,22 @@ Crear Precios Casas
             <div class="container-fluid">
                 <form class="d-flex">
                     @csrf
-                <input name="buscaInfo" class="form-control me-2" type="search" placeholder="Casa Numero" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    <select name="buscaInfo" class="form-control">
+                        <option value= " ">**Seleccione Casa**</option>
+                    @foreach ($data["buscarFilas"] as $buscarFila)
+                    <option value="{{$buscarFila->casaNumero}}"> {{$buscarFila->casaNumero}}</option>
+                    @endforeach
+                </select> 
+
+
+                </select>
+                <button class="btn btn-outline-success mx-2" type="submit">Buscar</button>
                 </form>
             </div>
         </nav>
     </div>
       <!-- hasta aqui -->
+
 </div>
 <div class="card-body">
 <table class="table table-bordered table-striped">
@@ -129,16 +141,17 @@ Crear Precios Casas
 </thead>
 <tbody>
 
+<!--copiar desde aqui -->
 @php(session(['searchKey'=>'none']))
 @foreach ($data["relacion"] as $relacion)
-<tr>
 @if (! (session('searchKey') == strtoupper($relacion->casaNumero)))
-   <td id="{{ strtoupper($relacion->casaNumero) }}">{{ $relacion->casaNumero }}</td>
+   <tr id="{{ strtoupper($relacion->casaNumero) }}">
    @php(session(['searchKey'=>strtoupper($relacion->casaNumero)]))
 @else 
-    <td>{{ $relacion->casaNumero }}</td>
+    <tr>
 @endif
-
+<!-- hasta aqui -->
+<td>{{ $relacion->casaNumero }}</td>
 <td>{{ $relacion->ofrecimiento }}</td>
 <td>{{ $relacion->duracion }}</td>
 <td>{{ $relacion->recurso }}</td>

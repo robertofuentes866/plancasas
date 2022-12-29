@@ -23,6 +23,7 @@ class localizacionController extends Controller
         $viewData['title'] = "Formulario - Localizaciones";
         $viewData['localizaciones'] = localizacion::all();
         $viewData['ciudades'] = ciudad::all();
+
         $viewData['relacion'] = DB::table('localizaciones')
                                     ->join('ciudades','localizaciones.id_ciudad','=','ciudades.id_ciudad')
                                     ->select('localizaciones.id_localizacion','localizaciones.residencial',
