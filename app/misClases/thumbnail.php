@@ -1,5 +1,5 @@
 <?php
-   namespace Php8Solutions\image;
+   namespace App\misClases;
 
    class Thumbnail {
      protected $original;
@@ -15,12 +15,13 @@
      public function __construct(
         string $image,
         protected string $path,
-        protected int $max = 120,
-        protected string $suffix = '_thb') {
+        string $nombre_final_archivo = ' ',
+        protected int $max = 120) {
             
             if (is_file($image) && is_readable($image)) {
                 
                 $dimension = getimagesize($image);
+               
             } else {
                 throw new \Exception("Cannot open $image");
             }
@@ -43,11 +44,8 @@
         $this->original =$image;
         $this->originalWidth = $dimension[0];
         $this->originalHeight = $dimension[1];
-        $this->basename = pathinfo($image,PATHINFO_FILENAME);
+        $this->basename = !empty($nombre_final_archivo)?$nombre_final_archivo:pathinfo($image,PATHINFO_FILENAME);
         $this->max = abs($max);
-        if ($suffix != '_thb') {
-            $this->suffix = $this->setSuffix($suffix)??'_thb';
-        }
      }
 
      public function create(){
@@ -58,10 +56,10 @@
         $thumb = imagecreatetruecolor($thumbWidth,$thumbHeight);
         imagecopyresampled($thumb,$resource,0,0,0,0,$thumbWidth,$thumbHeight,
                                   $this->originalWidth,$this->originalHeight);
-        $newname = $this->basename.$this->suffix;
+        $newname = $this->basename;
         switch ($this->imageType){
             case 'jpeg':
-                $newname .= '.jpeg';
+                $newname .= '.jpg';
                 $success = imagejpeg($thumb,$this->path.$newname);
                 break;
             case 'png':
@@ -110,16 +108,6 @@
             return true;
         } else {
             return false;
-        }
-     }
-
-     protected function setSuffix($suffix){
-        if (preg_match('/^\w+$/',$suffix)){
-            if (!str_starts_with($suffix,'_')){
-                return '_'.$suffix;
-            } else {
-                return $suffix;
-            }
         }
      }
 

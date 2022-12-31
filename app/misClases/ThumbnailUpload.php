@@ -1,7 +1,7 @@
 <?php
-namespace Php8Solutions\image;
-use Php8Solutions\File\Upload;
-require_once __DIR__.'/../File/Upload.php';
+namespace App\misClases;
+use Upload;
+require_once 'Upload.php';
 require_once 'Thumbnail.php';
 class ThumbnailUpload extends Upload {
      public function __construct(

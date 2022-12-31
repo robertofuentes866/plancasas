@@ -8,6 +8,7 @@ use App\Models\casa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\misClases\Thumbnail;
 
 class fotosCasaController extends Controller
 {
@@ -71,14 +72,16 @@ class fotosCasaController extends Controller
             Storage::putFileAs('propiedades',$request->file('foto_normal'),$nombre_imagen);
             $fotosCasa->foto_normal = $nombre_imagen;
             $fotosCasa->save();
-        }
-        if ($request->hasFile('foto_thumb')) {
-            $nombre_imagen = $fotosCasa->id_foto."_th.".$request->file('foto_thumb')->extension();
-            Storage::putFileAs('propiedades',$request->file('foto_thumb'),$nombre_imagen);
+            // --- A continuacion, crea el thumbnail de la foto tamaño normal y la guarda en el folder propiedades con extension th.
+             
+            $nombre_imagen = $fotosCasa->id_foto."_th.".$request->file('foto_normal')->extension();
+            $nombre_thumb = new Thumbnail($request->foto_normal,'storage/propiedades',$fotosCasa->id_foto.'_th');
+            $nombre_thumb->create();
             $fotosCasa->foto_thumb = $nombre_imagen;
             $fotosCasa->save();
+             
+            //  Storage::putFileAs('propiedades',$request->file('foto_thumb'),$nombre_imagen);
         }
-        
         return redirect()->route('admin.fotosCasaForm.index');
     }
 
@@ -130,15 +133,15 @@ class fotosCasaController extends Controller
         $fotosCasa->setEsPrincipal($request->es_principal?1:0);
         
         if ($request->hasFile('foto_normal')) {
+            // actualiza foto tamaño normal.
             $nombre_imagen = $fotosCasa->id_foto.".".$request->file('foto_normal')->extension();
             $request->file('foto_normal')->storeAs('propiedades',$nombre_imagen);
             $fotosCasa->setFotoNormal($nombre_imagen);
-        }
-
-        if ($request->hasFile('foto_thumb')) {
-            $nombre_imagen = $fotosCasa->id_foto."_th.".$request->file('foto_thumb')->extension();
-            $request->file('foto_thumb')->storeAs('propiedades',$nombre_imagen);
-            $fotosCasa->setFotoThumb($nombre_imagen);
+            
+            // actualiza la foto tamaño thumbnail.
+            $nombre_imagen = $fotosCasa->id_foto."_th.".$request->file('foto_normal')->extension();
+            $nombre_thumb = new Thumbnail($request->foto_normal,'storage/propiedades',$fotosCasa->id_foto.'_th');
+            $nombre_thumb->create();
         }
 
         $fotosCasa->save();

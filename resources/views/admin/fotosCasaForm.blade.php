@@ -57,12 +57,7 @@ Crear Fotos - Casa
 </div>
 </div>
 
-<div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Pequeña:</label>
-<div class="col-lg-10 col-md-6 col-sm-12"> 
-<input name="foto_thumb" id="foto_thumb" type="file" class="form-control"> 
-</div>
-</div>
+<input hidden name="foto_thumb"> 
 
 </div>
 </div>

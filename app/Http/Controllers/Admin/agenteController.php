@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\misClases\Thumbnail;
 use App\Models\agente;
 use App\Models\privilegio;
 use Illuminate\Http\Request;
@@ -70,7 +71,10 @@ class agenteController extends Controller
         $agente->save();
         if ($request->hasFile('foto_agente')) {
             $nombre_imagen = $agente->id_agente.".".$request->file('foto_agente')->extension();
-            Storage::putFileAs('agentes',$request->file('foto_agente'),$nombre_imagen);
+            $nombre_thumb = new Thumbnail($request->foto_agente,'storage/agentes',$agente->id_agente);
+            $nombre_thumb->create();
+           
+            //Storage::putFileAs('agentes',$request->file('foto_agente'),$nombre_imagen);
             $agente->foto_agente = $nombre_imagen;
             $agente->save();
         }
@@ -132,7 +136,11 @@ class agenteController extends Controller
         $agente->setIdPrivilegio($request->id_privilegio);
         if ($request->hasFile('foto_agente')) {
             $nombre_imagen = $agente->id_agente.".".$request->file('foto_agente')->extension();
-            $request->file('foto_agente')->storeAs('agentes',$nombre_imagen);
+            $nombre_thumb = new Thumbnail($request->foto_agente,'storage/agentes',$agente->id_agente);
+            $nombre_thumb->create();
+
+            //$nombre_imagen = $agente->id_agente.".".$request->file('foto_agente')->extension();
+            //$request->file('foto_agente')->storeAs('agentes',$nombre_imagen);
             $agente->setFotoAgente($nombre_imagen);
         }
 

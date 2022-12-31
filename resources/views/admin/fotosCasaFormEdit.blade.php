@@ -48,24 +48,6 @@ Editar Foto - Casa
     </div>
 @endif
 
-<div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Pequeña: <b>[{{basename($data['fotosCasa']->foto_thumb)}}]</b></label>
-<div class="col-lg-10 col-md-6 col-sm-12"> 
-<input name="foto_thumb" id="foto_thumb" type="file" class="form-control"> 
-</div>
-</div>
-@if(!is_null($data['fotosCasa']->foto_thumb))
-    <div class="mb-3 row">
-    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Pequeña:</label>
-    <div class="col-lg-10 col-md-6 col-sm-12"> 
-    <img width="{{$data['thumbAncho']}}" height="{{$data['thumbAlto']}}" src="{{asset('/storage/propiedades/'.$data['fotosCasa']->foto_thumb)}}"> 
-    </div>
-    </div>
-@endif
-
-
-</div>
-</div>
 <button type="submit" class="btn btn-primary">Guardar</button>
 <button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{ route('admin.fotosCasaForm.index')}}">Regresar</a></button>
 </div>

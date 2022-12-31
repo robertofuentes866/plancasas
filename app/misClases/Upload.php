@@ -100,8 +100,6 @@
          return number_format($this->max/1024,1).' KB';
       }
 
-
-
       protected function moveFile($file) {
          $filename = $this->newName??$file['name'];
          $success = move_uploaded_file($file['tmp_name'],$this->path.$filename);
