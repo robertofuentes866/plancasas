@@ -3,7 +3,9 @@
 
     <script>
         Swal.fire('Busqueda con resultado vacio');
+        
     </script>
+    @php(session(['ultimoQuery'=>'']))
     @php($swal = 1)
 @endif
 

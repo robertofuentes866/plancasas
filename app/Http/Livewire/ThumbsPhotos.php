@@ -186,6 +186,7 @@ class ThumbsPhotos extends Component
                                            
                 $this->actualizarLastQuery($this->lastQuery,session()->getId());
                 $this->titulo_thumbnail_lastQuery = "Destacados";
+                session(['ultimoQuery'=>'']);
                 return $this->lastQuery;
                 break;  
 
@@ -210,11 +211,13 @@ class ThumbsPhotos extends Component
 
                 $this->actualizarLastQuery($this->lastQuery,session()->getId());
                 $this->titulo_thumbnail_lastQuery = "Resultado de Busqueda";
+                session(['ultimoQuery'=>'Activo']);
                 return $this->lastQuery;
                 break;
 
            case 2:   // detalles de la propiedad.
-               $this->titulo_thumbnail_lastQuery = 'Propiedades';
+
+               $this->titulo_thumbnail_lastQuery = (empty(session('ultimoQuery')))?'Destacados':'Resultado de busqueda';
                return DB::table('casas')
                       ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                       ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
@@ -268,7 +271,7 @@ class ThumbsPhotos extends Component
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
-                
+                session(['ultimoQuery'=>'Activo']);
                 $this->actualizarLastQuery($this->lastQuery,session()->getId());
                 $this->titulo_thumbnail_lastQuery = "Resultado de Busqueda";
               return $this->lastQuery;
