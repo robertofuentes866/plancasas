@@ -178,10 +178,11 @@
                                 'localizacion'=>$_GET['id_localizacion']??0,'titulo'=>'Resultado de busqueda','tipo'=>$_GET['id_tipo']])  <!-- muestra resultado del formulario en la pagina principal.  -->
         @break
   @case (2)
-    @livewire('thumbs-photos',['gestion'=>2,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad'],'busqueda'=>$viewData['resultadoBusqueda']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
+    @livewire('thumbs-photos',['gestion'=>2,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
         @break
 
  @case (3)
+    
     @livewire('thumbs-photos',['gestion'=>3,'titulo'=>'Resultado de busqueda','id_ciudad'=>$_GET['id_ciudad']??0,
     'id_recurso'=>$_GET['id_recurso']??0,'id_duracion'=>$_GET['id_duracion']??0,'habitaciones'=>$_GET['habitaciones']??0,
     'banos'=>$_GET['banos']??0,'aires_acondicionado'=>$_GET['aires_acondicionado']??0,

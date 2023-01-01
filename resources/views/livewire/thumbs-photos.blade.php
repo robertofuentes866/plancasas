@@ -11,9 +11,8 @@
  <div class="col-lg-8 col-12">
         <div id="title_page_left_container" class="row">
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
-            <p style="color:gold">
+            <p style="color:gold;text-align:center">
                 @if(!empty($arrayOpcionesForm))
-                
                    {{$arrayOpcionesForm}}
                 @endif
             </p>
@@ -103,7 +102,7 @@
                                         <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                                     </div>
                                     <div class="card-body bg-body px-0">
-                                       @php(agregarThumbsToCarrousel($imagenes_casas,$titulo_thumbnail,'carouselAmbientes'))
+                                       @php(agregarThumbsToCarrousel($imagenes_casas,'Ambientes de la propiedad','carousel3'))
                                     </div> <!-- End Card Body -->
 
                                 </article> <!-- End Card text-black de Destacados o Ambientes thumbnails-->

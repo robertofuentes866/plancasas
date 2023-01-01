@@ -83,7 +83,7 @@ class ThumbsPhotos extends Component
             $this->gestion = $argumentos[0];
             $this->titulo = $argumentos[1];
             $this->id_propiedad = $argumentos[2];
-            $this->arrayOpcionesForm = $argumentos[3];
+            $this->arrayOpcionesForm = session('arrayOpcionesForm'); //$argumentos[3];
             $this->titulo_thumbnail = "Fotos de la propiedad seleccionada";
             
             break;
@@ -134,10 +134,11 @@ class ThumbsPhotos extends Component
 
             $this->piscina = $argumentos[15]?['casas.piscina','=',1]:['casas.disponibilidad','=',1];
             if($argumentos[15]){ $this->arrayOpcionesForm .= 'Con piscina ';  }
-            
+        
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
        }
+       session(['arrayOpcionesForm'=>$this->arrayOpcionesForm]);
     }
 
 
@@ -213,7 +214,7 @@ class ThumbsPhotos extends Component
                 break;
 
            case 2:   // detalles de la propiedad.
-               $this->titulo_thumbnail_lastQuery = "Otras propiedades";
+               $this->titulo_thumbnail_lastQuery = 'Propiedades';
                return DB::table('casas')
                       ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                       ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
@@ -238,7 +239,7 @@ class ThumbsPhotos extends Component
                 break;
 
             case 3: // llamado del formulario detallado.
-       
+               
                $this->lastQuery = DB::table('casas')
                 ->join('localizaciones','localizaciones.id_localizacion','=','casas.id_localizacion')
                 ->join('ciudades','ciudades.id_ciudad','=','localizaciones.id_ciudad')
@@ -267,6 +268,7 @@ class ThumbsPhotos extends Component
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
+                
                 $this->actualizarLastQuery($this->lastQuery,session()->getId());
                 $this->titulo_thumbnail_lastQuery = "Resultado de Busqueda";
               return $this->lastQuery;
@@ -275,7 +277,7 @@ class ThumbsPhotos extends Component
         }
     }
 
-    public function selectNormalImagen($foto,$descrip,$residencial,$casaNumero,$id,$leyenda,$ttl) {
+    public function selectNormalImagen($foto,$descrip,$residencial,$casaNumero,$id,$leyenda,$ttl,$carrusel) {
         $this->id_propiedad = $id;
         $this->fotoNormal = $foto;
         $this->descripcion = $descrip;
@@ -283,6 +285,13 @@ class ThumbsPhotos extends Component
         $this->casaNumero = $casaNumero;
         $this->leyenda = $leyenda;
         $this->titulo_en_foto_normal = $ttl;
+        $this->titulo = $ttl;
+
+        $this->arrayOpcionesForm = match($carrusel){
+            'carousel1'=> session('arrayOpcionesForm'),
+            'carousel2'=> "Propiedades grabadas en Lista de Mis Favoritos",
+            'carousel3'=> "Fotos de los ambientes de la propiedad seleccionada"
+        };
     }
 
     public function accionFavorito($id) {

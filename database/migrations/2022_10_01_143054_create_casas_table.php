@@ -16,21 +16,21 @@ return new class extends Migration
         Schema::create('casas', function (Blueprint $table) {
             $table->BigIncrements('id_casa');
             $table->unsignedTinyInteger('id_tipo');
-            $table->char('plantas',2)->nullable();
-            $table->char('garage',3)->nullable();
+            $table->unsignedTinyInteger('plantas')->nullable();
+            $table->unsignedTinyInteger('garage')->nullable();
             $table->string('CasaNumero',30);
             $table->float('area_construccion')->nullable();
             $table->float('area_terreno')->nullable();
-            $table->char('habitaciones',2)->nullable();
-            $table->char('banos',2)->nullable();
-            $table->char('bano_social',1)->nullable();
+            $table->unsignedTinyInteger('habitaciones')->nullable();
+            $table->unsignedTinyInteger('banos')->nullable();
+            $table->unsignedTinyInteger('bano_social')->nullable();
             $table->boolean('piscina')->nullable();
             $table->boolean('disponibilidad')->nullable();
             $table->boolean('apartamento')->nullable();
             $table->boolean('destacado')->nullable();
             $table->year('ano_construccion')->nullable();
-            $table->char('aires_acondicionado',2)->nullable();
-            $table->char('abanicos_techo',2)->nullable();
+            $table->unsignedTinyInteger('aires_acondicionado')->nullable();
+            $table->unsignedTinyInteger('abanicos_techo')->nullable();
             $table->boolean('agua_caliente')->nullable();
             $table->boolean('tanque_agua')->nullable();
             $table->boolean('sistema_seguridad')->nullable();
