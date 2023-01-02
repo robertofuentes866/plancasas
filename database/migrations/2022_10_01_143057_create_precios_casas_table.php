@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('id_ofrecimiento');
             $table->unsignedTinyInteger('id_duracion');
             $table->unsignedTinyInteger('id_recurso');
+            $table->boolean('disponibilidad')->nullable();
             $table->foreign('id_casa')->references('id_casa')->on('casas')->onDelete('restrict');
             $table->foreign('id_ofrecimiento')->references('id_ofrecimiento')->on('ofrecimientos')->onDelete('restrict');
             $table->foreign('id_duracion')->references('id_duracion')->on('duraciones')->onDelete('restrict');

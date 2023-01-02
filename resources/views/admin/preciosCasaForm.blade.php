@@ -89,6 +89,13 @@ Crear Precios Casas
                 </div>
                 </div>
     </div>
+
+    <div class="col-2">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="disponibilidad" id="inlineCheckbox1">
+            <label class="form-check-label" for="inlineCheckbox1">Disponibilidad?</label>
+        </div>
+    </div>
 </div>  <!-- Fin de Row -->
 
 <button type="submit" class="btn btn-primary">Guardar</button>

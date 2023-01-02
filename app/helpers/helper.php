@@ -74,9 +74,7 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                             $comillas$imagen_casa->leyenda$comillas,
                             $comillas$titulo$comillas,
                             $comillas$nombreCarrusel$comillas)\">
-                        <img class='img-thumbnail' 
-                            src=". asset('storage/propiedades/'.$imagen_casa->foto_thumb) 
-                            ." width=\"84\" height=\"54\">
+                        <img class='img-thumbnail' src=". asset('storage/propiedades/'.$imagen_casa->foto_thumb).">
                         <figcaption> $imagen_casa->leyenda </figcaption>
                     </figure></a>
                 </div>";

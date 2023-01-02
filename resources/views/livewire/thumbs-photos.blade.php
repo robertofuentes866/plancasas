@@ -3,7 +3,6 @@
 
     <script>
         Swal.fire('Busqueda con resultado vacio');
-        
     </script>
     @php(session(['ultimoQuery'=>'']))
     @php($swal = 1)
@@ -115,7 +114,7 @@
                         @if($gestion == 2 && $imagenes_casas->count())  
                             <article class="card mt-3 mb-3">
                                 <div class="card-header">
-                                    <strong>Características de la propiedad</strong>
+                                    Características de la propiedad: <strong>Tipo: {{ $imagenes_casas[0]->subtipo}}</strong>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered table-striped table-primary">

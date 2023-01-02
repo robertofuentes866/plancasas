@@ -71,7 +71,9 @@ class preciosCasaController extends Controller
     public function store(Request $request)
     {
         preciosCasa::validar($request);
-        $creationData = $request->only(["id_casa","id_recurso","id_duracion","id_ofrecimiento","valor"]);
+        $creationData = $request->only(["id_casa","id_recurso","id_duracion","id_ofrecimiento",
+                        "valor","disponibilidad"]);
+        $creationData['disponibilidad'] = $request->input('disponibilidad')?1:0;    
         preciosCasa::create($creationData);
         
         return redirect()->route('admin.preciosCasaForm.index');
@@ -109,7 +111,7 @@ class preciosCasaController extends Controller
                                                        ['pc.id_duracion','=',$id_duracion],['pc.id_recurso','=',$id_recurso]])
                                                 ->select('casas.id_casa','casas.casaNumero','ofrecimientos.id_ofrecimiento','ofrecimientos.ofrecimiento',
                                                          'duraciones.id_duracion','duraciones.duracion','recursos.id_recurso',
-                                                         'recursos.recurso','pc.valor')->get();
+                                                         'recursos.recurso','pc.valor','pc.disponibilidad')->get();
 
         return view('admin.preciosCasaFormEdit')->with('data',$viewData);
     }
@@ -127,7 +129,7 @@ class preciosCasaController extends Controller
     {
         $rowAffected = preciosCasa::where([['id_casa','=',$id_casa],['id_ofrecimiento','=',$id_ofrecimiento],
                             ['id_duracion','=',$id_duracion],['id_recurso','=',$id_recurso]])
-                            ->update(['valor'=>$request->valor]);
+                            ->update(['valor'=>$request->valor,'disponibilidad'=>$request->input('disponibilidad')?1:0]);
         
         if (!empty($rowAffected)) {
             return redirect()->route('admin.preciosCasaForm.index');

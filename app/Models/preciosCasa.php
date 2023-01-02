@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class preciosCasa extends Model
 {
     protected $table = "precios_casas";
-    protected $fillable = ["id_casa","id_recurso","id_ofrecimiento","id_duracion","valor"];
+    protected $fillable = ["id_casa","id_recurso","id_ofrecimiento","id_duracion","valor","disponibilidad"];
     
     use HasFactory; 
 
@@ -56,5 +56,13 @@ class preciosCasa extends Model
 
     public function setValor($valor) {
         $this->attributes['valor'] = $valor;
+    }
+
+    public function getDisponibilidad(){
+        return $this->attributes['disponibilidad'];
+    }
+
+    public function setDisponibilidad($dsp) {
+        $this->attributes['disponibilidad'] = $dsp;
     }
 }
