@@ -33,7 +33,21 @@
     <form method="get" action="{{route('menu.inicio',['gestion'=>3])}}">
             @csrf
         <fieldset>
-            <legend>Seleccione</legend>    
+            <legend>Seleccione</legend>  
+            
+            <div class="form-group row">
+                <label for="tipo" class="col-lg-6 col-form-label">Tipo <span class='requerido'>(Requerido)</span></label>
+         
+                <select class="w-75 ms-3" name="id_tipo" id="tipo">
+                    <option value="">** Tipo de propiedad **</option>
+                    
+                    @foreach($viewData['tipo'] as $tipo)
+                        <option value="{{$tipo->id_subtipo}}">{{$tipo->subtipo}} </option> 
+                    @endforeach
+                </select> 
+         
+            </div>
+
             <div class="form-group row">
                 <label for="ciudad" class="col-lg-6 col-form-label">Ciudad</label>
          
@@ -76,13 +90,13 @@
                 <tr> 
                     <div class="form-group mt-2">
                        <td> <label for="habitaciones" >Habitaciones Minima:</label></td>
-                        <td class="tabla_de_formulario_columna"><input name="habitaciones" value="1" type="number" min="1" max="25" ></td>
+                        <td class="tabla_de_formulario_columna"><input name="habitaciones" value="0" type="number" min="0" max="25" ></td>
                     </div>
                 </tr>
                 <tr>
                     <div class="form-group mt-2">
                        <td> <label for="banos" >Banos Minimo:</label></td>
-                       <td class="tabla_de_formulario_columna"> <input name="banos" value="1" type="number" min="1" max="25" ></td>
+                       <td class="tabla_de_formulario_columna"> <input name="banos" value="0" type="number" min="0" max="25" ></td>
                     </div>
                 </tr>
                 <tr>
@@ -188,7 +202,7 @@
     'banos'=>$_GET['banos']??0,'aires_acondicionado'=>$_GET['aires_acondicionado']??0,
     'abanicos_techo'=>$_GET['abanicos_techo']??0,'precio_minimo'=>$_GET['precio_minimo']??0,'precio_maximo'=>$_GET['precio_maximo']??0,
     'agua_caliente'=>$_GET['agua_caliente']??0,'tanque_agua'=>$_GET['tanque_agua']??0,'sistema_seguridad'=>$_GET['sistema_seguridad']??0,
-    'cuartoDomestica'=>$_GET['cuartoDomestica']??0,'piscina'=>$_GET['piscina']??0])  <!-- muestra resultado del formulario detallado.  -->
+    'cuartoDomestica'=>$_GET['cuartoDomestica']??0,'piscina'=>$_GET['piscina']??0,'tipo'=>$_GET['id_tipo']])  <!-- muestra resultado del formulario detallado.  -->
        @break
 
 @endswitch

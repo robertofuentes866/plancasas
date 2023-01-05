@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('subtipos', function (Blueprint $table) {
             $table->unsignedTinyInteger('id_tipo');
             $table->unsignedTinyInteger('id_subtipo');
-            $table->string('subtipo',20);
+            $table->string('subtipo',40);
             $table->foreign('id_tipo')->references('id_tipo')->on('tipos')->onDelete('restrict');
             $table->primary(['id_tipo','id_subtipo']);
             $table->timestamps();

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ofrecimiento;
+use App\Models\subtipo;
 use App\Models\ciudad;
 use App\Models\recurso;
 use App\Models\duracion;
@@ -25,7 +25,8 @@ class menuController extends Controller
         
         $viewData['resultadoBusqueda'] = $busqueda; // guarda el resultado de busqueda de algun formulario.
         $viewData['propiedades_destacadas'] = count(DB::table('casas')->where([['destacado','=',1],['disponibilidad','=',1]])->get());
-
+        
+        $viewData['tipo'] = subtipo::all();
         $viewData['ciudades'] = ciudad::all();
         $viewData['recurso'] = recurso::all();   // usado para formulario.
         $viewData['duracion'] = duracion::all();  // usado para formulario.

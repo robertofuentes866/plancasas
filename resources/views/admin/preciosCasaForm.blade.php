@@ -12,7 +12,7 @@
 
 <div class="card mb-4">
 <div class="card-header">
-Crear Precios Casas
+Crear Precios propiedad
 </div>
 <div class="card-body">
 @if($errors->any())
@@ -27,7 +27,7 @@ Crear Precios Casas
 <div class="row">
     <div class="col-3">
                 <div class="mb-3 row">
-                <label class="col-lg-3 col-md-6 col-sm-12 col-form-label">Casa:</label>
+                <label class="col-lg-10 col-md-6 col-sm-12 col-form-label">Propiedad:</label>
                 <div class="col-lg-10 col-md-6 col-sm-12"> 
                 <select name="id_casa" class="form-control">
                     @foreach ($data["casas"] as $casa)
@@ -112,7 +112,7 @@ Crear Precios Casas
     <!-- copiar desde aqui -->
     <div class="row">
         <div class="col-lg-8">
-        VER PRECIOS VIVIENDAS
+        VER PRECIOS PROPIEDAD
         </div>
         <nav class="navbar navbar-light bg-light col-lg-4">
             <div class="container-fluid">
@@ -139,7 +139,7 @@ Crear Precios Casas
 <table class="table table-bordered table-striped">
 <thead>
 <tr>
-<th scope="col">CASA NUMERO</th>
+<th scope="col">PROP NUMERO</th>
 <th scope="col">OFRECIMIENTO</th>
 <th scope="col">DURACION</th>
 <th scope="col">RECURSO</th>

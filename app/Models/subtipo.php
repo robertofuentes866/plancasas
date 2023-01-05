@@ -12,7 +12,7 @@ class subtipo extends Model
     protected $primaryKey = "id_subtipo";
 
     public static function validar($request) {
-        $request->validate(['subtipo'=>'required|max:20']);
+        $request->validate(['subtipo'=>'required|max:40']);
     }
 
     public function getIdSubtipo(){

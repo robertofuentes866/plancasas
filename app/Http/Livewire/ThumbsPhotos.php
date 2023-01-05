@@ -57,7 +57,6 @@ class ThumbsPhotos extends Component
 
             $this->id_tipo = $argumentos[5]?$argumentos[5]:0;
             $instance = subtipo::where('id_subtipo','=',$argumentos[5])
-                                 ->where('id_tipo','=',1)
                                  ->select('subtipo')->get();
                                  
             if ($instance->count()){
@@ -90,6 +89,17 @@ class ThumbsPhotos extends Component
         case 3:  // llamada del formulario detallado.
             $this->gestion = $argumentos[0];
             $this->titulo = $argumentos[1];
+
+            $this->id_tipo = $argumentos[16]?$argumentos[16]:0;
+           
+            $instance = subtipo::where('id_subtipo','=',$argumentos[16])
+                                 ->select('subtipo')->get();
+                                 
+            if ($instance->count()){
+                
+                $this->arrayOpcionesForm .= 'Tipo: '.$instance[0]->subtipo . '-';
+            }
+
             $this->id_ciudad = $argumentos[2]?['localizaciones.id_ciudad','=',$argumentos[2]]:['casas.disponibilidad','=',1];
             $instance = $argumentos[2]?ciudad::find($argumentos[2],'ciudad'):' ';
             if ($argumentos[2]) {$this->arrayOpcionesForm .= 'Ciudad: '. $instance->ciudad.'- ';}
@@ -272,6 +282,7 @@ class ThumbsPhotos extends Component
                     ['precios_casas.valor','>=',$this->precio_minimo],
                     ['precios_casas.valor','<=',$this->precio_maximo],
                     ['casas.disponibilidad','=',1],
+                    ['casas.id_subtipo','=',$this->id_tipo],
                     ['precios_casas.disponibilidad','=',1]])
                 ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',

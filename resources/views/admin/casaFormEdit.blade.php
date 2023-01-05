@@ -3,7 +3,7 @@
 @section('cuerpo')
 <div class="card mb-4">
 <div class="card-header">
-Editar Casa
+Editar propiedad}
 </div>
 <div class="card-body">
 @if($errors->any())
@@ -46,7 +46,7 @@ Editar Casa
 
     <div class="col-lg-3">
                 <div class="mb-3 row">
-                <label class="col-lg-12 col-form-label">Casa No.:</label>
+                <label class="col-lg-12 col-form-label">Prop No.:</label>
                 <div class="col-lg-12"> 
                 <input name="casaNumero" value="{{$data['casas']->getCasaNumero()}}" type="text" class="form-control"> 
                 </div>
@@ -55,7 +55,7 @@ Editar Casa
 
     <div class="col-lg-3">
     <div class="mb-3 row">
-                <label class="col-lg-12 col-form-label">Tipo Vivienda:</label>
+                <label class="col-lg-12 col-form-label">Tipo propiedad:</label>
                 <div class="col-lg-12"> 
                 <select name="id_subtipo" class="form-control">
                     @foreach ($data["subtipos"] as $subtipo)

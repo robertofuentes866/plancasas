@@ -3,7 +3,7 @@
 @section('cuerpo')
 <div class="card mb-4">
 <div class="card-header">
-Crear Casas
+Crear propiedad
 </div>
 <div class="card-body">
 @if($errors->any())
@@ -46,7 +46,7 @@ Crear Casas
 
     <div class="col-lg-3">
                 <div class="mb-3 row">
-                    <label class="col-12 col-form-label">Tipo Vivienda:</label>
+                    <label class="col-12 col-form-label">Tipo Propiedad:</label>
                     <div class="col-lg-12"> 
                         <select name="id_subtipo" class="form-control">
                             @foreach ($data["subtipos"] as $subtipo)
@@ -60,7 +60,7 @@ Crear Casas
 
     <div class="col-lg-3">
                 <div class="mb-3 row">
-                <label class="col-lg-12 col-form-label">Casa No.:</label>
+                <label class="col-lg-12 col-form-label">Propiedad No.:</label>
                 <div class="col-lg-12"> 
                 <input name="casaNumero" value="{{old('casaNumero')}}" type="text" class="form-control"> 
                 </div>
@@ -82,8 +82,8 @@ Crear Casas
 
     <div class="col-4">
                 <div class="mb-3 row">
-                <label class="col-lg-12 col-form-label">Area construccion:</label>
-                <div class="col-lg-4"> 
+                <label class="col-lg-12 col-form-label">Area construccion (mt2):</label>
+                <div class="col-lg-8"> 
                 <input name="area_construccion" value="{{old('area_construccion')}}" type="number" min="30" max="1000" class="form-control"> 
                 </div>
                 </div>
@@ -91,8 +91,8 @@ Crear Casas
 
     <div class="col-4">
                 <div class="mb-3 row">
-                <label class="col-lg-12 col-form-label">Area terreno:</label>
-                <div class="col-lg-4"> 
+                <label class="col-lg-12 col-form-label">Area terreno (mt2):</label>
+                <div class="col-lg-8"> 
                 <input name="area_terreno" value="{{old('area_terreno')}}" type="number" min="30" max="10000" class="form-control"> 
                 </div>
                 </div>
@@ -249,7 +249,7 @@ Crear Casas
 
 <div class="card">
 <div class="card-header">
-Ver Casas
+Ver propiedades
 </div>
 <div class="card-body">
 <table class="table table-bordered table-striped">
@@ -257,7 +257,7 @@ Ver Casas
 <tr>
 <th scope="col">CIUDAD</th>
 <th scope="col">RESIDENCIAL</th>
-<th scope="col">CASA NUMERO</th>
+<th scope="col">PROP NUMERO</th>
 <th scope="col">AGENTE INMOBILIARIO</th>
 </tr>
 </thead>

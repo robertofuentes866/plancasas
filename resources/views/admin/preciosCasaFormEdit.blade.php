@@ -3,7 +3,7 @@
 @section('cuerpo')
 <div class="card mb-4">
 <div class="card-header">
-Editar Precios Casas
+Editar Precios Propiedad
 </div>
 <div class="card-body">
 @if($errors->any())
@@ -20,7 +20,7 @@ Editar Precios Casas
 <div class="row">
     <div class="col-3">
                 <div class="mb-3 row">
-                   <label class="col-lg-6 col-md-6 col-sm-12 col-form-label">Casa No.: <b>{{ $data['preciosCasa'][0]->casaNumero }}</b>  </label>
+                   <label class="col-lg-6 col-md-6 col-sm-12 col-form-label">Prop No.: <b>{{ $data['preciosCasa'][0]->casaNumero }}</b>  </label>
                 </div>
     </div>
 

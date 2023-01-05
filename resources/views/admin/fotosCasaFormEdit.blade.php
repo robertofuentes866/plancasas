@@ -3,7 +3,7 @@
 @section('cuerpo')
 <div class="card mb-4">
 <div class="card-header">
-Editar Foto - Casa
+Editar Foto - Propiedad
 </div>
 <div class="card-body">
 @if($errors->any())
@@ -34,14 +34,14 @@ Editar Foto - Casa
 </div>
 
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Normal: <b>[{{basename($data['fotosCasa']->foto_normal)}}]</b></label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto: <b>[{{basename($data['fotosCasa']->foto_normal)}}]</b></label>
 <div class="col-lg-10 col-md-6 col-sm-12"> 
 <input name="foto_normal" id="foto_normal" type="file" class="form-control"> 
 </div>
 </div>
 @if(!is_null($data['fotosCasa']->foto_normal))
     <div class="mb-3 row">
-    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Normal:</label>
+    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto:</label>
     <div class="col-lg-10 col-md-6 col-sm-12"> 
     <img src="{{asset('/storage/propiedades/'.$data['fotosCasa']->foto_normal)}}"> 
     </div>

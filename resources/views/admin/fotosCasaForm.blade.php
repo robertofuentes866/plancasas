@@ -11,7 +11,7 @@
 <!-- hasta aqui -->
 <div class="card mb-4">
 <div class="card-header">
-Crear Fotos - Casa
+Crear Fotos - Propiedad
 </div>
 <div class="card-body">
 @if($errors->any())
@@ -27,7 +27,7 @@ Crear Fotos - Casa
 <div class="row">
 <div class="col">
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Casa:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Propiedad:</label>
 <div class="col-lg-10 col-md-6 col-sm-12"> 
 <select name="id_casa" class="form-control">
      @foreach ($data["casas"] as $casa)
@@ -51,7 +51,7 @@ Crear Fotos - Casa
 </div>
 
 <div class="mb-3 row">
-<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto Normal:</label>
+<label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Foto:</label>
 <div class="col-lg-10 col-md-6 col-sm-12"> 
 <input name="foto_normal" id="foto_normal" type="file" class="form-control"> 
 </div>
@@ -77,14 +77,14 @@ Crear Fotos - Casa
      <!-- copiar desde aqui -->
     <div class="row">
         <div class="col-lg-8">
-        VER FOTOS VIVIENDAS
+        VER FOTOS PROPIEDAD
         </div>
         <nav class="navbar navbar-light bg-light col-lg-4">
             <div class="container-fluid">
                 <form class="d-flex">
                     @csrf
                     <select name="buscaInfo" class="form-control">
-                        <option value= " ">**Seleccione Casa**</option>
+                        <option value= " ">**Seleccione propiedad**</option>
                     @foreach ($data["buscarFilas"] as $buscarFila)
                     <option value="{{$buscarFila->casaNumero}}"> {{$buscarFila->casaNumero}}</option>
                     @endforeach
@@ -101,7 +101,7 @@ Crear Fotos - Casa
 <thead>
 <tr>
 <th scope="col">RESIDENCIAL</th>
-<th scope="col">CASA</th>
+<th scope="col">PROPIEDAD</th>
 <th scope="col">LEYENDA</th>
 </tr>
 </thead>

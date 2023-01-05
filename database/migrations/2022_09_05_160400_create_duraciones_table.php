@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('duraciones', function (Blueprint $table) {
             $table->tinyIncrements('id_duracion');
-            $table->string('duracion',12);
+            $table->string('duracion',20);
             $table->timestamps();
         });
     }
