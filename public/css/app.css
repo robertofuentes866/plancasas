@@ -126,3 +126,6 @@ legend {
 .requerido {
     color:crimson;
 }
+.disable_element {
+    pointer-events: none;
+}

@@ -153,6 +153,7 @@ Crear Agentes
 <td>{{ $relacion->cel1 }}</td>
 <td>{{ $relacion->cel2 }}</td>
 <td> 
+    <!-- !check_edit(Auth::user()->id)?disable_element}} -->
     <a class="btn btn-primary" href="{{route('admin.agenteForm.edit',['id'=>$relacion->id_agente])}}">
     <i class="bi-pencil"></i>
     </a>
