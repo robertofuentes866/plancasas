@@ -202,8 +202,8 @@
                                 <div class="card-header">
                                     <strong>Agente Inmobiliario</strong>
                                 </div>
-                                <div class="card-body">
-                                    <table class="table-striped table table-dark" style="display:block">
+                                <div class="card-body table-responsive">
+                                    <table class="table-striped table table-dark">
                                         <tr>
                                         <td><u>Nombre:</u> {{ $imagenes_casas[0]->nombre_agente}}</td>
                                             <td>
