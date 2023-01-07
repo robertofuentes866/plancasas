@@ -8,6 +8,10 @@
     @php($swal = 1)
 @endif
 
+<script>
+        ;
+    </script>
+
 @if ((count($lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
  <div id="top_right" class="col-lg-8 col-12">
         <div id="title_page_left_container" class="row">
@@ -57,9 +61,6 @@
             
             <div class="col-lg-8 col-12 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
                             <article class="card">
-
-
-                            
                                 <img src="{{asset('storage/propiedades/'.$fotoNormal)}}" class="card-img-top" alt="...">
                                 <div id="procedencia">
                                     {{$titulo_en_foto_normal}}
@@ -201,58 +202,60 @@
 
                             <!-- Agente Inmobiliario -->
 
-                            <article class="card mb-3">
-                            <div class="card-header">
-                                <strong>Agente Inmobiliario</strong>
-                            </div>
-                            <div class="card-body">
-                                <table class=" table-striped table table-dark tabla_agente">
-                                    <tr>
-                                    <td><u>Nombre:</u> {{ $imagenes_casas[0]->nombre_agente}}</td>
-                                        <td>
-                                            <img src="{{asset('storage/agentes/'. $imagenes_casas[0]->foto_agente)}}">
-                                        </td>
+                            <article class="card mt-3 mb-3">
+                                <div class="card-header">
+                                    <strong>Agente Inmobiliario</strong>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table-striped table table-dark" style="table-layout:auto">
+                                        <tr>
+                                        <td><u>Nombre:</u> {{ $imagenes_casas[0]->nombre_agente}}</td>
+                                            <td>
+                                                <img src="{{asset('storage/agentes/'. $imagenes_casas[0]->foto_agente)}}">
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td><u>Celular Tigo:</u> {{ $imagenes_casas[0]->cel1}}</td>
+                                        </tr>
+                                        <tr>
+                                        <td><u>Celular Claro:</u> {{ $imagenes_casas[0]->cel2}}</td>
+                                        </tr>
+                                        <tr>
+                                        <td><u>Email:</u> {{ $imagenes_casas[0]->email}}</td>
+                                        </tr>
                                         
-                                    </tr>
-                                    <tr>
-                                        <td><u>Celular Tigo:</u> {{ $imagenes_casas[0]->cel1}}</td>
-                                    </tr>
-                                    <tr>
-                                    <td><u>Celular Claro:</u> {{ $imagenes_casas[0]->cel2}}</td>
-                                    </tr>
-                                    <tr>
-                                    <td><u>Email:</u> {{ $imagenes_casas[0]->email}}</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td colspan="3">
-                                            <form id="emailForm" action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
-                                                @csrf
-                                                <table class="table table-primary table-striped">
-                                                <tr>
-                                    <td colspan="2"> <p>Solicitar mayor informacion de: <strong>{{$casaNumero}}</strong></p>
-                                                     <p>O detállanos la propiedad que buscas</p> </td>
-                                    </tr>
-                                                    <tr> 
-                                                    <td><label for="from" >De:</label></td>
-                                                    <td> <input size="40px" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}"></td>
-                                                    </tr>
-                                                    <tr>    
-                                                    <td><label for="mensaje">Mensaje:</label></td>
-                                                    <td><textarea id="mensaje" required name="emailBody" rows="5" cols="45" placeholder="Mensaje"></textarea></td>
-                                                    <input hidden name="casaNumero" value="{{$casaNumero}}">
-                                                    </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                <form id="emailForm" action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
+                                                    @csrf
+                                                    <table class="table table-primary table-striped"  style="max-width:100%">
                                                     <tr>
-                                                    <td colspan="2"><input type="submit" name="submitEmail" value="Enviar" class="btn btn-primary">
-                                                    <input type="reset" value="Limpiar" class="btn btn-primary"></td>
-                                                    </tr>
-                                                </table>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    
+                                        <td colspan="2"> <p>Solicitar mayor informacion de: <strong>{{$casaNumero}}</strong></p>
+                                                        <p>O detállanos la propiedad que buscas</p> </td>
+                                        </tr>
+                                                        <tr> 
+                                                        <td colspan="2"><label for="from" >De:</label></td> </tr>
+                                                        <tr>
+                                                        <td colspan="2"> <input size="40" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}"></td>
+                                                        </tr>
+                                                        <tr>    
+                                                        <td colspan="2"><label for="mensaje">Mensaje:</label></td> </tr>
+                                                        <tr>
+                                                        <td colspan="2"><textarea id="mensaje" required name="emailBody" rows="5" cols="45" placeholder="Mensaje"></textarea></td>
+                                                        <input hidden name="casaNumero" value="{{$casaNumero}}">
+                                                        </tr>
+                                                        <tr>
+                                                        <td colspan="2"><input type="submit" name="submitEmail" value="Enviar" class="btn btn-primary">
+                                                        <input type="reset" value="Limpiar" class="btn btn-primary"></td>
+                                                        </tr>
+                                                    </table>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        
                                     </table>
-                            </div>
+                                </div>
                             </article>
                         @endif
                                 
