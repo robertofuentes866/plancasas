@@ -203,7 +203,7 @@
                                     <strong>Agente Inmobiliario</strong>
                                 </div>
                                 <div class="card-body">
-                                    <table class="table-striped table table-dark" style="table-layout:auto">
+                                    <table class="table-striped table table-dark" style="display:block">
                                         <tr>
                                         <td><u>Nombre:</u> {{ $imagenes_casas[0]->nombre_agente}}</td>
                                             <td>
@@ -225,7 +225,7 @@
                                             <td colspan="3">
                                                 <form id="emailForm" action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
                                                     @csrf
-                                                    <table class="table table-primary table-striped"  style="max-width:100%">
+                                                    <table class="table table-primary table-striped col-12">
                                                     <tr>
                                         <td colspan="2"> <p>Solicitar mayor informacion de: <strong>{{$casaNumero}}</strong></p>
                                                         <p>O detállanos la propiedad que buscas</p> </td>
