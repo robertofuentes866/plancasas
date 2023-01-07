@@ -9,8 +9,8 @@
 @endif
 
 <script>
-        ;
-    </script>
+     Swal.fire('Sus resultados');
+</script>
 
 @if ((count($lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
  <div id="top_right" class="col-lg-8 col-12">
