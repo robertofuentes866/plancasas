@@ -7,11 +7,6 @@
     @php(session(['ultimoQuery'=>'']))
     @php($swal = 1)
 @endif
-<script>
-   $(function(){
-      $.scrollTo("#top_right");
-   });
-</script>
 
 @if ((count($lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
  <div id="top_right" class="col-lg-8 col-12">
