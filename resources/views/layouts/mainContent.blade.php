@@ -86,29 +86,29 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend>Declare lo minimo de:</legend>
+            <legend>Indique lo minimo de:</legend>
             <table class="tabla_de_formulario">
                 <tr> 
                     <div class="form-group mt-2">
-                       <td> <label for="habitaciones" >Habitaciones Minima:</label></td>
+                       <td> <label for="habitaciones" >Habitaciones:</label></td>
                         <td class="tabla_de_formulario_columna"><input name="habitaciones" value="0" type="number" min="0" max="25" ></td>
                     </div>
                 </tr>
                 <tr>
                     <div class="form-group mt-2">
-                       <td> <label for="banos" >Banos Minimo:</label></td>
+                       <td> <label for="banos" >Banos:</label></td>
                        <td class="tabla_de_formulario_columna"> <input name="banos" value="0" type="number" min="0" max="25" ></td>
                     </div>
                 </tr>
                 <tr>
                     <div class="form-group mt-2">
-                        <td><label for="aires_acondicionado" >Aire Acond. Minimo:</label></td>
+                        <td><label for="aires_acondicionado" >Aire Acondicionados:</label></td>
                         <td class="tabla_de_formulario_columna"><input name="aires_acondicionado" value="0" type="number" min="0" max="25" ></td>
                     </div>
                 </tr>
                 <tr>
                     <div class="form-group mt-2">
-                        <td><label for="abanicos_techo" >Abanicos Minimo:</label></td>
+                        <td><label for="abanicos_techo" >Abanicos:</label></td>
                         <td class="tabla_de_formulario_columna"><input name="abanicos_techo" value="0" type="number" min="0" max="25" ></td>
                     </div>
                 </tr>
@@ -116,7 +116,7 @@
         </fieldset>
 
         <fieldset>
-            <legend> Marque lo requerido</legend> 
+            <legend> Indique lo deseado</legend> 
             <table class="tabla_de_formulario">
                 <tr>
             <div class="form-group mt-2">

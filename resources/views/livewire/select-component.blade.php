@@ -13,7 +13,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="ofrecimiento" class="col-lg-8 col-form-label">Ofrecimiento <span class="requerido">(Requerido)</span></label>
+                <label for="ofrecimiento" class="col-lg-8 col-form-label">Compra o Venta <span class="requerido">(Requerido)</span></label>
                 
                     <select name="id_ofrecimiento" id="ofrecimiento">
                                     <option value="">*** Desea comprar o alquilar ? ***</option>
