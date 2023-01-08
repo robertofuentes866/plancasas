@@ -121,7 +121,7 @@ legend {
 }
 
 .requerido {
-    color:crimson;
+    color:rgb(20, 220, 170);
 }
 .disable_element {
     pointer-events: none;

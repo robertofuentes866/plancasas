@@ -6,7 +6,6 @@ use Livewire\Component;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Models\tipo;
 use App\Models\ofrecimiento;
 use App\Models\localizacion;
 use App\Models\ciudad;
@@ -29,11 +28,12 @@ class ThumbsPhotos extends Component
     public $id_usuario = 0;
     public $titulo_thumbnail = '';
     public $titulo_thumbnail_lastQuery = '';
-    public $i = 0;
-    public $i_total = 0;
+    public $i = 0; // usado en los carruseles , en helper.php
+    public $i_total = 0;  // usado en los carruseles , en helper.php
     public $accionFav = "Mis Favoritos";
     public $arrayOpcionesForm = '';
     public $lastQuery = '';
+    
 
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
            $id_propiedad = 0,$gestion = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',

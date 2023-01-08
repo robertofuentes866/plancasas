@@ -1,4 +1,4 @@
- 
+
 @if ((! $imagenes_casas->count()))  <!-- Formularios con resultados vacios -->
 
     <script>
@@ -68,6 +68,7 @@
                                     <p class="card-text"> {{$descripcion}}</p>
                                    
                                     <a class="btn btn-primary" href="{{route('menu.inicio',[2,$id_propiedad,$arrayOpcionesForm])}}" role="button">Mas detalles...</a>
+                                    
                                    
                                     @else
                                     <p class="card-title">

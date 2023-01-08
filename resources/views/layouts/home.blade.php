@@ -61,11 +61,19 @@
 
         $('#flechas').trigger('click');
 
-
+        
     </script>
     
 </head>
 <body>
+@if($viewData['gestion'] != 0)
+<script>
+$(document).ready(function() {      
+          document.location.href = "#top_right";
+        });
+</script>
+@endif
+
 <div class="container">
     <div class="row">
         <div id="encabezado" class="col-12 bg-dark text-white">
