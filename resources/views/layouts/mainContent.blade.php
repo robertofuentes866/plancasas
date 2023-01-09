@@ -18,8 +18,8 @@
             @livewire('select-component',['viewData'=>$viewData])
                
             <div class="form-group row my-3">
-                <div class="col-sm-10">
-                    <button type="submit" id="submitForm1" name="submit" class="btn btn-secondary">Buscar</button>
+                <div class="col-12">
+                    <button type="submit" id="submitForm1" name="submit" class="btn btn-secondary col-12">Buscar</button>
                 </div>
             </div>
     </form>
@@ -170,8 +170,8 @@
         
                
             <div class="form-group row my-3">
-                <div class="col-sm-10">
-                    <button type="submit" id="submitForm2" name="buscar" class="btn btn-secondary">Buscar</button>
+                <div class="col-12">
+                    <button type="submit" id="submitForm2" name="buscar" class="btn btn-secondary col-12">Buscar</button>
                 </div>
             </div>
     </form>
