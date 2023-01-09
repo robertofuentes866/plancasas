@@ -67,13 +67,25 @@
 </head>
 <body>
 @if (isset($viewData))
-@if($viewData['gestion'] != 0)
-<script>
-$(document).ready(function() {      
-          document.location.href = "#top_right";
-        });
-</script>
-@endif
+    @switch ($viewData['gestion'])
+    
+        @case(1)
+        @case(3)
+        <script>
+            $(document).ready(function() {      
+                    document.location.href = "#top_resultados";
+                    });
+        </script>
+        @break
+
+        @case (2)
+        <script>
+            $(document).ready(function() {      
+                    document.location.href = "#top_detalles";
+                    });
+        </script>
+        @break
+    @endswitch
 @endif
 
 <div class="container">

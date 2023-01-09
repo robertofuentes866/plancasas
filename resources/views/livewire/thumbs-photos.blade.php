@@ -9,7 +9,7 @@
 @endif
 
 @if ((count($lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
- <div id="top_right" class="col-lg-8 col-12">
+ <div id="top_resultados" class="col-lg-8 col-12">
         <div id="title_page_left_container" class="row">
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
             <p style="color:gold;text-align:center">
@@ -68,8 +68,6 @@
                                     <p class="card-text"> {{$descripcion}}</p>
                                    
                                     <a class="btn btn-primary" href="{{route('menu.inicio',[2,$id_propiedad,$arrayOpcionesForm])}}" role="button">Mas detalles...</a>
-                                    
-                                   
                                     @else
                                     <p class="card-title">
                                     <strong>{{$leyenda. ' en '. $casaNumero}}</strong> </p>
@@ -94,7 +92,7 @@
                             </article>
                             <!-- Carousel de thumbnail  abajo de la foto normal -->
                             @if ($gestion==2 )
-                                <article class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
+                                <article id="top_detalles" class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                                     <div class="card-header text-white" style="text-align:center;height:4.5em">
                                         <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
                                         <p class="subtitle_page_left"><small>{Clique las fotos para ampliarlas}</small></p>
