@@ -66,12 +66,14 @@
     
 </head>
 <body>
+@if (isset($viewData))
 @if($viewData['gestion'] != 0)
 <script>
 $(document).ready(function() {      
           document.location.href = "#top_right";
         });
 </script>
+@endif
 @endif
 
 <div class="container">
