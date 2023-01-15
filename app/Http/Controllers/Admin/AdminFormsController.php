@@ -9,7 +9,7 @@ class AdminFormsController extends Controller
 {
     public function index() { // el formulario de la tabla se desea seleccionar.
         $viewData = [];
-        $viewData['title'] = "Panel de Administracion - Plancasas";
+        $viewData['title'] = "Panel de Administracion - Visual Home";
         $viewData['tables'] = ["admin.tipoForm.index"=>"Tabla Tipos de propiedades",
                                "admin.subTipoForm.index"=>"Tabla Sub-tipos de propiedades",
                                 "admin.ofrecimientoForm.index"=>"Tabla Ofrecimientos",

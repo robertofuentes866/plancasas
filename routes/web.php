@@ -25,6 +25,7 @@ use App\Mail\infoPropiedad;
 |
 */
 
+
 Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
       
      $sendMail = new infoPropiedad($_GET['from'],$_GET['emailBody'],$nombreAgente,$_GET['casaNumero']);
@@ -37,9 +38,14 @@ Route::get('/menu.inicio/{gestion?}/{id_propiedad?}/{busqueda?}','App\Http\Contr
 
 Route::get('/','App\Http\Controllers\menuController@indexacion')->name('menuIndex');
 
-Route::middleware('auth')->group(function(){
+Route::post('loginAdmin','App\Http\Controllers\Auth\loginAdminController@loginAdmin')->name('loginAdm');
+Route::get('/loginAdmin','App\Http\Controllers\Auth\loginAdminController@showLoginAdmin');
+Route::post('logOutAdmin','App\Http\Controllers\Auth\loginAdminController@logOutAdmin')->name('logOutAdmin');
 
 // prepara datos del menu de formularios.
+Route::group(['middleware'=>['autenticado']],function() { 
+     
+// llama al menu de los formularios.     
 Route::get('/AdminForms','App\Http\Controllers\Admin\AdminFormsController@index')->name('adminForms');
 
 // llama al formulario de entrada de datos seleccionado. Solo para administradores.
@@ -177,8 +183,6 @@ Route::put('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/{id
 
 Route::delete('/id_casa/{id_casa}/id_ofrecimiento/{id_ofrecimiento}/id_duracion/{id_duracion}/id_recurso/{id_recurso}','App\Http\Controllers\Admin\preciosCasaController@destroy')->name('admin.preciosCasaForm.delete');
 
-});
+}); // End grupo middleware autenticado.
 
 Auth::routes();
-
-// llama pagina de inicio de plancasas. Cualquier usuario puede tener acceso.

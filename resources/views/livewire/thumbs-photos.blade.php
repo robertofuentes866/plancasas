@@ -25,7 +25,7 @@
                 @if($imagenes_casas->count())
                     <!-- Destacados y Resultado de formularios en thumbnail -->
                     
-                    <article class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
+                    <section class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>{{$titulo_thumbnail_lastQuery}}</strong></p>
                             <p class="subtitle_page_left"><small>{Clique las fotos para ampliarlas}</small></p>
@@ -35,13 +35,13 @@
                                     @php(agregarThumbsToCarrousel($lastQuery,$titulo_thumbnail_lastQuery,"carousel1"))
                             </div> <!-- End Card Body -->
 
-                    </article> <!-- End Card text-black de Destacados,Resulta de busqueda o Ambientes thumbnails-->
+                    </section> <!-- End Card text-black de Destacados,Resulta de busqueda o Ambientes thumbnails-->
                     
                 @endif
 
                 @if ($favoritos_casas->count()) 
                     <!-- Favoritos thumbnails-->
-                    <article class="card text-black bg-dark mb-3 mt-2 mx-auto">
+                    <section class="card text-black bg-dark mb-3 mt-2 mx-auto">
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>Mis Favoritos</strong></p>
                             <p class="subtitle_page_left"><small>{Clique las fotos para ampliarlas}</small></p>
@@ -50,13 +50,13 @@
                             <div class="card-body bg-light">
                                 @php(agregarThumbsToCarrousel($favoritos_casas,"Mis Favoritos",'carousel2'))
                             </div>  
-                    </article>
+                    </section>
                      
                 @endif
             </div>  <!-- End container de los 2 grupos de thumbnails: Destacados/Formularios y Favoritos -->
             
             <div class="col-lg-8 col-12 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
-                            <article class="card">
+                            <section class="card">
                                 <img src="{{asset('storage/propiedades/'.$fotoNormal)}}" class="card-img-top" alt="...">
                                 <div id="procedencia">
                                     {{$titulo_en_foto_normal}}
@@ -89,10 +89,10 @@
                                     @endif
                                     
                                 </div>
-                            </article>
+                            </section>
                             <!-- Carousel de thumbnail  abajo de la foto normal -->
                             @if ($gestion==2 )
-                                <article id="top_detalles" class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
+                                <section id="top_detalles" class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                                     <div class="card-header text-white" style="text-align:center;height:4.5em">
                                         <p id="title_page_left"><strong>{{$titulo_thumbnail}}</strong></p>
                                         <p class="subtitle_page_left"><small>{Clique las fotos para ampliarlas}</small></p>
@@ -102,13 +102,13 @@
                                        @php(agregarThumbsToCarrousel($imagenes_casas,'Ambientes de la propiedad','carousel3'))
                                     </div> <!-- End Card Body -->
 
-                                </article> <!-- End Card text-black de Destacados o Ambientes thumbnails-->
+                                </section> <!-- End Card text-black de Destacados o Ambientes thumbnails-->
                             @endif
 
                         <!-- Características de la casa -->
 
                         @if($gestion == 2 && $imagenes_casas->count())  
-                            <article class="card mt-3 mb-3">
+                            <section class="card mt-3 mb-3">
                                 <div class="card-header">
                                     Características de la propiedad: <strong>Tipo: {{ $imagenes_casas[0]->subtipo}}</strong>
                                 </div>
@@ -157,11 +157,11 @@
                                     </tbody>
                                     </table>
                                  </div> <!--End card body -->
-                            </article>  <!--End card -->
+                            </section>  <!--End card -->
                         
                             <!-- Precios de renta o venta de la propiedad -->
                         
-                            <article class="card mt-3 mb-3">
+                            <section class="card mt-3 mb-3">
                                 <div class="card-header">
                                     <strong>Precios de la propiedad</strong>
                                 </div>
@@ -193,11 +193,11 @@
                                     </tbody>
                                     </table>
                                 </div>
-                            </article>
+                            </section>
 
                             <!-- Agente Inmobiliario -->
 
-                            <article class="card mt-3 mb-3">
+                            <section class="card mt-3 mb-3">
                                 <div class="card-header">
                                     <strong>Agente Inmobiliario</strong>
                                 </div>
@@ -251,7 +251,7 @@
                                         
                                     </table>
                                 </div>
-                            </article>
+                            </section>
                         @endif
                                 
                     </div>

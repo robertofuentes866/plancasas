@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class lixo
+class authAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,12 +17,10 @@ class lixo
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->email=="robertofuentes866@hotmail.com") {
-            return $next($request);
-        } else {
-            return redirect('/no-autorizado');
-        }
-       
-    
+        if (! Auth::guard('admin')->check()) {
+           return redirect('/loginAdmin');
+        } 
+        
+        return $next($request);  // acepta la peticion de entrar en los formularios.
     }
 }

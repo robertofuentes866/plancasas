@@ -19,27 +19,19 @@
 </div>
 <div class="container">
     <div class="row my-2 ">
-       <!-- <div class="col-lg-12 nav-justified">
+       <div class="col-lg-12 nav-justified">
+             @if (auth()->guard('admin')->check())
                 <ul class="nav nav-pills">
-                    
-                @guest
                     <li class="nav-item">
-                            <a class = "@yield('nav_link_registrar')" href="{{Route('register')}}">REGISTRARSE</a>
+                        <form id="logout" action="{{ route('logOutAdmin') }}" method="POST">
+                                <a role="button" class="nav-link"
+                                onclick="document.getElementById('logout').submit();">Salir</a>
+                                @csrf
+                        </form>
                     </li>
-                    <li class="nav-item">
-                            <a class = "@yield('nav_link_entrar')" href="{{Route('login')}}">ENTRAR</a>
-                    </li>
-                    @else
-                    <li class="nav-item">
-                    <form id="logout" action="{{ route('logout') }}" method="POST">
-                            <a role="button" class="nav-link"
-                            onclick="document.getElementById('logout').submit();">Salir</a>
-                            @csrf
-                    </form>
-                    </li>
-                    @endguest
                 </ul>
-        </div>  -->
+            @endif
+        </div> 
         
     </div>
 </div>

@@ -3,7 +3,7 @@
 @section('cuerpo')
 <div class="card mb-4">
 <div class="card-header">
-FORMULARIOS DE ENTRADA DE DATOS
+FORMULARIOS DE ENTRADA DE DATOS 
 </div>
 <div class="card-body">
 @if($errors->any())

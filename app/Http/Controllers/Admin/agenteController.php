@@ -64,7 +64,7 @@ class agenteController extends Controller
         $agente->nombre = $request->nombre;
         $agente->apellidos = $request->apellidos;
         $agente->email = $request->email;
-        $agente->password = hash::make($request->password);
+        $agente->password = bcrypt($request->password);
         $agente->cel1 = $request->cel1;
         $agente->cel2 = $request->cel2;
         $agente->id_privilegio = $request->id_privilegio;
@@ -129,7 +129,7 @@ class agenteController extends Controller
         $agente = agente::findOrFail($id);
         $agente->setNombre($request->nombre);
         $agente->setApellidos($request->apellidos);
-        $agente->setPassword(hash::make($request->password));
+        $agente->setPassword(bcrypt($request->password));
         $agente->setEmail($request->email);
         $agente->setCel1($request->cel1);
         $agente->setCel2($request->cel2);

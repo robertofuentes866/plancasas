@@ -90,11 +90,11 @@
 
 <div class="container">
     <div class="row">
-        <div id="encabezado" class="col-12 bg-dark text-white">
+        <header id="encabezado" class="col-12 bg-dark text-white">
             <p class="placeholder-wave" id="headerP">VISUAL HOME REAL ESTATE NICARAGUA </p>
             <p class="placeholder-wave"><small id="smallHeader">Te ofrecemos un lugar Accesible, Cómodo y Seguro para vivir en familia.</small> </p>
 
-        </div>
+        </header>
     </div>
 </div>
 <nav class="container">
@@ -126,7 +126,7 @@
         </div>
         
     </div>
-    </nav>
+</nav>
 
 
 <main class="container">
