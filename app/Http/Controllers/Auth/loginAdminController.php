@@ -48,7 +48,7 @@ class LoginAdminController extends Controller
             return redirect()->intended('/AdminForms');
 
         }
-        return redirect('/loginAdmin')->withErrors(['error'=>'Vuelva a intentar con otros parametros']);
+        return redirect('/loginAdmin')->withErrors(['errorCredencial'=>'Intente con otros parametros']);
     }
 
     public function logOutAdmin() {

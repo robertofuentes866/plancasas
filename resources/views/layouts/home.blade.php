@@ -61,6 +61,11 @@
 
         $('#flechas').trigger('click');
 
+        function muestraCasa(id) {
+            
+            $('#carouselFotosNormales'+id).trigger('click');
+        }
+
         
     </script>
     

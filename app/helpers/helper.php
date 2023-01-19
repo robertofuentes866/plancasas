@@ -66,7 +66,7 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                 echo '<div class="col" style=" float:right; height:120px;">';
                     incrementaIndice($i);
                     $permiteAbrirGrupoCarrusel=false;
-                    echo "<a href=\"#procedencia\"><figure wire:click=\"selectNormalImagen($comillas$imagen_casa->foto_normal$comillas,
+                    echo "<a onclick=\"muestraCasa($imagen_casa->id_casa)\" href=\"#procedencia\"><figure wire:click=\"selectNormalImagen($comillas$imagen_casa->foto_normal$comillas,
                             $comillas$imagen_casa->descripcion$comillas,
                             $comillas$imagen_casa->residencial$comillas,
                             $comillas$imagen_casa->casaNumero$comillas,

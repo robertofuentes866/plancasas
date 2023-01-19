@@ -55,42 +55,90 @@
                 @endif
             </div>  <!-- End container de los 2 grupos de thumbnails: Destacados/Formularios y Favoritos -->
             
-            <div class="col-lg-8 col-12 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
+            <div id="top_detalles" class="col-lg-8 col-12 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
                             <section class="card">
-                                <img src="{{asset('storage/propiedades/'.$fotoNormal)}}" class="card-img-top" alt="...">
-                                <div id="procedencia">
-                                    {{$titulo_en_foto_normal}}
-                                </div>
                                 <div class="card-body">
+                                   <!-- inicio del carrousel para fotos normales -->
+                                   <div id="carouselFotosNormales" class="carousel" data-bs-ride="carousel">
+                                       <div class="carousel-indicators"> 
+                                            
+                                            @for($i=0;$i<$imagenes_casas->count();$i++)
+                                                @if ($i==0)
+                                                    <button id="carouselFotosNormales{{$imagenes_casas[$i]->id_casa}}" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide-to="{{$i}}" class="active" aria-current="true" aria-label="Slide {{$i}}"></button>
+                                                @else
+                                                    <button id="carouselFotosNormales{{$imagenes_casas[$i]->id_casa}}" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide-to="{{$i}}" aria-label="Slide {{$i}}"></button>
+                                                @endif
+                                            @endfor
+                                            
+                                       </div> 
+                                        <div class="carousel-inner">
+                                            @php($primerItem = true)
+                                            @php($imagenes_casas_array = $carrusel=='carousel1' || ($carrusel=='carousel2' && $gestion==2)?$imagenes_casas:$favoritos_casas)
+                                            
+                                            @foreach($imagenes_casas_array as $imagen_casa)
+                                               @if($gestion!=2)
+                                                    @if ($imagen_casa->id_casa == $id_propiedad)
+                                                    <div class="carousel-item active">
+                                                    @else
+                                                    <div class="carousel-item"> 
+                                                    @endif
+                                                @else
+                                                    @if ($primerItem)
+                                                        <div class="carousel-item active">
+                                                        @php($primerItem = false)
+                                                        @else
+                                                        <div class="carousel-item"> 
+                                                        @endif
+                                                    @endif
+                                                
+                                                <!-- inicio de la muestra de la foto normal sin carrousel -->
+                                                <img src="{{asset('storage/propiedades/'. $imagen_casa->foto_normal)}}" class="card-img-top" alt="...">
+                                                <div id="procedencia">
+                                                    {{$titulo_en_foto_normal}}
+                                                </div>
+                                               
+                                                @if($gestion!=2) 
+                                                    <h5 class="card-title">{{$imagen_casa->residencial.'-'.$imagen_casa->casaNumero}}</h5>
+                                                    <p class="card-text"> {{$imagen_casa->descripcion}}</p>
+                                                
+                                                    <a class="btn btn-primary" href="{{route('menu.inicio',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Mas detalles...</a>
+                                                @else
+                                                    <p class="card-title">
+                                                       
+                                                    <strong>{{$imagen_casa->leyenda. ' en '. $imagen_casa->casaNumero}}</strong> </p>
+                                                    @if(Auth::check())
+                                                        <span class="d-block p-1 bg-primary text-white rounded-start">
+                                                            <p><button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip"
+                                                                data-placement="bottom" 
+                                                                title="{{buscarFavorito($imagen_casa->id_casa,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}"
+                                                                type="button" wire:click="accionFavorito({{$comillas.$imagen_casa->id_casa.$comillas}})" 
+                                                                name="buscarFavoritos" id="buscarFavoritos"
+                                                                class="btn {{buscarFavorito($imagen_casa->id_casa,$this->id_usuario)?'btn-danger':'btn-secondary'}}">
+                                                                <i class="bi bi-house-fill"></i>
+                                                                </button> &#10232; Agregar/Borrar en lista Favoritos
+                                                            </p>
+                                                        </span>
+                                                    @endif
+                                                @endif
+
+                                                <!-- fin de la muestra de la foto normal sin carrousel -->
+                                            </div>  <!-- end div item carrousel -->
+                                            @endforeach
+                                    </div>  <!-- end div inner  carrousel  -->
+                                    <button style="height: 350px;" class="carousel-control-prev" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button style="height: 350px;" class="carousel-control-next" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                    </div> <!-- fin del carrousel fotos normales -->
                                     
-                                    @if($gestion!=2)
-                                    <h5 class="card-title">{{$residencial.'-'.$casaNumero}}</h5>
-                                    <p class="card-text"> {{$descripcion}}</p>
-                                   
-                                    <a class="btn btn-primary" href="{{route('menu.inicio',[2,$id_propiedad,$arrayOpcionesForm])}}" role="button">Mas detalles...</a>
-                                    @else
-                                    <p class="card-title">
-                                    <strong>{{$leyenda. ' en '. $casaNumero}}</strong> </p>
-                                    @if(Auth::check())
-                                    <span class="d-block p-1 bg-primary text-white rounded-start">
-                                        <p><button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip"
-                                            data-placement="bottom" 
-                                            title="{{buscarFavorito($id_propiedad,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}"
-                                            type="button" wire:click="accionFavorito({{$comillas.$id_propiedad.$comillas}})" 
-                                            name="buscarFavoritos" id="buscarFavoritos"
-                                            class="btn {{buscarFavorito($id_propiedad,$this->id_usuario)?'btn-danger':'btn-secondary'}}">
-                                            <i class="bi bi-house-fill"></i>
-                                        </button> &#10232; Agregar/Borrar en lista Favoritos </p>
-                                        
-                                    </span>
-                                    @endif    
-                                   
-                                    
-                                    @endif
-                                    
-                                </div>
+                                </div>  <!-- end div card body -->
+
                             </section>
-                            <!-- Carousel de thumbnail  abajo de la foto normal -->
+                            <!-- Carousel de thumbnail  abajo de la foto normal 
                             @if ($gestion==2 )
                                 <section id="top_detalles" class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                                     <div class="card-header text-white" style="text-align:center;height:4.5em">
@@ -100,10 +148,10 @@
                                     </div>
                                     <div class="card-body bg-body px-0">
                                        @php(agregarThumbsToCarrousel($imagenes_casas,'Ambientes de la propiedad','carousel3'))
-                                    </div> <!-- End Card Body -->
+                                    </div> 
 
-                                </section> <!-- End Card text-black de Destacados o Ambientes thumbnails-->
-                            @endif
+                                </section> 
+                            @endif  -->
 
                         <!-- Características de la casa -->
 
@@ -188,7 +236,7 @@
                                         @endif
                                     @endforeach
                                     <tr>
-                                        <td colspan="4"><i> Los precios para contrato de renta: <u>anual</u>, <u>medio año</u> o <u>mes</u> son pagos mensuales.</i></td> 
+                                        <td colspan="4"><i> Los precios para contrato de renta: <u>anual</u>, <u>Semestral</u> o <u>mes</u> son pagos mensuales.</i></td> 
                                     </tr>
                                     </tbody>
                                     </table>

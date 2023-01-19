@@ -16,7 +16,7 @@ use App\Models\subtipo;
 class ThumbsPhotos extends Component
 {
     public $titulo_en_foto_normal = '';
-    public $fotoNormal = '';
+    public $foto_normal = '';
     public $descripcion = '';
     public $residencial = '';
     public $casaNumero = '';
@@ -33,6 +33,7 @@ class ThumbsPhotos extends Component
     public $accionFav = "Mis Favoritos";
     public $arrayOpcionesForm = '';
     public $lastQuery = '';
+    public $carrusel='carousel1';
     
 
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
@@ -161,12 +162,12 @@ class ThumbsPhotos extends Component
         $this->lastQuery = $this->selectLastQuery(session()->getId());
         
         $favoritos_casas = $this->get_favoritos_casas();
-
+        
         if (!$this->contador && ($imagenes_casas->count() || $favoritos_casas->count())) {
             // Entra aqui para mostrar la foto tamaño normal inicial y sus leyendas.
             $this->contador++;
  
-            $this->fotoNormal = $imagenes_casas[0]->foto_normal??$favoritos_casas[0]->foto_normal??'';
+            $this->foto_normal = $imagenes_casas[0]->foto_normal??$favoritos_casas[0]->foto_normal??'';
             $this->descripcion = $imagenes_casas[0]->descripcion??$favoritos_casas[0]->descripcion??'';
             $this->residencial = $imagenes_casas[0]->residencial??$favoritos_casas[0]->residencial??'';
             $this->casaNumero = $imagenes_casas[0]->casaNumero??$favoritos_casas[0]->casaNumero??'';
@@ -228,9 +229,9 @@ class ThumbsPhotos extends Component
                 break;
 
            case 2:   // detalles de la propiedad.
-
+              
                $this->titulo_thumbnail_lastQuery = (empty(session('ultimoQuery')))?'Propiedades Destacadas':'Resultado de busqueda';
-               return DB::table('casas')
+               $lixo = DB::table('casas')
                       ->join('subtipos','subtipos.id_subtipo','=','casas.id_subtipo')
                       ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                       ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
@@ -253,7 +254,8 @@ class ThumbsPhotos extends Component
                                 'agentes.cel1','agentes.cel2','agentes.email','agentes.foto_agente',
                                 'casas.aires_acondicionado','casas.abanicos_techo','casas.agua_caliente','casas.tanque_agua',
                                 'casas.sistema_seguridad','casas.descripcion','subtipos.subtipo',DB::raw("'Ambientes' as titulo" ))->get();
-                
+                               
+                return $lixo;
                 break;
 
             case 3: // llamado del formulario detallado.
@@ -298,14 +300,16 @@ class ThumbsPhotos extends Component
     }
 
     public function selectNormalImagen($foto,$descrip,$residencial,$casaNumero,$id,$leyenda,$ttl,$carrusel) {
+        
         $this->id_propiedad = $id;
-        $this->fotoNormal = $foto;
+        $this->foto_normal = $foto;
         $this->descripcion = $descrip;
         $this->residencial = $residencial;
         $this->casaNumero = $casaNumero;
         $this->leyenda = $leyenda;
         $this->titulo_en_foto_normal = $ttl;
         $this->titulo = $ttl;
+        $this->carrusel = $carrusel;
 
         $this->arrayOpcionesForm = match($carrusel){
             'carousel1'=> session('arrayOpcionesForm'),
