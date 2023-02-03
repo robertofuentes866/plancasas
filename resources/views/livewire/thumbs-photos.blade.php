@@ -259,10 +259,27 @@
                                             
                                         </tr>
                                         <tr>
-                                            <td><u>Celular Tigo:</u> {{ $imagenes_casas[0]->cel1}}</td>
+                                            <td><u>Celular Tigo:</u> 
+                                            @if(!empty($imagenes_casas[0]->cel1))
+                                            <!-- codigo para incorporar whatsapp -->
+                                                
+                                                    <a class="cel_agentes" href="https://api.whatsapp.com/send/?phone={{$imagenes_casas[0]->cel1}}&text=En que te puedo ayudar?" target="_blank">
+                                                        <img src="{{asset('storage/imagenes_app/whatsapp-logo.png')}}" class="boton">{{': '.$imagenes_casas[0]->cel1}}
+                                                    </a>
+                                            <!-- End whatsapp -->
+                                            @endif
+                                            </td>
                                         </tr>
                                         <tr>
-                                        <td><u>Celular Claro:</u> {{ $imagenes_casas[0]->cel2}}</td>
+                                            <td><u>Celular Claro:</u> 
+                                               @if(!empty($imagenes_casas[0]->cel2))
+                                                <!-- codigo para incorporar whatsapp -->
+                                                        <a class="cel_agentes" href="https://api.whatsapp.com/send/?phone={{$imagenes_casas[0]->cel2}}&text=En que te puedo ayudar?" target="_blank">
+                                                            <img src="{{asset('storage/imagenes_app/whatsapp-logo.png')}}" class="boton">{{': '.$imagenes_casas[0]->cel2}}
+                                                        </a>
+                                                <!-- End whatsapp -->
+                                                @endif
+                                            </td>
                                         </tr>
                                         <tr>
                                         <td><u>Email:</u> {{ $imagenes_casas[0]->email}}</td>

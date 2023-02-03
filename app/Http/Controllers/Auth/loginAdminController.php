@@ -43,11 +43,12 @@ class LoginAdminController extends Controller
         ]);
 
         $credenciales = $request->only(['email','password']);
-        if (Auth::guard('admin')->attempt($credenciales)) {
+        //dd(Auth::guard('admin')->attempt($credenciales));
+        if ( Auth::guard('admin')->attempt($credenciales)) {
             $request->session()->regenerate();
             return redirect()->intended('/AdminForms');
-
         }
+        
         return redirect('/loginAdmin')->withErrors(['errorCredencial'=>'Intente con otros parametros']);
     }
 

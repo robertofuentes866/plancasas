@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -140,7 +141,13 @@
         
     </div>
 </main>
-
+<!-- codigo para incorporar whatsapp -->
+<div class="whatsapp">
+   <a href="https://api.whatsapp.com/send/?phone=50589634969&text=En que te puedo ayudar?" target="_blank">
+    <img src="{{asset('storage/imagenes_app/whatsapp-logo.png')}}" class="boton">
+   </a>
+</div>
+<!-- End whatsapp -->
 <foot class="container">
     <div class="row my-2">
         <div class="col-12 bg-primary text-center">
