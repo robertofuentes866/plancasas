@@ -88,10 +88,10 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
     }
 
     echo'</div> 
-        <button class="carousel-control-prev bg-light ml-0 flechas" type="button" data-target="#'.$nombreCarrusel.'" data-slide="prev">
+        <button class="carousel-control-prev ml-0 flechas" type="button" data-target="#'.$nombreCarrusel.'" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span></button>
-        <button class="carousel-control-next bg-light mr-0 flechas" type="button" data-target="#'.$nombreCarrusel.'" data-slide="next">
+        <button class="carousel-control-next mr-0 flechas" type="button" data-target="#'.$nombreCarrusel.'" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span></button>
         </div>';

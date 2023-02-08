@@ -102,8 +102,9 @@ legend {
 }
 
 .flechas {
-    opacity:0.5;
+    opacity:0;
     
+    height:40%;
 }
 
 .tabla_de_formulario .tabla_de_formulario_columna {

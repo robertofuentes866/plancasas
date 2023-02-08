@@ -125,11 +125,11 @@
                                             </div>  <!-- end div item carrousel -->
                                             @endforeach
                                     </div>  <!-- end div inner  carrousel  -->
-                                    <button style="height: 350px;" class="carousel-control-prev" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide="prev">
+                                    <button style="height: 350px;" class="carousel-control-prev flechas" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="visually-hidden">Previous</span>
                                     </button>
-                                    <button style="height: 350px;" class="carousel-control-next" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide="next">
+                                    <button style="height: 350px;" class="carousel-control-next flechas" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="visually-hidden">Next</span>
                                     </button>
