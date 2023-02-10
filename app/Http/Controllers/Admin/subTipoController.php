@@ -29,7 +29,7 @@ class subTipoController extends Controller
 
    public function index()
    { 
-       return view('admin.subTipoForm')->with('data',$this->viewData());
+       return view('admin.subtipoForm')->with('data',$this->viewData());
    }
 
     /**

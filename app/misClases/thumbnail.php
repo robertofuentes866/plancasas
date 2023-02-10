@@ -79,7 +79,7 @@
         if ($success){
             $this->messages[]="$newname created successfully";
         } else {
-            $this->message[]="Couldn't create a thumbnail for ". basename($this->original);
+            $this->messages[]="Couldn't create a thumbnail for ". basename($this->original);
         }
         imagedestroy($resource);
         imagedestroy($thumb);

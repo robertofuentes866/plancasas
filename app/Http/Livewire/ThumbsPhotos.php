@@ -25,7 +25,7 @@ class ThumbsPhotos extends Component
     public $arrayProp = [];
     public $arrayFav = [];
     public $arrayPrecio = [];
-    public $id_usuario = 0;
+    public $id_usuario = -1;
     public $titulo_thumbnail = '';
     public $titulo_thumbnail_lastQuery = '';
     public $i = 0; // usado en los carruseles , en helper.php
@@ -156,7 +156,7 @@ class ThumbsPhotos extends Component
 
     public function render() {
 
-        $this->id_usuario = Auth::check()?Auth::id():0;
+        $this->id_usuario = Auth::check()?Auth::id():-1;
         $imagenes_casas = $this->get_casas();
 
         $this->lastQuery = $this->selectLastQuery(session()->getId());

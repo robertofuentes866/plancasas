@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\infoPropiedad;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,12 +26,38 @@ use App\Mail\infoPropiedad;
 
 
 Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
-      
+   try {   
      $sendMail = new infoPropiedad($_GET['from'],$_GET['emailBody'],$nombreAgente,$_GET['casaNumero']);
      Mail::to($to)->send($sendMail);
      return redirect()->back();
+   } catch (exception $e) {
+      return 'Ha ocurrido un error de envio: '. $e->getMessage();
+   }
+})->name('infoPropiedad'); 
 
-})->name('infoPropiedad');
+/*use PHPMailer\PHPMailer\PHPMailer;
+Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
+  
+   //require 'vendor/autoload.php';
+   $mail = new PHPMailer();
+   $mail->isSMTP();
+   $mail->SMTPDebug = 2;
+   $mail->Host = 'visualhome.net'; //4env('MAIL_HOST');
+   $mail->Port = 587; //env('MAIL_PORT');
+   $mail->SMTPAuth = true;
+   $mail->Username = 'ventas@visualhome.net'; // env('MAIL_USERNAME');
+   $mail->Password = 'nicAhome2'; //env('MAIL_PASSWORD');
+   
+   $mail->setFrom($_GET['from'], 'Cliente');
+   $mail->addAddress($to, 'nose');
+   $mail->Subject = 'Solicitud de Informacion';
+   $mail->Body = $_GET['emailBody'];
+   if (!$mail->send()) {
+       return 'Mailer Error: ' . $mail->ErrorInfo;
+   } else {
+       return redirect()->back();
+   }
+})->name('infoPropiedad'); */
 
 Route::get('/menu.inicio/{gestion?}/{id_propiedad?}/{busqueda?}','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
 
@@ -162,7 +187,7 @@ Route::put('/{id}/admin.casaForm.update','App\Http\Controllers\Admin\casaControl
 Route::delete('/{id}/admin.casaForm.delete','App\Http\Controllers\Admin\casaController@destroy')->name('admin.casaForm.delete');
 
 // Relacionados al formulario FOTOS CASA.
-Route::get('/admin.fotosCasaForm.index','App\Http\Controllers\Admin\FotosCasaController@index')->name('admin.fotosCasaForm.index');
+Route::get('/admin.fotosCasaForm.index','App\Http\Controllers\Admin\fotosCasaController@index')->name('admin.fotosCasaForm.index');
 
 Route::post('/admin.fotosCasaForm.store','App\Http\Controllers\Admin\fotosCasaController@store')->name('admin.fotosCasaForm.store');
 

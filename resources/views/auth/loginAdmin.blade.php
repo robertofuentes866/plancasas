@@ -1,4 +1,4 @@
-@extends('Admin.home')
+@extends('admin.home')
 @section('cuerpo')
 <div class="container">
     <div class="row justify-content-center">

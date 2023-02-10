@@ -143,7 +143,7 @@
 </main>
 <!-- codigo para incorporar whatsapp -->
 <div class="whatsapp">
-   <a href="https://api.whatsapp.com/send/?phone=50589634969&text=En que te puedo ayudar?" target="_blank">
+   <a href="https://api.whatsapp.com/send/?phone=50589634969" target="_blank">
     <img src="{{asset('storage/imagenes_app/whatsapp-logo.png')}}" class="boton">
    </a>
 </div>

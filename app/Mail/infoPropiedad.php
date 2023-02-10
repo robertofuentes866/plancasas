@@ -2,8 +2,8 @@
 
 namespace App\Mail;
 
-use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -28,7 +28,7 @@ class infoPropiedad extends Mailable
      
       $this->body = $body;
       $this->nombreAgente = $agente;
-      $this->subject = "Informacion Propiedad";
+      
       $this->propiedadNumero = $propNumero;
       $this->from[0]['address'] = $from;
       $this->from[0]['name'] = "Cliente";
@@ -41,6 +41,7 @@ class infoPropiedad extends Mailable
      */
     public function build()
     {
-        return $this->view('infoPropiedad');
+        return $this->subject('local')->from('robertofuentes866@hotmail.com','Roberto')->view('infoPropiedad');
     }
+
 }
