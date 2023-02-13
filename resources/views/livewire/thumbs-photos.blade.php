@@ -35,7 +35,7 @@
                             <p class="subtitle_page_left"><small>{Clique las fotos para ampliarlas}</small></p>
                             <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
-                            <div class="card-body bg-body px-0">
+                            <div class="card-body bg-body">
                                     @php(agregarThumbsToCarrousel($lastQuery,$titulo_thumbnail_lastQuery,"carousel1"))
                             </div> <!-- End Card Body -->
 
@@ -96,11 +96,11 @@
                                                     @endif
                                                 
                                                 <!-- inicio de la muestra de la foto normal sin carrousel -->
+                                                <span id=procedencia>{{$titulo_en_foto_normal}}</span>
                                                 <img src="{{asset('storage/propiedades/'. $imagen_casa->foto_normal)}}" class="card-img-top" alt="...">
-                                                <div id="procedencia">
-                                                    {{$titulo_en_foto_normal}}
-                                                </div>
-                                               
+                                                <div id="procedencia{{$imagen_casa->id_casa}}"></div>
+                                                
+
                                                 @if($gestion!=2) 
                                                     <h5 class="card-title">{{$imagen_casa->residencial.'-'.$imagen_casa->casaNumero}}</h5>
                                                     <p class="card-text"> {{$imagen_casa->descripcion}}</p>

@@ -2,7 +2,7 @@ body {
     background-color:aliceblue;
 }
 
-figure {
+/*figure {
     
     display: block;
     flex-flow: column;
@@ -17,11 +17,7 @@ figcaption {
     background-color: #222;
     color: #fff;
     font: italic smaller sans-serif;
-    padding: 3px;
-    text-align: center;
-    height:auto;
-    margin-top:5px;
-}
+}*/
 
 #headerP {
     font-style: oblique;
@@ -63,6 +59,7 @@ figcaption {
    background-size: 50%;
    background-position-y:20%;
 }
+
 fieldset {
     background-color: rgb(205, 218, 213);
     border:0.5px solid;
@@ -162,4 +159,15 @@ legend {
 
  .cel_agentes {
     text-decoration: none;
+ }
+
+ .img_thumbnails_row{
+    background-color:darkcyan;
+    text-align: center;
+  
+ }
+
+ #thumbnails_table {
+    border-collapse: separate;
+
  }

@@ -191,7 +191,7 @@ class ThumbsPhotos extends Component
                                     ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                                     ->where([['casas.destacado','=',1],['casas.disponibilidad','=',1],
                                                 ['fotos_casas.es_principal','=',1]])
-                                    ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'fotos_casas.foto_thumb',
+                                    ->select(DB::raw("CONCAT(localizaciones.residencial,' - ',casas.casaNumero) as leyenda"),'fotos_casas.foto_thumb',
                                                 'fotos_casas.foto_normal','fotos_casas.id_foto','localizaciones.descripcion',
                                                 'casas.id_casa','casas.casaNumero','localizaciones.residencial',
                                                 DB::raw("'Destacados' as titulo" ))->get();
@@ -217,7 +217,7 @@ class ThumbsPhotos extends Component
                     ['fotos_casas.es_principal','=',1],
                     ['casas.disponibilidad','=',1],
                     ['precios_casas.disponibilidad','=',1]])
-                ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
+                ->select(DB::raw("CONCAT(localizaciones.residencial,' - ',casas.casaNumero) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
@@ -286,7 +286,7 @@ class ThumbsPhotos extends Component
                     ['casas.disponibilidad','=',1],
                     ['casas.id_subtipo','=',$this->id_tipo],
                     ['precios_casas.disponibilidad','=',1]])
-                ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
+                ->select(DB::raw("CONCAT(localizaciones.residencial,' - ',casas.casaNumero) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
                         'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
