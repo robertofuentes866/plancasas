@@ -133,14 +133,15 @@ class fotosCasaController extends Controller
         $fotosCasa->setEsPrincipal($request->es_principal?1:0);
         
         if ($request->hasFile('foto_normal')) {
-            // actualiza foto tamaño normal.
+            // actualiza foto tama単o normal.
             $nombre_imagen = $fotosCasa->id_foto.".".$request->file('foto_normal')->extension();
-            $request->file('foto_normal')->storeAs('storage/propiedades',$nombre_imagen);
+            $pathfile = $request->file('foto_normal')->storeAs('/propiedades',$nombre_imagen);
+           
             $fotosCasa->setFotoNormal($nombre_imagen);
-            
-            // actualiza la foto tamaño thumbnail.
-            $nombre_imagen = $fotosCasa->id_foto."_th.".$request->file('foto_normal')->extension();
-            $nombre_thumb = new Thumbnail($request->foto_normal,'storage/propiedades',$fotosCasa->id_foto.'_th');
+            // actualiza la foto tama単o thumbnail.
+            $nombre_imagen = $fotosCasa->id_foto."_th";
+           
+            $nombre_thumb = new Thumbnail($request->foto_normal,'storage/propiedades',$nombre_imagen);
             $nombre_thumb->create();
         }
 

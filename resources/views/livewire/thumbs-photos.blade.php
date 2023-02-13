@@ -8,6 +8,10 @@
     @php($swal = 1)
 @endif
 
+@if (is_null($lastQuery))
+    return redirect('menuIndex')
+@endif
+
 @if ((count($lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
  <div id="top_resultados" class="col-lg-8 col-12">
         <div id="title_page_left_container" class="row">
