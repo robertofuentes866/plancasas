@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('id_tipo');
             $table->unsignedTinyInteger('plantas')->nullable();
             $table->unsignedTinyInteger('garage')->nullable();
-            $table->string('CasaNumero',30);
+            $table->string('casaNumero',30);
             $table->float('area_construccion')->nullable();
             $table->float('area_terreno')->nullable();
             $table->unsignedTinyInteger('habitaciones')->nullable();
@@ -38,6 +38,7 @@ return new class extends Migration
             $table->foreign('id_agente')->references('id_agente')->on('agentes')->onDelete('restrict');
             $table->foreign('id_tipo')->references('id_tipo')->on('tipos')->onDelete('restrict');
             $table->unsignedSmallInteger('id_localizacion');
+            $table->unsignedtinyInteger('id_subtipo');
             $table->foreign('id_localizacion')->references('id_localizacion')->on('localizaciones')->onDelete('restrict');
             $table->timestamps();
         });

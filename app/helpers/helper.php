@@ -48,7 +48,7 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
     init_variables($i,$i_total,$arrayProp);
     $permiteAbrirGrupoCarrusel= true;
    
-    echo '<div id="'.$nombreCarrusel.'" class="carousel carousel-dark slide" data-interval="10000" data-ride="carousel">
+    echo '<div id="'.$nombreCarrusel.'" class="carousel carousel-dark slide" data-interval="false" data-ride="carousel">
          
         <div class="carousel-inner">';
    
@@ -68,7 +68,8 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                 echo '<tr class="img_thumbnails_row"><td>';
                     incrementaIndice($i);
                     $permiteAbrirGrupoCarrusel=false;
-                    echo "<a onclick=\"muestraCasa($imagen_casa->id_casa)\" href=\"#procedencia$imagen_casa->id_casa\"><figure wire:click=\"selectNormalImagen($comillas$imagen_casa->foto_normal$comillas,
+                   
+                    echo "<a href=\"#top_detalles\"><figure wire:click=\"selectNormalImagen($comillas$imagen_casa->foto_normal$comillas,
                             $comillas$imagen_casa->descripcion$comillas,
                             $comillas$imagen_casa->residencial$comillas,
                             $comillas$imagen_casa->casaNumero$comillas,
@@ -76,7 +77,8 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                             $comillas$imagen_casa->leyenda$comillas,
                             $comillas$titulo$comillas,
                             $comillas$nombreCarrusel$comillas)\">
-                        <img src=". asset('storage/propiedades/'.$imagen_casa->foto_thumb).">
+                            
+                        <img class=\"img_thumbnails\" src=". asset(session('camino_mostrar').'/propiedades/'.$imagen_casa->foto_thumb).">
                         </td><td><figcaption><strong> $imagen_casa->residencial</strong><br>$imagen_casa->casaNumero </figcaption></td>
                     </figure></a>
                 </tr>";
@@ -90,12 +92,12 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
     }
 
     echo'</div>
-        <button class="carousel-control-prev ml-0 flechas" type="button" data-target="#'.$nombreCarrusel.'" data-slide="prev">
+        <a class="carousel-control-prev" role="button" data-target="#'.$nombreCarrusel.'" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span></button>
-        <button class="carousel-control-next mr-0 flechas" type="button" data-target="#'.$nombreCarrusel.'" data-slide="next">
+        <span class="sr-only">Previous</span></a>
+        <a class="carousel-control-next" role="button" data-target="#'.$nombreCarrusel.'" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span></button>
+        <span class="sr-only">Next</span></a>
         </div>';
         
 }

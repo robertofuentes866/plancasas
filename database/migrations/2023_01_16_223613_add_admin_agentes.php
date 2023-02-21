@@ -18,7 +18,6 @@ return new class extends Migration
             "email"=> "example@example.com",
             "password"=> bcrypt(123456),
             "cel1"=> "505 88888888",
-            "id_privilegio"=> 11,
             "created_at"=> date("Y-m-d H:m:s"),
             "updated_at"=> date("Y-m-d H:m:s")
         ));

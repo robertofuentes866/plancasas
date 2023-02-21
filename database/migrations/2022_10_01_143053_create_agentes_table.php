@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('cel1',25);
             $table->string('cel2',25)->nullable();
             $table->string('foto_agente',30)->nullable();
-            $table->unsignedTinyInteger('id_privilegio');
+            $table->unsignedTinyInteger('id_privilegio')->nullable();
             $table->foreign('id_privilegio')->references('id_privilegio')->on('privilegios')->onDelete('restrict');
             $table->timestamps();
         });

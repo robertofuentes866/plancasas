@@ -14,6 +14,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 <link href="{{asset('css/app.css');}}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
 
     <title>@yield('mainTitle','Visual Home Real Estate Nicaragua')</title>
@@ -25,47 +26,9 @@
         function alertaMensaje(msg) {
             Swal.fire(msg);
         }
-
-        function changeValueRange1(val){
-            document.getElementById("Range1Val").innerHTML='US$ '+val;
-            document.getElementById("Range2").min =val;
-        }
-
-        function changeValueRange2(val){
-            if (document.getElementById("Range1Val").nodeValue < val) {
-                 document.getElementById("Range2Val").innerHTML='US$ '+val;
-            }
-        }
-
-        function ajustarPrecios(val){
-           
-            if (val==1) { 
-                $("#Range1").attr("min",1000);
-                $("#Range1").attr("max",500000);
-                $("#Range1").attr("step",1000);
-                $("#Range2").attr("min",1000);
-                $("#Range2").attr("max",500000);
-                $("#Range2").attr("step",1000);
-                document.getElementById("Range1Val").innerHTML='US$ '+1000;
-                document.getElementById("Range2Val").innerHTML='US$ '+500000;
-            } else {
-                $("#Range1").attr("min",100);
-                $("#Range1").attr("max",3000);
-                $("#Range1").attr("step",100);
-                $("#Range2").attr("min",100);
-                $("#Range2").attr("max",3000);
-                $("#Range2").attr("step",100);
-                document.getElementById("Range1Val").innerHTML='US$ '+100;
-                document.getElementById("Range2Val").innerHTML='US$ '+3000;
-            }
-        }
-
+        
+        
         $('#flechas').trigger('click');
-
-        function muestraCasa(id) {
-            
-            $('#carouselFotosNormales'+id).trigger('click');
-        }
 
         
     </script>
@@ -97,7 +60,7 @@
 <div class="container">
     <div class="row">
         <header id="encabezado" class="col-12 bg-dark text-white">
-            <p class="placeholder-wave" id="headerP">VISUAL HOME REAL ESTATE NICARAGUA </p>
+            <p class="placeholder-wave" id="headerP">VISUAL HOME <br> REAL ESTATE NICARAGUA </p>
             <p class="placeholder-wave"><small id="smallHeader">Te ofrecemos un lugar Accesible, Cómodo y Seguro para vivir en familia.</small> </p>
 
         </header>
@@ -114,10 +77,10 @@
                     </li>
                 @guest
                     <li class="nav-item">
-                            <a class = "@yield('nav_link_registrar')" href="{{Route('register')}}">REGISTRARSE</a>
+                            <a class = "@yield('nav_link_registrar')" href="{{Route('register')}}">CREA UNA CUENTA</a>
                     </li>
                     <li class="nav-item">
-                            <a class = "@yield('nav_link_entrar')" href="{{Route('login')}}">ENTRAR</a>
+                            <a class = "@yield('nav_link_entrar')" href="{{Route('login')}}">TIENES CUENTA AQUI?</a>
                     </li>
                     @else
                     <li class="nav-item">
@@ -144,7 +107,7 @@
 <!-- codigo para incorporar whatsapp -->
 <div class="whatsapp">
    <a href="https://api.whatsapp.com/send/?phone=50589634969" target="_blank">
-    <img src="{{asset('storage/imagenes_app/whatsapp-logo.png')}}" class="boton">
+    <img src="{{asset(session('camino_mostrar').'/imagenes_app/whatsapp-logo.png')}}" class="boton">
    </a>
 </div>
 <!-- End whatsapp -->

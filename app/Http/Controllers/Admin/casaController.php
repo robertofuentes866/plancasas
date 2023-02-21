@@ -22,6 +22,8 @@ class casaController extends Controller
      */
 
      protected $viewData = [];
+     protected $id_tipo = 0;
+
 
      private function viewData() {
         $viewData = [];
@@ -71,6 +73,8 @@ class casaController extends Controller
                         "area_terreno","plantas","garage","habitaciones","banos","bano_social","cuartoDomestica","piscina",
                         "destacado","disponibilidad","ano_construccion","aires_acondicionado",
                         "abanicos_techo","descripcion","id_subtipo"]);
+
+        $creationData['id_tipo'] = subtipo::find($request->id_subtipo)->id_tipo;
         $creationData['piscina'] = $request->input('piscina')?1:0;
         $creationData['bano_social'] = $request->input('bano_social')?1:0;
         $creationData['cuartoDomestica'] = $request->input('cuartoDomestica')?1:0;
@@ -124,6 +128,7 @@ class casaController extends Controller
     {
         $casa = casa::find($id);
         $updateData = $request->all();
+        $updateData['id_tipo'] = subtipo::find($request->id_subtipo)->id_tipo;
         $updateData['piscina'] = $request->input('piscina')?1:0;
         $updateData['bano_social'] = $request->input('bano_social')?1:0;
         $updateData['cuartoDomestica'] = $request->input('cuartoDomestica')?1:0;
@@ -153,7 +158,7 @@ class casaController extends Controller
         try {
             casa::find($id);
             $this->borrar_fotos($id);
-            $this->borrar_valores($id);
+           // $this->borrar_valores($id);
             /*$this->borrar_favoritos($id);*/
             casa::destroy($id);
        } catch(\Exception $e) {
@@ -181,7 +186,7 @@ class casaController extends Controller
             if (!is_null($fotos->foto_thumb)) {
                 Storage::delete('propiedades/'.$fotos->foto_thumb);
             }
-            DB::delete('delete from fotos_casas where id_casa = ?',[$id]);
+           // DB::delete('delete from fotos_casas where id_casa = ?',[$id]);
         } 
     }
 

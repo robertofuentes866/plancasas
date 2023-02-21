@@ -8,11 +8,8 @@
     @php($swal = 1)
 @endif
 
-@if (is_null($lastQuery))
-    return redirect('menuIndex')
-@endif
 
-@if ((count($lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
+@if ((count((array)$lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
  <div id="top_resultados" class="col-lg-8 col-12">
         <div id="title_page_left_container" class="row">
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
@@ -32,7 +29,7 @@
                     <section class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>{{$titulo_thumbnail_lastQuery}}</strong></p>
-                            <p class="subtitle_page_left"><small>{Clique las fotos para ampliarlas}</small></p>
+                            <p class="subtitle_page_left"><small>{Clique sobre las fotos}</small></p>
                             <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
                             <div class="card-body bg-body">
@@ -48,7 +45,7 @@
                     <section class="card text-black bg-dark mb-3 mt-2 mx-auto">
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>Mis Favoritos</strong></p>
-                            <p class="subtitle_page_left"><small>{Clique las fotos para ampliarlas}</small></p>
+                            <p class="subtitle_page_left"><small>{Clique sobre las fotos}</small></p>
                             <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
                             <div class="card-body bg-light">
@@ -63,18 +60,8 @@
                             <section class="card">
                                 <div class="card-body">
                                    <!-- inicio del carrousel para fotos normales -->
-                                   <div id="carouselFotosNormales" class="carousel" data-bs-ride="carousel">
-                                       <div class="carousel-indicators"> 
+                                   <div id="carouselFotosNormales" class="carousel carousel-fade slide" data-interval="false" data-ride="carousel">
                                             
-                                            @for($i=0;$i<$imagenes_casas->count();$i++)
-                                                @if ($i==0)
-                                                    <button id="carouselFotosNormales{{$imagenes_casas[$i]->id_casa}}" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide-to="{{$i}}" class="active" aria-current="true" aria-label="Slide {{$i}}"></button>
-                                                @else
-                                                    <button id="carouselFotosNormales{{$imagenes_casas[$i]->id_casa}}" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide-to="{{$i}}" aria-label="Slide {{$i}}"></button>
-                                                @endif
-                                            @endfor
-                                            
-                                       </div> 
                                         <div class="carousel-inner">
                                             @php($primerItem = true)
                                             @php($imagenes_casas_array = $carrusel=='carousel1' || ($carrusel=='carousel2' && $gestion==2)?$imagenes_casas:$favoritos_casas)
@@ -83,29 +70,34 @@
                                                @if($gestion!=2)
                                                     @if ($imagen_casa->id_casa == $id_propiedad)
                                                     <div class="carousel-item active">
+                                                
                                                     @else
                                                     <div class="carousel-item"> 
+                                                   
                                                     @endif
                                                 @else
                                                     @if ($primerItem)
                                                         <div class="carousel-item active">
+                                                           
                                                         @php($primerItem = false)
                                                         @else
-                                                        <div class="carousel-item"> 
+                                                        <div class="carousel-item">
+                                                            
                                                         @endif
                                                     @endif
                                                 
                                                 <!-- inicio de la muestra de la foto normal sin carrousel -->
-                                                <span id=procedencia>{{$titulo_en_foto_normal}}</span>
-                                                <img src="{{asset('storage/propiedades/'. $imagen_casa->foto_normal)}}" class="card-img-top" alt="...">
-                                                <div id="procedencia{{$imagen_casa->id_casa}}"></div>
+                                                 
+                                                <span class=procedencia>{{$titulo_en_foto_normal}}</span>
+                                                <img src="{{asset(session('camino_mostrar').'/propiedades/'. $imagen_casa->foto_normal)}}" class="card-img-top" alt="...">
+                                               
                                                 
 
                                                 @if($gestion!=2) 
                                                     <h5 class="card-title">{{$imagen_casa->residencial.'-'.$imagen_casa->casaNumero}}</h5>
                                                     <p class="card-text"> {{$imagen_casa->descripcion}}</p>
                                                 
-                                                    <a class="btn btn-primary" href="{{route('menu.inicio',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Mas detalles...</a>
+                                                    <a class="btn btn-primary" href="{{route('menu.inicio',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Mas fotos de esta propiedad</a>
                                                 @else
                                                     <p class="card-title">
                                                        
@@ -129,14 +121,14 @@
                                             </div>  <!-- end div item carrousel -->
                                             @endforeach
                                     </div>  <!-- end div inner  carrousel  -->
-                                    <button class="carousel-control-prev flechas" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide="prev">
+                                    <a class="carousel-control-prev flechas" role="button" data-target="#carouselFotosNormales" data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next flechas" type="button" data-bs-target="#carouselFotosNormales" data-bs-slide="next">
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next flechas" role="button" data-target="#carouselFotosNormales" data-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                     </div> <!-- fin del carrousel fotos normales -->
                                     
                                 </div>  <!-- end div card body -->
@@ -258,7 +250,7 @@
                                         <tr>
                                         <td><u>Nombre:</u> {{ $imagenes_casas[0]->nombre_agente}}</td>
                                             <td>
-                                                <img src="{{asset('storage/agentes/'. $imagenes_casas[0]->foto_agente)}}">
+                                                <img src="{{asset(session('camino_mostrar').'/agentes/'. $imagenes_casas[0]->foto_agente)}}">
                                             </td>
                                             
                                         </tr>
@@ -268,7 +260,7 @@
                                             <!-- codigo para incorporar whatsapp -->
                                                 
                                                     <a class="cel_agentes" href="https://api.whatsapp.com/send/?phone={{$imagenes_casas[0]->cel1}}&text=En que te puedo ayudar?" target="_blank">
-                                                        <img src="{{asset('storage/imagenes_app/whatsapp-logo.png')}}" class="boton">{{': '.$imagenes_casas[0]->cel1}}
+                                                        <img src="{{asset(session('camino_mostrar').'/imagenes_app/whatsapp-logo.png')}}" class="boton">{{': '.$imagenes_casas[0]->cel1}}
                                                     </a>
                                             <!-- End whatsapp -->
                                             @endif
@@ -279,7 +271,7 @@
                                                @if(!empty($imagenes_casas[0]->cel2))
                                                 <!-- codigo para incorporar whatsapp -->
                                                         <a class="cel_agentes" href="https://api.whatsapp.com/send/?phone={{$imagenes_casas[0]->cel2}}&text=En que te puedo ayudar?" target="_blank">
-                                                            <img src="{{asset('storage/imagenes_app/whatsapp-logo.png')}}" class="boton">{{': '.$imagenes_casas[0]->cel2}}
+                                                            <img src="{{asset(session('camino_mostrar').'/imagenes_app/whatsapp-logo.png')}}" class="boton">{{': '.$imagenes_casas[0]->cel2}}
                                                         </a>
                                                 <!-- End whatsapp -->
                                                 @endif

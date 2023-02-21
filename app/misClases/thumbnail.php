@@ -44,7 +44,8 @@
         $this->original =$image;
         $this->originalWidth = $dimension[0];
         $this->originalHeight = $dimension[1];
-        $this->basename = !empty($nombre_final_archivo)?$nombre_final_archivo:pathinfo($image,PATHINFO_FILENAME);
+        $this->basename = !empty($nombre_final_archivo)?$nombre_final_archivo:($nombre_final_archivo==='0'?'0':pathinfo($image,PATHINFO_FILENAME));
+       
         $this->max = abs($max);
      }
 
@@ -57,6 +58,7 @@
         imagecopyresampled($thumb,$resource,0,0,0,0,$thumbWidth,$thumbHeight,
                                   $this->originalWidth,$this->originalHeight);
         $newname = $this->basename;
+        
         switch ($this->imageType){
             case 'jpeg':
                 $newname .= '.jpg';
