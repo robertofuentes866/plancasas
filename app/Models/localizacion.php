@@ -18,7 +18,8 @@ class localizacion extends Model
 
     public static function validar($request) {
         $request->validate(['residencial'=>'required|max:35',
-                             'id_ciudad'=>'required']);
+                             'id_ciudad'=>'required',
+                              'descripcion'=>'required']);
     }
 
 

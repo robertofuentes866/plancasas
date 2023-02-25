@@ -90,18 +90,18 @@
                                                  
                                                 <span class=procedencia>{{$titulo_en_foto_normal}}</span>
                                                 <img src="{{asset(session('camino_mostrar').'/propiedades/'. $imagen_casa->foto_normal)}}" class="card-img-top" alt="...">
-                                               
                                                 
-
                                                 @if($gestion!=2) 
                                                     <h5 class="card-title">{{$imagen_casa->residencial.'-'.$imagen_casa->casaNumero}}</h5>
-                                                    <p class="card-text"> {{$imagen_casa->descripcion}}</p>
                                                 
                                                     <a class="btn btn-primary" href="{{route('menu.inicio',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Mas fotos de esta propiedad</a>
+                                                    <a class="btn btn-primary mt-2" href="{{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}}" role="button">Conozca el residencial</a>
                                                 @else
                                                     <p class="card-title">
                                                        
                                                     <strong>{{$imagen_casa->leyenda. ' en '. $imagen_casa->casaNumero}}</strong> </p>
+                                                    
+                                                    <a class="btn btn-primary mb-2" href="{{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}}" role="button">Conozca el residencial</a>
                                                     @if(Auth::check())
                                                         <span class="d-block p-1 bg-primary text-white rounded-start">
                                                             <p><button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip"
@@ -150,7 +150,7 @@
                             @endif  -->
 
                         <!-- Características de la casa -->
-
+                       
                         @if($gestion == 2 && $imagenes_casas->count())  
                             <section class="card mt-3 mb-3">
                                 <div class="card-header">

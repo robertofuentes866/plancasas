@@ -24,6 +24,13 @@ use App\Mail\infoPropiedad;
 |
 */
 
+/*Route::get('/linkstorage', function () {
+   symlink("/home/izukatkgjhzn/realtor_web/storage/app/public", "/home/izukatkgjhzn/public_html/public/storage");
+});*/
+
+Route::get('/phpinfo',function(){
+   return phpinfo();
+});
 
 Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
    try {   
@@ -35,31 +42,14 @@ Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
    }
 })->name('infoPropiedad'); 
 
-/*use PHPMailer\PHPMailer\PHPMailer;
-Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
-  
-   //require 'vendor/autoload.php';
-   $mail = new PHPMailer();
-   $mail->isSMTP();
-   $mail->SMTPDebug = 2;
-   $mail->Host = 'visualhome.net'; //4env('MAIL_HOST');
-   $mail->Port = 587; //env('MAIL_PORT');
-   $mail->SMTPAuth = true;
-   $mail->Username = 'ventas@visualhome.net'; // env('MAIL_USERNAME');
-   $mail->Password = 'nicAhome2'; //env('MAIL_PASSWORD');
-   
-   $mail->setFrom($_GET['from'], 'Cliente');
-   $mail->addAddress($to, 'nose');
-   $mail->Subject = 'Solicitud de Informacion';
-   $mail->Body = $_GET['emailBody'];
-   if (!$mail->send()) {
-       return 'Mailer Error: ' . $mail->ErrorInfo;
-   } else {
-       return redirect()->back();
-   }
-})->name('infoPropiedad'); */
-
 Route::get('/menu.inicio/{gestion?}/{id_propiedad?}/{busqueda?}','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
+
+Route::get('/residencial/{descripcion}/{id_casa}/{residencial}',
+           function($descripcion,$id_casa,$residencial){ 
+            return view('layouts.residenciales',['descripcion'=>$descripcion,'id_casa'=>$id_casa,'residencial'=>$residencial]);
+         })->name('residencial');
+
+Route::get('/textos_informacion/{texto}','App\Http\Controllers\textos_informacionController@show')->name('textos_informacion');
 
 Route::get('/','App\Http\Controllers\menuController@indexacion')->name('menuIndex');
 

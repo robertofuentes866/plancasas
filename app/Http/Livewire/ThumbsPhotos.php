@@ -166,7 +166,7 @@ class ThumbsPhotos extends Component
         if (!$this->contador && ($imagenes_casas->count() || $favoritos_casas->count())) {
             // Entra aqui para mostrar la foto tamaño normal inicial y sus leyendas.
             $this->contador++;
- 
+            session(['idCasa'=>$imagenes_casas[0]->id_casa??$favoritos_casas[0]->id_casa]);
             $this->foto_normal = $imagenes_casas[0]->foto_normal??$favoritos_casas[0]->foto_normal??'';
             $this->descripcion = $imagenes_casas[0]->descripcion??$favoritos_casas[0]->descripcion??'';
             $this->residencial = $imagenes_casas[0]->residencial??$favoritos_casas[0]->residencial??'';
@@ -192,7 +192,7 @@ class ThumbsPhotos extends Component
                                     ->where([['casas.destacado','=',1],['casas.disponibilidad','=',1],
                                                 ['fotos_casas.es_principal','=',1]])
                                     ->select(DB::raw("CONCAT(localizaciones.residencial,' - ',casas.casaNumero) as leyenda"),'fotos_casas.foto_thumb',
-                                                'fotos_casas.foto_normal','fotos_casas.id_foto','localizaciones.descripcion',
+                                                'fotos_casas.foto_normal','fotos_casas.id_foto','localizaciones.descripcion as localizacion_descripcion',
                                                 'casas.id_casa','casas.casaNumero','localizaciones.residencial',
                                                 DB::raw("'Destacados' as titulo" ))->get();
                                            
@@ -218,10 +218,10 @@ class ThumbsPhotos extends Component
                     ['casas.disponibilidad','=',1],
                     ['precios_casas.disponibilidad','=',1]])
                 ->select(DB::raw("CONCAT(localizaciones.residencial,' - ',casas.casaNumero) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
-                        'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
+                        'fotos_casas.foto_normal','localizaciones.descripcion as localizacion_descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
-
+                
                 $this->actualizarLastQuery($this->lastQuery,session()->getId());
                 $this->titulo_thumbnail_lastQuery = "Resultado de Busqueda";
                 session(['ultimoQuery'=>'Activo']);
@@ -231,7 +231,7 @@ class ThumbsPhotos extends Component
            case 2:   // detalles de la propiedad.
               
                $this->titulo_thumbnail_lastQuery = (empty(session('ultimoQuery')))?'Propiedades Destacadas':'Resultado de busqueda';
-               $lixo = DB::table('casas')
+               $respuesta = DB::table('casas')
                       ->join('subtipos','subtipos.id_subtipo','=','casas.id_subtipo')
                       ->join('fotos_casas','fotos_casas.id_casa','=','casas.id_casa')
                       ->join('precios_casas','precios_casas.id_casa','=','casas.id_casa')
@@ -243,7 +243,7 @@ class ThumbsPhotos extends Component
                       ->where([['casas.id_casa','=',$this->id_propiedad],
                                ['precios_casas.disponibilidad','=',1],
                                ['casas.disponibilidad','=',1]])
-                      ->select('casas.casaNumero','localizaciones.residencial','localizaciones.descripcion','fotos_casas.foto_thumb',
+                      ->select('casas.casaNumero','localizaciones.residencial','localizaciones.descripcion as localizacion_descripcion','fotos_casas.foto_thumb',
                                 'fotos_casas.foto_normal','casas.id_casa','fotos_casas.id_foto','fotos_casas.leyenda',
                                'casas.area_construccion','casas.area_terreno','casas.ano_construccion',
                                'casas.plantas','casas.garage','casas.habitaciones','casas.banos',
@@ -254,8 +254,8 @@ class ThumbsPhotos extends Component
                                 'agentes.cel1','agentes.cel2','agentes.email','agentes.foto_agente',
                                 'casas.aires_acondicionado','casas.abanicos_techo','casas.agua_caliente','casas.tanque_agua',
                                 'casas.sistema_seguridad','casas.descripcion','subtipos.subtipo',DB::raw("'Ambientes' as titulo" ))->get();
-                               
-                return $lixo;
+                        
+                return $respuesta;
                 break;
 
             case 3: // llamado del formulario detallado.
@@ -287,7 +287,7 @@ class ThumbsPhotos extends Component
                     ['casas.id_subtipo','=',$this->id_tipo],
                     ['precios_casas.disponibilidad','=',1]])
                 ->select(DB::raw("CONCAT(localizaciones.residencial,' - ',casas.casaNumero) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
-                        'fotos_casas.foto_normal','localizaciones.descripcion','casas.id_casa','fotos_casas.id_foto',
+                        'fotos_casas.foto_normal','localizaciones.descripcion as localizacion_descripcion','casas.id_casa','fotos_casas.id_foto',
                         DB::raw("'Resultado de busqueda' as titulo" ))
                 ->groupBy('casas.casaNumero')->get();
                 session(['ultimoQuery'=>'Activo']);
@@ -300,7 +300,7 @@ class ThumbsPhotos extends Component
     }
 
     public function selectNormalImagen($foto,$descrip,$residencial,$casaNumero,$id,$leyenda,$ttl,$carrusel) {
-        
+        session(['idCasa'=>$id]);
         $this->id_propiedad = $id;
         $this->foto_normal = $foto;
         $this->descripcion = $descrip;
@@ -362,7 +362,7 @@ class ThumbsPhotos extends Component
                          ['casas.disponibilidad','=',1],
                          ['favoritos_casas.id_usuario','=',$this->id_usuario]])
                 ->select(DB::raw("CONCAT(casas.casaNumero,' - ',localizaciones.residencial) as leyenda"),'fotos_casas.foto_thumb',
-                            'fotos_casas.foto_normal','fotos_casas.id_foto','localizaciones.descripcion',
+                            'fotos_casas.foto_normal','fotos_casas.id_foto','localizaciones.descripcion as localizacion_descripcion',
                             'casas.id_casa','casas.casaNumero','localizaciones.residencial',
                           DB::raw("'Favoritos' as titulo" ))->get();
     }

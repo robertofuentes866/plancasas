@@ -62,7 +62,7 @@
         <header id="encabezado" class="col-12 bg-dark text-white">
             <p class="placeholder-wave" id="headerP">VISUAL HOME <br> REAL ESTATE NICARAGUA </p>
             <p class="placeholder-wave"><small id="smallHeader">Te ofrecemos un lugar Accesible, Cómodo y Seguro para vivir en familia.</small> </p>
-
+            
         </header>
     </div>
 </div>
@@ -91,6 +91,17 @@
                     </form>
                     </li>
                     @endguest
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mas...
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Lo que te ofrecemos</a>
+                        <a class="dropdown-item" href="#">Sobre Nosotros</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{route('textos_informacion',['consejos_adquirir_casa.txt'])}}">Consejos para comprar casa</a>
+                        </div>
+                    </li>
                 </ul>
         </div>
         
@@ -115,6 +126,8 @@
     <div class="row my-2">
         <div class="col-12 bg-primary text-center">
             Copyright - <b>Managua</b> - <b>Nicaragua</b>
+            <a class="mx-3" href="http://instagram.com/visualhomenicaragua" target="_blank" ><img width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_instagram.png')}}" ></a>
+            <a class="mx-3" href="https://www.facebook.com/people/Visual-Home-Real-Estate-Nicaragua/100068429333347/" target="_blank" ><img width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_facebook.png')}}" ></a>
         </div>
     </div>
 </foot>
