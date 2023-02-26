@@ -10,8 +10,8 @@
             <strong>Informacion </strong>
         </div>
         <div class="card-body">
-        <p>{{$texto}}</p>
-       
+        <p><?php echo nl2br($texto)?></p>
+         
         <a class="btn btn-primary mt-3" href="{{route('menu.inicio',[2,session('idCasa')])}}" role="button">Retorna a la pagina anterior</a>
         </div>
     </div>

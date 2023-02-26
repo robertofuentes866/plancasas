@@ -28,9 +28,6 @@ use App\Mail\infoPropiedad;
    symlink("/home/izukatkgjhzn/realtor_web/storage/app/public", "/home/izukatkgjhzn/public_html/public/storage");
 });*/
 
-Route::get('/phpinfo',function(){
-   return phpinfo();
-});
 
 Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
    try {   

@@ -86,11 +86,6 @@ legend {
     height:40%;
 }
 
-.tabla_de_formulario_columna {
-   /* padding-left: 20px; */
-  
-}
-
 .tabla_de_formulario .tabla_de_formulario_columna_check {  
     margin-left: 5px;
     padding-bottom: 25px;
@@ -164,4 +159,8 @@ legend {
  #thumbnails_table {
     border-collapse: separate;
 
+ }
+
+ .navbar li:active {
+    color:#fff;
  }

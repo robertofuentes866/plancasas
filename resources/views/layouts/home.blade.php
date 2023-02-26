@@ -66,48 +66,58 @@
         </header>
     </div>
 </div>
-<nav class="container">
-    <div class="row my-2 ">
-        <div class="col-12 nav-justified">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                            
-                            <a class = "@yield('nav_link_inicio')" href="{{Route('menu.inicio')}}">INICIO</a>
-                           
-                    </li>
-                @guest
-                    <li class="nav-item">
-                            <a class = "@yield('nav_link_registrar')" href="{{Route('register')}}">CREA UNA CUENTA</a>
-                    </li>
-                    <li class="nav-item">
-                            <a class = "@yield('nav_link_entrar')" href="{{Route('login')}}">TIENES CUENTA AQUI?</a>
-                    </li>
-                    @else
-                    <li class="nav-item">
+<!-- MENU PRINCIPAL -->
+<div class="container">
+    <div class="row">
+<nav class="col-12 navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img src="{{asset(session('camino_mostrar').'/imagenes_app/logo_visual_home.jpg')}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      Visual Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item mx-4">
+        <a class = "@yield('nav_link_inicio')" href="{{Route('menu.inicio')}}">INICIO</a>
+        </li>
+        @guest
+        <li class="nav-item mx-4">
+        <a class = "@yield('nav_link_registrar')" href="{{Route('register')}}">CREA UNA CUENTA</a>
+        </li>
+        <li class="nav-item mx-4">
+        <a class = "@yield('nav_link_entrar')" href="{{Route('login')}}">TIENES CUENTA AQUI?</a>
+        </li>
+        @else
+        <li class="nav-item mx-4">
                     <form id="logout" action="{{ route('logout') }}" method="POST">
                             <a role="button" class="nav-link"
                             onclick="document.getElementById('logout').submit();"><strong>{{Auth::user()->name}} {Salir}</strong></a>
                             @csrf
                     </form>
-                    </li>
-                    @endguest
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Mas...
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Lo que te ofrecemos</a>
-                        <a class="dropdown-item" href="#">Sobre Nosotros</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{route('textos_informacion',['consejos_adquirir_casa.txt'])}}">Consejos para comprar casa</a>
-                        </div>
-                    </li>
-                </ul>
-        </div>
-        
-    </div>
-</nav>
+        </li>
+        @endguest
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Consejos y mas...
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Lo que te ofrecemos</a></li>
+            <li><a class="dropdown-item" href="#">Sobre nosotros</a></li>
 
+            <li class="dropdown-divider"></li><li>
+                        <a class="dropdown-item" href="{{route('textos_informacion',['consejos_adquirir_casa.txt'])}}">Consejos para comprar casa</a>
+                        </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</div>
+</div>
+
+<!-- Fin Menu Principal -->
 
 <main class="container">
     <div class="row">
