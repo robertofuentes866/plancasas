@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="description" content="Visual Home Nicaragua es una herramienta de busqueda de casas y terrenos en venta o 
+alquiler del sector inmobiliario de Nicaragua.">
+<meta name="keywords" content="venta renta alquiler casa sierras doradas ganga carretera a masaya terrenos casas bajo precio bonita linda casa vivienda hogar">
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -71,7 +74,7 @@
     <div class="row">
 <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="{{asset(session('camino_mostrar').'/imagenes_app/logo_visual_home.jpg')}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+    <a class="navbar-brand" href="#"><img src="{{asset(session('camino_mostrar').'/imagenes_app/logo_visual_home.jpg')}}" alt="" width="30" height="24" class="d-inline-block align-text-top rounded">
       Visual Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -102,8 +105,8 @@
             Consejos y mas...
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Lo que te ofrecemos</a></li>
-            <li><a class="dropdown-item" href="#">Sobre nosotros</a></li>
+            <li><a class="dropdown-item" href="{{route('textos_informacion',['lo que somos.txt'])}}">Sobre nosotros</a></li>
+            <li><a class="dropdown-item" href="{{route('textos_informacion',['lo que te ofrecemos.txt'])}}">Lo que te ofrecemos</a></li>
 
             <li class="dropdown-divider"></li><li>
                         <a class="dropdown-item" href="{{route('textos_informacion',['consejos_adquirir_casa.txt'])}}">Consejos para comprar casa</a>
