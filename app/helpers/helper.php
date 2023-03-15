@@ -70,7 +70,6 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                     $permiteAbrirGrupoCarrusel=false;
                    
                     echo "<a href=\"#top_detalles\"><figure wire:click=\"selectNormalImagen($comillas$imagen_casa->foto_normal$comillas,
-                            $comillas$imagen_casa->localizacion_descripcion$comillas,
                             $comillas$imagen_casa->residencial$comillas,
                             $comillas$imagen_casa->casaNumero$comillas,
                             $comillas$imagen_casa->id_casa$comillas,

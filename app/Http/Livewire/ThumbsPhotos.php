@@ -299,11 +299,11 @@ class ThumbsPhotos extends Component
         }
     }
 
-    public function selectNormalImagen($foto,$descrip,$residencial,$casaNumero,$id,$leyenda,$ttl,$carrusel) {
+    public function selectNormalImagen($foto,$residencial,$casaNumero,$id,$leyenda,$ttl,$carrusel) {
         session(['idCasa'=>$id]);
         $this->id_propiedad = $id;
         $this->foto_normal = $foto;
-        $this->descripcion = $descrip;
+        //$this->descripcion = $descrip;
         $this->residencial = $residencial;
         $this->casaNumero = $casaNumero;
         $this->leyenda = $leyenda;
