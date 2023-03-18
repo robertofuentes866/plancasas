@@ -12,7 +12,7 @@
         <div class="card-body">
         <p><?php echo nl2br($texto)?></p>
          
-        <a class="btn btn-primary mt-3" href="{{route('menu.inicio',[2,session('idCasa')])}}" role="button">Retorna a la pagina anterior</a>
+        <a class="btn btn-primary mt-3" href="{{route('casas-venta-renta',[2,session('idCasa')])}}" role="button">Retorna a la pagina anterior</a>
         </div>
     </div>
 </div>

@@ -12,7 +12,7 @@
             <strong>Buscar por Residencial/Condominio </strong>
         </div>
     <div class="card-body">
-    <form method="get" action="{{route('menu.inicio',['gestion'=>1])}}">
+    <form method="get" action="{{route('casas-venta-renta',['gestion'=>1])}}">
             @csrf
            
             @livewire('select-component',['viewData'=>$viewData])
@@ -31,7 +31,7 @@
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
     <div class="card-header" style="text-align:center"><strong>Buscar con mas detalles </strong></div>
     <div class="card-body bg-danger">
-    <form method="get" action="{{route('menu.inicio',['gestion'=>3])}}">
+    <form method="get" action="{{route('casas-venta-renta',['gestion'=>3])}}">
             @csrf
         <fieldset>
             <legend>Seleccione</legend>  
@@ -193,6 +193,7 @@
                                 'localizacion'=>$_GET['id_localizacion']??0,'titulo'=>'Resultado de busqueda','tipo'=>$_GET['id_tipo']])  <!-- muestra resultado del formulario en la pagina principal.  -->
         @break
   @case (2)
+  
     @livewire('thumbs-photos',['gestion'=>2,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
         @break
 

@@ -12,7 +12,7 @@
         <div class="card-body">
         <p>{{$descripcion}}</p>
         
-        <a class="btn btn-primary mt-3" href="{{route('menu.inicio',[2,$id_casa])}}" role="button">Retornar a la pagina anterior</a>
+        <a class="btn btn-primary mt-3" href="{{route('casas-venta-renta',[2,$id_casa])}}" role="button">Retornar a la pagina anterior</a>
         </div>
     </div>
 </div>

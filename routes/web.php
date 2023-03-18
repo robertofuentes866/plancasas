@@ -39,7 +39,7 @@ Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
    }
 })->name('infoPropiedad'); 
 
-Route::get('/menu.inicio/{gestion?}/{id_propiedad?}/{busqueda?}','App\Http\Controllers\menuController@inicio')->name('menu.inicio');
+Route::get('/casas-venta-renta/{gestion?}/{id_propiedad?}/{busqueda?}','App\Http\Controllers\menuController@inicio')->name('casas-venta-renta');
 
 Route::get('/residencial/{descripcion}/{id_casa}/{residencial}',
            function($descripcion,$id_casa,$residencial){ 

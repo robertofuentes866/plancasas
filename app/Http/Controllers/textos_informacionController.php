@@ -46,8 +46,12 @@ class textos_informacionController extends Controller
      */
     public function show($texto)
     {
-        
-       $camino = session('camino_mostrar').'/textos/'.$texto;
+       if (!is_null(session('camino_mostrar'))) {
+          $camino = session('camino_mostrar').'/textos/'.$texto;
+       } else {
+        $camino = 'storage/textos/'.$texto;
+       }
+
        $txt = file_get_contents($camino);
        return view('layouts.textos_informacion')->with('texto',$txt);
         

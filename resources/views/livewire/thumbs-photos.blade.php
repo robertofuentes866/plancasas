@@ -8,8 +8,7 @@
     @php($swal = 1)
 @endif
 
-
-@if ((count((array)$lastQuery) or $favoritos_casas->count()) && !isset($swal)  )
+@if (!isset($swal)  )
  <div id="top_resultados" class="col-lg-8 col-12">
         <div id="title_page_left_container" class="row">
             <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
@@ -33,7 +32,9 @@
                             <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
                             <div class="card-body bg-body">
+                                @if (count((array)$lastQuery))
                                     @php(agregarThumbsToCarrousel($lastQuery,$titulo_thumbnail_lastQuery,"carousel1"))
+                                @endif
                             </div> <!-- End Card Body -->
 
                     </section> <!-- End Card text-black de Destacados,Resulta de busqueda o Ambientes thumbnails-->
@@ -49,7 +50,11 @@
                             <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
                         </div>
                             <div class="card-body bg-light">
-                                @php(agregarThumbsToCarrousel($favoritos_casas,"Mis Favoritos",'carousel2'))
+                            @if (count((array)$lastQuery))
+                               @if ($favoritos_casas->count())
+                                  @php(agregarThumbsToCarrousel($favoritos_casas,"Mis Favoritos",'carousel2'))
+                                @endif
+                            @endif
                             </div>  
                     </section>
                      
@@ -94,7 +99,7 @@
                                                 @if($gestion!=2) 
                                                     <h5 class="card-title">{{$imagen_casa->residencial.'-'.$imagen_casa->casaNumero}}</h5>
                                                 
-                                                    <a class="btn btn-primary" href="{{route('menu.inicio',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Mas fotos y precio de esta propiedad</a>
+                                                    <a class="btn btn-primary" href="{{route('casas-venta-renta',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Mas fotos y precio de esta propiedad</a>
                                                     <a class="btn btn-primary mt-2" href="{{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}}" role="button">Conozca el residencial</a>
                                                 @else
                                                     <p class="card-title">

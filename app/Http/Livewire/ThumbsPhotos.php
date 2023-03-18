@@ -43,7 +43,6 @@ class ThumbsPhotos extends Component
 
 
     public function mount(...$argumentos){
-       
        switch ($argumentos[0]) {
          case 0: // propiedades destacadas
             
@@ -155,12 +154,11 @@ class ThumbsPhotos extends Component
 
 
     public function render() {
-
+        
         $this->id_usuario = Auth::check()?Auth::id():-1;
         $imagenes_casas = $this->get_casas();
 
         $this->lastQuery = $this->selectLastQuery(session()->getId());
-        
         $favoritos_casas = $this->get_favoritos_casas();
         
         if (!$this->contador && ($imagenes_casas->count() || $favoritos_casas->count())) {
@@ -254,7 +252,7 @@ class ThumbsPhotos extends Component
                                 'agentes.cel1','agentes.cel2','agentes.email','agentes.foto_agente',
                                 'casas.aires_acondicionado','casas.abanicos_techo','casas.agua_caliente','casas.tanque_agua',
                                 'casas.sistema_seguridad','casas.descripcion','subtipos.subtipo',DB::raw("'Ambientes' as titulo" ))->get();
-                        
+                                
                 return $respuesta;
                 break;
 

@@ -5,6 +5,7 @@
 alquiler del sector inmobiliario de Nicaragua.">
 <meta name="keywords" content="venta renta alquiler casa sierras doradas ganga carretera a masaya terrenos casas bajo precio bonita linda casa vivienda hogar">
 
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -82,7 +83,7 @@ alquiler del sector inmobiliario de Nicaragua.">
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item mx-4">
-        <a class = "@yield('nav_link_inicio')" href="{{Route('menu.inicio')}}">INICIO</a>
+        <a class = "@yield('nav_link_inicio')" href="{{Route('casas-venta-renta')}}">INICIO</a>
         </li>
         @guest
         <li class="nav-item mx-4">
