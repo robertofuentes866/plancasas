@@ -20,22 +20,22 @@
 <div class="col-lg-8 col-12 bg-secondary">
     
     <figure class="figure">
-        <img width="300" src="{{asset(session('camino_mostrar').'/residenciales/'.strtolower($residencial).'1.jpg')}}" class="img-thumbnail" alt="">
+        <img width="300" src="{{asset(session('camino_mostrar').'/residenciales/'.strtolower($residencial).'1.jpg')}}" class="img-thumbnail" alt="casa venta renta carretera a masaya managua">
         
     </figure>
 
     <figure class="figure">
-        <img width="300" src="{{asset(session('camino_mostrar').'/residenciales/'.strtolower($residencial).'2.jpg')}}" class="img-thumbnail" alt="">
+        <img width="300" src="{{asset(session('camino_mostrar').'/residenciales/'.strtolower($residencial).'2.jpg')}}" class="img-thumbnail" alt="casa venta alquiler carretera a masaya managua">
         
     </figure>
 
     <figure class="figure">
-        <img width="300" src="{{asset(session('camino_mostrar').'/residenciales/'.strtolower($residencial).'3.jpg')}}" class="img-thumbnail" alt="">
+        <img width="300" src="{{asset(session('camino_mostrar').'/residenciales/'.strtolower($residencial).'3.jpg')}}" class="img-thumbnail" alt="casa venta renta carretera a masaya managua">
         
     </figure>
 
     <figure class="figure">
-        <img width="300" src="{{asset(session('camino_mostrar').'/residenciales/'.strtolower($residencial).'4.jpg')}}" class="img-thumbnail" alt="">
+        <img width="300" src="{{asset(session('camino_mostrar').'/residenciales/'.strtolower($residencial).'4.jpg')}}" class="img-thumbnail" alt="casa venta alquiler carretera a masaya managua">
         
     </figure>
     

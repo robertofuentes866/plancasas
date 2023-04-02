@@ -49,7 +49,7 @@ class textos_informacionController extends Controller
        if (!is_null(session('camino_mostrar'))) {
           $camino = session('camino_mostrar').'/textos/'.$texto;
        } else {
-        $camino = 'storage/textos/'.$texto;
+        $camino = 'public/storage/textos/'.$texto;
        }
 
        $txt = file_get_contents($camino);

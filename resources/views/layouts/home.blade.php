@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="description" content="Visual Home Nicaragua es una herramienta de busqueda de casas y terrenos en venta o 
-alquiler del sector inmobiliario de Nicaragua.">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6XGEZPNVG8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6XGEZPNVG8');
+</script>
+<meta name="description" content="Visual Home Nicaragua es un sitio web que ofrece casas y terrenos en venta o 
+alquiler en el sector de Managua y Carretera a Masaya.">
 <meta name="keywords" content="venta renta alquiler casa sierras doradas ganga carretera a masaya terrenos casas bajo precio bonita linda casa vivienda hogar">
 
 
@@ -141,7 +150,7 @@ alquiler del sector inmobiliario de Nicaragua.">
         <div class="col-12 bg-primary text-center">
             Copyright - <b>Managua</b> - <b>Nicaragua</b>
             <a class="mx-3" href="http://instagram.com/visualhomenicaragua" target="_blank" ><img width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_instagram.png')}}" ></a>
-            <a class="mx-3" href="https://www.facebook.com/people/Visual-Home-Real-Estate-Nicaragua/100068429333347/" target="_blank" ><img width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_facebook.png')}}" ></a>
+            <a class="mx-3" href="https://facebook.com/visualhomenicaragua" target="_blank" ><img width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_facebook.png')}}" ></a>
         </div>
     </div>
 </foot>

@@ -11,7 +11,7 @@
 @if (!isset($swal)  )
  <div id="top_resultados" class="col-lg-8 col-12">
         <div id="title_page_left_container" class="row">
-            <p id="title_page_left"><strong> {{$titulo}}</strong> </p>
+        <header><h6><p id="title_page_left"><strong> {{$titulo}}</strong></p></h6></header>
             <p style="color:gold;text-align:center">
                 @if(!empty($arrayOpcionesForm))
                    {{$arrayOpcionesForm}}
@@ -94,7 +94,7 @@
                                                 <!-- inicio de la muestra de la foto normal sin carrousel -->
                                                  
                                                 <span class=procedencia>{{$titulo_en_foto_normal}}</span>
-                                                <img src="{{asset(session('camino_mostrar').'/propiedades/'. $imagen_casa->foto_normal)}}" class="card-img-top" alt="...">
+                                                <img src="{{asset(session('camino_mostrar').'/propiedades/'. $imagen_casa->foto_normal)}}" class="card-img-top" alt="{{'casa venta renta en '. $imagen_casa->residencial}}">
                                                 
                                                 @if($gestion!=2) 
                                                     <h5 class="card-title">{{$imagen_casa->residencial.'-'.$imagen_casa->casaNumero}}</h5>
@@ -159,7 +159,7 @@
                         @if($gestion == 2 && $imagenes_casas->count())  
                             <section class="card mt-3 mb-3">
                                 <div class="card-header">
-                                    Características de la propiedad: <strong>Tipo: {{ $imagenes_casas[0]->subtipo}}</strong>
+                                    <header><h6>Características de la propiedad: <strong>Tipo: {{ $imagenes_casas[0]->subtipo}}</strong></h6></header>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered table-striped table-primary">
@@ -212,7 +212,7 @@
                         
                             <section class="card mt-3 mb-3">
                                 <div class="card-header">
-                                    <strong>Precios de la propiedad</strong>
+                                    <header><h6><strong>Precios de la propiedad</strong></h6></header>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered table-striped">
@@ -248,7 +248,7 @@
 
                             <section class="card mt-3 mb-3">
                                 <div class="card-header">
-                                    <strong>Agente Inmobiliario</strong>
+                                    <header><h6><strong>Agente Inmobiliario</strong></h6></header>
                                 </div>
                                 <div class="card-body table-responsive">
                                     <table class="table-striped table table-dark">

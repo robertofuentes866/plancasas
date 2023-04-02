@@ -1,12 +1,14 @@
-https://www.visualhome.net/menu.inicio
-https://www.visualhome.net/menu.inicio/2/12
-https://www.visualhome.net/menu.inicio/2/11
-visualhome.net/textos_informacion/lo que somos.txt
-visualhome.net/textos_informacion/lo que te ofrecemos.txt
-visualhome.net/textos_informacion/consejos_adquirir_casa.txt
-https://www.visualhome.net/register
-https://www.visualhome.net/login
-
+https://visualhome.net/casas-venta-renta
+https://visualhome.net/casas-venta-renta/2/12
+https://visualhome.net/casas-venta-renta/2/11
+https://visualhome.net/casas-venta-renta/2/13
+https://visualhome.net/casas-venta-renta/2/14
+https://visualhome.net/casas-venta-renta/2/15
+https://visualhome.net/textos_informacion/lo que somos.txt
+https://visualhome.net/textos_informacion/lo que te ofrecemos.txt
+https://visualhome.net/textos_informacion/consejos_adquirir_casa.txt
+https://visualhome.net/register
+https://visualhome.net/login
 
 
 

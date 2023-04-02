@@ -9,7 +9,7 @@
 
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
         <div class="card-header" style="text-align:center">
-            <strong>Buscar por Residencial/Condominio </strong>
+            <header><h6><strong>Buscar casa venta-renta por Residencial </strong></h6></header>
         </div>
     <div class="card-body">
     <form method="get" action="{{route('casas-venta-renta',['gestion'=>1])}}">
@@ -29,7 +29,9 @@
 
     <!-- Formulario detallado -->
     <div class="card text-black bg-light mb-3 mt-2 mx-auto" style="max-width: 22rem;">
-    <div class="card-header" style="text-align:center"><strong>Buscar con mas detalles </strong></div>
+    <div class="card-header" style="text-align:center">
+       <header><h6><strong>Buscar casa venta-renta con mas detalles </strong></h6></header>
+    </div>
     <div class="card-body bg-danger">
     <form method="get" action="{{route('casas-venta-renta',['gestion'=>3])}}">
             @csrf
@@ -184,7 +186,7 @@
 @switch ($viewData['gestion']) 
  
   @case (0)    
-            @livewire('thumbs-photos',['gestion'=>0,'titulo'=>'Propiedades Destacadas'])  <!-- muestra fotos destacadas en la pagina principal  -->
+            @livewire('thumbs-photos',['gestion'=>0,'titulo'=>'Casas y Terrenos Destacados'])  <!-- muestra fotos destacadas en la pagina principal  -->
             @break
 
   @case (1)
@@ -194,7 +196,7 @@
         @break
   @case (2)
   
-    @livewire('thumbs-photos',['gestion'=>2,'titulo'=>'Detalle de la propiedad seleccionada','id_propiedad'=>$viewData['id_propiedad']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
+    @livewire('thumbs-photos',['gestion'=>2,'titulo'=>'Detalle de la casa o terreno seleccionado','id_propiedad'=>$viewData['id_propiedad']])  <!-- muestra la propiedad seleccionada en los thumbnails.  -->
         @break
 
  @case (3)
