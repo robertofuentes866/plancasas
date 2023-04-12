@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\ciudad;
 use App\Models\localizacion;
 use App\Models\ofrecimiento;
-use Illuminate\Support\Facades\DB;
 use App\Models\subtipo;
 
 class SelectComponent extends Component
@@ -21,11 +20,9 @@ class SelectComponent extends Component
     }
 
     private function viewData(){
-       
+    
        $this->viewData['ofrecimiento'] = ofrecimiento::all();
-       //$this->viewData['tipo'] = DB::table('subtipos')->join('tipos','tipos.id_tipo','=','subtipos.id_tipo')
-         //                                      ->select('subtipos.id_tipo','id_subtipo','subtipo')
-        //                                       ->get();  // usado para formulario.
+      
         $this->viewData['tipo'] = subtipo::all();
        
        $this->viewData['ciudades'] = ciudad::all();
@@ -34,7 +31,6 @@ class SelectComponent extends Component
     public function render()
     {
         $this->viewData();
-       
         return view('livewire.select-component');
     }
 }

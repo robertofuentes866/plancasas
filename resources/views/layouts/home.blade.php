@@ -11,8 +11,9 @@
   gtag('config', 'G-6XGEZPNVG8');
 </script>
 <meta name="description" content="Visual Home Nicaragua es un sitio web que ofrece casas y terrenos en venta o 
-alquiler en el sector de Managua y Carretera a Masaya.">
-<meta name="keywords" content="venta renta alquiler casa sierras doradas ganga carretera a masaya terrenos casas bajo precio bonita linda casa vivienda hogar">
+alquiler en el sector de Managua y carretera a Masaya.">
+<meta name="keywords" content="venta de casas, renta de casas, alquiler de casas, alquiler en sierras doradas, alquiler de casas carretera a masaya, casas en alquiler a bajo precio, venta de casas en managua,
+                               alquiler de casas en managua, busco alquiler de casas a bajo costo en managua, managua, nicaragua, casas en carretera a masaya, casas en managua, casas en jinotepe">
 
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -84,7 +85,7 @@ alquiler en el sector de Managua y Carretera a Masaya.">
     <div class="row">
 <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="{{asset(session('camino_mostrar').'/imagenes_app/logo_visual_home.jpg')}}" alt="" width="30" height="24" class="d-inline-block align-text-top rounded">
+    <a class="navbar-brand" href="#"><img src="{{asset(session('camino_mostrar').'/imagenes_app/logo_visual_home.jpg')}}" alt="ventas y alquileres de casas en Managua y Carretera a Masaya" width="30" height="24" class="d-inline-block align-text-top rounded">
       Visual Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -135,13 +136,12 @@ alquiler en el sector de Managua y Carretera a Masaya.">
 <main class="container">
     <div class="row">
         @yield('cuerpo')
-        
     </div>
 </main>
 <!-- codigo para incorporar whatsapp -->
 <div class="whatsapp">
    <a href="https://api.whatsapp.com/send/?phone=50589634969" target="_blank">
-    <img src="{{asset(session('camino_mostrar').'/imagenes_app/whatsapp-logo.png')}}" class="boton">
+    <img src="{{asset(session('camino_mostrar').'/imagenes_app/whatsapp-logo.png')}}" alt="Logo de whatsapp" class="boton">
    </a>
 </div>
 <!-- End whatsapp -->
@@ -149,8 +149,8 @@ alquiler en el sector de Managua y Carretera a Masaya.">
     <div class="row my-2">
         <div class="col-12 bg-primary text-center">
             Copyright - <b>Managua</b> - <b>Nicaragua</b>
-            <a class="mx-3" href="http://instagram.com/visualhomenicaragua" target="_blank" ><img width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_instagram.png')}}" ></a>
-            <a class="mx-3" href="https://facebook.com/visualhomenicaragua" target="_blank" ><img width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_facebook.png')}}" ></a>
+            <a class="mx-3" href="http://instagram.com/visualhomenicaragua" target="_blank" ><img alt="enlace con cuenta instagram visual home nicaragua" width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_instagram.png')}}" ></a>
+            <a class="mx-3" href="https://facebook.com/visualhomenicaragua" target="_blank" ><img alt="enlace con cuenta facebook visual home nicaragua" width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_facebook.png')}}" ></a>
         </div>
     </div>
 </foot>

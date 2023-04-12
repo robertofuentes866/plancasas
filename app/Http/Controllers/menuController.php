@@ -6,6 +6,7 @@ use App\Models\subtipo;
 use App\Models\ciudad;
 use App\Models\recurso;
 use App\Models\duracion;
+use App\Models\ofrecimiento;
 
 use Illuminate\Support\Facades\DB;
 
@@ -30,6 +31,9 @@ class menuController extends Controller
         $viewData['ciudades'] = ciudad::all();
         $viewData['recurso'] = recurso::all();   // usado para formulario.
         $viewData['duracion'] = duracion::all();  // usado para formulario.
+
+        $viewData['ofrecimiento'] = ofrecimiento::all();
+
         return view('layouts/mainContent')->with("viewData",$viewData);
     }
 
