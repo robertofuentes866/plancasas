@@ -10,6 +10,7 @@
 
   gtag('config', 'G-6XGEZPNVG8');
 </script>
+<meta name="google-site-verification" content="uavcS11j8HEaLvzS-5TUEVttlk3hZZBeyllOx3fR5CY">
 <meta name="description" content="Visual Home Nicaragua es un sitio web que ofrece casas y terrenos en venta o 
 alquiler en el sector de Managua y carretera a Masaya.">
 <meta name="keywords" content="venta de casas, renta de casas, alquiler de casas, alquiler en sierras doradas, alquiler de casas carretera a masaya, casas en alquiler a bajo precio, venta de casas en managua,
@@ -124,6 +125,15 @@ alquiler en el sector de Managua y carretera a Masaya.">
                         </li>
           </ul>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Hágalo usted mismo
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{{route('hagalo-usted-mismo',['manguera pantry.txt'])}}">Cambiar manguerita de lavamanos</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
@@ -146,13 +156,34 @@ alquiler en el sector de Managua y carretera a Masaya.">
 </div>
 <!-- End whatsapp -->
 <foot class="container">
-    <div class="row my-2">
-        <div class="col-12 bg-primary text-center">
-            Copyright - <b>Managua</b> - <b>Nicaragua</b>
-            <a class="mx-3" href="http://instagram.com/visualhomenicaragua" target="_blank" ><img alt="enlace con cuenta instagram visual home nicaragua" width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_instagram.png')}}" ></a>
-            <a class="mx-3" href="https://facebook.com/visualhomenicaragua" target="_blank" ><img alt="enlace con cuenta facebook visual home nicaragua" width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_facebook.png')}}" ></a>
-        </div>
+
+
+  <div class="row bg-dark pie">
+    <div class="col-lg-4 col-12">
+      <h4>Casas en Venta y Alquiler</h4>
+       <a href="https://visualhome.net/casas-venta-renta/2/11">Venta casa en Sierras Doradas - Carretera a Masaya </a><br>
+       <a href="https://visualhome.net/casas-venta-renta/2/12">Venta casa en Sierras Doradas - Carretera a Masaya </a><br>
+       <a href="https://visualhome.net/casas-venta-renta/2/13">Venta casa en Villa Arahal - Carretera a Masaya</a><br>
+       <a href="https://visualhome.net/casas-venta-renta/2/14">Venta o alquiler casa en Sierras Doradas - Carretera a Masaya</a><br>
+       <a href="https://visualhome.net/casas-venta-renta/2/15">Alquiler casa en Villa Arahal - Carretera a Masaya</a><br>
+       <a href="https://visualhome.net/casas-venta-renta/2/16">Alquiler casa en Palmetto - Carretera a Masaya</a><br>
+       <a href="https://visualhome.net/casas-venta-renta/2/18">Alquiler casa en Sierras Doradas - Carretera a Masaya</a><br>
     </div>
+
+    <div class="col-lg-4 col-12">
+    <h4>Textos Informativos</h4>
+    <a href="https://visualhome.net/textos_informacion/lo que somos.txt">Lo que somos</a><br>
+    <a href="https://visualhome.net/textos_informacion/lo que te ofrecemos.txt">Lo que te ofrecemos</a><br>
+    <a href="https://visualhome.net/textos_informacion/consejos_adquirir_casa.txt">Consejos para adquirir casa</a><br>
+    <a href="https://visualhome.net/hagalo-usted-mismo/manguera pantry.txt">Hágalo usted mismo - Cambiar manguera</a><br>
+    </div>
+
+    <div class="col-lg-4 col-12">
+    <h4>Redes Sociales</h4>
+        <a class="mx-3" href="http://instagram.com/visualhomenicaragua" target="_blank" ><img alt="enlace con cuenta instagram visual home nicaragua" width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_instagram.png')}}" ></a>
+        <a class="mx-3" href="https://facebook.com/visualhomenicaragua" target="_blank" ><img alt="enlace con cuenta facebook visual home nicaragua" width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_facebook.png')}}" ></a>
+    </div>
+  </div>
 </foot>
 @livewireScripts
 @yield('js')

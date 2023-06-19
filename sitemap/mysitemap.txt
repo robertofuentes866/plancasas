@@ -9,6 +9,7 @@ https://visualhome.net/textos_informacion/lo que te ofrecemos.txt
 https://visualhome.net/textos_informacion/consejos_adquirir_casa.txt
 https://visualhome.net/register
 https://visualhome.net/login
+https://visualhome.net/hagalo_usted_mismo/cambiar_mangueras.txt
 
 
 

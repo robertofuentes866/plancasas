@@ -28,6 +28,10 @@ use App\Mail\infoPropiedad;
    symlink("/home/izukatkgjhzn/realtor_web/storage/app/public", "/home/izukatkgjhzn/public_html/public/storage");
 });*/
 
+Route::get('/lixoClass',function(){
+    
+    $lixov = new app\lixo\lixoClass();
+});
 
 Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
    try {   
@@ -47,6 +51,7 @@ Route::get('/residencial/{descripcion}/{id_casa}/{residencial}',
          })->name('residencial');
 
 Route::get('/textos_informacion/{texto}','App\Http\Controllers\textos_informacionController@show')->name('textos_informacion');
+Route::get('/hagalo-usted-mismo/{texto}','App\Http\Controllers\textos_informacionController@show')->name('hagalo-usted-mismo');
 
 Route::get('/','App\Http\Controllers\menuController@indexacion')->name('menuIndex');
 

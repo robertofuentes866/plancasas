@@ -78,8 +78,8 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                             $comillas$nombreCarrusel$comillas)\">
                             
                         <img class=\"img_thumbnails rounded\" src=". asset(session('camino_mostrar').'/propiedades/'.$imagen_casa->foto_thumb)."
-                           alt=casa venta renta en ".$imagen_casa->residencial.">
-                        </td><td><figcaption><strong> $imagen_casa->residencial</strong><br>$imagen_casa->casaNumero </figcaption></td>
+                           alt=\"casa venta renta en $imagen_casa->residencial.\">
+                        </td><td><h6><strong> $imagen_casa->residencial</strong><br>$imagen_casa->casaNumero </h6></td>
                     </figure></a>
                 </tr>";
         }

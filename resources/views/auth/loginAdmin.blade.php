@@ -45,31 +45,6 @@
 </div>
 @endsection
 
-<!-- <!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    @if ($errors->any())
-     <h3> {{$errors->first()}}</h3>
-    @endif
-    <form method="post" action={{route('loginAdm')}}>
-        @csrf
-        <p><label for="email">Email</label>
-        <input type="text" name="email" id="email"></p>
-
-        <p><label for="pass">Password</label>
-        <input type="password" name="password" id="pass"></p>
-
-        <p><input type="submit" name="submit" value="Submit"></p>
-
-
-    </form>
-</body>
-</html> -->
-
 
 
 
