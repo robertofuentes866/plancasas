@@ -89,17 +89,20 @@ alquiler en el sector de Managua y carretera a Masaya.">
 
 <div class="container">
     <div class="row">
-        <header id="encabezado" class="col-12 bg-dark text-white">
-            <p class="placeholder-wave" id="headerP">VISUAL HOME <br> REAL ESTATE NICARAGUA </p>
-            <p class="placeholder-wave"><small id="smallHeader">Te ofrecemos un lugar Accesible, Cómodo y Seguro para vivir en familia.</small> </p>
+        <header style="max-height:150px;"  class="bg-dark d-flex justify-content-between p-0">
+            <div class="d-md-inline">
+              <p class="d-md-block placeholder-wave mb-1" id="headerP">VISUAL HOME <br>  REAL ESTATE NICARAGUA </p>
+              <p class="d-md-block placeholder-wave mt-1 ms-3"><small id="smallHeader">Te ofrecemos un lugar Accesible, Cómodo y Seguro para vivir en familia.</small> </p>
+            </div>
             
+            <img class="d-md-inline d-none" width="50%" src="{{asset(session('camino_mostrar').'/imagenes_app/encabezado.JPG')}}">
         </header>
     </div>
 </div>
 <!-- MENU PRINCIPAL -->
 <div class="container">
     <div class="row">
-<nav class="col-12 navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img src="{{asset(session('camino_mostrar').'/imagenes_app/logo_visual_home.jpg')}}" alt="ventas y alquileres de casas en Managua y Carretera a Masaya" width="30" height="24" class="d-inline-block align-text-top rounded">
       Visual Home</a>
@@ -159,7 +162,7 @@ alquiler en el sector de Managua y carretera a Masaya.">
 <!-- Fin Menu Principal -->
 
 <main class="container">
-    <div class="row">
+    <div class="row fondo_principal">
         @yield('cuerpo')
     </div>
 </main>

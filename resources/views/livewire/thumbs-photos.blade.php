@@ -9,8 +9,8 @@
 @endif
 
 @if (!isset($swal)  )
- <div id="top_resultados" class="col-lg-8 col-12">
-        <div id="title_page_left_container" class="row">
+ <div id="top_resultados" class="col-lg-6 col-12 mt-2">
+        <div id="title_page_left_container" class="row rounded-top">
         <header><h6><p id="title_page_left"><strong> {{$titulo}}</strong></p></h6></header>
             <p style="color:gold;text-align:center">
                 @if(!empty($arrayOpcionesForm))
@@ -19,7 +19,7 @@
             </p>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-12" style="background-color:antiquewhite;"> <!-- Columna thumbnails -->
+            <div class="col-12 bg-dark"> <!-- Columna thumbnails -->
                 
                 @php($comillas = '"')
                 @if($imagenes_casas->count())
@@ -61,7 +61,7 @@
                 @endif
             </div>  <!-- End container de los 2 grupos de thumbnails: Destacados/Formularios y Favoritos -->
             
-            <div id="top_detalles" class="col-lg-8 col-12 mt-1" style="background-color:antiquewhite">  <!--columna de foto normal y caracteristicas -->
+            <div id="top_detalles" class="col-12 mt-1 bg-dark p-3">  <!--columna de foto normal y caracteristicas -->
                             <section class="card">
                                 <div class="card-body">
                                    <!-- inicio del carrousel para fotos normales -->
@@ -100,7 +100,7 @@
                                                     <h5 class="card-title">{{$imagen_casa->residencial.'-'.$imagen_casa->casaNumero}}</h5>
                                                 
                                                     <a class="btn btn-primary" href="{{route('casas-venta-renta',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Mas fotos y precio de esta propiedad</a>
-                                                    <a class="btn btn-primary mt-2" href="{{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}}" role="button">Conozca el residencial</a>
+                                                    <a class="btn btn-primary" href="{{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}}" role="button">Conozca el residencial</a>
                                                 @else
                                                     <p class="card-title">
                                                        

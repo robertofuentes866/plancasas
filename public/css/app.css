@@ -148,20 +148,12 @@ legend {
      
      
  }
- 
-
- .img_thumbnails_row{
-    background-color:darkcyan;
-    text-align: center;
-  
- }
-
- #thumbnails_table {
-    border-collapse: separate;
-
- }
 
  .navbar li:active {
     color:#fff;
+ }
+
+ .fondo_principal{
+    background-color:dimgray;
  }
 

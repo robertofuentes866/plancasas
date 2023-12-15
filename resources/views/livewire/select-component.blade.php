@@ -5,7 +5,7 @@
             <label for="ciudad" class="input-group-text">Ciudad</label>
          
             <select wire:model="selectedCiudad" id="ciudad" name="id_ciudad" class="form-select"> 
-                     <option value="">**Ubicacion Ciudad**</option>
+                     <option value="">*Opciones*</option>
                      @foreach($viewData['ciudades'] as $ciudad)
                         <option value="{{$ciudad->id_ciudad}}">{{$ciudad->ciudad}}</option>
                      @endforeach
@@ -21,7 +21,7 @@
                 <label for="localizacion" class="input-group-text">Localizacion</label>
             
                 <select name="id_localizacion" id="localizacion" class="form-select">
-                            <option value="">**Residencial**</option>
+                            <option value="">*Opciones*</option>
                             @foreach($localizaciones as $localizacion)
                             <option value="{{$localizacion->id_localizacion}}">{{$localizacion->residencial}}</option>
                             @endforeach

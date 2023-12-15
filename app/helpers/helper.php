@@ -48,45 +48,47 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
     init_variables($i,$i_total,$arrayProp);
     $permiteAbrirGrupoCarrusel= true;
    
-    echo '<div id="'.$nombreCarrusel.'" class="carousel carousel-dark slide" data-interval="false" data-ride="carousel">
+    echo '<div id="'.$nombreCarrusel.'" class="mx-0 carousel carousel-dark slide" data-interval="false" data-ride="carousel">
          
-        <div class="carousel-inner">';
+        <div class="carousel-inner container">';
    
     foreach($fotos_thumb as $imagen_casa) {
         incrementaIndice($i_total);
     
         if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp)) {
-            if ((!($i % $numPropPorRotacion)) && $permiteAbrirGrupoCarrusel) {
+            if ((!($i % $numPropPorRotacion)) && $permiteAbrirGrupoCarrusel)
+            {
 
                 if ($i==0) {
-                    echo '<div class="carousel-item active row ">';
+                    echo '<div class="carousel-item active row row-cols-md-2 g-2">';
                 } else {
-                    echo '<div class="carousel-item row ">';
+                    echo '<div class="carousel-item row row-cols-md-2 g-2">';
                 }
-                echo '<table id="thumbnails_table">';
+               
             } 
-                echo '<tr class="img_thumbnails_row"><td>';
-                    incrementaIndice($i);
-                    $permiteAbrirGrupoCarrusel=false;
-                   
-                    echo "<a href=\"#top_detalles\"><figure wire:click=\"selectNormalImagen($comillas$imagen_casa->foto_normal$comillas,
-                            $comillas$imagen_casa->residencial$comillas,
-                            $comillas$imagen_casa->casaNumero$comillas,
-                            $comillas$imagen_casa->id_casa$comillas,
-                            $comillas$imagen_casa->leyenda$comillas,
-                            $comillas$titulo$comillas,
-                            $comillas$nombreCarrusel$comillas)\">
-                            
-                        <img class=\"img_thumbnails rounded\" src=". asset(session('camino_mostrar').'/propiedades/'.$imagen_casa->foto_thumb)."
-                           alt=\"casa venta renta en $imagen_casa->residencial.\">
-                        </td><td><h6><strong> $imagen_casa->residencial</strong><br>$imagen_casa->casaNumero </h6></td>
-                    </figure></a>
-                </tr>";
+                
+            incrementaIndice($i);
+            $permiteAbrirGrupoCarrusel=false;
+            echo "<div class=\"card col float-start\">";
+            echo "<div class=\"card-body d-block mx-auto\">";
+            echo "<a href=\"#top_detalles\" wire:click=\"selectNormalImagen($comillas$imagen_casa->foto_normal$comillas,
+                    $comillas$imagen_casa->residencial$comillas,
+                    $comillas$imagen_casa->casaNumero$comillas,
+                    $comillas$imagen_casa->id_casa$comillas,
+                    $comillas$imagen_casa->leyenda$comillas,
+                    $comillas$titulo$comillas,
+                    $comillas$nombreCarrusel$comillas)\">
+                    
+                <img width=<\"80px\" height=\"60px\" src=". asset(session('camino_mostrar').'/propiedades/'.$imagen_casa->foto_thumb)."
+                    alt=\"casa venta renta en $imagen_casa->residencial.\"></a>
+                </div><div class=\"card-footer\">
+                <h6><small class=\"text-muted\">$imagen_casa->residencial Num. $imagen_casa->casaNumero</small></h6>
+             </div></div>";
         }
         if ( ( (!($i % $numPropPorRotacion)) or ($i_total >= $fotos_thumb->count()) ) && !$permiteAbrirGrupoCarrusel ) {
             $permiteAbrirGrupoCarrusel=true;
 
-            echo '</table></div>'; 
+            echo '</div>'; 
            
         }
     }
