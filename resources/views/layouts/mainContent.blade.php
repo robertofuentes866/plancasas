@@ -15,27 +15,32 @@
         <form method="get" action="{{route('casas-venta-renta',['gestion'=>1])}}">
         @csrf
         <div class="form-group row">
-                <label for="tipo" class="col-lg-6 col-form-label">Tipo <span class='requerido'>(Requerido)</span></label>
-                
-                    <select name="id_tipo" id="tipo">
+
+            <div class="input-group">
+                <label for="tipo" class="input-group-text">Tipo</label>
+                <select name="id_tipo" id="tipo" class="form-select">
                                     <option value="">** Tipo de propiedad **</option>
                                    
                                     @foreach($viewData['tipo'] as $tipo)
                                         <option value="{{$tipo->id_subtipo}}">{{$tipo->subtipo}} </option> 
                                     @endforeach
-                    </select> 
-                
+                    </select>
             </div>
+                
+        </div>
 
             <div class="form-group row">
-                <label for="ofrecimiento" class="col-lg-8 col-form-label">Compra o Venta <span class="requerido">(Requerido)</span></label>
+                <div class="input-group">
+                     <label for="ofrecimiento" class="input-group-text">Comprar o Rentar</label>
                 
-                    <select name="id_ofrecimiento" id="ofrecimiento">
-                                    <option value="">*** Desea comprar o alquilar ? ***</option>
+                    <select name="id_ofrecimiento" id="ofrecimiento" class="form-select">
+                                    <option value="">**Opciones**</option>
                                     @foreach($viewData['ofrecimiento'] as $ofrecimiento)
                                         <option value="{{$ofrecimiento->id_ofrecimiento}}">{{$ofrecimiento->ofrecimiento}} </option>
                                     @endforeach
                     </select> 
+                </div>
+               
                 
             </div>
             @livewire('select-component',['viewData'=>$viewData])
@@ -61,124 +66,145 @@
             <legend>Seleccione</legend>  
             
             <div class="form-group row">
-                <label for="tipo" class="col-lg-6 col-form-label">Tipo <span class='requerido'>(Requerido)</span></label>
+                <div class="input-group">
+                    <label for="tipo" class="input-group-text">Tipo</label>
          
-                <select class="w-75 ms-3" name="id_tipo" id="tipo">
-                    <option value="">** Tipo de propiedad **</option>
-                    
-                    @foreach($viewData['tipo'] as $tipo)
-                        <option value="{{$tipo->id_subtipo}}">{{$tipo->subtipo}} </option> 
-                    @endforeach
-                </select> 
+                    <select class="form-select" name="id_tipo" id="tipo">
+                        <option value="">** Tipo de propiedad **</option>
+                        
+                        @foreach($viewData['tipo'] as $tipo)
+                            <option value="{{$tipo->id_subtipo}}">{{$tipo->subtipo}} </option> 
+                        @endforeach
+                    </select> 
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="input-group">
+                    <label for="ciudad" class="input-group-text">Ciudad</label>
+         
+                    <select class="form-select" id="ciudad" name="id_ciudad"> 
+                        <option value="">**Ubicacion Ciudad **</option>
+                            @foreach($viewData['ciudades'] as $ciudad)
+                                <option value="{{$ciudad->id_ciudad}}">{{$ciudad->ciudad}}</option>
+                            @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="input-group">
+                    <label for="recurso" class="input-group-text">Recurso</label>
+         
+                    <select class="form-select" id="recurso" name="id_recurso"> 
+                            <option value="">**Requerir muebles ?**</option>
+                            @foreach($viewData['recurso'] as $recurso)
+                                <option value="{{$recurso->id_recurso}}">{{$recurso->recurso}}</option>
+                            @endforeach
+                    </select>
+                </div>
+                
          
             </div>
 
             <div class="form-group row">
-                <label for="ciudad" class="col-lg-6 col-form-label">Ciudad</label>
+                <div class="input-group">
+                    <label for="duracion" class="input-group-text">Contrato</label>
          
-                <select class="w-75 ms-3" id="ciudad" name="id_ciudad"> 
-                     <option value="">**Ubicacion Ciudad **</option>
-                        @foreach($viewData['ciudades'] as $ciudad)
-                            <option value="{{$ciudad->id_ciudad}}">{{$ciudad->ciudad}}</option>
-                        @endforeach
-                </select>
-         
-            </div>
-
-            <div class="form-group row">
-                <label for="recurso" class="col-lg-6 col-form-label">Recurso</label>
-         
-                <select class="w-75 ms-3" id="recurso" name="id_recurso"> 
-                        <option value="">**Requerir muebles ?**</option>
-                        @foreach($viewData['recurso'] as $recurso)
-                            <option value="{{$recurso->id_recurso}}">{{$recurso->recurso}}</option>
-                        @endforeach
-                </select>
-         
-            </div>
-
-            <div class="form-group row">
-                <label for="duracion" class="col-lg-6 col-form-label">Contrato</label>
-         
-                <select class="w-75 ms-3" onchange=ajustarPrecios(this.value) id="duracion" name="id_duracion"> 
-                        <option value="">**Duracion del Contrato**</option>
-                        @foreach($viewData['duracion'] as $duracion)
-                            <option value="{{$duracion->id_duracion}}">{{$duracion->duracion}}</option>
-                        @endforeach
-                </select>
-         
+                    <select class="form-select" onchange=ajustarPrecios(this.value) id="duracion" name="id_duracion"> 
+                            <option value="">**Duracion del Contrato**</option>
+                            @foreach($viewData['duracion'] as $duracion)
+                                <option value="{{$duracion->id_duracion}}">{{$duracion->duracion}}</option>
+                            @endforeach
+                    </select>
+                </div>
             </div>
         </fieldset>
         <fieldset>
             <legend>Indique lo minimo de:</legend>
-            <table class="tabla_de_formulario">
-                <tr> 
-                    <div class="form-group mt-2">
-                       <td> <label for="habitaciones" >Habitaciones:</label></td>
-                        <td class="tabla_de_formulario_columna"><input name="habitaciones" value="0" type="number" min="0" max="25" ></td>
+                <div class="d-flex flex-column">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="habitaciones" >Habitaciones</label>
+                        <input class="form-control" name="habitaciones" value="0" type="number" min="0" max="25" >
                     </div>
-                </tr>
-                <tr>
-                    <div class="form-group mt-2">
-                       <td> <label for="banos" >Banos:</label></td>
-                       <td class="tabla_de_formulario_columna"> <input name="banos" value="0" type="number" min="0" max="25" ></td>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="banos" >Baños</label>
+                        <input class="form-control" id="banos" name="banos" value="0" type="number" min="0" max="25" >
                     </div>
-                </tr>
-                <tr>
-                    <div class="form-group mt-2">
-                        <td><label for="aires_acondicionado" >Aire Acondicionados:</label></td>
-                        <td class="tabla_de_formulario_columna"><input name="aires_acondicionado" value="0" type="number" min="0" max="25" ></td>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="aires_acondicionado" >Aire Acondicionado</label>
+                        <input class="form-control" id="aires_acondicionado" name="aires_acondicionado" value="0" type="number" min="0" max="25" >
                     </div>
-                </tr>
-                <tr>
-                    <div class="form-group mt-2">
-                        <td><label for="abanicos_techo" >Abanicos:</label></td>
-                        <td class="tabla_de_formulario_columna"><input name="abanicos_techo" value="0" type="number" min="0" max="25" ></td>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="abanicos_techo" >Abanicos</label>
+                        <input class="form-control" id="abanicos_techo" name="abanicos_techo" value="0" type="number" min="0" max="25" >
                     </div>
-                </tr>
-            </table>
+
+                </div>
         </fieldset>
 
         <fieldset>
             <legend> Indique lo deseado</legend> 
-            <table class="tabla_de_formulario">
-                <tr>
+            
             <div class="form-group mt-2">
-                <td><label class="form-check-label" for="cuartoDomestica"> Cuarto Domestica?</label></td>
-                <td class="tabla_de_formulario_columna_check"><input class="form-check-input ms-2" type="checkbox" name= "cuartoDomestica" id="cuartoDomestica"></td>
+                <div class="d-flex flex-column">
+                    <div class="d-flex mb-3 justify-content-between">
+                        <label for="cuartoDomestica" class="input-group-text"> Cuarto Domestica?</label>
+                        <div class="bg-light px-3 rounded d-flex align-items-center">
+                            <input class="form-check" type="checkbox" name= "cuartoDomestica" id="cuartoDomestica">
+                        </div>
+                    </div>
 
-                <td><label class="form-check-label ms-5" for="piscina"> Piscina?</label></td>
-                <td class="tabla_de_formulario_columna_check"><input class="form-check-input ms-2" type="checkbox" name= "piscina" id="piscina"></td>
-                
-            </div>
-                </tr>
-                <tr>
-            <div class="form-group mt-2">
-                <td><label class="form-check-label" for="agua_caliente"> Agua Caliente?</label></td>
-                <td class="tabla_de_formulario_columna_check"><input class="form-check-input ms-2" type="checkbox" name= "agua_caliente" id="agua_caliente"></td>
+                    <div class="d-flex mb-3 justify-content-between">
+                        <label for="piscina" class="input-group-text"> Sistema Seguridad?</label>
+                        <div class="bg-light px-3 rounded d-flex align-items-center">
+                            <input class="form-check" type="checkbox" name= "sistema_seguridad" id="sistema_seguridad">
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex mb-3 justify-content-between">
+                        <label for="piscina" class="input-group-text"> Tanque de agua?</label>
+                        <div class="bg-light px-3 rounded d-flex align-items-center">
+                            <input class="form-check" type="checkbox" name= "tanque_agua" id="tanque_agua">
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex mb-3 justify-content-between">
+                        <label for="piscina" class="input-group-text">Agua caliente?</label>
+                        <div class="bg-light px-3 rounded d-flex align-items-center">
+                            <input class="form-check" type="checkbox" name= "agua_caliente" id="agua_caliente">
+                        </div>
+                    </div>
 
-                <td><label class="form-check-label ms-5" for="tanque_agua">Tanque Agua?</label></td>
-                <td class="tabla_de_formulario_columna_check"><input class="form-check-input ms-2" type="checkbox" name="tanque_agua" id="tanque_agua"></td>
+
+                    <div class="d-flex mb-3 justify-content-between">
+                        <label for="piscina" class="input-group-text"> Piscina?</label>
+                        <div class="bg-light px-3 rounded d-flex align-items-center">
+                            <input class="form-check" type="checkbox" name= "piscina" id="piscina">
+                        </div>
+                    </div>
+                </div>
                 
             </div>
-                </tr>
-                <tr>
-            <div class="form-group mt-2">
-                <td><label class="form-check-label" for="sistema_seguridad">Sist. Seguridad?</label></td>
-                <td class="tabla_de_formulario_columna_check"><input class="form-check-input ms-2" type="checkbox" name= "sistema_seguridad" id="sistema_seguridad"></td>
-                
-            </div>
-                </tr>
-            </table>
         </fieldset>
 
         </fieldset>
-            <div class="form-group row">
-                <label for="precio_minimo" class="col-lg-4 col-form-label">Precio Minimo</label>
-                <input class="w-75 ms-3 CurrencyInput" name="precio_minimo" value="100" type="number" step="10" min="100" max="2000000">
+        <fieldset>
+        <legend> Indique precios</legend>
+             <div class="form-group row">
+                <div class="input-group mb-3">
+                    <label for="precio_minimo" class="input-group-text">Precio Minimo</label>
+                    <input class="form-control" name="precio_minimo" value="100" type="number" step="10" min="100" max="2000000">
+                </div>
+                <div class="input-group">
+                    <label for="precio_maximo" class="input-group-text">Precio Maximo</label>
+                    <input class="form-control" name="precio_maximo" value="1000" type="number" step="50" min="200" max="2000000">
+                </div>
 
-                <label for="precio_maximo" class="col-lg-4 col-form-label">Precio Maximo</label>
-                <input class="w-75 ms-3" name="precio_maximo" value="1000" type="number" step="50" min="200" max="2000000">
+                
 
                 <!--<label for="Range1" class="form-label">Precio mínimo</label>
                 <span id="Range1Val" style="color:red;">US$ 0</span>
@@ -191,6 +217,8 @@
                   oninput="changeValueRange2(this.value)"> -->
          
             </div>
+        </fieldset>
+           
         
                
             <div class="form-group row my-3">

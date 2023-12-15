@@ -1,27 +1,33 @@
 <div>
       
       <div class="form-group row">
-         <label for="ciudad" class="col-lg-4 col-form-label">Ciudad</label>
+        <div class="input-group">
+            <label for="ciudad" class="input-group-text">Ciudad</label>
          
-               <select wire:model="selectedCiudad" id="ciudad" name="id_ciudad"> 
+            <select wire:model="selectedCiudad" id="ciudad" name="id_ciudad" class="form-select"> 
                      <option value="">**Ubicacion Ciudad**</option>
                      @foreach($viewData['ciudades'] as $ciudad)
                         <option value="{{$ciudad->id_ciudad}}">{{$ciudad->ciudad}}</option>
                      @endforeach
-               </select>
+            </select>
+        </div>
+         
          
       </div>
 
      @if($selectedCiudad)
         <div class="form-group row">
-            <label for="localizacion" class="col-lg-4 col-form-label">Localizacion</label>
+            <div class="input-group">
+                <label for="localizacion" class="input-group-text">Localizacion</label>
             
-                <select name="id_localizacion" id="localizacion">
+                <select name="id_localizacion" id="localizacion" class="form-select">
                             <option value="">**Residencial**</option>
                             @foreach($localizaciones as $localizacion)
                             <option value="{{$localizacion->id_localizacion}}">{{$localizacion->residencial}}</option>
                             @endforeach
                 </select>
+            </div>
+            
             
         </div>
     @endif

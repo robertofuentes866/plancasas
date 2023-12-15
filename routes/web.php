@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\ciudadController;
 use App\Http\Controllers\Admin\duracionController;
 use App\Http\Controllers\Admin\localizacionController;
 use App\Http\Controllers\Admin\subTipoController;
-
+use App\lixo\miLixito;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -28,9 +28,10 @@ use App\Mail\infoPropiedad;
    symlink("/home/izukatkgjhzn/realtor_web/storage/app/public", "/home/izukatkgjhzn/public_html/public/storage");
 });*/
 
-Route::get('/lixoClass',function(){
+Route::get('/lixoClass1/{nombre}',function($nombre) {
     
-    $lixov = new app\lixo\lixoClass();
+   (new miLixito())->quienSoy($nombre);
+   print session('nombre');
 });
 
 Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
