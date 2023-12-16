@@ -79,7 +79,7 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                     $comillas$titulo$comillas,
                     $comillas$nombreCarrusel$comillas)\">
                     
-                <img width=<\"80px\" height=\"60px\" src=". asset(session('camino_mostrar').'/propiedades/'.$imagen_casa->foto_thumb)."
+                <img width=<\"180px\" height=\"120px\" src=". asset(session('camino_mostrar').'/propiedades/'.$imagen_casa->foto_thumb)."
                     alt=\"casa venta renta en $imagen_casa->residencial.\"></a>
                 </div><div class=\"card-footer\">
                 <h6><small class=\"text-muted\">$imagen_casa->residencial Num. $imagen_casa->casaNumero</small></h6>

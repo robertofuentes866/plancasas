@@ -98,9 +98,11 @@
                                                 
                                                 @if($gestion!=2) 
                                                     <h5 class="card-title">{{$imagen_casa->residencial.'-'.$imagen_casa->casaNumero}}</h5>
-                                                
-                                                    <a class="btn btn-primary" href="{{route('casas-venta-renta',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Mas fotos y precio de esta propiedad</a>
-                                                    <a class="btn btn-primary" href="{{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}}" role="button">Conozca el residencial</a>
+                                                    <div class=" w-100 btn-group btn-group-sm mx-auto">
+                                                        <a class="btn btn-primary" href="{{route('casas-venta-renta',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Mas fotos y precio de la propiedad</a>
+                                                        <a class="btn btn-secondary" href="{{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}}" role="button">Ver residencial</a>
+                                                    </div>
+                                                    
                                                 @else
                                                     <p class="card-title">
                                                        
