@@ -47,6 +47,17 @@ alquiler en el sector de Managua y carretera a Masaya.">
 
         
     </script>
+    <style>
+      .jumbotron{
+        height:310px;
+        width:100%;
+        background-position:center center;
+        background-repeat:no-repeat;
+        background-size:cover;
+        background:contain;
+        background-image: url({{asset(session('camino_mostrar').'/imagenes_app/encabezado.JPG')}});
+      }
+    </style>
     
 </head>
 <body>
@@ -86,21 +97,14 @@ alquiler en el sector de Managua y carretera a Masaya.">
         @break
     @endswitch
 @endif
-
-<div class="container">
-    <div class="row">
-        <header style="max-height:150px;"  class="bg-dark d-flex justify-content-between p-0">
-            <div class="d-md-inline">
-              <p class="d-md-block placeholder-wave mb-1" id="headerP">VISUAL HOME <br>  REAL ESTATE NICARAGUA </p>
-              <p class="d-md-block placeholder-wave mt-1 ms-3"><small id="smallHeader">Te ofrecemos un lugar Accesible, Cómodo y Seguro para vivir en familia.</small> </p>
-            </div>
-            
-            <img class="d-md-inline d-none" width="50%" src="{{asset(session('camino_mostrar').'/imagenes_app/encabezado.JPG')}}">
-        </header>
-    </div>
+<div class="jumbotron jumbotron-fluid pt-0 mb-0">
+    <div class="d-flex flex-column">
+        <h1 class="m-0 display-6 fw-bolder text-bg-light ps-2" style="font-size:1.2rem;">VISUAL HOME NICARAGUA - REAL ESTATE</h1>
+        <p class="m-0 fst-italic fs-6 ps-2 text-bg-light rounded-bottom" style="font-size:3.5vw;">Te ofrecemos una propiedad Accesible, Cómoda y Segura para vivir en familia</p>
+    </div>     
 </div>
 <!-- MENU PRINCIPAL -->
-<div class="container">
+<div class="container-fluid">
     <div class="row">
 <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
@@ -161,7 +165,7 @@ alquiler en el sector de Managua y carretera a Masaya.">
 
 <!-- Fin Menu Principal -->
 
-<main class="container">
+<main class="container-fluid">
     <div class="row bg-secondary">
         @yield('cuerpo')
     </div>
@@ -173,7 +177,7 @@ alquiler en el sector de Managua y carretera a Masaya.">
    </a>
 </div>
 <!-- End whatsapp -->
-<footer class="container rounded-4 py-3 my-2 bg-dark text-white">
+<footer class="container-fluid rounded-bottom py-3 mt-0 bg-dark text-white">
 
   <div class="row row-cols-lg-4 row-cols-md-3 row-cols-1 d-flex justify-content-evenly">
     <div class="col">
