@@ -106,9 +106,9 @@
                 <div class="container">
                     <div class="row row-cols-2 row-cols-lg-1">
 
-                        <div class="col px-1">
-                            <fieldset>
-                                <legend>Seleccione</legend>  
+                        <div class="col px-1 mb-2">
+                            <fieldset class="h-100">
+                                <legend><small>Selección</small></legend>  
                                 <div class="row d-flex flex-column">
                                     <div class="form-floating mb-3">
                                         <select class="form-select" name="id_tipo" id="tipo">
@@ -153,9 +153,9 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col px-1">
-                            <fieldset>
-                                <legend>Lo mínimo de:</legend>
+                        <div class="col px-1 mb-2">
+                            <fieldset class="h-100">
+                                <legend><small>Lo mínimo de:</small></legend>
                                 <div class="d-flex flex-column">
                                     <div class="form-floating mb-3">
                                         <input id="habitaciones" class="form-control " name="habitaciones" value="0" type="number" min="0" max="25" >
@@ -179,9 +179,9 @@
                                 
                             </fieldset>
                         </div>
-                        <div class="col px-1">
-                            <fieldset>
-                                <legend>Preferencias</legend> 
+                        <div class="col px-1 mb-2">
+                            <fieldset class="h-100">
+                                <legend><small>Preferencias</small> </legend> 
                                 <div class="d-flex flex-column">
                                     <div class="d-flex mb-3 justify-content-between">
                                         <label for="cuartoDomestica" class="form-check-label"> Cuarto Domestica?</label>
@@ -220,9 +220,9 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col px-1">
-                            <fieldset>
-                                <legend> Precios</legend>
+                        <div class="col px-1 mb-2">
+                            <fieldset class="h-100">
+                                <legend><small>Precios</small> </legend>
                                 <div class="form-group row">
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="precio_minimo" name="precio_minimo" value="100" type="number" step="100" min="100" max="1000000">

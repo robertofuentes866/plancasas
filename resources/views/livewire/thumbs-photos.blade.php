@@ -99,7 +99,7 @@
                                                 @if($gestion!=2) 
                                                     <h5 class="card-title">{{$imagen_casa->residencial.'-'.$imagen_casa->casaNumero}}</h5>
                                                     <div class=" w-100 btn-group btn-group-sm mx-auto">
-                                                        <a class="btn btn-primary" href="{{route('casas-venta-renta',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Mas fotos y precio de la propiedad</a>
+                                                        <a class="btn btn-primary" href="{{route('casas-venta-renta',[2,$imagen_casa->id_casa,$arrayOpcionesForm])}}" role="button">Fotos y precio de la propiedad</a>
                                                         <a class="btn btn-secondary" href="{{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}}" role="button">Ver residencial</a>
                                                     </div>
                                                     
@@ -250,13 +250,13 @@
 
                             <section class="card my-3">
                                 <div class="card-header">
-                                    <header><h6 class="display-8">Agente Inmobiliario - Envíanos un email aquí</h6></header>
+                                    <header><h6 class=" display-8">Agente Inmobiliario-Envíanos email aquí</h6></header>
                                 </div>
                                 <div class="card-body ">
                                     <div class="container">
                                         <div class="bg-dark text-white row row-cols-2">
                                             <div class="col-9 col-lg-10 px-1 mx-0 ">
-                                                <p class="">{{ $imagenes_casas[0]->nombre_agente}}</p>
+                                                <p><small>{{ $imagenes_casas[0]->nombre_agente}}</small></p>
                                                  
                                                 @if(!empty($imagenes_casas[0]->cel1))
                                                 <p class="">Celular Tigo:
@@ -277,7 +277,7 @@
                                                             <!-- End whatsapp -->
                                                     </p>
                                                 @endif
-                                                <p class="">Email: {{ $imagenes_casas[0]->email}}</p>
+                                                <p><small>Email: {{ $imagenes_casas[0]->email}}</small></p>
                                             </div>
                                             <div class="col-3 col-lg-2 overflow-hidden">
                                                 <img src="{{asset(session('camino_mostrar').'/agentes/'. $imagenes_casas[0]->foto_agente)}}">
@@ -286,8 +286,8 @@
 
                                         <div class="row">
                                             <div class="col-12 bg-info">
-                                                <p class="my-0">Solicitar mayor informacion de: <strong>{{$casaNumero}}</strong></p>
-                                                <p class="my-0">O detállanos la propiedad que buscas</p>
+                                                <p class="my-0"><small>Solicitar mayor informacion de: <strong>{{$casaNumero}}</strong></small> </p>
+                                                <p class="my-0"><small>O detállanos la propiedad que buscas</small> </p>
                                             </div>
                                             <div class="bg-info bg-gradient col py-2">
                                                 <form id="emailForm" action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
