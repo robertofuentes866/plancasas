@@ -248,76 +248,68 @@
 
                             <!-- Agente Inmobiliario -->
 
-                            <section class="card mt-3 mb-3">
+                            <section class="card my-3">
                                 <div class="card-header">
-                                    <header><h6><strong>Agente Inmobiliario</strong></h6></header>
+                                    <header><h6 class="display-8">Agente Inmobiliario - Envíanos un email aquí</h6></header>
                                 </div>
-                                <div class="card-body table-responsive">
-                                    <table class="table-striped table table-dark">
-                                        <tr>
-                                        <td><u>Nombre:</u> {{ $imagenes_casas[0]->nombre_agente}}</td>
-                                            <td>
-                                                <img src="{{asset(session('camino_mostrar').'/agentes/'. $imagenes_casas[0]->foto_agente)}}">
-                                            </td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td><u>Celular Tigo:</u> 
-                                            @if(!empty($imagenes_casas[0]->cel1))
-                                            <!-- codigo para incorporar whatsapp -->
-                                                
+                                <div class="card-body ">
+                                    <div class="container">
+                                        <div class="bg-dark text-white row row-cols-2">
+                                            <div class="col-9 col-lg-10 px-1 mx-0 ">
+                                                <p class="">{{ $imagenes_casas[0]->nombre_agente}}</p>
+                                                 
+                                                @if(!empty($imagenes_casas[0]->cel1))
+                                                <p class="">Celular Tigo:
+                                                    <!-- codigo para incorporar whatsapp -->
                                                     <a class="cel_agentes" href="https://api.whatsapp.com/send/?phone={{$imagenes_casas[0]->cel1}}&text=En que te puedo ayudar?" target="_blank">
                                                         <img src="{{asset(session('camino_mostrar').'/imagenes_app/whatsapp-logo.png')}}" class="boton">{{': '.$imagenes_casas[0]->cel1}}
                                                     </a>
-                                            <!-- End whatsapp -->
-                                            @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><u>Celular Claro:</u> 
-                                               @if(!empty($imagenes_casas[0]->cel2))
-                                                <!-- codigo para incorporar whatsapp -->
-                                                        <a class="cel_agentes" href="https://api.whatsapp.com/send/?phone={{$imagenes_casas[0]->cel2}}&text=En que te puedo ayudar?" target="_blank">
-                                                            <img src="{{asset(session('camino_mostrar').'/imagenes_app/whatsapp-logo.png')}}" class="boton">{{': '.$imagenes_casas[0]->cel2}}
-                                                        </a>
-                                                <!-- End whatsapp -->
+                                                    <!-- End whatsapp -->
+                                                </p> 
                                                 @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                        <td><u>Email:</u> {{ $imagenes_casas[0]->email}}</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td colspan="3">
+
+                                                @if(!empty($imagenes_casas[0]->cel2))
+                                                    <p>Celular Claro:
+                                                            <!-- codigo para incorporar whatsapp -->
+                                                            <a class="cel_agentes" href="https://api.whatsapp.com/send/?phone={{$imagenes_casas[0]->cel2}}&text=En que te puedo ayudar?" target="_blank">
+                                                                <img src="{{asset(session('camino_mostrar').'/imagenes_app/whatsapp-logo.png')}}" class="boton">{{': '.$imagenes_casas[0]->cel2}}
+                                                            </a>
+                                                            <!-- End whatsapp -->
+                                                    </p>
+                                                @endif
+                                                <p class="">Email: {{ $imagenes_casas[0]->email}}</p>
+                                            </div>
+                                            <div class="col-3 col-lg-2 overflow-hidden">
+                                                <img src="{{asset(session('camino_mostrar').'/agentes/'. $imagenes_casas[0]->foto_agente)}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12 bg-info">
+                                                <p class="my-0">Solicitar mayor informacion de: <strong>{{$casaNumero}}</strong></p>
+                                                <p class="my-0">O detállanos la propiedad que buscas</p>
+                                            </div>
+                                            <div class="bg-info bg-gradient col py-2">
                                                 <form id="emailForm" action="{{route('infoPropiedad',[$imagenes_casas[0]->email,$imagenes_casas[0]->nombre_agente])}}" method="get">
                                                     @csrf
-                                                    <table class="table table-primary table-striped col-12">
-                                                    <tr>
-                                        <td colspan="2"> <p>Solicitar mayor informacion de: <strong>{{$casaNumero}}</strong></p>
-                                                        <p>O detállanos la propiedad que buscas</p> </td>
-                                        </tr>
-                                                        <tr> 
-                                                        <td colspan="2"><label for="from" >De:</label></td> </tr>
-                                                        <tr>
-                                                        <td colspan="2"> <input size="40" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}"></td>
-                                                        </tr>
-                                                        <tr>    
-                                                        <td colspan="2"><label for="mensaje">Mensaje:</label></td> </tr>
-                                                        <tr>
-                                                        <td colspan="2"><textarea id="mensaje" required name="emailBody" rows="5" cols="45" placeholder="Mensaje"></textarea></td>
-                                                        <input hidden name="casaNumero" value="{{$casaNumero}}">
-                                                        </tr>
-                                                        <tr>
-                                                        <td colspan="2"><input type="submit" name="submitEmail" value="Enviar" class="btn btn-primary">
-                                                        <input type="reset" value="Limpiar" class="btn btn-primary"></td>
-                                                        </tr>
-                                                    </table>
+                                                    <div class="input-group my-2">
+                                                        <label class="input-group-text" for="from" >De:</label>
+                                                        <input class="form-control" placeholder="Tu Direccion Email" type="email" required id="from" name="from" value="{{Auth::check()?Auth::user()->email:' '}}">
+                                                    </div>
+                                                    <div class="my-2">
+                                                        <textarea class="w-100 rounded" rows="5" id="mensaje" required name="emailBody" placeholder="Mensaje" ></textarea>
+                                                        
+                                                    </div>
+                                                    <input hidden name="casaNumero" value="{{$casaNumero}}">
+                                                    <div class="w-100 btn-group btn-group-lg">
+                                                        <button type="submit" name="submitEmail" class="btn btn-primary">Enviar</button>
+                                                        <button type="reset"class="btn btn-secondary">Limpiar</button>
+                                                    </div>
                                                 </form>
-                                            </td>
-                                        </tr>
-                                        
-                                    </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                
                                 </div>
                             </section>
                         @endif

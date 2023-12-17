@@ -166,7 +166,7 @@ alquiler en el sector de Managua y carretera a Masaya.">
 <!-- Fin Menu Principal -->
 
 <main class="container-fluid">
-    <div class="row bg-secondary">
+    <div class="row bg-secondary py-1">
         @yield('cuerpo')
     </div>
 </main>
