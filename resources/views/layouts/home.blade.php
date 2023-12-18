@@ -99,8 +99,8 @@ alquiler en el sector de Managua y carretera a Masaya.">
 @endif
 <div class="jumbotron jumbotron-fluid pt-0 mb-0">
     <div class="d-flex flex-column">
-        <h1 class="m-0 display-6 fw-bolder text-bg-light ps-2" style="font-size:1.2rem;">VISUAL HOME NICARAGUA - REAL ESTATE</h1>
-        <p class="m-0 fst-italic fs-6 ps-2 text-bg-light rounded-bottom" style="font-size:3.5vw;">Te ofrecemos una propiedad Accesible, Cómoda y Segura para vivir en familia</p>
+        <h1 class="m-0 display-6 fw-bolder text-bg-light ps-2 bg-opacity-75" style="font-size:1.2rem;">VISUAL HOME NICARAGUA - REAL ESTATE</h1>
+        <p class="m-0 fst-italic fs-6 ps-2 text-bg-light rounded-bottom bg-opacity-75" style="font-size:3.5vw;">Te ofrecemos una propiedad Accesible, Cómoda y Segura para vivir en familia</p>
     </div>     
 </div>
 <!-- MENU PRINCIPAL -->
@@ -108,7 +108,7 @@ alquiler en el sector de Managua y carretera a Masaya.">
     <div class="row">
 <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="{{asset(session('camino_mostrar').'/imagenes_app/logo_visual_home.jpg')}}" alt="ventas y alquileres de casas en Managua y Carretera a Masaya" width="30" height="24" class="d-inline-block align-text-top rounded">
+    <a class="navbar-brand" href="{{Route('casas-venta-renta')}}"><img src="{{asset(session('camino_mostrar').'/imagenes_app/logo_visual_home.jpg')}}" alt="ventas y alquileres de casas en Managua y Carretera a Masaya" width="30" height="24" class="d-inline-block align-text-top rounded">
       Visual Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

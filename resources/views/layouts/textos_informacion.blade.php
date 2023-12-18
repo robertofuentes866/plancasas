@@ -6,7 +6,7 @@
 <div class="col-12 bg-primary">  <!-- Primera columna, la del formulario Residencial/Condonimio -->
 
     <div class="card text-black bg-light mb-3 mt-2 mx-auto">
-        <div class="card-header" style="text-align:center">
+        <div class="card-header text-center">
             <strong>Informacion </strong>
         </div>
         <div class="card-body">
