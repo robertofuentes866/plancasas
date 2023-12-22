@@ -40,7 +40,8 @@ class fotosCasaController extends Controller
      }
     public function index()
     {
-        return view('admin.fotosCasaForm')->with('data',$this->viewData());
+        return view('admin.fotosCasaForm')->with('data',json_decode(json_encode($this->viewData()),true))
+                                          ->with('id_prop',0);
     }
 
     /**
@@ -61,28 +62,32 @@ class fotosCasaController extends Controller
      */
     public function store(Request $request)
     {
+        
         $fotosCasa = new fotosCasa();
         $fotosCasa->validar($request);
         $fotosCasa->id_casa = $request->id_casa;
         $fotosCasa->leyenda = $request->leyenda;
         $fotosCasa->es_principal = $request->es_principal?1:0;
         $fotosCasa->save();
-        if ($request->hasFile('foto_normal')) {
+        if ($request->hasFile('foto_normal')) { 
+            if ($fotosCasa->es_principal) // solo crea el thumbnail de la foto si es la foto principal.
+            {
+                $nombre_imagen = $fotosCasa->id_foto."_th.".$request->file('foto_normal')->extension();
+                
+                $nombre_thumb = new Thumbnail($request->foto_normal,storage_path('app/public').'/propiedades',$fotosCasa->id_foto.'_th');
+                $nombre_thumb->create();
+                $fotosCasa->foto_thumb = $nombre_imagen;
+                $fotosCasa->save();
+            }
             $nombre_imagen = $fotosCasa->id_foto.".".$request->file('foto_normal')->extension();
             Storage::putFileAs('propiedades',$request->file('foto_normal'),$nombre_imagen);
             $fotosCasa->foto_normal = $nombre_imagen;
             $fotosCasa->save();
-            // --- A continuacion, crea el thumbnail de la foto tamaño normal y la guarda en el folder propiedades con extension th.
-             
-            $nombre_imagen = $fotosCasa->id_foto."_th.".$request->file('foto_normal')->extension();
-            $nombre_thumb = new Thumbnail($request->foto_normal,'storage/propiedades',$fotosCasa->id_foto.'_th');
-            $nombre_thumb->create();
-            $fotosCasa->foto_thumb = $nombre_imagen;
-            $fotosCasa->save();
-             
-            //  Storage::putFileAs('propiedades',$request->file('foto_thumb'),$nombre_imagen);
         }
-        return redirect()->route('admin.fotosCasaForm.index');
+        //return redirect()->route('admin.fotosCasaForm.index');
+       // dd(json_decode($request->viewData,true));
+        return view('admin.fotosCasaForm')->with('id_prop',$request->id_casa)
+                                          ->with('data',json_decode($request->viewData,true));
     }
 
     /**

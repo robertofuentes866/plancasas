@@ -37,16 +37,15 @@
 </div>
 
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         @yield('cuerpo')
-        
     </div>
 </div>
 
 <div class="row my-2">
     <div class="col-lg-12 bg-primary text-center">
-        Copyright - <b>Managua</b> - <b>Nicaragua</b>
+        &copy; 2023 - <b>Managua</b> - <b>Nicaragua</b>
     </div>
 </div>
 @yield('js')

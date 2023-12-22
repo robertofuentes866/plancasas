@@ -98,6 +98,7 @@ alquiler en el sector de Managua y carretera a Masaya.">
     @endswitch
 @endif
 <div class="jumbotron jumbotron-fluid pt-0 mb-0">
+ 
     <div class="d-flex flex-column">
         <h1 class="m-0 display-6 fw-bolder text-bg-light ps-2 bg-opacity-75" style="font-size:1.2rem;">VISUAL HOME NICARAGUA - REAL ESTATE</h1>
         <p class="m-0 fst-italic fs-6 ps-2 text-bg-light rounded-bottom bg-opacity-75" style="font-size:3.5vw;">Te ofrecemos una propiedad Accesible, Cómoda y Segura para vivir en familia</p>
@@ -214,6 +215,11 @@ alquiler en el sector de Managua y carretera a Masaya.">
         <!-- <a href="http://instagram.com/visualhomenicaragua" target="_blank" ></a> 
         <img alt="enlace con cuenta instagram visual home nicaragua" width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_instagram.png')}}" ></a>
         <a class="mx-3" href="https://facebook.com/visualhomenicaragua" target="_blank" ><img alt="enlace con cuenta facebook visual home nicaragua" width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_facebook.png')}}" ></a> -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center text-white">
+      <small>&copy; 2023</small>
     </div>
   </div>
 </footer>

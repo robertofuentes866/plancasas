@@ -7,11 +7,12 @@ use App\Http\Controllers\Admin\ciudadController;
 use App\Http\Controllers\Admin\duracionController;
 use App\Http\Controllers\Admin\localizacionController;
 use App\Http\Controllers\Admin\subTipoController;
-use App\lixo\miLixito;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\infoPropiedad;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +29,10 @@ use App\Mail\infoPropiedad;
    symlink("/home/izukatkgjhzn/realtor_web/storage/app/public", "/home/izukatkgjhzn/public_html/public/storage");
 });*/
 
-Route::get('/lixoClass1/{nombre}',function($nombre) {
-    
-   (new miLixito())->quienSoy($nombre);
-   print session('nombre');
+Route::get('/lixostorage',function() {
+     // Storage::copy('agentes/35.jpg','imagenes_app/35.jpg');
+     return "Ruta: ".Storage::path('35.jpg');
+     
 });
 
 Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
@@ -180,7 +181,7 @@ Route::put('/{id}/admin.casaForm.update','App\Http\Controllers\Admin\casaControl
 Route::delete('/{id}/admin.casaForm.delete','App\Http\Controllers\Admin\casaController@destroy')->name('admin.casaForm.delete');
 
 // Relacionados al formulario FOTOS CASA.
-Route::get('/admin.fotosCasaForm.index','App\Http\Controllers\Admin\fotosCasaController@index')->name('admin.fotosCasaForm.index');
+Route::get('/admin.fotosCasaForm.index/','App\Http\Controllers\Admin\fotosCasaController@index')->name('admin.fotosCasaForm.index');
 
 Route::post('/admin.fotosCasaForm.store','App\Http\Controllers\Admin\fotosCasaController@store')->name('admin.fotosCasaForm.store');
 

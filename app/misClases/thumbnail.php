@@ -1,5 +1,6 @@
 <?php
    namespace App\misClases;
+   use Illuminate\Support\Facades\Storage;
 
    class Thumbnail {
      protected $original;
@@ -36,10 +37,19 @@
                     throw new \Exception('Cannot process that type of file.');
                 }
             }
-        if (is_dir($path) && is_writable($path)) {
-            $this->path = rtrim($path,'/\\') . DIRECTORY_SEPARATOR;
-        } else {
-            throw new \Exception("Cannot write to $path.");
+        if (is_dir($path))
+        {
+            if (is_writable($path))
+            {
+                $this->path = rtrim($path,'/\\') . DIRECTORY_SEPARATOR;
+            } else
+            {
+                throw new \Exception("Cannot write to $path.");
+            }
+
+        } else
+        {
+            throw new \Exception("Cannot a directory $path.");
         }
         $this->original =$image;
         $this->originalWidth = $dimension[0];
@@ -63,6 +73,7 @@
             case 'jpeg':
                 $newname .= '.jpg';
                 $success = imagejpeg($thumb,$this->path.$newname);
+                
                 break;
             case 'png':
                 $newname .= '.png';

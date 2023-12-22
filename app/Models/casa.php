@@ -13,7 +13,7 @@ class casa extends Model
     "area_terreno","plantas","garage","habitaciones","banos","piscina","cuartoDomestica",
    "bano_social","disponibilidad","destacado","ano_construccion","aires_acondicionado","abanicos_techo",
     "agua_caliente","tanque_agua","sistema_seguridad","descripcion",'id_subtipo'];
-    protected $hidden = ['id_casa'];
+    //protected $hidden = ['id_casa'];
     
     use HasFactory;
 

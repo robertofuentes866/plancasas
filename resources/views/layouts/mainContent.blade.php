@@ -5,9 +5,9 @@
 @section('nav_link_entrar',$viewData['nav_link_entrar'])
 @section('cuerpo')
 
-<div class="col-lg-3 col-12">  <!-- Primera columna, la del formulario Residencial/Condonimio -->
+<div class="col-lg-3 col-12 ">  <!-- Primera columna, la del formulario Residencial/Condonimio -->
 
-    <div class="card text-black bg-light mb-3 mt-2 mx-auto">
+    <div class="card text-black bg-light mb-3 mt-2 mx-auto sticky-lg-top">
         <div class="card-header" style="text-align:center">
             <header>
                 <h6><strong>Buscar casa por Residencial </strong></h6>

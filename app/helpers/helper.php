@@ -53,6 +53,7 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
         <div class="carousel-inner container">';
    
     foreach($fotos_thumb as $imagen_casa) {
+        //dd($imagen_casa->habitaciones);
         incrementaIndice($i_total);
     
         if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp)) {
@@ -82,7 +83,14 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                 <img width=<\"180px\" height=\"120px\" src=". asset(session('camino_mostrar').'/propiedades/'.$imagen_casa->foto_thumb)."
                     alt=\"casa venta renta en $imagen_casa->residencial.\"></a>
                 </div><div class=\"card-footer\">
+                <div class=\"text-center\">
                 <h6><small class=\"text-muted\">$imagen_casa->residencial Num. $imagen_casa->casaNumero</small></h6>
+                <img class=\"me-1\" width=\"20px\" src=\"".asset(session('camino_mostrar').'/imagenes_app/sleeping-icon.png')."\" alt=\"Numero Habitaciones\">
+                 <span class=\"me-4\">". $imagen_casa->habitaciones ."</span>
+                <img class=\"me-1\" width=\"20px\" src=\"".asset(session('camino_mostrar').'/imagenes_app/bath-icon.png')."\" alt=\"Numero banos\">
+                <span class=\"me-4\">". $imagen_casa->banos."</span>
+                <img class=\"mx-1\" width=\"25px\" src=\"".asset(session('camino_mostrar').'/imagenes_app/parking-icon.png')."\" alt=\"Numero garage\">
+                <span class=\"me-4\">". $imagen_casa->garage ."</span></div>
              </div></div>";
         }
         if ( ( (!($i % $numPropPorRotacion)) or ($i_total >= $fotos_thumb->count()) ) && !$permiteAbrirGrupoCarrusel ) {
