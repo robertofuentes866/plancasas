@@ -70,17 +70,18 @@ class fotosCasaController extends Controller
         $fotosCasa->es_principal = $request->es_principal?1:0;
         $fotosCasa->save();
         if ($request->hasFile('foto_normal')) { 
-            if ($fotosCasa->es_principal) // solo crea el thumbnail de la foto si es la foto principal.
-            {
-                $nombre_imagen = $fotosCasa->id_foto."_th.".$request->file('foto_normal')->extension();
-                
-                $nombre_thumb = new Thumbnail($request->foto_normal,storage_path('app/public').'/propiedades',$fotosCasa->id_foto.'_th');
-                $nombre_thumb->create();
-                $fotosCasa->foto_thumb = $nombre_imagen;
-                $fotosCasa->save();
-            }
+            // Crea y guarda el thumbnail de la foto normal.
+            $nombre_imagen = $fotosCasa->id_foto."_th.".$request->file('foto_normal')->extension();
+            $nombre_thumb = new Thumbnail($request->foto_normal,storage_path('app/public').'/propiedades',$fotosCasa->id_foto.'_th');
+            $nombre_thumb->create();
+            $fotosCasa->foto_thumb = $nombre_imagen;
+            $fotosCasa->save();
+            
+            // Guarda la foto tamaño normal.
             $nombre_imagen = $fotosCasa->id_foto.".".$request->file('foto_normal')->extension();
-            Storage::putFileAs('propiedades',$request->file('foto_normal'),$nombre_imagen);
+            $foto_normal = new Thumbnail($request->foto_normal,storage_path('app/public').'/propiedades',$fotosCasa->id_foto,800);
+            $foto_normal->create();
+           // Storage::putFileAs('propiedades',$request->file('foto_normal'),$nombre_imagen);
             $fotosCasa->foto_normal = $nombre_imagen;
             $fotosCasa->save();
         }

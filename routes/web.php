@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\infoPropiedad;
+use App\misClases\Thumbnail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 
@@ -30,9 +31,8 @@ use Illuminate\Http\File;
 });*/
 
 Route::get('/lixostorage',function() {
-     // Storage::copy('agentes/35.jpg','imagenes_app/35.jpg');
-     return "Ruta: ".Storage::path('35.jpg');
-     
+  $lixo = new Thumbnail(new File('c:\cursos\foto1.jpg'),storage_path('app/public/agentes'),'final1',800);
+  $lixo->create();     
 });
 
 Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){

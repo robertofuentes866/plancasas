@@ -84,7 +84,7 @@
     @livewire('thumbs-photos',['gestion'=>3,'titulo'=>'Resultado de busqueda','id_ciudad'=>$_GET['id_ciudad']??0,
     'id_recurso'=>$_GET['id_recurso']??0,'id_duracion'=>$_GET['id_duracion']??0,'habitaciones'=>$_GET['habitaciones']??0,
     'banos'=>$_GET['banos']??0,'aires_acondicionado'=>$_GET['aires_acondicionado']??0,
-    'abanicos_techo'=>$_GET['abanicos_techo']??0,'precio_minimo'=>$_GET['precio_minimo']??0,'precio_maximo'=>$_GET['precio_maximo']??0,
+    'garage'=>$_GET['garage']??0,'precio_minimo'=>$_GET['precio_minimo']??0,'precio_maximo'=>$_GET['precio_maximo']??0,
     'agua_caliente'=>$_GET['agua_caliente']??0,'tanque_agua'=>$_GET['tanque_agua']??0,'sistema_seguridad'=>$_GET['sistema_seguridad']??0,
     'cuartoDomestica'=>$_GET['cuartoDomestica']??0,'piscina'=>$_GET['piscina']??0,'tipo'=>$_GET['id_tipo']])  <!-- muestra resultado del formulario detallado.  -->
        @break
@@ -173,8 +173,8 @@
                                     </div>
 
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="abanicos_techo" name="abanicos_techo" value="0" type="number" min="0" max="25" >
-                                        <label for="abanicos_techo" >Abanicos</label>
+                                        <input class="form-control" id="garage" name="garage" value="0" type="number" min="0" max="15" >
+                                        <label for="garage" >Garage para...</label>
                                     </div>
                                 
                             </fieldset>

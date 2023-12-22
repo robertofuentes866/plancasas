@@ -38,7 +38,7 @@ class ThumbsPhotos extends Component
 
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
            $id_propiedad = 0,$gestion = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',
-           $abanicos_techo='',$precio_minimo=0,$precio_maximo=0,$agua_caliente='',$tanque_agua='',
+           $garage='',$precio_minimo=0,$precio_maximo=0,$agua_caliente='',$tanque_agua='',
            $sistema_seguridad='',$cuartoDomestica='',$piscina='',$id_tipo=1;
 
 
@@ -122,7 +122,7 @@ class ThumbsPhotos extends Component
             if($argumentos[7]){ $this->arrayOpcionesForm .= 'Aire Acond. Minimo: '. $argumentos[7].'- ';}
 
             $this->abanicos_techo = $argumentos[8];
-            if($argumentos[8]){ $this->arrayOpcionesForm .= 'Abanicos Minimo: '. $argumentos[8].'- ';}
+            if($argumentos[8]){ $this->arrayOpcionesForm .= 'Garage Minimo: '. $argumentos[8].'- ';}
 
             $this->precio_minimo = $argumentos[9];
             if($argumentos[9]){ $this->arrayOpcionesForm .= 'Precio Minimo: '. $argumentos[9].'- ';}
@@ -279,7 +279,7 @@ class ThumbsPhotos extends Component
                     ['casas.habitaciones','>=',$this->habitaciones],
                     ['casas.banos','>=',$this->banos],
                     ['casas.aires_acondicionado','>=',$this->aires_acondicionado],
-                    ['casas.abanicos_techo','>=',$this->abanicos_techo],
+                    ['casas.garage','>=',$this->garage],
                     [$this->agua_caliente[0],$this->agua_caliente[1],$this->agua_caliente[2]],
                     [$this->tanque_agua[0],$this->tanque_agua[1],$this->tanque_agua[2]],
                     [$this->sistema_seguridad[0],$this->sistema_seguridad[1],$this->sistema_seguridad[2]],

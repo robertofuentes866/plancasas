@@ -26,7 +26,7 @@
             @csrf
             <input type="hidden" name="viewData" value="{{json_encode($data)}}">
             <div class="row border-bottom border-2 d-flex justify-content-center mb-3">
-                <div class="col-4 pb-2 ">
+                <div class="col-8 col-lg-3 pb-2 ">
                     <div class="input-group">
                         <label class="input-group-text">Propiedad</label>
                         <select name="id_casa" class="form-select">
@@ -96,7 +96,7 @@
       <!-- hasta aqui -->
 </div>
 <div class="card-body">
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped table-sm table-responsive-md">
 <thead>
 <tr>
 <th scope="col">RESIDENCIAL</th>
