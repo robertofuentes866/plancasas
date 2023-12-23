@@ -195,7 +195,18 @@ alquiler en el sector de Managua y carretera a Masaya.">
     </div>
 
     <div class="col">
-      <h4 class="display-8 fw-bold my-3 text-secondary">Textos informativos</h4>
+      <h4 class="display-8 fw-bold my-3 text-secondary">RESIDENCIALES</h4>
+       <ul class="nav list-unstyled d-flex flex-column">
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}} alt="Sierras Doradas carretera a masaya"><small>Sierras Doradas</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/lo que te ofrecemos.txt" alt="Lo que te ofrecemos"><small>Palmetto</small> </a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/consejos_adquirir_casa.txt" alt="Consejos adquirir casas"><small>Villa Arahal</small></a></li>
+          <li class="nav-item"><hr class="my-1"></li>
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/hagalo-usted-mismo/manguera pantry.txt" alt="Cambiar manguera lavaplatos"><small>Puertas del Sol</small></a></li>
+       </ul>  
+    </div>
+
+    <div class="col">
+      <h4 class="display-8 fw-bold my-3 text-secondary">BLOGS</h4>
        <ul class="nav list-unstyled d-flex flex-column">
           <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/lo que somos.txt" alt="Lo que somos"><small>Lo que somos</small></a></li>
           <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/lo que te ofrecemos.txt" alt="Lo que te ofrecemos"><small>Lo que te ofrecemos</small> </a></li>

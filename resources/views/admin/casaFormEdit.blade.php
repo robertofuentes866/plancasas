@@ -13,8 +13,9 @@
             @endforeach
             </ul>
         @endif
-        <form method="POST" action="{{ route('admin.casaForm.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.casaForm.update',['id'=>$data['casas']->getId()]) }}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <input name="id_tipo" value="1" type="hidden">
         <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 g-2">
             <div class="col">

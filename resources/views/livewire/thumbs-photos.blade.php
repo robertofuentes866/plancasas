@@ -98,7 +98,7 @@
                                                     <p class="card-title">
                                                        
                                                     <strong>{{$imagen_casa->leyenda. ' en '. $imagen_casa->casaNumero}}</strong> </p>
-                                                    
+                                                    @dd($imagen_casa)
                                                     <a class="btn btn-primary mb-2" href="{{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}}" role="button">Conozca el residencial</a>
                                                     @if(Auth::check())
                                                         <span class="d-block p-1 bg-primary text-white rounded-start">

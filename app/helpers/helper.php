@@ -85,11 +85,18 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                 </div><div class=\"card-footer\">
                 <div class=\"text-center\">
                 <h6><small class=\"text-muted\">$imagen_casa->residencial Num. $imagen_casa->casaNumero</small></h6>
-                <img class=\"me-1\" width=\"20px\" src=\"".asset(session('camino_mostrar').'/imagenes_app/sleeping-icon.png')."\" alt=\"Numero Habitaciones\">
-                 <span class=\"me-4\">". $imagen_casa->habitaciones ."</span>
-                <img class=\"me-1\" width=\"20px\" src=\"".asset(session('camino_mostrar').'/imagenes_app/bath-icon.png')."\" alt=\"Numero banos\">
+                <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Habitaciones\"><img class=\"me-1\" width=\"20px\" src=\"".asset(session('camino_mostrar').'/imagenes_app/sleeping-icon.png')."\" alt=\"Numero Habitaciones\"></a>";
+                 
+                 if ($imagen_casa->cuartoDomestica)
+                 {
+                    echo "<span class=\"me-1\">". $imagen_casa->habitaciones ."</span> + <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cuarto de doméstica\"> <img class=\"me-4\" width=\"25px\" src=\"".asset(session('camino_mostrar').'/imagenes_app/service-room.png')."\" alt=\"Cuarto Servicio\"></a>";
+                 } else
+                 {
+                    echo "<span class=\"me-4\">". $imagen_casa->habitaciones ."</span>";
+                 }
+                echo "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Baños\"><img class=\"me-1\" width=\"20px\" src=\"".asset(session('camino_mostrar').'/imagenes_app/bath-icon.png')."\" alt=\"Numero banos\"></a>
                 <span class=\"me-4\">". $imagen_casa->banos."</span>
-                <img class=\"mx-1\" width=\"25px\" src=\"".asset(session('camino_mostrar').'/imagenes_app/parking-icon.png')."\" alt=\"Numero garage\">
+                <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Garage para vehículos\"><img class=\"mx-1\" width=\"25px\" src=\"".asset(session('camino_mostrar').'/imagenes_app/parking-icon.png')."\" alt=\"Numero garage\"></a>
                 <span class=\"me-4\">". $imagen_casa->garage ."</span></div>
              </div></div>";
         }
@@ -103,10 +110,10 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
 
     echo'</div>
         <a class="carousel-control-prev" role="button" data-target="#'.$nombreCarrusel.'" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
         <span class="sr-only">Previous</span></a>
         <a class="carousel-control-next" role="button" data-target="#'.$nombreCarrusel.'" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
         <span class="sr-only">Next</span></a>
         </div>';
         
