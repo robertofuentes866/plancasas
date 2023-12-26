@@ -75,6 +75,12 @@ class ThumbsPhotos extends Component
             $instance = $argumentos[3]?localizacion::find($argumentos[3],'residencial'):' ';
             if ($argumentos[3]) {$this->arrayOpcionesForm .= ' Residencial: '. $instance->residencial;}
             $this->titulo = $argumentos[4];
+            /* precios */
+            $this->precio_minimo = $argumentos[6];
+            if($argumentos[6]){ $this->arrayOpcionesForm .= 'Precio Minimo: '. $argumentos[6].'- ';}
+
+            $this->precio_maximo = $argumentos[7];
+            if($argumentos[7]){ $this->arrayOpcionesForm .= 'Precio Maximo: '. $argumentos[7].'- ';}
             $this->titulo_thumbnail = "Resultado busqueda";
             break;
         case 2: // propiedad seleccionada clicando boton MAS DETALLES...
@@ -218,8 +224,11 @@ class ThumbsPhotos extends Component
                         ['precios_casas.id_ofrecimiento','=',$this->id_ofrecimiento],
                         [$this->id_ciudad[0],$this->id_ciudad[1],$this->id_ciudad[2] ],
                         [$this->id_localizacion[0],$this->id_localizacion[1],$this->id_localizacion[2]],
+
                     ['fotos_casas.es_principal','=',1],
                     ['casas.disponibilidad','=',1],
+                    ['precios_casas.valor','>=',$this->precio_minimo],
+                    ['precios_casas.valor','<=',$this->precio_maximo],
                     ['precios_casas.disponibilidad','=',1]])
                 ->select(DB::raw("CONCAT(localizaciones.residencial,' - ',casas.casaNumero) as leyenda"),'casas.casaNumero','ciudades.ciudad','localizaciones.residencial','fotos_casas.foto_thumb',
                         'fotos_casas.foto_normal','localizaciones.id_localizacion','casas.id_casa','casas.garage','casas.habitaciones','casas.banos','casas.cuartoDomestica','fotos_casas.id_foto',

@@ -52,6 +52,23 @@
                         @livewire('select-component',['viewData'=>$viewData])
                         
                     </div>
+
+                    <div class="row row-cols-2 row-cols-lg-1">
+                        <div class="col mb-2">
+                            <div class="form-floating">
+                                <input class="form-control" id="precio_minimo" name="precio_minimo" value="100" type="number" step="100" min="100" max="1000000">
+                                <label for="precio_minimo">Precio Mínimo</label>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-floating"> 
+                                <input class="form-control" id="precio_maximo" name="precio_maximo" value="1000" type="number" step="100" min="200" max="2000000">
+                                <label for="precio_maximo">Precio Máximo</label>
+                            </div>
+                        </div>
+                            
+                    </div>
                     <div class="row my-3">
                         <div class="col-12">
                             <button type="submit" id="submitForm1" name="submit" class=" col-12 btn btn-secondary">Buscar</button>
@@ -72,7 +89,8 @@
   @case (1)
        
         @livewire('thumbs-photos',['gestion'=>1,'ofrecimiento'=>$_GET['id_ofrecimiento']??0,'ciudad'=>$_GET['id_ciudad']??0,
-                                'localizacion'=>$_GET['id_localizacion']??0,'titulo'=>'Resultado de busqueda','tipo'=>$_GET['id_tipo']??0])  <!-- muestra resultado del formulario en la pagina principal.  -->
+                                'localizacion'=>$_GET['id_localizacion']??0,'titulo'=>'Resultado de busqueda','tipo'=>$_GET['id_tipo']??0,
+                                'precio_minimo'=>$_GET['precio_minimo']??0,'precio_maximo'=>$_GET['precio_maximo']??0])  <!-- muestra resultado del formulario en la pagina principal.  -->
         @break
   @case (2)
   
