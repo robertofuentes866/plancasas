@@ -9,57 +9,57 @@
 @endif
 
 <div class="card mb-4">
-<div class="card-header">
-Crear Localizaciones
-</div>
-<div class="card-body">
-@if($errors->any())
-<ul class="alert alert-danger list-unstyled">
-@foreach($errors->all() as $error)
-<li>- {{ $error }}</li>
-@endforeach
-</ul>
-@endif
-<form method="POST" action="{{ route('admin.localizacionForm.store') }}" enctype="form-data">
-@csrf
-<div class="row">
-<div class="col">
-<div class="mb-3 row">
-    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Ciudad:</label>
-    <div class="col-lg-10 col-md-6 col-sm-12"> 
-        <select name="id_ciudad" class="form-control">
-            @foreach ($data["ciudades"] as $ciudad)
-              <option value="{{$ciudad['id_ciudad']}}">{{$ciudad['ciudad']}}</option>
-            @endforeach
-        </select> 
+    <div class="card-header">
+        Crear Localizaciones
     </div>
-</div>
+    <div class="card-body">
+        @if($errors->any())
+            <ul class="alert alert-danger list-unstyled">
+                @foreach($errors->all() as $error)
+                    <li>- {{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+        <form method="POST" action="{{ route('admin.localizacionForm.store') }}" enctype="form-data">
+            @csrf
+            <div class="row">
+                    <div class="col-6 form-floating">
+                        <select id="id_ciudad" name="id_ciudad" class="form-select">
+                            @foreach ($data["ciudades"] as $ciudad)
+                                <option value="{{$ciudad['id_ciudad']}}">{{$ciudad['ciudad']}}</option>
+                            @endforeach
+                        </select> 
+                         <label for="id_ciudad">Ciudad</label>
+                    </div>
 
-<div class="mb-3 row">
-    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Residencial:</label>
-    <div class="col-lg-10 col-md-6 col-sm-12"> 
-        <input name="residencial" value="{{ old('residencial') }}" type="text" class="form-control">
+                    <div class="col-6 form-floating">
+                        <input name="residencial" value="{{ old('residencial') }}" type="text" class="form-control">
+                        <label for="residencial">Residencial</label>
+                    </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <textarea class="col-12" id="direccion" name="direccion">{{old('direccion')}} </textarea>
+                        <label for="direccion">Direccion</label>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="row mt-2">
+                 <div class="col-12">
+                    <div class="form-floating">
+                        <textarea class="col-12" name="descripcion" rows="10" >{{old('descripcion')}} </textarea>
+                        <label for="descripcion">Descripcion</label>
+                    </div>
+                </div>
+            </div>   
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{ route('adminForms')}}">Regresar</a></button>
+
+        </form>
     </div>
-</div>
-
-<div class="mb-3 row">
-    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Direccion:</label>
-    <textarea name="direccion" >{{old('direccion')}} </textarea> 
-</div>
-
-<div class="mb-3 row">
-    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Descripcion:</label>
-    <textarea name="descripcion" >{{old('descripcion')}} </textarea> 
-</div>
-
-</div>
-</div>
-<button type="submit" class="btn btn-primary">Guardar</button>
-<button type="button" class="btn btn-primary"><a style="text-decoration:none;color:beige" href="{{ route('adminForms')}}">Regresar</a></button>
-</div>
-
-</form>
-</div>
 </div>
 
 

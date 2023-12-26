@@ -29,7 +29,7 @@
                 <div class="mb-3">
                     <label class="col-sm-6 col-form-label">Propiedad:</label>
                     <div class="col-sm-6"> 
-                        <select name="id_casa" class="form-control">
+                        <select name="id_casa" class="form-select">
                             @foreach ($data["casas"] as $casa)
                                 <option value="{{$casa['id_casa']}}"> {{$casa['casaNumero']}}</option>
                             @endforeach
@@ -42,7 +42,7 @@
                 <div class="mb-3">
                 <label class="col-sm-6 col-form-label">Ofrecimiento:</label>
                 <div class="col-sm-6"> 
-                <select name="id_ofrecimiento" class="form-control">
+                <select name="id_ofrecimiento" class="form-select">
                     @foreach ($data["ofrecimientos"] as $ofrecimiento)
                     <option value="{{$ofrecimiento['id_ofrecimiento']}}"> {{$ofrecimiento['ofrecimiento']}}</option>
                     @endforeach
@@ -58,7 +58,7 @@
                 <div class="mb-3 row">
                 <label class="col-lg-6 col-md-6 col-sm-6 col-form-label">Duracion:</label>
                 <div class="col-lg-10 col-md-6 col-sm-6"> 
-                <select name="id_duracion" class="form-control">
+                <select name="id_duracion" class="form-select">
                     @foreach ($data["duraciones"] as $duracion)
                     <option value="{{$duracion['id_duracion']}}"> {{$duracion['duracion']}}</option>
                     @endforeach
@@ -71,7 +71,7 @@
                 <div class="mb-3 row">
                 <label class="col-lg-6 col-md-6 col-sm-12 col-form-label">Recurso:</label>
                 <div class="col-lg-10 col-md-6 col-sm-12"> 
-                <select name="id_recurso" class="form-control">
+                <select name="id_recurso" class="form-select">
                     @foreach ($data["recursos"] as $recurso)
                     <option value="{{$recurso['id_recurso']}}"> {{$recurso['recurso']}}</option>
                     @endforeach
@@ -82,20 +82,19 @@
 
 </div>  <!-- Fin de row -->
 
-<div class="row">
-    <div class="col-lg-2 col-sm-6">
-                <div class="mb-3 row">
-                <label class="col-lg-6 col-md-6 col-sm-12 col-form-label">Precio:</label>
-                <div class="col-lg-12 col-md-6 col-sm-12"> 
-                <input name="valor" value="{{old('valor')}}" type="text" class="form-control"> 
-                </div>
-                </div>
+<div class="row mb-3">
+    <div class="col-6">
+        <label class="col-form-label">Precio:</label>
+        <div class="col-lg-4">
+            <input name="valor" value="{{old('valor')}}" type="number" class="form-control">
+        </div>
+          
     </div>
 
-    <div class="col-2">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="disponibilidad" id="inlineCheckbox1">
-            <label class="form-check-label" for="inlineCheckbox1">Disponibilidad?</label>
+    <div class="col-6 py-5">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="disponibilidad" id="disponibilidad">
+            <label class="form-check-label" for="disponibilidad">Precio disponible?</label>
         </div>
     </div>
 </div>  <!-- Fin de Row -->

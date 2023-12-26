@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/x-icon" href="{{asset('storage/imagenes_app/favicon_visual_home.png')}}">
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6XGEZPNVG8"></script>
 <script>
@@ -195,23 +196,21 @@ alquiler en el sector de Managua y carretera a Masaya.">
     </div>
 
     <div class="col">
-      <h4 class="display-8 fw-bold my-3 text-secondary">RESIDENCIALES</h4>
+      <h4 class="display-8 fw-bold my-3 text-secondary">Residenciales</h4>
        <ul class="nav list-unstyled d-flex flex-column">
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',[$imagen_casa->localizacion_descripcion,$imagen_casa->id_casa,$imagen_casa->residencial])}} alt="Sierras Doradas carretera a masaya"><small>Sierras Doradas</small></a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/lo que te ofrecemos.txt" alt="Lo que te ofrecemos"><small>Palmetto</small> </a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/consejos_adquirir_casa.txt" alt="Consejos adquirir casas"><small>Villa Arahal</small></a></li>
-          <li class="nav-item"><hr class="my-1"></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/hagalo-usted-mismo/manguera pantry.txt" alt="Cambiar manguera lavaplatos"><small>Puertas del Sol</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',[14,0])}} alt="Sierras Doradas carretera a masaya"><small>Sierras Doradas</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',[13,0])}} alt="Palmetto carretera a masaya"><small>Palmetto</small> </a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',[15,0])}} alt="El Prado carretera a masaya"><small>El Prado</small></a></li>
        </ul>  
     </div>
 
     <div class="col">
-      <h4 class="display-8 fw-bold my-3 text-secondary">BLOGS</h4>
+      <h4 class="display-8 fw-bold my-3 text-secondary">Blogs</h4>
        <ul class="nav list-unstyled d-flex flex-column">
           <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/lo que somos.txt" alt="Lo que somos"><small>Lo que somos</small></a></li>
           <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/lo que te ofrecemos.txt" alt="Lo que te ofrecemos"><small>Lo que te ofrecemos</small> </a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/consejos_adquirir_casa.txt" alt="Consejos adquirir casas"><small>Consejos para adquirir tu casa nueva</small></a></li>
           <li class="nav-item"><hr class="my-1"></li>
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/consejos_adquirir_casa.txt" alt="Consejos adquirir casas"><small>Consejos para adquirir tu casa nueva</small></a></li>
           <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/hagalo-usted-mismo/manguera pantry.txt" alt="Cambiar manguera lavaplatos"><small>Cambiar manguera del lavaplatos</small></a></li>
        </ul>  
     </div>

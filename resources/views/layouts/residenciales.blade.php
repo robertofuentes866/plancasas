@@ -12,7 +12,8 @@
     <div class="card text-black bg-light mb-3 mt-2 mx-auto">
         <div class="card-header">
             <h3 class="card-title text-center">
-                Residencial/Condominio
+                <p>Residencial/Condominio </p>
+                <small>{{$residencial}}</small>
             </h3>
         </div>
         <div class="card-body">

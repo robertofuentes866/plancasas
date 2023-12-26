@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\subTipoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Models\localizacion;
 use App\Mail\infoPropiedad;
 use App\misClases\Thumbnail;
 use Illuminate\Support\Facades\Storage;
@@ -47,9 +48,10 @@ Route::get('/infoPropiedad/{to}/{nombreAgente}', function($to,$nombreAgente){
 
 Route::get('/casas-venta-renta/{gestion?}/{id_propiedad?}/{busqueda?}','App\Http\Controllers\menuController@inicio')->name('casas-venta-renta');
 
-Route::get('/residencial/{descripcion}/{id_casa}/{residencial}',
-           function($descripcion,$id_casa,$residencial){ 
-            return view('layouts.residenciales',['descripcion'=>$descripcion,'id_casa'=>$id_casa,'residencial'=>$residencial]);
+Route::get('/residencial/{id_localizacion}/{id_casa}',
+           function($id_localizacion,$id_casa){ 
+            $residencial = localizacion::findOrFail($id_localizacion);
+            return view('layouts.residenciales',['descripcion'=>$residencial->descripcion,'id_casa'=>$id_casa,'residencial'=>$residencial->residencial]);
          })->name('residencial');
 
 Route::get('/textos_informacion/{texto}','App\Http\Controllers\textos_informacionController@show')->name('textos_informacion');

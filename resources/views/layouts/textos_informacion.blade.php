@@ -1,6 +1,10 @@
 @extends('layouts/home')
 @section('mainTitle','Informacion')
 
+@section('nav_link_inicio','nav-link active')
+@section('nav_link_registrar','nav-link')
+@section('nav_link_entrar','nav-link')
+
 @section('cuerpo')
 
 <div class="col-12 bg-primary">  <!-- Primera columna, la del formulario Residencial/Condonimio -->
