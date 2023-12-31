@@ -13,7 +13,7 @@
         <div class="card-header">
             <h3 class="card-title text-center">
                 <p>Residencial/Condominio </p>
-                <small>{{$residencial}}</small>
+                <p><small>{{$residencial}}</small></p>
             </h3>
         </div>
         <div class="card-body">

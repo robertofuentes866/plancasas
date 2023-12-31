@@ -71,6 +71,7 @@
                                             @php($primerItem = true)
          
                                             @foreach($caracteristicas_propiedad as $imagen_casa)
+                                                @php($YaEsFavorito = buscarFavorito($imagen_casa->id_casa,$this->id_usuario) )
                                                 @if($gestion!=2)
                                                     @if ($imagen_casa->id_casa == $id_propiedad)
                                                     <div class="carousel-item active">
@@ -102,14 +103,14 @@
                                                     <a class="btn btn-primary mb-2" href="{{route('residencial',[$imagen_casa->id_localizacion,$imagen_casa->id_casa])}}" role="button">Conozca el residencial</a>
                                                     @if(Auth::check())
                                                         <span class="d-block p-1 bg-primary text-white rounded-start">
-                                                            <p><button onclick="alertaMensaje('{{$accionFav}}')" data-toggle="tooltip"
+                                                            <p><button data-bs-toggle="tooltip"
                                                                 data-placement="bottom" 
-                                                                title="{{buscarFavorito($imagen_casa->id_casa,$this->id_usuario)?'Borrar de Mis Favoritos':'Agregar a Mis Favoritos'}}"
+                                                                title="{{$YaEsFavorito?'Borrar de mi lista Favoritos':'Agregar a mi lista Favoritos'}}"
                                                                 type="button" wire:click="accionFavorito({{$comillas.$imagen_casa->id_casa.$comillas}})" 
                                                                 name="buscarFavoritos" id="buscarFavoritos"
-                                                                class="btn {{buscarFavorito($imagen_casa->id_casa,$this->id_usuario)?'btn-danger':'btn-secondary'}}">
+                                                                class="btn {{$YaEsFavorito?'btn-danger':'btn-secondary'}}">
                                                                 <i class="bi bi-house-fill"></i>
-                                                                </button> &#10232; Agregar/Borrar en lista Favoritos
+                                                                </button> &#10232; {{$YaEsFavorito?'Borrar de ':'Agregar a '}} mi lista Favoritos
                                                             </p>
                                                         </span>
                                                     @endif
@@ -181,7 +182,7 @@
                                         <td><u>Sist. Seguridad:</u> {{ $caracteristicas_propiedad[0]->sistema_seguridad?'Si':'No' }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><u>Descripcion:</u> {{$caracteristicas_propiedad[0]->descripcion}}</td>
+                                        <td colspan="2"><u>Descripcion:</u><p> {{$caracteristicas_propiedad[0]->descripcion}}</p></td>
                                     </tr>
                                     </tbody>
                                     </table>
@@ -281,8 +282,8 @@
                                                     </div>
                                                     <input hidden name="casaNumero" value="{{$casaNumero}}">
                                                     <div class="w-100 btn-group btn-group-lg">
-                                                        <button type="submit" name="submitEmail" class="btn btn-primary">Enviar</button>
                                                         <button type="reset"class="btn btn-secondary">Limpiar</button>
+                                                        <button type="submit" name="submitEmail" class="btn btn-primary">Enviar</button>
                                                     </div>
                                                 </form>
                                             </div>

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" type="image/x-icon" href="{{asset('storage/imagenes_app/favicon_visual_home.png')}}">
+  
+  <!-- En produccion: <link rel="icon" type="image/x-icon" href="{{asset(session('camino_mostrar').'/imagenes_app/favicon_visual_home.png')}}">-->
+<link rel="icon" type="image/x-icon" href="{{asset(session('camino_mostrar').'/imagenes_app/favicon_visual_home.png')}}">
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6XGEZPNVG8"></script>
 <script>
@@ -11,6 +13,9 @@
 
   gtag('config', 'G-6XGEZPNVG8');
 </script>
+<meta charset="utf-8">
+<meta name="author" content="Roberto Fuentes Pereira">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" content="uavcS11j8HEaLvzS-5TUEVttlk3hZZBeyllOx3fR5CY">
 <meta name="description" content="Visual Home Nicaragua es un sitio web que ofrece casas y terrenos en venta o 
 alquiler en el sector de Managua y carretera a Masaya.">
@@ -35,7 +40,7 @@ alquiler en el sector de Managua y carretera a Masaya.">
 
     <title>@yield('mainTitle','Visual Home Real Estate Nicaragua')</title>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     @livewireStyles
     <script>
@@ -46,6 +51,23 @@ alquiler en el sector de Managua y carretera a Masaya.">
         
         $('#flechas').trigger('click');
 
+        function changePrices(nombre_form)
+        {
+          let formulario = document.forms[nombre_form];
+          let ofrece = formulario['ofrecimiento'];
+          let precioMin = formulario['precio_minimo'];
+          let precioMax = formulario['precio_maximo'];
+          
+          if (ofrece.value == 2) // es venta
+          {
+            precioMin.value = 50000;
+            precioMax.value = 100000;
+          } else // es renta
+          {
+            precioMin.value = 100;
+            precioMax.value = 500;
+          } 
+        }
         
     </script>
     <style>
@@ -98,11 +120,12 @@ alquiler en el sector de Managua y carretera a Masaya.">
         @break
     @endswitch
 @endif
+
 <div class="jumbotron jumbotron-fluid pt-0 mb-0">
  
     <div class="d-flex flex-column">
         <h1 class="m-0 display-6 fw-bolder text-bg-light ps-2 bg-opacity-75" style="font-size:1.2rem;">VISUAL HOME NICARAGUA - REAL ESTATE</h1>
-        <p class="m-0 fst-italic fs-6 ps-2 text-bg-light rounded-bottom bg-opacity-75" style="font-size:3.5vw;">Te ofrecemos una propiedad Accesible, Cómoda y Segura para vivir en familia</p>
+        <p class="jumbotron_p m-0 fst-italic ps-2 text-bg-light rounded-bottom bg-opacity-75">Te ofrecemos una propiedad Accesible, Cómoda y Segura para vivir en familia</p>
     </div>     
 </div>
 <!-- MENU PRINCIPAL -->
@@ -136,11 +159,11 @@ alquiler en el sector de Managua y carretera a Masaya.">
                     </form>
         </li>
         @endguest
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown mx-4">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Consejos y mas...
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{{route('textos_informacion',['lo que somos.txt'])}}">Sobre nosotros</a></li>
             <li><a class="dropdown-item" href="{{route('textos_informacion',['lo que te ofrecemos.txt'])}}">Lo que te ofrecemos</a></li>
 
@@ -150,11 +173,11 @@ alquiler en el sector de Managua y carretera a Masaya.">
           </ul>
         </li>
 
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown mx-4">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Hágalo usted mismo
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{{route('hagalo-usted-mismo',['manguera pantry.txt'])}}">Cambiar manguerita de lavamanos</a></li>
           </ul>
         </li>
@@ -198,9 +221,9 @@ alquiler en el sector de Managua y carretera a Masaya.">
     <div class="col">
       <h4 class="display-8 fw-bold my-3 text-secondary">Residenciales</h4>
        <ul class="nav list-unstyled d-flex flex-column">
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',[14,0])}} alt="Sierras Doradas carretera a masaya"><small>Sierras Doradas</small></a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',[13,0])}} alt="Palmetto carretera a masaya"><small>Palmetto</small> </a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',[15,0])}} alt="El Prado carretera a masaya"><small>El Prado</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href="{{route('residencial',['id_localizacion'=>14,'id_casa'=>0])}}" alt="Sierras Doradas carretera a masaya"><small>Sierras Doradas</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',['id_localizacion'=>14,'id_casa'=>0])}} alt="Palmetto carretera a masaya"><small>Palmetto</small> </a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',['id_localizacion'=>14,'id_casa'=>0])}} alt="El Prado carretera a masaya"><small>El Prado</small></a></li>
        </ul>  
     </div>
 
@@ -220,11 +243,6 @@ alquiler en el sector de Managua y carretera a Masaya.">
         <a class="me-3" href="http://instagram.com/visualhomenicaragua" target="_blank"><svg class="bi" width="32" height="32"><use xlink:href="#instagram"></svg></a>
         
         <a href="https://facebook.com/visualhomenicaragua" target="_blank"><svg class="bi" width="32" height="32"><use xlink:href="#facebook"></svg></a>
-        
-
-        <!-- <a href="http://instagram.com/visualhomenicaragua" target="_blank" ></a> 
-        <img alt="enlace con cuenta instagram visual home nicaragua" width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_instagram.png')}}" ></a>
-        <a class="mx-3" href="https://facebook.com/visualhomenicaragua" target="_blank" ><img alt="enlace con cuenta facebook visual home nicaragua" width="30" src="{{asset(session('camino_mostrar').'/imagenes_app/logo_facebook.png')}}" ></a> -->
     </div>
   </div>
   <div class="row">

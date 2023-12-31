@@ -2,7 +2,7 @@ body {
     background-color:aliceblue;
 }
 
-.headerP {
+#headerP {
     font-style: oblique;
     font-family: fantasy;
     font-size:xx-large;
@@ -16,7 +16,7 @@ body {
     font-style: italic;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: medium;
-    color:black;
+    color:khaki;
     width:auto;
 }
 
@@ -35,17 +35,9 @@ body {
    background-color: black; 
 }
 
-#encabezado {
-   background-image:url("../storage/imagenes_app/encabezado.JPG");
-   background-repeat: no-repeat;
-   background-position:right;
-   background-size: 50%;
-   background-position-y:20%;
-}
-
 fieldset {
-    background-color: rgb(128, 125, 125);
-    border:0.5px dashed;
+    background-color:rgb(205,218,213);
+    border:0.5px solid;
     padding: 10px;
     margin-top: 15px;
     margin-bottom: 10px;
@@ -90,6 +82,13 @@ legend {
     margin-left: 5px;
     padding-bottom: 25px;
   
+}
+.card{
+    border: 2px solid white;
+}
+
+.card-title {
+    text-align: center;
 }
 
 .requerido {
@@ -140,7 +139,7 @@ legend {
      margin:auto;
      margin-top:12px;
      width:100%;
-     
+     height:100%;
      
      
  }
@@ -148,3 +147,26 @@ legend {
  .navbar li:active {
     color:#fff;
  }
+
+ .fondo_principal{
+    background-color:rgb(205, 218, 213);
+ }
+ 
+ 
+ @media screen and (max-width:768px)
+ {
+     .jumbotron_p {
+        font-size:0.7rem;
+        
+     }
+ }
+ 
+  @media screen and (min-width:769px)
+ {
+     .jumbotron_p {
+        font-size:1.2rem;
+       
+     }
+ }
+ 
+

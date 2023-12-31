@@ -17,7 +17,7 @@
         </div>
         
         <div class="card-body px-0">
-            <form method="get" action="{{route('casas-venta-renta',['gestion'=>1])}}">
+            <form id="form_residencial" method="get" action="{{route('casas-venta-renta',['gestion'=>1])}}">
                 @csrf
                 <div class="container">
                     <div class="row row-cols-2 row-cols-lg-1">
@@ -39,7 +39,7 @@
                     
                         <div class="col">
                             <div class="form-floating mb-2">
-                                <select name="id_ofrecimiento" id="ofrecimiento" class="form-select">
+                                <select onchange="changePrices('form_residencial')" name="id_ofrecimiento" id="ofrecimiento" class="form-select">
                                                 <option value="">Ver opciones</option>
                                                 @foreach($viewData['ofrecimiento'] as $ofrecimiento)
                                                     <option value="{{$ofrecimiento->id_ofrecimiento}}">{{$ofrecimiento->ofrecimiento}} </option>
@@ -63,12 +63,12 @@
 
                         <div class="col">
                             <div class="form-floating"> 
-                                <input class="form-control" id="precio_maximo" name="precio_maximo" value="1000" type="number" step="100" min="200" max="2000000">
+                                <input class="form-control" id="precio_maximo" name="precio_maximo" value="500" type="number" step="100" min="200" max="2000000">
                                 <label for="precio_maximo">Precio Máximo</label>
                             </div>
-                        </div>
-                            
+                        </div> 
                     </div>
+
                     <div class="row my-3">
                         <div class="col-12">
                             <button type="submit" id="submitForm1" name="submit" class=" col-12 btn btn-secondary">Buscar</button>
@@ -119,7 +119,7 @@
             </header>
         </div>
         <div class="card-body px-1">
-            <form method="get" action="{{route('casas-venta-renta',['gestion'=>3])}}">
+            <form id="form_detallado" method="get" action="{{route('casas-venta-renta',['gestion'=>3])}}">
                 @csrf
                 <div class="container">
                     <div class="row row-cols-2 row-cols-lg-1">
@@ -160,13 +160,13 @@
                                     </div>
 
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" onchange=ajustarPrecios(this.value) id="duracion" name="id_duracion"> 
+                                        <select class="form-select" onchange="changePrices('form_detallado')" id="ofrecimiento" name="id_duracion"> 
                                                 <option value="">Ver opciones</option>
                                                 @foreach($viewData['duracion'] as $duracion)
                                                     <option value="{{$duracion->id_duracion}}">{{$duracion->duracion}}</option>
                                                 @endforeach
                                         </select>
-                                        <label for="duracion">Contrato</label>
+                                        <label for="ofrecimiento">Contrato</label>
                                     </div>
                                 </div>
                             </fieldset>
