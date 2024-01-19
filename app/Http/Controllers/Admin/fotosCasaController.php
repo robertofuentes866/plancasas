@@ -139,7 +139,21 @@ class fotosCasaController extends Controller
         $fotosCasa->setEsPrincipal($request->es_principal?1:0);
         
         if ($request->hasFile('foto_normal')) {
-            // actualiza foto tama単o normal.
+            // Crea y guarda el thumbnail de la foto normal.
+            $nombre_imagen = $fotosCasa->id_foto."_th.".$request->file('foto_normal')->extension();
+            $nombre_thumb = new Thumbnail($request->foto_normal,storage_path('app/public').'/propiedades',$fotosCasa->id_foto.'_th');
+            $nombre_thumb->create();
+            $fotosCasa->foto_thumb = $nombre_imagen;
+            $fotosCasa->save();
+            
+            // Guarda la foto tamaño normal.
+            $nombre_imagen = $fotosCasa->id_foto.".".$request->file('foto_normal')->extension();
+            $foto_normal = new Thumbnail($request->foto_normal,storage_path('app/public').'/propiedades',$fotosCasa->id_foto,800);
+            $foto_normal->create();
+           // Storage::putFileAs('propiedades',$request->file('foto_normal'),$nombre_imagen);
+            $fotosCasa->foto_normal = $nombre_imagen;
+           
+            /* // actualiza foto tama単o normal.
             $nombre_imagen = $fotosCasa->id_foto.".".$request->file('foto_normal')->extension();
             $pathfile = $request->file('foto_normal')->storeAs('/propiedades',$nombre_imagen);
            
@@ -148,11 +162,10 @@ class fotosCasaController extends Controller
             $nombre_imagen = $fotosCasa->id_foto."_th";
            
             $nombre_thumb = new Thumbnail($request->foto_normal,'storage/propiedades',$nombre_imagen);
-            $nombre_thumb->create();
-        }
+            $nombre_thumb->create();*/
 
+        } 
         $fotosCasa->save();
-        
         return redirect()->route('admin.fotosCasaForm.index');
     }
 

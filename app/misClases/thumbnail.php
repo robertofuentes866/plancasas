@@ -64,9 +64,30 @@
         $thumbHeight = round($this->originalHeight*$ratio);
         $thumbWidth = round($this->originalWidth*$ratio);
         $resource = $this->createImageResource();
+
+        $exif = exif_read_data($this->original);
+        if(!empty($exif['Orientation']))
+        {
+            switch($exif['Orientation']) 
+            {
+                case 8:
+                    $resource = imagerotate($resource,90,0);
+                    break;
+                case 3:
+                    $resource = imagerotate($resource,180,0);
+                    break;
+                case 6:
+                    $resource = imagerotate($resource,-90,0);
+                    break;
+            } 
+        }
+
+
         $thumb = imagecreatetruecolor($thumbWidth,$thumbHeight);
+        
         imagecopyresampled($thumb,$resource,0,0,0,0,$thumbWidth,$thumbHeight,
                                   $this->originalWidth,$this->originalHeight);
+
         $newname = $this->basename;
         
         switch ($this->imageType){

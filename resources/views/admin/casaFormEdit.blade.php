@@ -73,21 +73,21 @@
 
             <div class="col">
                 <div class="form-floating">
-                    <input id="area_construccion" name="area_construccion" value="{{$data['casas']->getAreaConstruccion()}}" type="number" min="30" max="1000" class="form-control">     
+                    <input id="area_construccion" name="area_construccion" value="{{$data['casas']->getAreaConstruccion()}}" type="number" min="0" max="1000" class="form-control">     
                     <label for="area_construccion">Area construccion (mt2)</label>
                 </div>
             </div>
 
             <div class="col">
                 <div class="form-floating">
-                    <input name="area_terreno" value="{{$data['casas']->getAreaTerreno()}}" type="number" min="30" max="10000" class="form-control">     
+                    <input name="area_terreno" value="{{$data['casas']->getAreaTerreno()}}" type="number" min="0" max="10000" class="form-control">     
                     <label for="area_terreno">Area terreno (mt2)</label>
                 </div>
             </div>
 
             <div class="col">
                 <div class="form-floating">
-                    <input name="ano_construccion" value="{{$data['casas']->getAnoConstruccion()}}" type="number" min="1950" max="{{date('Y')}}" class="form-control">     
+                    <input name="ano_construccion" value="{{$data['casas']->getAnoConstruccion()}}" type="number" min="1930" max="{{date('Y')}}" class="form-control">     
                     <label for="ano_construccion">Año Construcción</label>
                 </div>
             </div>
@@ -108,28 +108,28 @@
 
             <div class="col">
                 <div class="form-floating">
-                    <input id="aires_acondicionado" name="aires_acondicionado" value="{{$data['casas']->getAiresAcondicionado()}}" type="number" min="1" max="25" class="form-control">     
+                    <input id="aires_acondicionado" name="aires_acondicionado" value="{{$data['casas']->getAiresAcondicionado()}}" type="number" min="0" max="25" class="form-control">     
                     <label for="aires_acondicionado">Aires Acondicionado</label>
                 </div>
             </div>
 
             <div class="col">
                 <div class="form-floating">
-                    <input id="habitaciones" name="habitaciones" value="{{$data['casas']->getHabitaciones()}}" type="number" min="1" max="25" class="form-control">     
+                    <input id="habitaciones" name="habitaciones" value="{{$data['casas']->getHabitaciones()}}" type="number" min="0" max="25" class="form-control">     
                     <label for="habitaciones">Habitaciones</label>
                 </div>
             </div>
     
             <div class="col">
                 <div class="form-floating">
-                    <input id="banos" name="banos" value="{{$data['casas']->getBanos()}}" type="number" min="1" max="25" class="form-control">     
+                    <input id="banos" name="banos" value="{{$data['casas']->getBanos()}}" type="number" min="0" max="25" class="form-control">     
                     <label for="banos">Baños</label>
                 </div>
             </div>
 
             <div class="col">
                 <div class="form-floating">
-                    <input id="abanicos_techo" name="abanicos_techo" value="{{$data['casas']->getAbanicosTecho()}}" type="number" min="1" max="25" class="form-control">     
+                    <input id="abanicos_techo" name="abanicos_techo" value="{{$data['casas']->getAbanicosTecho()}}" type="number" min="0" max="25" class="form-control">     
                     <label for="abanicos_techo">Abanicos de techo</label>
                 </div>
             </div>
