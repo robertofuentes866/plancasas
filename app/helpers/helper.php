@@ -42,14 +42,21 @@ function init_variables(&$i,&$t,&$a) {
     $a = [];
 }
 
-function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
+
+
+function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel,$pagina) {
     $comillas = htmlentities('"');
     $numPropPorRotacion = 4; // Numero de propiedades por pagina.
+    $numero_paginas = 0;
     init_variables($i,$i_total,$arrayProp);
     $permiteAbrirGrupoCarrusel= true;
-   
-    echo '<div id="'.$nombreCarrusel.'" class="mx-0 carousel carousel-dark slide" data-touch="true" data-interval="5000" >
+
+    //ceil(count($fotos_thumb)/$numPropPorRotacion); 
+   //dd(count($fotos_thumb),$numPropPorRotacion,$numero_paginas);
+    echo '<div id="'.$nombreCarrusel.'" class="mx-0 carousel carousel-dark slide" data-touch="true" data-interval="false" data-ride="carousel" >
          
+        
+
         <div class="carousel-inner container">';
    
     foreach($fotos_thumb as $imagen_casa) {
@@ -59,15 +66,14 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
         if (! propiedadIncluida($imagen_casa->id_casa,$imagen_casa->id_foto,$arrayProp)) {
             if ((!($i % $numPropPorRotacion)) && $permiteAbrirGrupoCarrusel)
             {
-
-                if ($i==0) {
+                if ($i==$pagina*$numPropPorRotacion) {
                     echo '<div class="carousel-item active row row-cols-md-2 g-2">';
                 } else {
                     echo '<div class="carousel-item row row-cols-md-2 g-2">';
                 }
                
             } 
-                
+            $pagina_aux = floor($i/$numPropPorRotacion);
             incrementaIndice($i);
             $permiteAbrirGrupoCarrusel=false;
             echo "<div class=\"card col float-start\">";
@@ -78,7 +84,8 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
                     $comillas$imagen_casa->id_casa$comillas,
                     $comillas$imagen_casa->leyenda$comillas,
                     $comillas$titulo$comillas,
-                    $comillas$nombreCarrusel$comillas)\">
+                    $comillas$nombreCarrusel$comillas,
+                    $comillas$pagina_aux$comillas)\">
                     
                 <img width=<\"180px\" height=\"120px\" src=". asset(session('camino_mostrar').'/propiedades/'.$imagen_casa->foto_thumb)."
                     alt=\"casa venta renta en $imagen_casa->residencial.\"></a>
@@ -102,6 +109,7 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
         }
         if ( ( (!($i % $numPropPorRotacion)) or ($i_total >= $fotos_thumb->count()) ) && !$permiteAbrirGrupoCarrusel ) {
             $permiteAbrirGrupoCarrusel=true;
+            $numero_paginas++;
 
             echo '</div>'; 
            
@@ -111,12 +119,30 @@ function agregarThumbsToCarrousel($fotos_thumb,$titulo,$nombreCarrusel) {
     echo'</div>
         <a class="carousel-control-prev" role="button" data-target="#'.$nombreCarrusel.'" data-slide="prev">
         <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span></a>
+        </a>
         <a class="carousel-control-next" role="button" data-target="#'.$nombreCarrusel.'" data-slide="next">
         <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
-        <span class="sr-only">Next</span></a>
-        </div>';
-        
+        </a>
+
+        <div class="card-footer mt-4">
+        <div class="carousel-indicators">';
+      
+            for($j=0;$j<$numero_paginas;$j++)
+            {
+                if($j==0)
+                {
+                    echo '<a role="button" data-target="#'.$nombreCarrusel.'" data-slide-to="'.$j.'" class="btn btn-sm btn-secondary me-1 active">'.($j+1).'</a>';
+                } else
+                {
+                    echo '<a role="button" data-target="#'.$nombreCarrusel.'" data-slide-to="'.$j.'" class="btn btn-sm btn-secondary me-1">'.($j+1).'</a>';
+                }
+                
+            }
+            
+        echo '</div>
+        </div> 
+    </div>';
+       
 }
 
 

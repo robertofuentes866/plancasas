@@ -34,8 +34,8 @@ class ThumbsPhotos extends Component
     public $arrayOpcionesForm = '';
     public $lastQuery = '';
     public $carrusel='carousel1';
+    public $pagina = 0;
     
-
     public $id_ofrecimiento = '',$id_ciudad = '',$id_localizacion = '',$id_recurso = '',$id_duracion = '',
            $id_propiedad = 0,$gestion = '',$titulo = '',$habitaciones='',$banos='',$aires_acondicionado='',
            $garage='',$precio_minimo=0,$precio_maximo=0,$agua_caliente='',$tanque_agua='',
@@ -43,6 +43,7 @@ class ThumbsPhotos extends Component
 
 
     public function mount(...$argumentos){
+
        switch ($argumentos[0]) {
          case 0: // propiedades destacadas
             
@@ -160,14 +161,14 @@ class ThumbsPhotos extends Component
 
 
     public function render() {
-        
+       
         $this->id_usuario = Auth::check()?Auth::id():-1;
         $imagenes_casas = $this->get_casas($this->gestion);
         $this->gestion = 2;
         $caracteristicas_propiedad = $this->get_casas(2);
         $this->lastQuery = $this->selectLastQuery(session()->getId());
         $favoritos_casas = $this->get_favoritos_casas();
-        
+       
         if (!$this->contador && ($imagenes_casas->count() || $favoritos_casas->count())) {
             // Entra aqui para mostrar la foto tamaño normal inicial y sus leyendas.
             $this->contador++;
@@ -188,7 +189,8 @@ class ThumbsPhotos extends Component
        
             return view('livewire.thumbs-photos')->with('imagenes_casas',$imagenes_casas)
                                             ->with('favoritos_casas',$favoritos_casas)
-                                            ->with(compact('caracteristicas_propiedad'));
+                                            ->with(compact('caracteristicas_propiedad'))
+                                            ->with('pagina',$this->pagina);
                          
     }
 
@@ -312,7 +314,9 @@ class ThumbsPhotos extends Component
         }
     }
 
-    public function selectNormalImagen($foto,$residencial,$casaNumero,$id,$leyenda,$ttl,$carrusel) {
+    public function selectNormalImagen($foto,$residencial,$casaNumero,$id,$leyenda,$ttl,$carrusel,$pagina)
+    {
+        $this->pagina = $pagina;
         session(['idCasa'=>$id]);
         $this->id_propiedad = $id;
         $this->foto_normal = $foto;
@@ -332,6 +336,7 @@ class ThumbsPhotos extends Component
         if ($carrusel!='carousel3'){
             session(['ultimoCarrusel'=>$carrusel]);
         }
+        
         
     }
 

@@ -1,4 +1,3 @@
-
 @if ((! $imagenes_casas->count()))  <!-- Formularios con resultados vacios -->
    
     <script>
@@ -19,13 +18,13 @@
             </p>
         </div>
         <div class="row">
-            <div class="col-12 bg-dark"> <!-- Columna thumbnails -->
+            <div id="carrusel1" class="col-12 bg-dark"> <!-- Columna thumbnails -->
                 
                 @php($comillas = '"')
                 @if($imagenes_casas->count())
                     <!-- Destacados y Resultado de formularios en thumbnail -->
                     
-                    <section class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
+                    <section  class="card text-black bg-dark mb-3 mt-2 mx-auto"> 
                         <div class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>{{$titulo_thumbnail_lastQuery}}</strong></p>
                             <p class="subtitle_page_left"><small>{Clique sobre las fotos}</small></p>
@@ -33,7 +32,7 @@
                         </div>
                             <div class="card-body bg-body">
                                 @if (count((array)$lastQuery))
-                                    @php(agregarThumbsToCarrousel($lastQuery,$titulo_thumbnail_lastQuery,"carousel1"))
+                                    @php(agregarThumbsToCarrousel($lastQuery,$titulo_thumbnail_lastQuery,"carousel1",$pagina))
                                 @endif
                             </div> <!-- End Card Body -->
 
@@ -43,8 +42,8 @@
 
                 @if ($favoritos_casas->count()) 
                     <!-- Favoritos thumbnails-->
-                    <section class="card text-black bg-dark mb-3 mt-2 mx-auto">
-                        <div class="card-header text-white" style="text-align:center;height:5em">
+                    <section  class="card text-black bg-dark mb-3 mt-2 mx-auto">
+                        <div id="carrusel2" class="card-header text-white" style="text-align:center;height:5em">
                             <p id="title_page_left"><strong>Mis Favoritos</strong></p>
                             <p class="subtitle_page_left"><small>{Clique sobre las fotos}</small></p>
                             <p class="subtitle_page_left"><small>{Rotar usando las flechas}</small></p>
@@ -52,7 +51,7 @@
                             <div class="card-body bg-light">
                             @if (count((array)$lastQuery))
                                @if ($favoritos_casas->count())
-                                  @php(agregarThumbsToCarrousel($favoritos_casas,"Mis Favoritos",'carousel2'))
+                                  @php(agregarThumbsToCarrousel($favoritos_casas,"Mis Favoritos",'carousel2',$pagina))
                                 @endif
                             @endif
                             </div>  
@@ -296,8 +295,10 @@
                                 
                     </div>
         </div>  <!-- End Row -->
-
+        
+        
 </div> <!-- End Columna 8 de derecha. -->
+
 @else 
   
     @if ($gestion==1 or $gestion==2 or $gestion==3) <!-- si viene de cualquier formulario con resultados vacios -->
@@ -306,3 +307,6 @@
         @livewire('imagenes-grupo')
     @endif
 @endif
+<script>
+            $('#carousel1').carousel('<?php echo $pagina?>');
+        </script>  
