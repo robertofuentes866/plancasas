@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consumir API desde Blade</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/tu-endpoint')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // Aquí puedes actualizar tu DOM con los datos recibidos
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</head>
+<body>
+    <!-- Tu contenido HTML aquí -->
+</body>
+</html>

@@ -1,3 +1,5 @@
+
+@import url(https://fonts.googleapis.com/css?family=Julius+Sans+One:regular);
 body {
     background-color:aliceblue;
 }
@@ -91,6 +93,11 @@ legend {
     text-align: center;
 }
 
+.card-footer-info{ /* pie de informacion de la casa */
+   /*background-color: rgba(185, 235, 175, 0.85);*/
+   background: linear-gradient(45deg,#292929,#e7e9e7);
+}
+
 .requerido {
     color:rgb(20, 220, 170);
 }
@@ -168,5 +175,177 @@ legend {
        
      }
  }
- 
 
+ /* FORMULARIO AGENTE INMOBILIARIO*/
+
+ .card-agente .card-body .container{
+    width: 100%;
+    position: relative;
+    padding: 10px;
+    
+ }
+
+ .info-agente{
+    display: flex;
+    width: 25%;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 7px 7px 5px #000;
+    z-index: 2;
+ }
+
+ .info-agente:hover #contacto-agente{
+    left: 100%;
+    opacity: .9;
+    width: 250%;
+ }
+
+ .info-agente .foto-agente{
+    width: 100%;
+ }
+ 
+ .info-agente .foto-agente img{
+    width: 100%;
+ }
+
+ .info-agente .contacto-agente{
+    position: absolute;
+    left:0px;
+    opacity: 0;
+    background-color:darkslategray;
+    width: 0%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 15px;
+    color: #fff;
+    z-index: -1;
+    transition: all .8s;
+ }
+
+ .info-agente .contacto-agente div{
+   display: flex;
+ }
+
+ .info-agente .contacto-agente span{
+    font-size: 100%;
+ }
+ 
+ .card-agente .card-body{
+    
+    height: 450px;
+ }
+
+ .card-agente .container .form{
+    position: absolute;
+    top:45%;
+    left:20%;
+    background-color: #222;
+    height: 310px;
+    width: 80%;
+    
+ }
+
+ .card-agente .container .form .form-encabezado{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    background-color: #000;
+    padding: 5px;
+ }
+
+ .card-agente .container .form .form-encabezado span{
+    font-size: 75%;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+ }
+
+ .form-cuerpo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-evenly;
+    height: 100%;
+ }
+
+ .card-agente .container .form .form-cuerpo .input-dato{
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+    
+ }
+
+ .card-agente .container .form .form-cuerpo input,
+ .card-agente .container .form .form-cuerpo textarea{
+    border: none;
+    background-color: #222;
+    border-bottom: 1px solid #2e6329;
+    outline: none;
+    resize: none;
+    color: darkseagreen;
+    width: 100%;
+    
+ }
+
+ .card-agente .container .form .form-cuerpo textarea{
+    min-height: 60px;
+    margin-bottom: 7px;
+ }
+
+ .card-agente .container .form .form-cuerpo span{
+    color: #fff;
+ }
+
+ .card-agente .container .form .form-cuerpo .botones-agente{
+    padding: 7px;
+ }
+
+ .w-70{
+    width: 100%;
+ }
+
+ /* ESTILO A LAS FOTOS THUMBS DE LOS CARRUSELES. */
+
+ .thumbCarrousel{
+   width: 100%;
+   height: 100%;
+   /*background-color: #d3d3bd;*/
+   background: linear-gradient(45deg,#292929,#e7e9e7);
+   overflow: hidden;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+ }
+
+ .thumbCarrousel a{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transition: all .5s;
+   
+ }
+
+ .thumbCarrousel a img{
+   border: 3px solid #fefefe;
+   box-shadow: 0 0 5px 3px #000;
+ }
+
+ .thumbCarrousel a:hover{
+   transform: scale(1.2);
+ }
+
+ /* ESTILOS PARA OFFCANVAS QUE MUESTRA DATOS DEL RESIDENCIAL */
+
+ .offcanvas-title{
+   font-family: 'Julius Sans One';
+ }
+
+#cierre{
+   position: sticky;
+   top:100%;
+   border: 1px solid #000;
+   border-radius: 50%;
+}

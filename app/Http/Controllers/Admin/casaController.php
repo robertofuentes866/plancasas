@@ -84,6 +84,13 @@ class casaController extends Controller
         $creationData['agua_caliente'] = $request->input('agua_caliente')?1:0;
         $creationData['tanque_agua'] = $request->input('tanque_agua')?1:0;
         $creationData['sistema_seguridad'] = $request->input('sistema_seguridad')?1:0;
+
+        //Tratamiento a aire acondicinados y abanicos cuando el valor es vacio.
+
+        $creationData['aires_acondicionado'] = $request->input('aires_acondicionado')==""?0:$request->input('aires_acondicionado');
+
+        $creationData['abanicos_techo'] = $request->input('abanicos_techo')==""?0:$request->input('abanicos_techo');
+
         casa::create($creationData);
         
         return redirect()->route('admin.casaForm.index');

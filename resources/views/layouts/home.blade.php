@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   
   <!-- En produccion: <link rel="icon" type="image/x-icon" href="{{asset(session('camino_mostrar').'/imagenes_app/favicon_visual_home.png')}}">-->
@@ -25,23 +25,18 @@ alquiler en el sector de Managua y carretera a Masaya.">
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->$_COOKIE
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-<!-- CSS only -->
-<!-- OLD <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>-->
+<!-- Hoja de estilos CSS local -->
 <link href="{{asset('css/app.css');}}" rel="stylesheet" type="text/css">
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
 
     <title>@yield('mainTitle','Visual Home Real Estate Nicaragua')</title>
-<!-- OLD<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
-
 
     @livewireStyles
     <script>
@@ -69,6 +64,36 @@ alquiler en el sector de Managua y carretera a Masaya.">
             precioMax.value = 500;
           } 
         }
+
+
+         //Codigo para el offcanvas , conozca el residencial 
+         async function offcanvasResidencialFunction(id_localizacion,id_casa)
+          {
+              try{
+                    respuesta = await fetch('/api/residencial/'+id_localizacion,);
+                    console.log(respuesta);
+                    datos = await respuesta.json();
+                    
+                   
+                    // Aquí puedes actualizar tu DOM con los datos recibidos
+                    let cuerpo =  document.getElementById('offcanvasResult');
+                    let h3 = cuerpo.querySelector('#h3');
+                    let parraf1 = cuerpo.querySelector('#parraf1');
+                    h3.textContent = datos.data.residencial;
+                    parraf1.textContent = datos.data.descripcion;
+                    // console.log(id_localizacion, data.data);
+                    let imagenes = cuerpo.getElementsByTagName('img');
+                    for (let i=0; i<imagenes.length; i++)
+                    {
+                      imagenes[i].src= datos.ruta+(i+1)+'.jpg';
+                    }
+                    
+                }catch(error)
+                { 
+                    console.error('Error:', error, 'Datos: ',id_localizacion);
+                }
+          }
+              
         
     </script>
     <style>
@@ -126,7 +151,7 @@ alquiler en el sector de Managua y carretera a Masaya.">
 
 <div class="jumbotron jumbotron-fluid pt-0 mb-0">
  
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column bg-light">
         <h1 class="m-0 display-6 fw-bolder text-bg-light ps-2 bg-opacity-75" style="font-size:1.2rem;">VISUAL HOME NICARAGUA - REAL ESTATE</h1>
         <p class="jumbotron_p m-0 fst-italic ps-2 text-bg-light rounded-bottom bg-opacity-75">Te ofrecemos una propiedad Accesible, Cómoda y Segura para vivir en familia</p>
     </div>     
@@ -134,13 +159,13 @@ alquiler en el sector de Managua y carretera a Masaya.">
 <!-- MENU PRINCIPAL -->
 <div class="container-fluid">
     <div class="row">
-<nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{Route('casas-venta-renta')}}"><img src="{{asset(session('camino_mostrar').'/imagenes_app/logo_visual_home.jpg')}}" alt="ventas y alquileres de casas en Managua y Carretera a Masaya" width="30" height="24" class="d-inline-block align-text-top rounded">
-      Visual Home</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{Route('casas-venta-renta')}}"><img src="{{asset(session('camino_mostrar').'/imagenes_app/logo_visual_home.jpg')}}" alt="ventas y alquileres de casas en Managua y Carretera a Masaya" width="30" height="24" class="d-inline-block align-text-top rounded me-2">Visual Home
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+              </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item mx-4">
@@ -170,7 +195,8 @@ alquiler en el sector de Managua y carretera a Masaya.">
             <li><a class="dropdown-item" href="{{route('textos_informacion',['lo que somos.txt'])}}">Sobre nosotros</a></li>
             <li><a class="dropdown-item" href="{{route('textos_informacion',['lo que te ofrecemos.txt'])}}">Lo que te ofrecemos</a></li>
 
-            <li class="dropdown-divider"></li><li>
+            <li class="dropdown-divider"></li>
+            <li>
                         <a class="dropdown-item" href="{{route('textos_informacion',['consejos_adquirir_casa.txt'])}}">Consejos para comprar casa</a>
                         </li>
           </ul>
@@ -205,57 +231,59 @@ alquiler en el sector de Managua y carretera a Masaya.">
    </a>
 </div>
 <!-- End whatsapp -->
-<footer class="container-fluid rounded-bottom py-3 mt-0 bg-dark text-white">
+<footer class="container-fluid rounded-bottom py-3 mt-0 bg-dark">
 
-  <div class="row row-cols-lg-4 row-cols-md-3 row-cols-1 d-flex justify-content-evenly">
+  <div class="row row-cols-lg-4 row-cols-md-3 row-cols-1 d-flex justify-content-evenly ">
     <div class="col">
       <h4 class="display-8 fw-bold my-3 text-secondary">Casas en Venta y Alquiler</h4>
-       <ul class="nav list-unstyled d-flex flex-column">
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/casas-venta-renta/2/11" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Venta en Sierras Doradas</small>  </a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/casas-venta-renta/2/12" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Venta en Sierras Doradas</small> </a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/casas-venta-renta/2/13" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Venta en Villa Arahal</small></a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/casas-venta-renta/2/14" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Venta o alquiler en Sierras Doradas</small></a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/casas-venta-renta/2/15" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Alquiler en Villa Arahal</small></a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/casas-venta-renta/2/16" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Alquiler en Palmetto</small></a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/casas-venta-renta/2/18" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Alquiler en Sierras Doradas</small></a></li>
+       <ul class="nav list-unstyled d-flex flex-column ">
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="{{asset('casas-venta-renta/2/11')}}" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Venta en Sierras Doradas M-3</small>  </a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="https://visualhome.net/casas-venta-renta/2/12" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Venta en Sierras Doradas</small> </a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="https://visualhome.net/casas-venta-renta/2/13" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Venta en Villa Arahal</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="https://visualhome.net/casas-venta-renta/2/14" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Venta o alquiler en Sierras Doradas</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="https://visualhome.net/casas-venta-renta/2/15" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Alquiler en Villa Arahal</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="https://visualhome.net/casas-venta-renta/2/16" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Alquiler en Palmetto</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="https://visualhome.net/casas-venta-renta/2/18" alt="Venta casa en Sierras Doradas Carretera a Masaya"><small>Alquiler en Sierras Doradas</small></a></li>
        </ul>  
     </div>
 
     <div class="col">
       <h4 class="display-8 fw-bold my-3 text-secondary">Residenciales</h4>
        <ul class="nav list-unstyled d-flex flex-column">
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="{{route('residencial',['id_localizacion'=>14,'id_casa'=>0])}}" alt="Sierras Doradas carretera a masaya"><small>Sierras Doradas</small></a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',['id_localizacion'=>14,'id_casa'=>0])}} alt="Palmetto carretera a masaya"><small>Palmetto</small> </a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href={{route('residencial',['id_localizacion'=>14,'id_casa'=>0])}} alt="El Prado carretera a masaya"><small>El Prado</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="{{route('residencial',['id_localizacion'=>2,'id_casa'=>0])}}" alt="Sierras Doradas carretera a masaya"><small>Sierras Doradas</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href={{route('residencial',['id_localizacion'=>4,'id_casa'=>0])}} alt="Palmetto carretera a masaya"><small>Palmetto</small> </a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href={{route('residencial',['id_localizacion'=>6,'id_casa'=>0])}} alt="Puertas del Sol carretera a masaya"><small>Puertas del Sol</small></a></li>
        </ul>  
     </div>
 
     <div class="col">
       <h4 class="display-8 fw-bold my-3 text-secondary">Blogs</h4>
        <ul class="nav list-unstyled d-flex flex-column">
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/lo que somos.txt" alt="Lo que somos"><small>Lo que somos</small></a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/lo que te ofrecemos.txt" alt="Lo que te ofrecemos"><small>Lo que te ofrecemos</small> </a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="https://visualhome.net/textos_informacion/lo que somos.txt" alt="Lo que somos"><small>Lo que somos</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="https://visualhome.net/textos_informacion/lo que te ofrecemos.txt" alt="Lo que te ofrecemos"><small>Lo que te ofrecemos</small> </a></li>
           <li class="nav-item"><hr class="my-1"></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/textos_informacion/consejos_adquirir_casa.txt" alt="Consejos adquirir casas"><small>Consejos para adquirir tu casa nueva</small></a></li>
-          <li class="nav-item"><a class="p-0 nav-link text-muted" href="https://visualhome.net/hagalo-usted-mismo/manguera pantry.txt" alt="Cambiar manguera lavaplatos"><small>Cambiar manguera del lavaplatos</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="https://visualhome.net/textos_informacion/consejos_adquirir_casa.txt" alt="Consejos adquirir casas"><small>Consejos para adquirir tu casa nueva</small></a></li>
+          <li class="nav-item"><a class="p-0 nav-link text-white" href="https://visualhome.net/hagalo-usted-mismo/manguera pantry.txt" alt="Cambiar manguera lavaplatos"><small>Cambiar manguera del lavaplatos</small></a></li>
        </ul>  
     </div>
 
     <div class="col">
         <h4 class="display-8 fw-bold my-3 text-secondary">Otros enlaces</h4>
-        <a class="me-3" href="http://instagram.com/visualhomenicaragua" target="_blank"><svg class="bi" width="32" height="32"><use xlink:href="#instagram"></svg></a>
+        <a class="me-3 bg-secondary rounded-circle" href="http://instagram.com/visualhomenicaragua" target="_blank"><svg class="bi" width="18" height="18"><use xlink:href="#instagram"></svg></a>
         
-        <a href="https://facebook.com/visualhomenicaragua" target="_blank"><svg class="bi" width="32" height="32"><use xlink:href="#facebook"></svg></a>
+        <a class="bg-secondary rounded-circle" href="https://facebook.com/visualhomenicaragua" target="_blank"><svg class="bi" width="18" height="18"><use xlink:href="#facebook"></svg></a>
     </div>
   </div>
   <div class="row">
     <div class="col text-center text-white">
-      <small>&copy; 2023</small>
+      <small>&copy; 2024</small>
     </div>
   </div>
 </footer>
 @livewireScripts
 @yield('js')
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>
